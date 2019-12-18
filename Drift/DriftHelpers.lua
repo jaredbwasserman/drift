@@ -22,7 +22,7 @@ end
 -- Public functions
 DriftHelpers = {}
 
-function DriftHelpers:isNotForbidden(frame)
+function DriftHelpers:IsNotForbidden(frame)
     if frame.IsForbidden then
         if type(frame.IsForbidden) == "function" then
             return not frame:IsForbidden()
@@ -34,9 +34,9 @@ function DriftHelpers:isNotForbidden(frame)
     end
 end
 
-function DriftHelpers:makeMovable(frame)
+function DriftHelpers:MakeMovable(frame)
     -- TODO: Remove
-    print(frame:GetName())
+    -- print(frame:GetName())
 
     frame:SetMovable(true)
     frame:EnableMouse(true)
