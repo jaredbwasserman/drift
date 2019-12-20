@@ -19,24 +19,9 @@ local function setOrHookScript(frame, script, func)
     end
 end
 
--- Public functions
-DriftHelpers = {}
-
-function DriftHelpers:IsNotForbidden(frame)
-    if frame.IsForbidden then
-        if type(frame.IsForbidden) == "function" then
-            return not frame:IsForbidden()
-        else
-            return frame.IsForbidden ~= "IsForbidden"
-        end
-    else
-        return true
-    end
-end
-
-function DriftHelpers:MakeMovable(frame)
+local function makeFrameMovable(frame)
     -- TODO: Remove
-    -- print(frame:GetName())
+    print(frame:GetName())
 
     frame:SetMovable(true)
     frame:EnableMouse(true)
@@ -44,4 +29,17 @@ function DriftHelpers:MakeMovable(frame)
 
     setOrHookScript(frame, "OnDragStart", onDragStart)
     setOrHookScript(frame, "OnDragStop", onDragStop)
+end
+
+-- Public functions
+DriftHelpers = {}
+
+function DriftHelpers:MakeFramesMovable(frames)
+    for frameName, isMovable in pairs(frames) do
+        local frame = _G[frameName] or nil
+        if frame and not isMovable then
+            makeFrameMovable(frame)
+            frames[frameName] = true
+        end
+    end
 end

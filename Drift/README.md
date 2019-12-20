@@ -8,3 +8,4 @@ Makes WoW frames movable
 1. Add support for more frame types like containers or unit frames
 1. Make it work for world map and any other frames missing
 1. Disable limit of 2 frames if possible
+1. Right click to lock/reset/hide (should be able to right-click on handle too)
