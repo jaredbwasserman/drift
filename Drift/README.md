@@ -1,11 +1,15 @@
 # Drift
-Makes WoW frames movable
+1. UI panels become draggable
+1. Panel positions are persisted
+1. Unlimited number of panels can now be open at once
 
 ## TODO
-1. Make frames from Addons movable (only works on preloaded frames currently)
-1. Make frames keep old positions across logins (saved variables)
-1. Configuration options (like reset positions or disable opacity change)
-1. Add support for more frame types like containers or unit frames
-1. Make it work for world map and any other frames missing
-1. Disable limit of 2 frames if possible
-1. Right click to lock/reset/hide (should be able to right-click on handle too)
+1. Add support for Containers
+1. Add full support for PlayerTalentFrame and WorldMapFrame
+1. Right click to lock/reset/hide/clamped (should be able to right-click on handle too)
+1. Add ability to change opacity
+1. Add ability to change scale
+1. Add handles to frames that need handles
+1. Refactor to start with everything in UIPanelWindows then add anything missing
+1. Add more properties to list - e.g. handle 
+1. Register Escape, Toggle hot key, and UI buttons to be able to hide frames

@@ -1,8 +1,9 @@
 ## Interface: 80205
 ## Title: Drift
-## Notes: Makes WoW frames movable
+## Notes: Draggable UI panels
 ## Version: 1.0.0
 ## Author: Jared Wasserman
+## SavedVariables: DriftPoints
 
 DriftHelpers.lua
 Drift.lua
