@@ -24,7 +24,7 @@ local function onDragStop(frame)
     }
 end
 
-local function makeMovable(frame, properties)
+local function makeMovable(frame)
     frame:SetFrameStrata("HIGH")
     frame:SetMovable(true)
     frame:EnableMouse(true)
@@ -34,39 +34,46 @@ local function makeMovable(frame, properties)
     frame:SetScript("OnDragStop", onDragStop)
 end
 
-local function makeSticky(frame, properties, frameCloseButton)
-    if frameCloseButton and not properties.nonSticky then
+local function makePersistent(frame)
+    -- Set point from old position
+    frame:HookScript("OnShow", function(self, event, ...)
+        self:ClearAllPoints()
+
+        local point = DriftPoints[frame:GetName()]
+        if point then
+            self:SetPoint(
+                point["point"],
+                point["relativeTo"],
+                point["relativePoint"],
+                point["xOfs"],
+                point["yOfs"]
+            )
+        end
+    end)
+end
+
+local function makeSticky(frame)
+    local frameCloseButton = _G[frame:GetName().."CloseButton"] or frame.CloseButton or nil
+    if frameCloseButton then
+        -- TODO: Uncomment??
         -- Prevent other frames from hiding this one
-        frame.HideOrig = frame.Hide
-        frame.Hide = DoNothing
-        
+        -- frame.HideOrig = frame.Hide
+        -- frame.Hide = DoNothing
+
+        -- TODO: Uncomment??
         -- Only valid way to hide is if the user does it
         -- TODO: Support more methods than clicking close button
-        frameCloseButton:SetScript("OnClick", function (self, button, down)
-            frame:HideOrig()
-        end)
+        -- frameCloseButton:HookScript("OnClick", function (self, button, down)
+        --     frame:HideOrig()
+        -- end)
 
-        -- Set point from old position
+        -- Prevent other frames from moving this one while it's shown
         frame:HookScript("OnShow", function(self, event, ...)
-            self:ClearAllPoints()
-
-            local point = DriftPoints[frame:GetName()]
-            if point then
-                self:SetPoint(
-                    point["point"],
-                    point["relativeTo"],
-                    point["relativePoint"],
-                    point["xOfs"],
-                    point["yOfs"]
-                )
-            end
-
-            -- Prevent other frames from moving this one while it's shown
             frame.SetPointOrig = frame.SetPoint
             frame.SetPoint = DoNothing
         end)
 
-        -- Reset SetPoint
+        -- Reset SetPoint when hidden
         frame:HookScript("OnHide", function(self, event, ...)
             frame.SetPoint = frame.SetPointOrig
         end)
@@ -78,9 +85,9 @@ function DriftHelpers:ModifyFrames(frames)
     for frameName, properties in pairs(frames) do
         local frame = _G[frameName] or nil
         if frame and not properties.hasBeenModified then
-            local frameCloseButton = _G[frameName.."CloseButton"] or frame.CloseButton or nil
-            makeMovable(frame, properties)
-            makeSticky(frame, properties, frameCloseButton)
+            makeMovable(frame)
+            makePersistent(frame)
+            makeSticky(frame)
             properties.hasBeenModified = true
         end
     end

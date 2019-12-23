@@ -7,10 +7,10 @@ local frames = {
     ["GossipFrame"] = {hasBeenModified = false},
     ["CollectionsJournal"] = {hasBeenModified = false},
     ["SpellBookFrame"] = {hasBeenModified = false},
-    ["PlayerTalentFrame"] = {hasBeenModified = false, nonSticky = true},
+    ["PlayerTalentFrame"] = {hasBeenModified = true}, -- disabled
     ["TalentFrame"] = {hasBeenModified = false},
     ["AchievementFrame"] = {hasBeenModified = false}, -- needs handle of AchievementFrameHeader
-    ["WorldMapFrame"] = {hasBeenModified = false, nonSticky = true},
+    ["WorldMapFrame"] = {hasBeenModified = true}, -- disabled
     ["LookingForGuildFrame"] = {hasBeenModified = false},
     ["CommunitiesFrame"] = {hasBeenModified = false},
     ["PVEFrame"] = {hasBeenModified = false},
@@ -27,13 +27,11 @@ local frames = {
     ["VideoOptionsFrame"] = {hasBeenModified = false},
     ["InterfaceOptionsFrame"] = {hasBeenModified = false},
     ["KeyBindingFrame"] = {hasBeenModified = false},
-    ["LootFrame"] = {hasBeenModified = false},
     ["RaidBrowserFrame"] = {hasBeenModified = false},
     ["TradeFrame"] = {hasBeenModified = false},
     ["SUFWrapperFrame"] = {hasBeenModified = false},
     ["QuestLogFrame"] = {hasBeenModified = false},
     ["CraftFrame"] = {hasBeenModified = false},
-    ["TalkingHeadFrame"] = {hasBeenModified = false},
     ["TimeManagerFrame"] = {hasBeenModified = false},
     ["TabardFrame"] = {hasBeenModified = false},
     ["GuildRegistrarFrame"] = {hasBeenModified = false},
