@@ -14,7 +14,7 @@ local function onDragStop(frame)
     frame:StopMovingOrSizing()
     frame:SetAlpha(1)
 
-    local point, relativeTo, relativePoint, xOfs, yOfs = frame:GetPoint(pointNum)
+    local point, relativeTo, relativePoint, xOfs, yOfs = frame:GetPoint()
     DriftPoints[frame:GetName()] = {
         ["point"] = point,
         ["relativeTo"] = relativeTo or "UIParent",
@@ -25,7 +25,6 @@ local function onDragStop(frame)
 end
 
 local function makeMovable(frame)
-    frame:SetFrameStrata("HIGH")
     frame:SetMovable(true)
     frame:EnableMouse(true)
     frame:SetClampedToScreen(true)
@@ -53,31 +52,16 @@ local function makePersistent(frame)
 end
 
 local function makeSticky(frame)
-    local frameCloseButton = _G[frame:GetName().."CloseButton"] or frame.CloseButton or nil
-    if frameCloseButton then
-        -- TODO: Uncomment??
-        -- Prevent other frames from hiding this one
-        -- frame.HideOrig = frame.Hide
-        -- frame.Hide = DoNothing
+    -- Prevent other frames from moving this one while it's shown
+    frame:HookScript("OnShow", function(self, event, ...)
+        frame.SetPointOrig = frame.SetPoint
+        frame.SetPoint = DoNothing
+    end)
 
-        -- TODO: Uncomment??
-        -- Only valid way to hide is if the user does it
-        -- TODO: Support more methods than clicking close button
-        -- frameCloseButton:HookScript("OnClick", function (self, button, down)
-        --     frame:HideOrig()
-        -- end)
-
-        -- Prevent other frames from moving this one while it's shown
-        frame:HookScript("OnShow", function(self, event, ...)
-            frame.SetPointOrig = frame.SetPoint
-            frame.SetPoint = DoNothing
-        end)
-
-        -- Reset SetPoint when hidden
-        frame:HookScript("OnHide", function(self, event, ...)
-            frame.SetPoint = frame.SetPointOrig
-        end)
-    end
+    -- Reset SetPoint when hidden
+    frame:HookScript("OnHide", function(self, event, ...)
+        frame.SetPoint = frame.SetPointOrig
+    end)
 end
 
 -- Global functions

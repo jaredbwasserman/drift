@@ -1,5 +1,5 @@
 local frames = {
-    ["CharacterFrame"] = {hasBeenModified = false},
+    ["CharacterFrame"] = {hasBeenModified = false}, -- fix this
     ["TradeSkillFrame"] = {hasBeenModified = false},
     ["ArchaeologyFrame"] = {hasBeenModified = false},
     ["QuestFrame"] = {hasBeenModified = false},
@@ -8,13 +8,13 @@ local frames = {
     ["GossipFrame"] = {hasBeenModified = false},
     ["CollectionsJournal"] = {hasBeenModified = false},
     ["SpellBookFrame"] = {hasBeenModified = false},
-    ["PlayerTalentFrame"] = {hasBeenModified = true}, -- disabled
+    -- ["PlayerTalentFrame"] = {hasBeenModified = false},
     ["TalentFrame"] = {hasBeenModified = false},
     ["AchievementFrame"] = {hasBeenModified = false}, -- needs handle of AchievementFrameHeader
-    ["WorldMapFrame"] = {hasBeenModified = true}, -- disabled
+    -- ["WorldMapFrame"] = {hasBeenModified = false},
     ["LookingForGuildFrame"] = {hasBeenModified = false},
     ["CommunitiesFrame"] = {hasBeenModified = false},
-    ["PVEFrame"] = {hasBeenModified = false},
+    ["PVEFrame"] = {hasBeenModified = false}, -- fix this
     ["EncounterJournal"] = {hasBeenModified = false},
     ["FriendsFrame"] = {hasBeenModified = false},
     ["DressUpFrame"] = {hasBeenModified = false},
@@ -64,10 +64,10 @@ local frames = {
     ["GarrisonCapacitiveDisplayFrame"] = {hasBeenModified = false},
     ["OrderHallMissionFrame"] = {hasBeenModified = false},
     ["OrderHallTalentFrame"] = {hasBeenModified = false},
+    ["BFAMissionFrame"] = {hasBeenModified = false}, -- needs handle
     ["ArtifactFrame"] = {hasBeenModified = false},
     ["ItemTextFrame"] = {hasBeenModified = false},
     ["PetStableFrame"] = {hasBeenModified = false},
-    ["BFAMissionFrame"] = {hasBeenModified = false}, -- needs handle
     ["TaxiFrame"] = {hasBeenModified = false},
     ["PVPMatchScoreboard"] = {hasBeenModified = false},
     ["PVPMatchResults"] = {hasBeenModified = false},
