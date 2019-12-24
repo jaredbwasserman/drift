@@ -74,7 +74,9 @@ local frames = {
     ["PVPMatchResults"] = {},
     ["AlliedRacesFrame"] = {},
     ["ChatConfigFrame"] = {},
-    ["FlightMapFrame"] = {}
+    ["FlightMapFrame"] = {},
+    ["ScrappingMachineFrame"] = {},
+    ["IslandsQueueFrame"] = {}
 }
 
 -- Modify pre-loaded frames
