@@ -11,7 +11,8 @@ local frames = {
     ["SpellBookFrame"] = {},
     -- ["PlayerTalentFrame"] = {},
     ["TalentFrame"] = {},
-    ["AchievementFrame"] = {}, -- needs handle of AchievementFrameHeader
+    ["AchievementFrame"] = {},
+    ["AchievementFrameHeader"] = {delegate = "AchievementFrame"},
     -- ["WorldMapFrame"] = {},
     ["LookingForGuildFrame"] = {},
     ["CommunitiesFrame"] = {},
@@ -22,7 +23,7 @@ local frames = {
     ["AddonList"] = {},
     ["MerchantFrame"] = {},
     ["MailFrame"] = {},
-    ["SendMailFrame"] = {}, -- needs handle
+    ["SendMailFrame"] = {delegate = "MailFrame"},
     ["BankFrame"] = {},
     ["GameMenuFrame"] = {},
     ["VideoOptionsFrame"] = {},
@@ -65,7 +66,7 @@ local frames = {
     ["GarrisonCapacitiveDisplayFrame"] = {},
     ["OrderHallMissionFrame"] = {},
     ["OrderHallTalentFrame"] = {},
-    ["BFAMissionFrame"] = {}, -- needs handle
+    ["BFAMissionFrame"] = {},
     ["ArtifactFrame"] = {},
     ["ItemTextFrame"] = {},
     ["PetStableFrame"] = {},

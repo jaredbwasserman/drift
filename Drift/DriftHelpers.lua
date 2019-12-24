@@ -6,16 +6,17 @@ DriftHelpers = {}
 local function DoNothing() end
 
 local function onDragStart(frame)
-    frame:StartMoving()
-    frame:SetAlpha(0.3)
+    local frameToMove = frame.delegate or frame
+    frameToMove:StartMoving()
+    frameToMove:SetAlpha(0.3)
 end
 
 local function onDragStop(frame)
-    frame:StopMovingOrSizing()
-    frame:SetAlpha(1)
-
-    local point, relativeTo, relativePoint, xOfs, yOfs = frame:GetPoint()
-    DriftPoints[frame:GetName()] = {
+    local frameToMove = frame.delegate or frame
+    frameToMove:StopMovingOrSizing()
+    frameToMove:SetAlpha(1)
+    local point, relativeTo, relativePoint, xOfs, yOfs = frameToMove:GetPoint()
+    DriftPoints[frameToMove:GetName()] = {
         ["point"] = point,
         ["relativeTo"] = relativeTo or "UIParent",
         ["relativePoint"] = relativePoint,
@@ -25,7 +26,9 @@ local function onDragStop(frame)
 end
 
 local function makeMovable(frame)
+    local frameToMove = frame.delegate or frame
     frame:SetMovable(true)
+    frameToMove:SetMovable(true)
     frame:EnableMouse(true)
     frame:SetClampedToScreen(true)
     frame:RegisterForDrag("LeftButton")
@@ -36,11 +39,11 @@ end
 local function makePersistent(frame)
     -- Set point from old position
     frame:HookScript("OnShow", function(self, event, ...)
-        self:ClearAllPoints()
-
-        local point = DriftPoints[frame:GetName()]
+        local frameToMove = frame.delegate or frame
+        frameToMove:ClearAllPoints()
+        local point = DriftPoints[frameToMove:GetName()]
         if point then
-            self:SetPoint(
+            frameToMove:SetPoint(
                 point["point"],
                 point["relativeTo"],
                 point["relativePoint"],
@@ -54,13 +57,15 @@ end
 local function makeSticky(frame)
     -- Prevent other frames from moving this one while it's shown
     frame:HookScript("OnShow", function(self, event, ...)
-        frame.SetPointOrig = frame.SetPoint
-        frame.SetPoint = DoNothing
+        local frameToMove = frame.delegate or frame
+        frameToMove.SetPointOrig = frameToMove.SetPoint
+        frameToMove.SetPoint = DoNothing
     end)
 
     -- Reset SetPoint when hidden
     frame:HookScript("OnHide", function(self, event, ...)
-        frame.SetPoint = frame.SetPointOrig
+        local frameToMove = frame.delegate or frame
+        frameToMove.SetPoint = frameToMove.SetPointOrig
     end)
 end
 
@@ -68,11 +73,14 @@ end
 function DriftHelpers:ModifyFrames(frames)
     for frameName, properties in pairs(frames) do
         local frame = _G[frameName] or nil
-        if frame and not properties.hasBeenModified then
+        if frame and not frame.modifiedByDrift then
+            if properties.delegate then
+                frame.delegate = _G[properties.delegate] or frame
+            end
             makeMovable(frame)
             makePersistent(frame)
             makeSticky(frame)
-            properties.hasBeenModified = true
+            frame.modifiedByDrift = true
         end
     end
 end
