@@ -9,11 +9,11 @@ local frames = {
     ["GossipFrame"] = {},
     ["CollectionsJournal"] = {},
     ["SpellBookFrame"] = {},
-    -- ["PlayerTalentFrame"] = {},
+    ["PlayerTalentFrame"] = {}, -- fix this
     ["TalentFrame"] = {},
     ["AchievementFrame"] = {},
     ["AchievementFrameHeader"] = {delegate = "AchievementFrame"},
-    -- ["WorldMapFrame"] = {},
+    ["WorldMapFrame"] = {}, -- fix this
     ["LookingForGuildFrame"] = {},
     ["CommunitiesFrame"] = {},
     ["PVEFrame"] = {}, -- fix this

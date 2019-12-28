@@ -40,9 +40,9 @@ local function makePersistent(frame)
     -- Set point from old position
     frame:HookScript("OnShow", function(self, event, ...)
         local frameToMove = frame.delegate or frame
-        frameToMove:ClearAllPoints()
         local point = DriftPoints[frameToMove:GetName()]
         if point then
+            frameToMove:ClearAllPoints()
             frameToMove:SetPoint(
                 point["point"],
                 point["relativeTo"],
