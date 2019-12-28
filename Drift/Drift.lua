@@ -1,5 +1,5 @@
 local frames = {
-    ["CharacterFrame"] = {}, -- fix this
+    ["CharacterFrame"] = {notSticky = true},
     ["TradeSkillFrame"] = {},
     ["ArchaeologyFrame"] = {},
     ["QuestFrame"] = {},
@@ -9,14 +9,15 @@ local frames = {
     ["GossipFrame"] = {},
     ["CollectionsJournal"] = {},
     ["SpellBookFrame"] = {},
-    ["PlayerTalentFrame"] = {}, -- fix this
+    ["PlayerTalentFrame"] = {notSticky = true},
     ["TalentFrame"] = {},
     ["AchievementFrame"] = {},
     ["AchievementFrameHeader"] = {delegate = "AchievementFrame"},
-    ["WorldMapFrame"] = {}, -- fix this
+    ["WorldMapFrame"] = {notSticky = true},
+    ["QuestScrollFrame"] = {delegate = "WorldMapFrame"},
     ["LookingForGuildFrame"] = {},
     ["CommunitiesFrame"] = {},
-    ["PVEFrame"] = {}, -- fix this
+    ["PVEFrame"] = {notSticky = true},
     ["EncounterJournal"] = {},
     ["FriendsFrame"] = {},
     ["DressUpFrame"] = {},

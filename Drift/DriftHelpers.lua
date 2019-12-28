@@ -77,9 +77,14 @@ function DriftHelpers:ModifyFrames(frames)
             if properties.delegate then
                 frame.delegate = _G[properties.delegate] or frame
             end
+
             makeMovable(frame)
             makePersistent(frame)
-            makeSticky(frame)
+
+            if not properties.notSticky then
+                makeSticky(frame)
+            end
+
             frame.modifiedByDrift = true
         end
     end
