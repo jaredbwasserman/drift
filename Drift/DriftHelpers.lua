@@ -25,13 +25,11 @@ local function onDragStop(frame)
     }
 end
 
-local function getBroadcastFunc(frames)
-    return function(self, event, ...)
-        for frameName, properties in pairs(frames) do
-            local frame = _G[frameName] or nil
-            if frame and frame:IsVisible() then
-                frame.DriftResetNeeded = true
-            end
+local function broadcastReset(frames)
+    for frameName, _ in pairs(frames) do
+        local frame = _G[frameName] or nil
+        if frame and frame:IsVisible() then
+            frame.DriftResetNeeded = true
         end
     end
 end
@@ -63,10 +61,23 @@ local function makeMovable(frame)
 end
 
 local function makeSticky(frame, frames)
-    frame:HookScript("OnShow", getBroadcastFunc(frames))
-    frame:HookScript("OnHide", getBroadcastFunc(frames))
     frame:HookScript(
-        "OnUpdate",
+        'OnShow',
+        function(self, event, ...)
+            resetPosition(frame)
+            broadcastReset(frames)
+        end
+    )
+
+    frame:HookScript(
+        'OnHide',
+        function(self, event, ...)
+            broadcastReset(frames)
+        end
+    )
+
+    frame:HookScript(
+        'OnUpdate',
         function(self, event, ...)
             if frame.DriftResetNeeded then
                 resetPosition(frame)
