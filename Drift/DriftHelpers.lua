@@ -84,9 +84,6 @@ function DriftHelpers:ModifyFrames(frames)
             if properties.DriftDelegate then
                 frame.DriftDelegate = _G[properties.DriftDelegate] or frame
             end
-            if properties.DriftNoReset then
-                frame.DriftNoReset = properties.DriftNoReset
-            end
 
             makeMovable(frame)
             makeSticky(frame, frames)
