@@ -1,5 +1,5 @@
 local frames = {
-    ["CharacterFrame"] = {},
+    ["CharacterFrame"] = {DriftTabs = {"CharacterFrameTab1", "CharacterFrameTab2", "CharacterFrameTab3"}},
     ["TradeSkillFrame"] = {},
     ["ArchaeologyFrame"] = {},
     ["QuestFrame"] = {},
@@ -9,7 +9,7 @@ local frames = {
     ["GossipFrame"] = {},
     ["CollectionsJournal"] = {},
     ["SpellBookFrame"] = {},
-    ["PlayerTalentFrame"] = {},
+    ["PlayerTalentFrame"] = {DriftTabs = {"PlayerTalentFrameTab1", "PlayerTalentFrameTab2"}},
     ["TalentFrame"] = {},
     ["AchievementFrame"] = {},
     ["AchievementFrameHeader"] = {DriftDelegate = "AchievementFrame"},
@@ -17,7 +17,7 @@ local frames = {
     ["QuestScrollFrame"] = {DriftDelegate = "WorldMapFrame"},
     ["LookingForGuildFrame"] = {},
     ["CommunitiesFrame"] = {},
-    ["PVEFrame"] = {},
+    ["PVEFrame"] = {DriftTabs = {"PVEFrameTab1", "PVEFrameTab2", "PVEFrameTab3"}},
     ["EncounterJournal"] = {},
     ["FriendsFrame"] = {},
     ["DressUpFrame"] = {},
@@ -84,11 +84,13 @@ local frames = {
 -- Modify pre-loaded frames
 DriftHelpers:ModifyFrames(frames)
 
-local function addonLoaded(self, event, ...)
-    DriftHelpers:ModifyFrames(frames)
+local function eventHandler(self, event, ...)
+    if event == "ADDON_LOADED" then
+        DriftHelpers:ModifyFrames(frames)
+    end
 end
 
 -- Make addon frames hasBeenModified when any addon is loaded
 local Drift = CreateFrame("Frame")
-Drift:SetScript("OnEvent", addonLoaded)
+Drift:SetScript("OnEvent", eventHandler)
 Drift:RegisterEvent("ADDON_LOADED")
