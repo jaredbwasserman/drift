@@ -87,13 +87,14 @@ local function makeSticky(frame, frames)
     )
 end
 
-local function makeTabsSticky(frame)
+local function makeTabsSticky(frame, frames)
     if frame.DriftTabs then
         for _, tab in pairs(frame.DriftTabs) do
             tab:HookScript(
                 "OnClick",
                 function(self, event, ...)
                     resetPosition(frame)
+                    broadcastReset(frames)
                 end
             )
         end
@@ -119,7 +120,7 @@ function DriftHelpers:ModifyFrames(frames)
 
             makeMovable(frame)
             makeSticky(frame, frames)
-            makeTabsSticky(frame)
+            makeTabsSticky(frame, frames)
             frame.DriftModified = true
         end
     end
