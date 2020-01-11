@@ -1,5 +1,11 @@
 local frames = {
-    ["CharacterFrame"] = {DriftTabs = {"CharacterFrameTab1", "CharacterFrameTab2", "CharacterFrameTab3"}},
+    ["CharacterFrame"] = {
+        DriftTabs = {
+            "CharacterFrameTab1",
+            "CharacterFrameTab2",
+            "CharacterFrameTab3"
+        }
+    },
     ["TradeSkillFrame"] = {},
     ["ArchaeologyFrame"] = {},
     ["QuestFrame"] = {},
@@ -9,15 +15,37 @@ local frames = {
     ["GossipFrame"] = {},
     ["CollectionsJournal"] = {},
     ["SpellBookFrame"] = {},
-    ["PlayerTalentFrame"] = {DriftTabs = {"PlayerTalentFrameTab1", "PlayerTalentFrameTab2"}},
+    ["PlayerTalentFrame"] = {
+        DriftTabs = {
+            "PlayerTalentFrameTab1",
+            "PlayerTalentFrameTab2"
+        }
+    },
     ["TalentFrame"] = {},
     ["AchievementFrame"] = {},
-    ["AchievementFrameHeader"] = {DriftDelegate = "AchievementFrame"},
+    ["AchievementFrameHeader"] = {
+        DriftDelegate = "AchievementFrame"
+    },
     ["WorldMapFrame"] = {},
-    ["QuestScrollFrame"] = {DriftDelegate = "WorldMapFrame"},
+    ["QuestScrollFrame"] = {
+        DriftDelegate = "WorldMapFrame"
+    },
     ["LookingForGuildFrame"] = {},
-    ["CommunitiesFrame"] = {},
-    ["PVEFrame"] = {DriftTabs = {"PVEFrameTab1", "PVEFrameTab2", "PVEFrameTab3"}},
+    ["CommunitiesFrame"] = {
+        DriftTabs = {
+            "ChatTab",
+            "RosterTab",
+            "GuildBenefitsTab",
+            "GuildInfoTab"
+        }
+    },
+    ["PVEFrame"] = {
+        DriftTabs = {
+            "PVEFrameTab1",
+            "PVEFrameTab2",
+            "PVEFrameTab3"
+        }
+    },
     ["EncounterJournal"] = {},
     ["FriendsFrame"] = {},
     ["RaidInfoFrame"] = {},
@@ -25,7 +53,9 @@ local frames = {
     ["AddonList"] = {},
     ["MerchantFrame"] = {},
     ["MailFrame"] = {},
-    ["SendMailFrame"] = {DriftDelegate = "MailFrame"},
+    ["SendMailFrame"] = {
+        DriftDelegate = "MailFrame"
+    },
     ["OpenMailFrame"] = {},
     ["BankFrame"] = {},
     ["GameMenuFrame"] = {},

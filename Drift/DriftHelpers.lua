@@ -114,6 +114,8 @@ function DriftHelpers:ModifyFrames(frames)
                 for _, tabName in pairs(properties.DriftTabs) do
                     if _G[tabName] then
                         table.insert(frame.DriftTabs, _G[tabName])
+                    elseif frame[tabName] then
+                        table.insert(frame.DriftTabs, frame[tabName])
                     end
                 end
             end
