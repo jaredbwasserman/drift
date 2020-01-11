@@ -20,6 +20,7 @@ local frames = {
     ["PVEFrame"] = {DriftTabs = {"PVEFrameTab1", "PVEFrameTab2", "PVEFrameTab3"}},
     ["EncounterJournal"] = {},
     ["FriendsFrame"] = {},
+    ["RaidInfoFrame"] = {},
     ["DressUpFrame"] = {},
     ["AddonList"] = {},
     ["MerchantFrame"] = {},
