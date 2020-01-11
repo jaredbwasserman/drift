@@ -25,6 +25,7 @@ local frames = {
     ["MerchantFrame"] = {},
     ["MailFrame"] = {},
     ["SendMailFrame"] = {DriftDelegate = "MailFrame"},
+    ["OpenMailFrame"] = {},
     ["BankFrame"] = {},
     ["GameMenuFrame"] = {},
     ["VideoOptionsFrame"] = {},

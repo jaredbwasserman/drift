@@ -4,5 +4,4 @@
 
 ## TODO
 1. Verify Classic WoW works as expected
-1. Fix EncounterJournalTooltip
 1. Add support for Containers

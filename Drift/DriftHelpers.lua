@@ -127,6 +127,6 @@ function DriftHelpers:ModifyFrames(frames)
 
     -- This is needed to avoid a Lua error
     if EncounterJournalTooltip then
-        EncounterJournalTooltip.SetPoint = DoNothing
+        EncounterJournalTooltip:ClearAllPoints()
     end
 end
