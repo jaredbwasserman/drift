@@ -110,7 +110,8 @@ local frames = {
     ["ChatConfigFrame"] = {},
     ["FlightMapFrame"] = {},
     ["ScrappingMachineFrame"] = {},
-    ["IslandsQueueFrame"] = {}
+    ["IslandsQueueFrame"] = {},
+    ["ItemUpgradeFrame"] = {}
 }
 
 -- Modify pre-loaded frames
