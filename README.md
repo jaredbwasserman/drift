@@ -5,7 +5,7 @@ Addon for World of Warcraft
 * Draggable UI panels
 * Classic compatible
 
-## Wishlist
+## To Add
 1. Add support for Containers (bags and bank bags)
 1. Add support for ObjectiveTrackerFrame
 1. Add support for TalkingHeadFrame
@@ -13,7 +13,7 @@ Addon for World of Warcraft
 1. Add config menu in Interface Addons menu
    1. Global reset button in config menu (wipes state)
 
-## Fixlist
+## To Fix
 1. Verify Classic WoW works as expected
 1. Fix bug where frame resets from hotkey when on other tab
-1. Fix bug where PlayerTalentFrame moves after any button press
+1. Fix bug where PlayerTalentFrame moves after any button clicked
