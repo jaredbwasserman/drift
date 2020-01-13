@@ -16,3 +16,4 @@ Addon for World of Warcraft
 ## Fixlist
 1. Verify Classic WoW works as expected
 1. Fix bug where frame resets from hotkey when on other tab
+1. Fix bug where PlayerTalentFrame moves after any button press
