@@ -88,6 +88,8 @@ local frames = {
     ["CalendarFrame"] = {},
     ["ClassTrainerFrame"] = {},
     ["AuctionFrame"] = {},
+    ["AuctionHouseFrame"] = {},
+    ["BlackMarketFrame"] = {},
     ["ReforgingFrame"] = {},
     ["GarrisonBuildingFrame"] = {},
     ["GarrisonLandingPage"] = {},
@@ -111,7 +113,8 @@ local frames = {
     ["FlightMapFrame"] = {},
     ["ScrappingMachineFrame"] = {},
     ["IslandsQueueFrame"] = {},
-    ["ItemUpgradeFrame"] = {}
+    ["ItemUpgradeFrame"] = {},
+    ["ItemInteractionFrame"] = {}
 }
 
 -- Modify pre-loaded frames
