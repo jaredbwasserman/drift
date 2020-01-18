@@ -5,6 +5,37 @@ DriftHelpers = {}
 -- Local functions
 local function DoNothing() end
 
+local function getFrame(frameName)
+    if not frameName then
+        return nil
+    end
+
+    -- First check global table
+    local frame = _G[frameName]
+    if frame then
+        return frame
+    end
+
+    -- Try splitting on dot
+    local frameNames = {}
+    for name in string.gmatch(frameName, "[^%.]+") do
+        table.insert(frameNames, name)
+    end
+    if #frameNames < 2 then
+        return nil
+    end
+
+    -- Combine
+    frame = _G[frameNames[1]]
+    if frame then
+        for idx = 2, #frameNames do
+            frame = frame[frameNames[idx]]
+        end
+    end
+
+    return frame
+end
+
 local function onDragStart(frame)
     local frameToMove = frame.DriftDelegate or frame
     frameToMove:StartMoving()
@@ -50,6 +81,10 @@ local function resetPosition(frame)
 end
 
 local function makeMovable(frame)
+    if frame.DriftMovable then
+        return
+    end
+
     local frameToMove = frame.DriftDelegate or frame
     frame:SetMovable(true)
     frameToMove:SetMovable(true)
@@ -58,9 +93,15 @@ local function makeMovable(frame)
     frame:RegisterForDrag("LeftButton")
     frame:SetScript("OnDragStart", onDragStart)
     frame:SetScript("OnDragStop", onDragStop)
+
+    frame.DriftMovable = true
 end
 
 local function makeSticky(frame, frames)
+    if frame.DriftSticky then
+        return
+    end
+
     frame:HookScript(
         "OnShow",
         function(self, event, ...)
@@ -85,18 +126,23 @@ local function makeSticky(frame, frames)
             end
         end
     )
+
+    frame.DriftSticky = true
 end
 
 local function makeTabsSticky(frame, frames)
     if frame.DriftTabs then
         for _, tab in pairs(frame.DriftTabs) do
-            tab:HookScript(
-                "OnClick",
-                function(self, event, ...)
-                    resetPosition(frame)
-                    broadcastReset(frames)
-                end
-            )
+            if not tab.DriftTabSticky then
+                tab:HookScript(
+                    "OnClick",
+                    function(self, event, ...)
+                        resetPosition(frame)
+                        broadcastReset(frames)
+                    end
+                )
+                tab.DriftTabSticky = true
+            end
         end
     end
 end
@@ -104,18 +150,22 @@ end
 -- Global functions
 function DriftHelpers:ModifyFrames(frames)
     for frameName, properties in pairs(frames) do
-        local frame = _G[frameName] or nil
-        if frame and not frame.DriftModified then
+        local frame = getFrame(frameName)
+        if frame then
+            if not frame:GetName() then
+                frame.GetName = function()
+                    return frameName
+                end
+            end
             if properties.DriftDelegate then
-                frame.DriftDelegate = _G[properties.DriftDelegate] or frame
+                frame.DriftDelegate = getFrame(properties.DriftDelegate) or frame
             end
             if properties.DriftTabs then
                 frame.DriftTabs = {}
                 for _, tabName in pairs(properties.DriftTabs) do
-                    if _G[tabName] then
-                        table.insert(frame.DriftTabs, _G[tabName])
-                    elseif frame[tabName] then
-                        table.insert(frame.DriftTabs, frame[tabName])
+                    local tabFrame = getFrame(tabName)
+                    if tabFrame then
+                        table.insert(frame.DriftTabs, tabFrame)
                     end
                 end
             end
@@ -123,7 +173,6 @@ function DriftHelpers:ModifyFrames(frames)
             makeMovable(frame)
             makeSticky(frame, frames)
             makeTabsSticky(frame, frames)
-            frame.DriftModified = true
         end
     end
 
@@ -131,4 +180,42 @@ function DriftHelpers:ModifyFrames(frames)
     if EncounterJournalTooltip then
         EncounterJournalTooltip:ClearAllPoints()
     end
+
+    -- Reset everything in case there was a delay
+    broadcastReset(frames)
+end
+
+DriftHelpers.waitTable = {}
+DriftHelpers.waitFrame = nil
+function DriftHelpers:Wait(delay, func, ...)
+    if type(delay) ~= "number" or type(func) ~= "function" then
+        return false
+    end
+
+    if DriftHelpers.waitFrame == nil then
+        DriftHelpers.waitFrame = CreateFrame("Frame", "WaitFrame", UIParent)
+        DriftHelpers.waitFrame:SetScript(
+            "OnUpdate",
+            function(self, elapse)
+                local count = #DriftHelpers.waitTable
+                local i = 1
+                while (i <= count) do
+                    local waitRecord = tremove(DriftHelpers.waitTable, i)
+                    local d = tremove(waitRecord, 1)
+                    local f = tremove(waitRecord, 1)
+                    local p = tremove(waitRecord, 1)
+                    if (d > elapse) then
+                        tinsert(DriftHelpers.waitTable, i, {d - elapse, f, p})
+                        i = i + 1
+                    else
+                        count = count - 1
+                        f(unpack(p))
+                    end
+                end
+            end
+        )
+    end
+
+    tinsert(DriftHelpers.waitTable, {delay, func, {...}})
+    return true
 end

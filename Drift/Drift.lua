@@ -26,6 +26,7 @@ local frames = {
     ["AchievementFrameHeader"] = {
         DriftDelegate = "AchievementFrame"
     },
+    ["AchievementFrame.searchResults"] = {},
     ["WorldMapFrame"] = {},
     ["QuestScrollFrame"] = {
         DriftDelegate = "WorldMapFrame"
@@ -33,21 +34,34 @@ local frames = {
     ["LookingForGuildFrame"] = {},
     ["CommunitiesFrame"] = {
         DriftTabs = {
-            "ChatTab",
-            "RosterTab",
-            "GuildBenefitsTab",
-            "GuildInfoTab"
+            "ClubFinderGuildFinderFrame.ClubFinderSearchTab",
+            "ClubFinderCommunityAndGuildFinderFrame.ClubFinderSearchTab",
+            "ClubFinderGuildFinderFrame.ClubFinderPendingTab",
+            "ClubFinderCommunityAndGuildFinderFrame.ClubFinderPendingTab",
+            "CommunitiesFrame.ChatTab",
+            "CommunitiesFrame.RosterTab",
+            "CommunitiesFrame.GuildBenefitsTab",
+            "CommunitiesFrame.GuildInfoTab",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton1",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton2",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton3",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton4",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton5"
         }
     },
     ["PVEFrame"] = {
         DriftTabs = {
             "PVEFrameTab1",
             "PVEFrameTab2",
-            "PVEFrameTab3"
+            "PVEFrameTab3",
+            "PVPQueueFrameCategoryButton1",
+            "PVPQueueFrameCategoryButton2",
+            "PVPQueueFrameCategoryButton3"
         }
     },
     ["EncounterJournal"] = {},
     ["FriendsFrame"] = {},
+    ["ChannelFrame"] = {},
     ["RaidInfoFrame"] = {},
     ["DressUpFrame"] = {},
     ["AddonList"] = {},
@@ -121,12 +135,18 @@ local frames = {
 DriftHelpers:ModifyFrames(frames)
 
 local function eventHandler(self, event, ...)
+    local addonName = select(1, ...)
     if event == "ADDON_LOADED" then
-        DriftHelpers:ModifyFrames(frames)
+        -- Blizzard Communities buttons are delayed for some reason
+        if addonName == "Blizzard_Communities" then
+            DriftHelpers:Wait(0, DriftHelpers.ModifyFrames, DriftHelpers, frames)
+        else
+            DriftHelpers:ModifyFrames(frames)
+        end
     end
 end
 
--- Make addon frames hasBeenModified when any addon is loaded
+-- Modify frames after any addon is loaded
 local Drift = CreateFrame("Frame")
 Drift:SetScript("OnEvent", eventHandler)
-Drift:RegisterEvent("ADDON_LOADED")
+DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
