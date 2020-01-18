@@ -157,5 +157,11 @@ end
 -- Modify frames after any addon is loaded
 local Drift = CreateFrame("Frame")
 Drift:SetScript("OnEvent", eventHandler)
-Drift:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
+
+-- PLAYER_SPECIALIZATION_CHANGED does not exist in classic
+local isClassic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
+if not isClassic then
+    Drift:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
+end
+
 DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
