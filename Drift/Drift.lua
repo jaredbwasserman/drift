@@ -139,7 +139,7 @@ local function eventHandler(self, event, ...)
     if event == "ADDON_LOADED" then
         -- Blizzard Communities buttons are delayed for some reason
         if addonName == "Blizzard_Communities" then
-            DriftHelpers:Wait(0, DriftHelpers.ModifyFrames, DriftHelpers, frames)
+            DriftHelpers:Wait(0.25, DriftHelpers.ModifyFrames, DriftHelpers, frames)
         else
             DriftHelpers:ModifyFrames(frames)
         end
