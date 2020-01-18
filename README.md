@@ -15,4 +15,4 @@ Addon for World of Warcraft
 ## To Fix
 1. Verify Classic WoW works as expected
 1. Fix bug where frame resets from hotkey when on other tab
-1. Fix bug where PlayerTalentFrame moves after any button clicked
+1. Fix bug where PlayerTalentFrame resets from Close button on PVP Talents

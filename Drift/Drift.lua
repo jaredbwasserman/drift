@@ -18,7 +18,12 @@ local frames = {
     ["PlayerTalentFrame"] = {
         DriftTabs = {
             "PlayerTalentFrameTab1",
-            "PlayerTalentFrameTab2"
+            "PlayerTalentFrameTab2",
+            "PlayerTalentFrameTalentsPvpTalentButton",
+            "PlayerTalentFrameTalentsPvpTalentFrame.TrinketSlot",
+            "PlayerTalentFrameTalentsPvpTalentFrame.TalentSlot1",
+            "PlayerTalentFrameTalentsPvpTalentFrame.TalentSlot2",
+            "PlayerTalentFrameTalentsPvpTalentFrame.TalentSlot3"
         }
     },
     ["TalentFrame"] = {},
@@ -135,18 +140,22 @@ local frames = {
 DriftHelpers:ModifyFrames(frames)
 
 local function eventHandler(self, event, ...)
-    local addonName = select(1, ...)
     if event == "ADDON_LOADED" then
+        local addonName = select(1, ...)
+
         -- Blizzard Communities buttons are delayed for some reason
         if addonName == "Blizzard_Communities" then
             DriftHelpers:Wait(0.25, DriftHelpers.ModifyFrames, DriftHelpers, frames)
         else
             DriftHelpers:ModifyFrames(frames)
         end
+    elseif event == "PLAYER_SPECIALIZATION_CHANGED" then
+        DriftHelpers:BroadcastReset(frames)
     end
 end
 
 -- Modify frames after any addon is loaded
 local Drift = CreateFrame("Frame")
 Drift:SetScript("OnEvent", eventHandler)
+Drift:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
 DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")

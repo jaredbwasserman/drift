@@ -56,15 +56,6 @@ local function onDragStop(frame)
     }
 end
 
-local function broadcastReset(frames)
-    for frameName, _ in pairs(frames) do
-        local frame = _G[frameName] or nil
-        if frame and frame:IsVisible() then
-            frame.DriftResetNeeded = true
-        end
-    end
-end
-
 local function resetPosition(frame)
     local frameToMove = frame.DriftDelegate or frame
     local point = DriftPoints[frameToMove:GetName()]
@@ -106,14 +97,14 @@ local function makeSticky(frame, frames)
         "OnShow",
         function(self, event, ...)
             resetPosition(frame)
-            broadcastReset(frames)
+            DriftHelpers:BroadcastReset(frames)
         end
     )
 
     frame:HookScript(
         "OnHide",
         function(self, event, ...)
-            broadcastReset(frames)
+            DriftHelpers:BroadcastReset(frames)
         end
     )
 
@@ -138,7 +129,7 @@ local function makeTabsSticky(frame, frames)
                     "OnClick",
                     function(self, event, ...)
                         resetPosition(frame)
-                        broadcastReset(frames)
+                        DriftHelpers:BroadcastReset(frames)
                     end
                 )
                 tab.DriftTabSticky = true
@@ -182,7 +173,7 @@ function DriftHelpers:ModifyFrames(frames)
     end
 
     -- Reset everything in case there was a delay
-    broadcastReset(frames)
+    DriftHelpers:BroadcastReset(frames)
 end
 
 DriftHelpers.waitTable = {}
@@ -218,4 +209,13 @@ function DriftHelpers:Wait(delay, func, ...)
 
     tinsert(DriftHelpers.waitTable, {delay, func, {...}})
     return true
+end
+
+function DriftHelpers:BroadcastReset(frames)
+    for frameName, _ in pairs(frames) do
+        local frame = getFrame(frameName)
+        if frame and frame:IsVisible() then
+            frame.DriftResetNeeded = true
+        end
+    end
 end
