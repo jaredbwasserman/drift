@@ -8,6 +8,7 @@ Supported frames include:
 * Professions
 * World Map
 * Quest Log
+* Social
 * Spellbook
 * Talents
 * Game Menu
