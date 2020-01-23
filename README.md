@@ -1,6 +1,9 @@
 # Drift
 Addon for World of Warcraft that modifies UI frames so you can click and drag to move them around.
 
+[Drift CurseForge link](https://www.curseforge.com/wow/addons/drift)
+[Drift Classic CurseForge link](https://www.curseforge.com/wow/addons/driftclassic)
+
 ## TODO
 1. Add support for Containers (bags and bank bags)
 1. Add support for ObjectiveTrackerFrame
