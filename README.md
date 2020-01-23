@@ -1,9 +1,5 @@
 # Drift
-Addon for World of Warcraft
-
-## Features
-* Draggable UI panels
-* Classic compatible
+Addon for World of Warcraft that modifies UI frames so you can click and drag to move them around.
 
 ## TODO
 1. Add support for Containers (bags and bank bags)
