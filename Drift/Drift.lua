@@ -19,6 +19,7 @@ local frames = {
         DriftTabs = {
             "PlayerTalentFrameTab1",
             "PlayerTalentFrameTab2",
+            "PlayerTalentFrameTab3",
             "PlayerTalentFrameTalentsPvpTalentButton",
             "PlayerTalentFrameTalentsPvpTalentFrame.TrinketSlot",
             "PlayerTalentFrameTalentsPvpTalentFrame.TalentSlot1",
