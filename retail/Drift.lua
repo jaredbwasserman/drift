@@ -7,6 +7,7 @@ local frames = {
         }
     },
     ["TradeSkillFrame"] = {},
+    ["CraftFrame"] = {},
     ["ArchaeologyFrame"] = {},
     ["QuestFrame"] = {},
     ["QuestLogPopupDetailFrame"] = {},
@@ -88,7 +89,6 @@ local frames = {
     ["RaidBrowserFrame"] = {},
     ["TradeFrame"] = {},
     ["SUFWrapperFrame"] = {},
-    ["CraftFrame"] = {},
     ["TimeManagerFrame"] = {},
     ["TabardFrame"] = {},
     ["GuildBankFrame"] = {},
@@ -158,11 +158,5 @@ end
 -- Modify frames after any addon is loaded
 local Drift = CreateFrame("Frame")
 Drift:SetScript("OnEvent", eventHandler)
-
--- PLAYER_SPECIALIZATION_CHANGED does not exist in classic
-local isClassic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
-if not isClassic then
-    Drift:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
-end
-
+Drift:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
 DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
