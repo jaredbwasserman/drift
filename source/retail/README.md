@@ -1,3 +1,5 @@
+This is the retail version of the addon. The classic version is [Drift Classic](https://www.curseforge.com/wow/addons/driftclassic).
+
 Modifies UI frames so you can click and drag to move them around. Once you move a frame, that frame will remain there until you move it again (even after logging out).
 
 Supported frames include:
