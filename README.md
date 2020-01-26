@@ -11,6 +11,7 @@ CurseForge links:
 1. Add support for TalkingHeadFrame
 1. Add config menu in Interface Addons menu
 1. Global reset button in config menu
+1. Add right-click menu to lock and unlock
 
 ## Bugs
 1. Frames with tabs move from hotkey when on other tab
