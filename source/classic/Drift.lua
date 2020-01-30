@@ -3,6 +3,7 @@ local frames = {
     ["TradeSkillFrame"] = {},
     ["CraftFrame"] = {},
     ["QuestLogFrame"] = {},
+    ["QuestFrame"] = {},
     ["GossipFrame"] = {},
     ["SpellBookFrame"] = {},
     ["TalentFrame"] = {},
