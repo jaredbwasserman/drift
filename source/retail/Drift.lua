@@ -9,9 +9,9 @@ local frames = {
     ["TradeSkillFrame"] = {},
     ["CraftFrame"] = {},
     ["ArchaeologyFrame"] = {},
-    ["QuestFrame"] = {},
     ["QuestLogPopupDetailFrame"] = {},
     ["QuestLogFrame"] = {},
+    ["QuestFrame"] = {},
     ["WarboardQuestChoiceFrame"] = {},
     ["GossipFrame"] = {},
     ["CollectionsJournal"] = {},
@@ -150,7 +150,7 @@ local function eventHandler(self, event, ...)
         else
             DriftHelpers:ModifyFrames(frames)
         end
-    elseif event == "PLAYER_SPECIALIZATION_CHANGED" then
+    else
         DriftHelpers:BroadcastReset(frames)
     end
 end
@@ -159,4 +159,5 @@ end
 local Drift = CreateFrame("Frame")
 Drift:SetScript("OnEvent", eventHandler)
 Drift:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
+Drift:RegisterEvent("PET_SPECIALIZATION_CHANGED")
 DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
