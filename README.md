@@ -18,6 +18,7 @@ CurseForge links:
 ## Bugs
 1. Frames with tabs move from hotkey when on other tab
 1. PlayerTalentFrame moves from Close button on PVP Talents
+1. PlayerTalentFrame moves from changing spec
 1. ColorPickerFrame moves when it's not supposed to
 1. First pick of a talent resets PlayerTalentFrame
 1. TimeManagerFrame does not move if opened before other frames
