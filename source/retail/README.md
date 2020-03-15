@@ -28,6 +28,7 @@ Supported frames include:
 * Azerite
 * Gossip
 * Merchant
+* Talking Head
 * ...and more!
 
 ## Bugs and Feature Requests

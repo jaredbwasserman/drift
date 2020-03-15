@@ -134,7 +134,9 @@ local frames = {
     ["ScrappingMachineFrame"] = {},
     ["IslandsQueueFrame"] = {},
     ["ItemUpgradeFrame"] = {},
-    ["ItemInteractionFrame"] = {}
+    ["ItemInteractionFrame"] = {},
+    ["ExtraActionButton1"] = {},
+    ["TalkingHeadFrame"] = {},
 }
 
 -- Modify pre-loaded frames
