@@ -20,6 +20,7 @@ local frames = {
     },
     ["OpenMailFrame"] = {},
     ["BankFrame"] = {},
+    ["LootFrame"] = {},
     ["GameMenuFrame"] = {},
     ["VideoOptionsFrame"] = {},
     ["AudioOptionsFrame"] = {},
