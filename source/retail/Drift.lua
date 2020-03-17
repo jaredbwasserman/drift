@@ -136,6 +136,8 @@ local frames = {
     ["ItemUpgradeFrame"] = {},
     ["ItemInteractionFrame"] = {},
     ["ExtraActionButton1"] = {},
+    ["ZoneAbilityFrame"] = {},
+    ["PlayerPowerBarAlt"] = {},
     ["TalkingHeadFrame"] = {},
 }
 
