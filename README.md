@@ -8,7 +8,6 @@ CurseForge links:
 ## TODO
 1. Add support for Containers (bags and bank bags)
 1. Add support for ObjectiveTrackerFrame
-1. Add support for LootFrame
 1. Add config menu in Interface Addons menu
 1. Global reset button in config menu
 1. Hold down shift to move option in config menu
