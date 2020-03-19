@@ -1,4 +1,24 @@
 local frames = {
+    ["ContainerFrame1"] = {},
+    ["ContainerFrame1.ClickableTitleFrame"] = {
+        DriftDelegate = "ContainerFrame1"
+    },
+    ["ContainerFrame2"] = {},
+    ["ContainerFrame2.ClickableTitleFrame"] = {
+        DriftDelegate = "ContainerFrame2"
+    },
+    ["ContainerFrame3"] = {},
+    ["ContainerFrame3.ClickableTitleFrame"] = {
+        DriftDelegate = "ContainerFrame3"
+    },
+    ["ContainerFrame4"] = {},
+    ["ContainerFrame4.ClickableTitleFrame"] = {
+        DriftDelegate = "ContainerFrame4"
+    },
+    ["ContainerFrame5"] = {},
+    ["ContainerFrame5.ClickableTitleFrame"] = {
+        DriftDelegate = "ContainerFrame5"
+    },
     ["CharacterFrame"] = {
         DriftTabs = {
             "CharacterFrameTab1",

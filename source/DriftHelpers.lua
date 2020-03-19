@@ -167,9 +167,14 @@ function DriftHelpers:ModifyFrames(frames)
         end
     end
 
-    -- This is needed to avoid a Lua error
+    -- ClearAllPoints is needed to avoid Lua errors
     if EncounterJournalTooltip then
         EncounterJournalTooltip:ClearAllPoints()
+    end
+
+    -- Disable updating Container frames to avoid unwanted movement
+    UpdateContainerFrameAnchors = function ()
+        -- Do nothing
     end
 
     -- Reset everything in case there was a delay
