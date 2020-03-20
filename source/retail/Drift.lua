@@ -19,6 +19,38 @@ local frames = {
     ["ContainerFrame5.ClickableTitleFrame"] = {
         DriftDelegate = "ContainerFrame5"
     },
+    ["ContainerFrame6"] = {},
+    ["ContainerFrame6.ClickableTitleFrame"] = {
+        DriftDelegate = "ContainerFrame6"
+    },
+    ["ContainerFrame7"] = {},
+    ["ContainerFrame7.ClickableTitleFrame"] = {
+        DriftDelegate = "ContainerFrame7"
+    },
+    ["ContainerFrame8"] = {},
+    ["ContainerFrame8.ClickableTitleFrame"] = {
+        DriftDelegate = "ContainerFrame8"
+    },
+    ["ContainerFrame9"] = {},
+    ["ContainerFrame9.ClickableTitleFrame"] = {
+        DriftDelegate = "ContainerFrame9"
+    },
+    ["ContainerFrame10"] = {},
+    ["ContainerFrame10.ClickableTitleFrame"] = {
+        DriftDelegate = "ContainerFrame10"
+    },
+    ["ContainerFrame11"] = {},
+    ["ContainerFrame11.ClickableTitleFrame"] = {
+        DriftDelegate = "ContainerFrame11"
+    },
+    ["ContainerFrame12"] = {},
+    ["ContainerFrame12.ClickableTitleFrame"] = {
+        DriftDelegate = "ContainerFrame12"
+    },
+    ["ContainerFrame13"] = {},
+    ["ContainerFrame13.ClickableTitleFrame"] = {
+        DriftDelegate = "ContainerFrame13"
+    },
     ["CharacterFrame"] = {
         DriftTabs = {
             "CharacterFrameTab1",
