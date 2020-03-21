@@ -6,7 +6,6 @@ CurseForge links:
  * [Drift (Classic)](https://www.curseforge.com/wow/addons/driftclassic)
 
 ## TODO
-1. Add support for Containers (bags and bank bags)
 1. Add support for ObjectiveTrackerFrame
 1. Add config menu in Interface Addons menu
 1. Global reset button in config menu
@@ -17,6 +16,6 @@ CurseForge links:
 1. Frames with tabs move from hotkey when on other tab
 1. PlayerTalentFrame moves from Close button on PVP Talents
 1. PlayerTalentFrame moves from changing spec
-1. ColorPickerFrame moves when it's not supposed to
 1. First pick of a talent resets PlayerTalentFrame
+1. ColorPickerFrame moves when it's not supposed to
 1. TimeManagerFrame does not move if opened before other frames

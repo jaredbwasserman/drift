@@ -9,6 +9,7 @@ This is the classic version of the addon. The retail version is [Drift (Retail)]
 ## Details
 Supported frames include:
 
+* Bags
 * Auction House
 * Character Info
 * Professions
