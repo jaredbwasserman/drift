@@ -105,7 +105,8 @@ local frames = {
             "CommunitiesFrameCommunitiesListListScrollFrameButton2",
             "CommunitiesFrameCommunitiesListListScrollFrameButton3",
             "CommunitiesFrameCommunitiesListListScrollFrameButton4",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton5"
+            "CommunitiesFrameCommunitiesListListScrollFrameButton5",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton6",
         }
     },
     ["PVEFrame"] = {
