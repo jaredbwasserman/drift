@@ -107,6 +107,20 @@ local frames = {
             "CommunitiesFrameCommunitiesListListScrollFrameButton4",
             "CommunitiesFrameCommunitiesListListScrollFrameButton5",
             "CommunitiesFrameCommunitiesListListScrollFrameButton6",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton7",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton8",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton9",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton10",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton11",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton12",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton13",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton14",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton15",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton16",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton17",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton18",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton19",
+            "CommunitiesFrameCommunitiesListListScrollFrameButton20"
         }
     },
     ["PVEFrame"] = {
