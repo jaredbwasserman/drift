@@ -3,7 +3,7 @@
 ## Notes: Draggable UI frames
 ## Version: 1.0.0
 ## Author: Jared Wasserman
-## SavedVariables: DriftPoints
+## SavedVariables: DriftPoints, DriftOptions
 
 DriftHelpers.lua
 Drift.lua

@@ -1,6 +1,17 @@
--- Global variables
+--------------------------------------------------------------------------------
+-- Setup
+--------------------------------------------------------------------------------
+
 if not DriftPoints then DriftPoints = {} end
+if not DriftOptions then DriftOptions = {} end
 DriftHelpers = {}
+DriftOptionsPanel = {}
+DriftOptionsPanel.config = {}
+
+
+--------------------------------------------------------------------------------
+-- Core Logic
+--------------------------------------------------------------------------------
 
 -- Local functions
 local function DoNothing() end
@@ -223,4 +234,57 @@ function DriftHelpers:BroadcastReset(frames)
             frame.DriftResetNeeded = true
         end
     end
+end
+
+
+--------------------------------------------------------------------------------
+-- Interface Options
+--------------------------------------------------------------------------------
+
+-- Local functions
+local function createCheckbox(name, point, relativeFrame, relativePoint, xOffset, yOffset, text, tooltipText, onClickFunction)
+    local checkbox = CreateFrame("CheckButton", name, relativeFrame, "ChatConfigCheckButtonTemplate")
+    checkbox:SetPoint(point, relativeFrame, relativePoint, xOffset, yOffset)
+    getglobal(checkbox:GetName() .. "Text"):SetText(text)
+    checkbox.tooltip = tooltipText
+    checkbox:SetScript("OnClick", onClickFunction)
+    return checkbox
+end
+
+-- Make parent panel
+DriftOptionsPanel.panel = CreateFrame("Frame", "DriftOptionsPanel", UIParent)
+DriftOptionsPanel.panel.name = "Drift"
+local driftOptionsTitle = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
+driftOptionsTitle:SetFontObject("GameFontNormalLarge")
+driftOptionsTitle:SetText("Drift " .. GetAddOnMetadata("Drift", "Version"))
+driftOptionsTitle:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -15)
+InterfaceOptions_AddCategory(DriftOptionsPanel.panel)
+
+-- Make a child panel
+DriftOptionsPanel.childpanel = CreateFrame("Frame", "DriftOptionsPanelChild", DriftOptionsPanel.panel)
+DriftOptionsPanel.childpanel.name = "Options"
+DriftOptionsPanel.childpanel.parent = DriftOptionsPanel.panel.name
+local driftOptionsChildTitle = DriftOptionsPanel.childpanel:CreateFontString(nil, "BACKGROUND")
+driftOptionsChildTitle:SetFontObject("GameFontNormalLarge")
+driftOptionsChildTitle:SetText("Options")
+driftOptionsChildTitle:SetPoint("TOPLEFT", DriftOptionsPanel.childpanel, "TOPLEFT", 16, -15)
+InterfaceOptions_AddCategory(DriftOptionsPanel.childpanel)
+
+-- Parent panel content
+DriftOptionsPanel.config.framesAreLockedCheckbox = createCheckbox(
+    "FramesAreLockedCheckbox",
+    "TOPLEFT",
+    DriftOptionsPanel.childpanel,
+    "TOPLEFT",
+    14,
+    -50,
+    " Lock Frames",
+    "If frames are locked, the Drag Key must be pressed while dragging frames.",
+    nil
+)
+
+-- TODO: Fix
+-- Update logic
+DriftOptionsPanel.panel.okay = function (self)
+    print(DriftOptionsPanel.config.framesAreLockedCheckbox:GetChecked())
 end
