@@ -7,9 +7,7 @@ CurseForge links:
 
 ## TODO
 1. Add support for ObjectiveTrackerFrame
-1. Add config menu in Interface Addons menu
 1. Global reset button in config menu
-1. Hold down shift to move option in config menu
 1. Remove delay for Guild & Communities
 
 ## Bugs

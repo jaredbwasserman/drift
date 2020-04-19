@@ -74,7 +74,7 @@ local function onDragStop(frame)
     local point, relativeTo, relativePoint, xOfs, yOfs = frameToMove:GetPoint()
     DriftPoints[frameToMove:GetName()] = {
         ["point"] = point,
-        ["relativeTo"] = relativeTo or "UIParent",
+        ["relativeTo"] = "UIParent",
         ["relativePoint"] = relativePoint,
         ["xOfs"] = xOfs,
         ["yOfs"] = yOfs
@@ -294,7 +294,7 @@ local function createDragKeyDropdown(name, point, relativeFrame, relativePoint, 
     UIDropDownMenu_Initialize(dropdown, initialize)
     UIDropDownMenu_SetWidth(dropdown, 100)
     UIDropDownMenu_SetButtonWidth(dropdown, 124)
-    UIDropDownMenu_SetSelectedID(dropdown, 1)
+    UIDropDownMenu_SetSelectedID(dropdown, DriftOptions.dragKey or 1)
     UIDropDownMenu_JustifyText(dropdown, "LEFT")
     return dropdown
 end
@@ -345,6 +345,7 @@ DriftOptionsPanel.config.framesAreLockedCheckbox = createCheckbox(
     "If frames are locked, the Drag Key must be pressed while dragging frames.",
     nil
 )
+DriftOptionsPanel.config.framesAreLockedCheckbox:SetChecked(DriftOptions.framesAreLocked)
 
 local dragKeyDropdownTitle = DriftOptionsPanel.childpanel:CreateFontString(nil, "BACKGROUND")
 dragKeyDropdownTitle:SetFontObject("GameFontNormal")
@@ -363,7 +364,6 @@ DriftOptionsPanel.config.dragKeyDropdown = createDragKeyDropdown(
 -- Update logic
 DriftOptionsPanel.panel.okay = function (self)
     DriftOptions.framesAreLocked = DriftOptionsPanel.config.framesAreLockedCheckbox:GetChecked()
-    DriftOptions.dragKeyFunc = getDragKeyFuncFromOrdinal(
-        UIDropDownMenu_GetSelectedID(DriftOptionsPanel.config.dragKeyDropdown)
-    )
+    DriftOptions.dragKey = UIDropDownMenu_GetSelectedID(DriftOptionsPanel.config.dragKeyDropdown)
+    DriftOptions.dragKeyFunc = getDragKeyFuncFromOrdinal(DriftOptions.dragKey)
 end
