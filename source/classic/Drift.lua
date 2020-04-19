@@ -110,13 +110,14 @@ DriftHelpers:ModifyFrames(frames)
 local function eventHandler(self, event, ...)
     if event == "ADDON_LOADED" then
         DriftHelpers:ModifyFrames(frames)
+    elseif event == "VARIABLES_LOADED" then
+        -- Setup config
+        DriftHelpers:SetupConfig()
     end
 end
 
 -- Modify frames after any addon is loaded
 local Drift = CreateFrame("Frame")
 Drift:SetScript("OnEvent", eventHandler)
+Drift:RegisterEvent("VARIABLES_LOADED")
 DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
-
--- Setup config
-DriftHelpers:SetupConfig()

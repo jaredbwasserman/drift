@@ -222,6 +222,9 @@ local function eventHandler(self, event, ...)
         else
             DriftHelpers:ModifyFrames(frames)
         end
+    elseif event == "VARIABLES_LOADED" then
+        -- Setup config
+        DriftHelpers:SetupConfig()
     else
         DriftHelpers:BroadcastReset(frames)
     end
@@ -232,7 +235,5 @@ local Drift = CreateFrame("Frame")
 Drift:SetScript("OnEvent", eventHandler)
 Drift:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
 Drift:RegisterEvent("PET_SPECIALIZATION_CHANGED")
+Drift:RegisterEvent("VARIABLES_LOADED")
 DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
-
--- Setup config
-DriftHelpers:SetupConfig()
