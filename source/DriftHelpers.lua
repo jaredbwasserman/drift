@@ -14,7 +14,19 @@ DriftOptionsPanel.config = {}
 --------------------------------------------------------------------------------
 
 -- Local functions
-local function DoNothing() end
+local function shouldMove()
+    if not DriftOptions.framesAreLocked then
+        return true
+    elseif DriftOptions.dragKeyFunc then
+        if DriftOptions.dragKeyFunc() then
+            return true
+        else
+            return false
+        end
+    else
+        return false
+    end
+end
 
 local function getFrame(frameName)
     if not frameName then
@@ -49,8 +61,10 @@ end
 
 local function onDragStart(frame)
     local frameToMove = frame.DriftDelegate or frame
-    frameToMove:StartMoving()
-    frameToMove:SetAlpha(0.3)
+    if shouldMove() then
+        frameToMove:StartMoving()
+        frameToMove:SetAlpha(0.3)
+    end
 end
 
 local function onDragStop(frame)
@@ -251,6 +265,51 @@ local function createCheckbox(name, point, relativeFrame, relativePoint, xOffset
     return checkbox
 end
 
+local function createDragKeyDropdown(name, point, relativeFrame, relativePoint, xOffset, yOffset)
+    local dropdown = CreateFrame("Frame", name, relativeFrame, "UIDropDownMenuTemplate")
+    dropdown:SetPoint(point, relativeFrame, relativePoint, xOffset, yOffset)
+
+    local items = {
+        "ALT key",
+        "CTRL key",
+        "SHIFT key",
+        "None"
+    }
+
+    local function OnClick(self)
+        UIDropDownMenu_SetSelectedID(dropdown, self:GetID())
+    end
+
+    local function initialize(self, level)
+        local info = UIDropDownMenu_CreateInfo()
+        for k, v in pairs(items) do
+            info = UIDropDownMenu_CreateInfo()
+            info.text = v
+            info.value = v
+            info.func = OnClick
+            UIDropDownMenu_AddButton(info, level)
+        end
+    end
+
+    UIDropDownMenu_Initialize(dropdown, initialize)
+    UIDropDownMenu_SetWidth(dropdown, 100)
+    UIDropDownMenu_SetButtonWidth(dropdown, 124)
+    UIDropDownMenu_SetSelectedID(dropdown, 1)
+    UIDropDownMenu_JustifyText(dropdown, "LEFT")
+    return dropdown
+end
+
+local function getDragKeyFuncFromOrdinal(ordinal)
+    if ordinal == 1 then
+        return IsAltKeyDown
+    elseif ordinal == 2 then
+        return IsControlKeyDown
+    elseif ordinal == 3 then
+        return IsShiftKeyDown
+    end
+    return nil
+end
+
 -- Make parent panel
 DriftOptionsPanel.panel = CreateFrame("Frame", "DriftOptionsPanel", UIParent)
 DriftOptionsPanel.panel.name = "Drift"
@@ -258,6 +317,10 @@ local driftOptionsTitle = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGRO
 driftOptionsTitle:SetFontObject("GameFontNormalLarge")
 driftOptionsTitle:SetText("Drift " .. GetAddOnMetadata("Drift", "Version"))
 driftOptionsTitle:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -15)
+local driftOptionsInfo = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
+driftOptionsInfo:SetFontObject("GameFontNormal")
+driftOptionsInfo:SetText("by Jared Wasserman")
+driftOptionsInfo:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -45)
 InterfaceOptions_AddCategory(DriftOptionsPanel.panel)
 
 -- Make a child panel
@@ -283,8 +346,24 @@ DriftOptionsPanel.config.framesAreLockedCheckbox = createCheckbox(
     nil
 )
 
--- TODO: Fix
+local dragKeyDropdownTitle = DriftOptionsPanel.childpanel:CreateFontString(nil, "BACKGROUND")
+dragKeyDropdownTitle:SetFontObject("GameFontNormal")
+dragKeyDropdownTitle:SetText("Drag Key")
+dragKeyDropdownTitle:SetPoint("TOPLEFT", DriftOptionsPanel.childpanel, "TOPLEFT", 20, -92)
+
+DriftOptionsPanel.config.dragKeyDropdown = createDragKeyDropdown(
+    "DragKeyDropdown",
+    "TOPLEFT",
+    DriftOptionsPanel.childpanel,
+    "TOPLEFT",
+    0,
+    -110
+)
+
 -- Update logic
 DriftOptionsPanel.panel.okay = function (self)
-    print(DriftOptionsPanel.config.framesAreLockedCheckbox:GetChecked())
+    DriftOptions.framesAreLocked = DriftOptionsPanel.config.framesAreLockedCheckbox:GetChecked()
+    DriftOptions.dragKeyFunc = getDragKeyFuncFromOrdinal(
+        UIDropDownMenu_GetSelectedID(DriftOptionsPanel.config.dragKeyDropdown)
+    )
 end
