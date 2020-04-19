@@ -294,8 +294,8 @@ local function createDragKeyDropdown(name, point, relativeFrame, relativePoint, 
     UIDropDownMenu_Initialize(dropdown, initialize)
     UIDropDownMenu_SetWidth(dropdown, 100)
     UIDropDownMenu_SetButtonWidth(dropdown, 124)
-    UIDropDownMenu_SetSelectedID(dropdown, DriftOptions.dragKey or 1)
     UIDropDownMenu_JustifyText(dropdown, "LEFT")
+    UIDropDownMenu_SetSelectedID(dropdown, DriftOptions.dragKey or 1)
     return dropdown
 end
 
@@ -310,60 +310,64 @@ local function getDragKeyFuncFromOrdinal(ordinal)
     return nil
 end
 
--- Make parent panel
-DriftOptionsPanel.panel = CreateFrame("Frame", "DriftOptionsPanel", UIParent)
-DriftOptionsPanel.panel.name = "Drift"
-local driftOptionsTitle = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
-driftOptionsTitle:SetFontObject("GameFontNormalLarge")
-driftOptionsTitle:SetText("Drift " .. GetAddOnMetadata("Drift", "Version"))
-driftOptionsTitle:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -15)
-local driftOptionsInfo = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
-driftOptionsInfo:SetFontObject("GameFontNormal")
-driftOptionsInfo:SetText("by Jared Wasserman")
-driftOptionsInfo:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -45)
-InterfaceOptions_AddCategory(DriftOptionsPanel.panel)
+-- Global functions
+function DriftHelpers:SetupConfig()
+    -- Make parent panel
+    DriftOptionsPanel.panel = CreateFrame("Frame", "DriftOptionsPanel", UIParent)
+    DriftOptionsPanel.panel.name = "Drift"
+    local driftOptionsTitle = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
+    driftOptionsTitle:SetFontObject("GameFontNormalLarge")
+    driftOptionsTitle:SetText("Drift " .. GetAddOnMetadata("Drift", "Version"))
+    driftOptionsTitle:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -15)
+    local driftOptionsInfo = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
+    driftOptionsInfo:SetFontObject("GameFontNormal")
+    driftOptionsInfo:SetText("by Jared Wasserman")
+    driftOptionsInfo:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -45)
+    InterfaceOptions_AddCategory(DriftOptionsPanel.panel)
 
--- Make a child panel
-DriftOptionsPanel.childpanel = CreateFrame("Frame", "DriftOptionsPanelChild", DriftOptionsPanel.panel)
-DriftOptionsPanel.childpanel.name = "Options"
-DriftOptionsPanel.childpanel.parent = DriftOptionsPanel.panel.name
-local driftOptionsChildTitle = DriftOptionsPanel.childpanel:CreateFontString(nil, "BACKGROUND")
-driftOptionsChildTitle:SetFontObject("GameFontNormalLarge")
-driftOptionsChildTitle:SetText("Options")
-driftOptionsChildTitle:SetPoint("TOPLEFT", DriftOptionsPanel.childpanel, "TOPLEFT", 16, -15)
-InterfaceOptions_AddCategory(DriftOptionsPanel.childpanel)
+    -- Make a child panel
+    DriftOptionsPanel.childpanel = CreateFrame("Frame", "DriftOptionsPanelChild", DriftOptionsPanel.panel)
+    DriftOptionsPanel.childpanel.name = "Options"
+    DriftOptionsPanel.childpanel.parent = DriftOptionsPanel.panel.name
+    local driftOptionsChildTitle = DriftOptionsPanel.childpanel:CreateFontString(nil, "BACKGROUND")
+    driftOptionsChildTitle:SetFontObject("GameFontNormalLarge")
+    driftOptionsChildTitle:SetText("Options")
+    driftOptionsChildTitle:SetPoint("TOPLEFT", DriftOptionsPanel.childpanel, "TOPLEFT", 16, -15)
+    InterfaceOptions_AddCategory(DriftOptionsPanel.childpanel)
 
--- Parent panel content
-DriftOptionsPanel.config.framesAreLockedCheckbox = createCheckbox(
-    "FramesAreLockedCheckbox",
-    "TOPLEFT",
-    DriftOptionsPanel.childpanel,
-    "TOPLEFT",
-    14,
-    -50,
-    " Lock Frames",
-    "If frames are locked, the Drag Key must be pressed while dragging frames.",
-    nil
-)
-DriftOptionsPanel.config.framesAreLockedCheckbox:SetChecked(DriftOptions.framesAreLocked)
+    -- Child panel content
+    DriftOptionsPanel.config.framesAreLockedCheckbox = createCheckbox(
+        "FramesAreLockedCheckbox",
+        "TOPLEFT",
+        DriftOptionsPanel.childpanel,
+        "TOPLEFT",
+        14,
+        -50,
+        " Lock Frames",
+        "If frames are locked, the Drag Key must be pressed while dragging frames.",
+        nil
+    )
+    DriftOptionsPanel.config.framesAreLockedCheckbox:SetChecked(DriftOptions.framesAreLocked)
 
-local dragKeyDropdownTitle = DriftOptionsPanel.childpanel:CreateFontString(nil, "BACKGROUND")
-dragKeyDropdownTitle:SetFontObject("GameFontNormal")
-dragKeyDropdownTitle:SetText("Drag Key")
-dragKeyDropdownTitle:SetPoint("TOPLEFT", DriftOptionsPanel.childpanel, "TOPLEFT", 20, -92)
+    local dragKeyDropdownTitle = DriftOptionsPanel.childpanel:CreateFontString(nil, "BACKGROUND")
+    dragKeyDropdownTitle:SetFontObject("GameFontNormal")
+    dragKeyDropdownTitle:SetText("Drag Key")
+    dragKeyDropdownTitle:SetPoint("TOPLEFT", DriftOptionsPanel.childpanel, "TOPLEFT", 20, -92)
 
-DriftOptionsPanel.config.dragKeyDropdown = createDragKeyDropdown(
-    "DragKeyDropdown",
-    "TOPLEFT",
-    DriftOptionsPanel.childpanel,
-    "TOPLEFT",
-    0,
-    -110
-)
-
--- Update logic
-DriftOptionsPanel.panel.okay = function (self)
-    DriftOptions.framesAreLocked = DriftOptionsPanel.config.framesAreLockedCheckbox:GetChecked()
-    DriftOptions.dragKey = UIDropDownMenu_GetSelectedID(DriftOptionsPanel.config.dragKeyDropdown)
+    DriftOptionsPanel.config.dragKeyDropdown = createDragKeyDropdown(
+        "DragKeyDropdown",
+        "TOPLEFT",
+        DriftOptionsPanel.childpanel,
+        "TOPLEFT",
+        0,
+        -110
+    )
     DriftOptions.dragKeyFunc = getDragKeyFuncFromOrdinal(DriftOptions.dragKey)
+
+    -- Update logic
+    DriftOptionsPanel.panel.okay = function (self)
+        DriftOptions.framesAreLocked = DriftOptionsPanel.config.framesAreLockedCheckbox:GetChecked()
+        DriftOptions.dragKey = UIDropDownMenu_GetSelectedID(DriftOptionsPanel.config.dragKeyDropdown)
+        DriftOptions.dragKeyFunc = getDragKeyFuncFromOrdinal(DriftOptions.dragKey)
+    end
 end

@@ -233,3 +233,6 @@ Drift:SetScript("OnEvent", eventHandler)
 Drift:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
 Drift:RegisterEvent("PET_SPECIALIZATION_CHANGED")
 DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
+
+-- Setup config
+DriftHelpers:SetupConfig()

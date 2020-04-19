@@ -117,3 +117,6 @@ end
 local Drift = CreateFrame("Frame")
 Drift:SetScript("OnEvent", eventHandler)
 DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
+
+-- Setup config
+DriftHelpers:SetupConfig()
