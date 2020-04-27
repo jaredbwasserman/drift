@@ -1,7 +1,7 @@
 ## Interface: 11304
 ## Title: Drift
 ## Notes: Draggable UI frames
-## Version: 1.0.0
+## Version: 1.0.1
 ## Author: Jared Wasserman
 ## SavedVariables: DriftPoints, DriftOptions
 
