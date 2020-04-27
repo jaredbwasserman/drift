@@ -197,9 +197,78 @@ function DriftHelpers:ModifyFrames(frames)
         EncounterJournalTooltip:ClearAllPoints()
     end
 
-    -- Disable updating Container frames to avoid unwanted movement
+    -- Change UpdateContainerFrameAnchors to avoid unwanted movement
     UpdateContainerFrameAnchors = function ()
-        -- Do nothing
+        -- Variable does not exist in classic
+        local MINIMUM_CONTAINER_OFFSET_X = MINIMUM_CONTAINER_OFFSET_X or 10
+
+        local containerFrameOffsetX = math.max(CONTAINER_OFFSET_X, MINIMUM_CONTAINER_OFFSET_X)
+        local frame, xOffset, yOffset, screenHeight, freeScreenHeight, leftMostPoint, column
+        local screenWidth = GetScreenWidth()
+        local containerScale = 1
+        local leftLimit = 0
+        if ( BankFrame:IsShown() ) then
+            leftLimit = BankFrame:GetRight() - 25
+        end
+
+        while ( containerScale > CONTAINER_SCALE ) do
+            screenHeight = GetScreenHeight() / containerScale
+            -- Adjust the start anchor for bags depending on the multibars
+            xOffset = containerFrameOffsetX / containerScale
+            yOffset = CONTAINER_OFFSET_Y / containerScale
+            -- freeScreenHeight determines when to start a new column of bags
+            freeScreenHeight = screenHeight - yOffset
+            leftMostPoint = screenWidth - xOffset
+            column = 1
+            local frameHeight
+            for index, frameName in ipairs(ContainerFrame1.bags) do
+                frameHeight = _G[frameName]:GetHeight()
+                if ( freeScreenHeight < frameHeight ) then
+                    -- Start a new column
+                    column = column + 1
+                    leftMostPoint = screenWidth - ( column * CONTAINER_WIDTH * containerScale ) - xOffset
+                    freeScreenHeight = screenHeight - yOffset
+                end
+                freeScreenHeight = freeScreenHeight - frameHeight - VISIBLE_CONTAINER_SPACING
+            end
+            if ( leftMostPoint < leftLimit ) then
+                containerScale = containerScale - 0.01
+            else
+                break;
+            end
+        end
+
+        if ( containerScale < CONTAINER_SCALE ) then
+            containerScale = CONTAINER_SCALE
+        end
+
+        screenHeight = GetScreenHeight() / containerScale
+        -- Adjust the start anchor for bags depending on the multibars
+        xOffset = containerFrameOffsetX / containerScale
+        yOffset = CONTAINER_OFFSET_Y / containerScale
+        -- freeScreenHeight determines when to start a new column of bags
+        freeScreenHeight = screenHeight - yOffset
+        column = 0
+        for index, frameName in ipairs(ContainerFrame1.bags) do
+            -- Do nothing if frame has been moved by user
+            if not DriftPoints[frameName] then
+                frame = _G[frameName]
+                frame:SetScale(containerScale)
+                if ( index == 1 ) then
+                    -- First bag
+                    frame:SetPoint("BOTTOMRIGHT", frame:GetParent(), "BOTTOMRIGHT", -xOffset, yOffset )
+                elseif ( freeScreenHeight < frame:GetHeight() ) then
+                    -- Start a new column
+                    column = column + 1
+                    freeScreenHeight = screenHeight - yOffset
+                    frame:SetPoint("BOTTOMRIGHT", frame:GetParent(), "BOTTOMRIGHT", -(column * CONTAINER_WIDTH) - xOffset, yOffset )
+                else
+                    -- Anchor to the previous bag
+                    frame:SetPoint("BOTTOMRIGHT", ContainerFrame1.bags[index - 1], "TOPRIGHT", 0, CONTAINER_SPACING)
+                end
+                freeScreenHeight = freeScreenHeight - frame:GetHeight() - VISIBLE_CONTAINER_SPACING
+            end
+        end
     end
 
     -- Reset everything in case there was a delay
