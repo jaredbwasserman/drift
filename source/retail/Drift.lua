@@ -166,6 +166,7 @@ local frames = {
     ["ColorPickerFrame"] = {},
     ["AzeriteEmpoweredItemUI"] = {},
     ["AzeriteEssenceUI"] = {},
+    ["AzeriteRespecFrame"] = {},
     ["InspectFrame"] = {},
     ["ItemSocketingFrame"] = {},
     ["BarberShopFrame"] = {},
