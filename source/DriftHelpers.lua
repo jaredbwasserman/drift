@@ -404,7 +404,7 @@ function DriftHelpers:SetupConfig()
 
     local driftOptionsDesc = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
     driftOptionsDesc:SetFontObject("GameFontHighlight")
-    driftOptionsDesc:SetText("Modifies UI frames so you can click and drag to move them around")
+    driftOptionsDesc:SetText("Modifies default UI frames so you can click and drag to move them around")
     driftOptionsDesc:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -45)
 
     local driftOptionsVersionLabel = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
