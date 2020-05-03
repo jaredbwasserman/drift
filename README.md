@@ -6,8 +6,8 @@ CurseForge links:
  * [Drift (Classic)](https://www.curseforge.com/wow/addons/driftclassic)
 
 ## TODO
-1. Add support for ObjectiveTrackerFrame
-1. Global reset button in config menu
+1. Per frame reset in config menu
+1. Add scaling
 1. Remove delay for Guild & Communities
 
 ## Bugs
@@ -17,3 +17,4 @@ CurseForge links:
 1. First pick of a talent resets PlayerTalentFrame
 1. ColorPickerFrame moves when it's not supposed to
 1. TimeManagerFrame does not move if opened before other frames
+1. Bags cause Lua errors after uninstalling Drift
