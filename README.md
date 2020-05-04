@@ -7,6 +7,7 @@ CurseForge links:
 
 ## TODO
 1. Fix reset button tooltip in retail and classic
+1. Make sure text in config author/version is left justified
 1. Per frame reset in config menu
 1. Add scaling
 1. Remove delay for Guild & Communities
