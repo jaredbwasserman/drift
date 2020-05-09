@@ -174,6 +174,8 @@ local function eventHandler(self, event, ...)
     elseif event == "VARIABLES_LOADED" then
         -- Setup config
         DriftHelpers:SetupConfig()
+    elseif event == "BANKFRAME_OPENED" then
+        DriftHelpers:FixBags()
     else
         DriftHelpers:BroadcastReset(frames)
     end
@@ -185,4 +187,5 @@ Drift:SetScript("OnEvent", eventHandler)
 Drift:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
 Drift:RegisterEvent("PET_SPECIALIZATION_CHANGED")
 Drift:RegisterEvent("VARIABLES_LOADED")
+Drift:RegisterEvent("BANKFRAME_OPENED")
 DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")

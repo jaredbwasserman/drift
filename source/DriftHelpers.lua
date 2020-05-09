@@ -197,7 +197,15 @@ function DriftHelpers:ModifyFrames(frames)
         EncounterJournalTooltip:ClearAllPoints()
     end
 
-    -- Fix bag lua errors
+    -- Fix bags
+    DriftHelpers:FixBags()
+
+    -- Reset everything in case there was a delay
+    DriftHelpers:BroadcastReset(frames)
+end
+
+-- Fix bag lua errors
+function DriftHelpers:FixBags()
     -- Set UpdateContainerFrameAnchors to do nothing
     UpdateContainerFrameAnchorsO = UpdateContainerFrameAnchors
     UpdateContainerFrameAnchors = function () end
@@ -244,9 +252,6 @@ function DriftHelpers:ModifyFrames(frames)
 
     -- Put back the original UpdateContainerFrameAnchors
     UpdateContainerFrameAnchors = UpdateContainerFrameAnchorsO
-
-    -- Reset everything in case there was a delay
-    DriftHelpers:BroadcastReset(frames)
 end
 
 DriftHelpers.waitTable = {}
