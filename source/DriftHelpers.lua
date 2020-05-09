@@ -197,80 +197,53 @@ function DriftHelpers:ModifyFrames(frames)
         EncounterJournalTooltip:ClearAllPoints()
     end
 
-    -- Change UpdateContainerFrameAnchors to avoid unwanted movement
-    UpdateContainerFrameAnchors = function ()
-        -- This variable does not exist in classic
-        local MINIMUM_CONTAINER_OFFSET_X = MINIMUM_CONTAINER_OFFSET_X or 10
+    -- Fix bag lua errors
+    -- Set UpdateContainerFrameAnchors to do nothing
+    UpdateContainerFrameAnchorsO = UpdateContainerFrameAnchors
+    UpdateContainerFrameAnchors = function () end
 
-        local containerFrameOffsetX = math.max(CONTAINER_OFFSET_X, MINIMUM_CONTAINER_OFFSET_X)
-        local frame, xOffset, yOffset, screenHeight, freeScreenHeight, leftMostPoint, column
-        local screenWidth = GetScreenWidth()
-        local containerScale = 1
-        local leftLimit = 0
-        if ( BankFrame:IsShown() ) then
-            leftLimit = BankFrame:GetRight() - 25
-        end
+    -- Clear all points on all Containers
+    _G['ContainerFrame1']:ClearAllPoints()
+    _G['ContainerFrame1'].ClickableTitleFrame:ClearAllPoints()
 
-        while ( containerScale > CONTAINER_SCALE ) do
-            screenHeight = GetScreenHeight() / containerScale
-            -- Adjust the start anchor for bags depending on the multibars
-            xOffset = containerFrameOffsetX / containerScale
-            yOffset = CONTAINER_OFFSET_Y / containerScale
-            -- freeScreenHeight determines when to start a new column of bags
-            freeScreenHeight = screenHeight - yOffset
-            leftMostPoint = screenWidth - xOffset
-            column = 1
-            local frameHeight;
-            for _, frameName in ipairs(ContainerFrame1.bags) do
-                frameHeight = _G[frameName]:GetHeight()
-                if ( freeScreenHeight < frameHeight ) then
-                    -- Start a new column
-                    column = column + 1
-                    leftMostPoint = screenWidth - ( column * CONTAINER_WIDTH * containerScale) - xOffset
-                    freeScreenHeight = screenHeight - yOffset
-                end
-                freeScreenHeight = freeScreenHeight - frameHeight - VISIBLE_CONTAINER_SPACING
-            end
-            if ( leftMostPoint < leftLimit ) then
-                containerScale = containerScale - 0.01
-            else
-                break
-            end
-        end
+    _G['ContainerFrame2']:ClearAllPoints()
+    _G['ContainerFrame2'].ClickableTitleFrame:ClearAllPoints()
 
-        if ( containerScale < CONTAINER_SCALE ) then
-            containerScale = CONTAINER_SCALE
-        end
+    _G['ContainerFrame3']:ClearAllPoints()
+    _G['ContainerFrame3'].ClickableTitleFrame:ClearAllPoints()
 
-        screenHeight = GetScreenHeight() / containerScale
-        -- Adjust the start anchor for bags depending on the multibars
-        xOffset = containerFrameOffsetX / containerScale
-        yOffset = CONTAINER_OFFSET_Y / containerScale
-        -- freeScreenHeight determines when to start a new column of bags
-        freeScreenHeight = screenHeight - yOffset
-        column = 0
-        for index, frameName in ipairs(ContainerFrame1.bags) do
-            -- Do nothing if frame has been moved by user
-            if not DriftPoints[frameName] then
-                frame = _G[frameName]
-                frame:ClearAllPoints() -- This is needed to avoid lua errors
-                -- frame:SetScale(containerScale)
-                if ( index == 1 ) then
-                    -- First bag
-                    frame:SetPoint("BOTTOMRIGHT", frame:GetParent(), "BOTTOMRIGHT", -xOffset, yOffset)
-                elseif ( freeScreenHeight < frame:GetHeight() ) then
-                    -- Start a new column
-                    column = column + 1
-                    freeScreenHeight = screenHeight - yOffset;
-                    frame:SetPoint("BOTTOMRIGHT", frame:GetParent(), "BOTTOMRIGHT", -(column * CONTAINER_WIDTH) - xOffset, yOffset)
-                else
-                    -- Anchor to the previous bag
-                    frame:SetPoint("BOTTOMRIGHT", ContainerFrame1.bags[index - 1], "TOPRIGHT", 0, CONTAINER_SPACING)
-                end
-                freeScreenHeight = freeScreenHeight - frame:GetHeight() - VISIBLE_CONTAINER_SPACING
-            end
-        end
-    end
+    _G['ContainerFrame4']:ClearAllPoints()
+    _G['ContainerFrame4'].ClickableTitleFrame:ClearAllPoints()
+
+    _G['ContainerFrame5']:ClearAllPoints()
+    _G['ContainerFrame5'].ClickableTitleFrame:ClearAllPoints()
+
+    _G['ContainerFrame6']:ClearAllPoints()
+    _G['ContainerFrame6'].ClickableTitleFrame:ClearAllPoints()
+
+    _G['ContainerFrame7']:ClearAllPoints()
+    _G['ContainerFrame7'].ClickableTitleFrame:ClearAllPoints()
+
+    _G['ContainerFrame8']:ClearAllPoints()
+    _G['ContainerFrame8'].ClickableTitleFrame:ClearAllPoints()
+
+    _G['ContainerFrame9']:ClearAllPoints()
+    _G['ContainerFrame9'].ClickableTitleFrame:ClearAllPoints()
+
+    _G['ContainerFrame10']:ClearAllPoints()
+    _G['ContainerFrame10'].ClickableTitleFrame:ClearAllPoints()
+
+    _G['ContainerFrame11']:ClearAllPoints()
+    _G['ContainerFrame11'].ClickableTitleFrame:ClearAllPoints()
+
+    _G['ContainerFrame12']:ClearAllPoints()
+    _G['ContainerFrame12'].ClickableTitleFrame:ClearAllPoints()
+
+    _G['ContainerFrame13']:ClearAllPoints()
+    _G['ContainerFrame13'].ClickableTitleFrame:ClearAllPoints()
+
+    -- Put back the original UpdateContainerFrameAnchors
+    UpdateContainerFrameAnchors = UpdateContainerFrameAnchorsO
 
     -- Reset everything in case there was a delay
     DriftHelpers:BroadcastReset(frames)
