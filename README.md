@@ -8,7 +8,7 @@ CurseForge links:
 ## TODO
 1. Per frame reset in config menu
 1. Add scaling
-1. Remove delay for Guild & Communities and TalkingHeadFrame
+1. Remove delay for Guild & Communities
 
 ## Bugs
 1. Frames with tabs move from hotkey when on other tab

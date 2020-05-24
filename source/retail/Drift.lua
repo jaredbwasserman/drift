@@ -176,11 +176,6 @@ local function eventHandler(self, event, ...)
         DriftHelpers:SetupConfig()
     elseif event == "BANKFRAME_OPENED" then
         DriftHelpers:FixBags()
-    elseif event == "UPDATE_ALL_UI_WIDGETS" or
-      event == "UPDATE_UI_WIDGET" or
-      event == "PLAYER_MOUNT_DISPLAY_CHANGED" then
-        -- TalkingHeadFrame has a delay for some reason
-        DriftHelpers:Wait(0.25, DriftHelpers.BroadcastReset, DriftHelpers, frames)
     else
         DriftHelpers:BroadcastReset(frames)
     end
@@ -203,11 +198,6 @@ Drift:RegisterEvent("VARIABLES_LOADED")
 
 -- Bags
 Drift:RegisterEvent("BANKFRAME_OPENED")
-
--- Delayed reset
-Drift:RegisterEvent("UPDATE_ALL_UI_WIDGETS")
-Drift:RegisterEvent("UPDATE_UI_WIDGET")
-Drift:RegisterEvent("PLAYER_MOUNT_DISPLAY_CHANGED")
 
 -- Modify frames
 DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
