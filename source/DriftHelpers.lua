@@ -225,6 +225,9 @@ function DriftHelpers:ModifyFrames(frames)
     -- Fix PVP talents list
     DriftHelpers:FixPVPTalentsList(frames)
 
+    -- Fix TalkingHeadFrame
+    DriftHelpers:FixTalkingHeadFrame()
+
     -- Reset everything in case there was a delay
     DriftHelpers:BroadcastReset(frames)
 end
@@ -290,6 +293,11 @@ function DriftHelpers:FixPVPTalentsList(frames)
             end
         )
     end
+end
+
+-- Remove TalkingHeadFrame from list of frames managed by UIParent
+function DriftHelpers:FixTalkingHeadFrame()
+    UIPARENT_MANAGED_FRAME_POSITIONS["TalkingHeadFrame"] = nil
 end
 
 DriftHelpers.waitTable = {}
