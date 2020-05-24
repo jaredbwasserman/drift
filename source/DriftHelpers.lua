@@ -14,6 +14,10 @@ DriftOptionsPanel.config = {}
 --------------------------------------------------------------------------------
 
 -- Local functions
+local function getInCombatLockdown()
+    return InCombatLockdown()
+end
+
 local function shouldMove()
     if not DriftOptions.framesAreLocked then
         return true
@@ -82,6 +86,12 @@ local function onDragStop(frame)
 end
 
 local function resetPosition(frame)
+    -- Do not reset if in combat to avoid Lua errors
+    -- Refer to https://wowwiki.fandom.com/wiki/API_InCombatLockdown
+    if (getInCombatLockdown()) then
+        return
+    end
+
     local frameToMove = frame.DriftDelegate or frame
     local point = DriftPoints[frameToMove:GetName()]
     if point then
@@ -204,7 +214,7 @@ function DriftHelpers:ModifyFrames(frames)
     DriftHelpers:BroadcastReset(frames)
 end
 
--- Fix bag lua errors
+-- Fix bag Lua errors
 function DriftHelpers:FixBags()
     -- Set UpdateContainerFrameAnchors to do nothing
     UpdateContainerFrameAnchorsO = UpdateContainerFrameAnchors
