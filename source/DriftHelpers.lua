@@ -346,8 +346,20 @@ local function createButton(name, point, relativeFrame, relativePoint, xOffset, 
     button:SetText(text)
     button:SetNormalFontObject("GameFontNormal")
     button:SetHighlightFontObject("GameFontHighlight")
+
+    -- Configure tooltip
     button.tooltipText = tooltipText
+    button:SetScript(
+        "OnEnter",
+        function()
+            GameTooltip:SetOwner(button, "ANCHOR_TOPRIGHT")
+            GameTooltip:SetText(button.tooltipText, nil, nil, nil, nil, true)
+        end
+    )
+
+    -- Configure click function
     button:SetScript("OnClick", onClickFunction)
+
     return button
 end
 
