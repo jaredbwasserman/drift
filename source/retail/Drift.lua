@@ -189,12 +189,25 @@ end
 -- Modify frames after any addon is loaded
 local Drift = CreateFrame("Frame")
 Drift:SetScript("OnEvent", eventHandler)
+
+-- Talents
 Drift:RegisterEvent("PLAYER_TALENT_UPDATE")
 Drift:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
 Drift:RegisterEvent("PET_SPECIALIZATION_CHANGED")
+
+-- Azerite
+Drift:RegisterEvent("ITEM_LOCKED")
+
+-- Config
 Drift:RegisterEvent("VARIABLES_LOADED")
+
+-- Bags
 Drift:RegisterEvent("BANKFRAME_OPENED")
+
+-- Delayed reset
 Drift:RegisterEvent("UPDATE_ALL_UI_WIDGETS")
 Drift:RegisterEvent("UPDATE_UI_WIDGET")
 Drift:RegisterEvent("PLAYER_MOUNT_DISPLAY_CHANGED")
+
+-- Modify frames
 DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
