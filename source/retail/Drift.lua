@@ -186,7 +186,7 @@ local function eventHandler(self, event, ...)
     end
 end
 
--- Modify frames after any addon is loaded
+-- Respond to events to fix frames
 local Drift = CreateFrame("Frame")
 Drift:SetScript("OnEvent", eventHandler)
 

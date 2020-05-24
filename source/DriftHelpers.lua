@@ -66,15 +66,22 @@ end
 local function onDragStart(frame)
     local frameToMove = frame.DriftDelegate or frame
     if shouldMove() then
+        -- Start moving
         frameToMove:StartMoving()
         frameToMove:SetAlpha(0.3)
+        frameToMove.DriftIsMoving = true
     end
 end
 
 local function onDragStop(frame)
     local frameToMove = frame.DriftDelegate or frame
+
+    -- Stop moving
     frameToMove:StopMovingOrSizing()
     frameToMove:SetAlpha(1)
+    frameToMove.DriftIsMoving = false
+
+    -- Save position
     local point, relativeTo, relativePoint, xOfs, yOfs = frameToMove:GetPoint()
     DriftPoints[frameToMove:GetName()] = {
         ["point"] = point,
@@ -89,6 +96,11 @@ local function resetPosition(frame)
     -- Do not reset if in combat to avoid Lua errors
     -- Refer to https://wowwiki.fandom.com/wiki/API_InCombatLockdown
     if (getInCombatLockdown()) then
+        return
+    end
+
+    -- Do not reset if frame is being dragged
+    if (frame.DriftIsMoving) then
         return
     end
 
