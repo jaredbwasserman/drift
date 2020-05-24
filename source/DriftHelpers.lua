@@ -210,6 +210,9 @@ function DriftHelpers:ModifyFrames(frames)
     -- Fix bags
     DriftHelpers:FixBags()
 
+    -- Fix PVP talents list
+    DriftHelpers:FixPVPTalentsList(frames)
+
     -- Reset everything in case there was a delay
     DriftHelpers:BroadcastReset(frames)
 end
@@ -262,6 +265,19 @@ function DriftHelpers:FixBags()
 
     -- Put back the original UpdateContainerFrameAnchors
     UpdateContainerFrameAnchors = UpdateContainerFrameAnchorsO
+end
+
+-- Make it so clicking Close button for PVP talents causes reset
+function DriftHelpers:FixPVPTalentsList(frames)
+    local talentListFrame = _G['PlayerTalentFrameTalentsPvpTalentFrameTalentList']
+    if (talentListFrame) then
+        talentListFrame:HookScript(
+            "OnHide",
+            function(self, event, ...)
+                DriftHelpers:BroadcastReset(frames)
+            end
+        )
+    end
 end
 
 DriftHelpers.waitTable = {}

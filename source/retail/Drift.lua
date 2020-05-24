@@ -189,6 +189,7 @@ end
 -- Modify frames after any addon is loaded
 local Drift = CreateFrame("Frame")
 Drift:SetScript("OnEvent", eventHandler)
+Drift:RegisterEvent("PLAYER_TALENT_UPDATE")
 Drift:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
 Drift:RegisterEvent("PET_SPECIALIZATION_CHANGED")
 Drift:RegisterEvent("VARIABLES_LOADED")
