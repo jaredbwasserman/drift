@@ -83,6 +83,7 @@ local frames = {
     },
     ["EncounterJournal"] = {},
     ["FriendsFrame"] = {},
+    ["RecruitAFriendRewardsFrame"] = {},
     ["ChannelFrame"] = {},
     ["RaidInfoFrame"] = {},
     ["DressUpFrame"] = {},
