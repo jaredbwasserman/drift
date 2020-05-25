@@ -233,6 +233,9 @@ function DriftHelpers:ModifyFrames(frames)
     -- Fix TalkingHeadFrame
     DriftHelpers:FixTalkingHeadFrame()
 
+    -- Fix ZoneAbilityFrame
+    DriftHelpers:FixZoneAbilityFrame()
+
     -- Reset everything in case there was a delay
     DriftHelpers:BroadcastReset(frames)
 end
@@ -305,9 +308,13 @@ function DriftHelpers:FixTalkingHeadFrame()
     if (TalkingHeadFrame and TalkingHeadFrame.DriftMovable) then
         UIPARENT_MANAGED_FRAME_POSITIONS["TalkingHeadFrame"] = nil
     end
+end
 
-    -- TODO: Fix
-    -- UIPARENT_MANAGED_FRAME_POSITIONS["ZoneAbilityFrame"] = nil
+-- Remove ZoneAbilityFrame from list of frames managed by UIParent
+function DriftHelpers:FixZoneAbilityFrame()
+    if (ZoneAbilityFrame and ZoneAbilityFrame.DriftMovable) then
+        UIPARENT_MANAGED_FRAME_POSITIONS["ZoneAbilityFrame"] = nil
+    end
 end
 
 DriftHelpers.waitTable = {}

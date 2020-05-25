@@ -6,11 +6,11 @@ CurseForge links:
  * [Drift (Classic)](https://www.curseforge.com/wow/addons/driftclassic)
 
 ## TODO
-1. Per frame reset in config menu
 1. Add scaling
+1. Per frame reset in config menu
 1. Remove delay for Guild & Communities
 
 ## Bugs
 1. Frames with tabs move from hotkey when on other tab
 1. ColorPickerFrame moves when it's not supposed to
-1. TimeManagerFrame does not move if opened before other frames
+1. TimeManagerFrame and TalkingHeadFrame do not move depending on addons loaded
