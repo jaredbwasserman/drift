@@ -171,8 +171,9 @@ local function eventHandler(self, event, ...)
         else
             DriftHelpers:ModifyFrames(frames)
         end
+    elseif event == "PLAYER_REGEN_ENABLED" then
+        DriftHelpers:ModifyFrames(frames)
     elseif event == "VARIABLES_LOADED" then
-        -- Setup config
         DriftHelpers:SetupConfig()
     elseif event == "BANKFRAME_OPENED" then
         DriftHelpers:FixBags()
@@ -199,5 +200,8 @@ Drift:RegisterEvent("VARIABLES_LOADED")
 -- Bags
 Drift:RegisterEvent("BANKFRAME_OPENED")
 
--- Modify frames
+-- Modify frames after an addon loads
 DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
+
+-- Modify frames after combat ends
+Drift:RegisterEvent("PLAYER_REGEN_ENABLED")

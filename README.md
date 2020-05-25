@@ -14,4 +14,3 @@ CurseForge links:
 1. Frames with tabs move from hotkey when on other tab
 1. ColorPickerFrame moves when it's not supposed to
 1. TimeManagerFrame does not move if opened before other frames
-1. If ModifyFrames is called in combat, it will cause Lua errors

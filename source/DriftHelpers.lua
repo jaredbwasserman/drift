@@ -93,9 +93,9 @@ local function onDragStop(frame)
 end
 
 local function resetPosition(frame)
-    -- Do not reset if in combat to avoid Lua errors
+    -- Do not reset protected frame if in combat to avoid Lua errors
     -- Refer to https://wowwiki.fandom.com/wiki/API_InCombatLockdown
-    if (getInCombatLockdown()) then
+    if (frame:IsProtected() and getInCombatLockdown()) then
         return
     end
 
@@ -187,6 +187,11 @@ end
 
 -- Global functions
 function DriftHelpers:ModifyFrames(frames)
+    -- Do not modify frames during combat
+    if (getInCombatLockdown()) then
+        return
+    end
+
     for frameName, properties in pairs(frames) do
         local frame = getFrame(frameName)
         if frame then
