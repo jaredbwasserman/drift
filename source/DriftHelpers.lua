@@ -297,7 +297,12 @@ end
 
 -- Remove TalkingHeadFrame from list of frames managed by UIParent
 function DriftHelpers:FixTalkingHeadFrame()
-    UIPARENT_MANAGED_FRAME_POSITIONS["TalkingHeadFrame"] = nil
+    if (TalkingHeadFrame and TalkingHeadFrame.DriftMovable) then
+        UIPARENT_MANAGED_FRAME_POSITIONS["TalkingHeadFrame"] = nil
+    end
+
+    -- TODO: Fix
+    -- UIPARENT_MANAGED_FRAME_POSITIONS["ZoneAbilityFrame"] = nil
 end
 
 DriftHelpers.waitTable = {}
