@@ -8,6 +8,17 @@ DriftHelpers = {}
 DriftOptionsPanel = {}
 DriftOptionsPanel.config = {}
 
+-- Variables for timer
+DriftHelpers.waitTable = {}
+DriftHelpers.waitFrame = nil
+
+-- Variables for scaling
+local MAX_SCALE = 1.5
+local MIN_SCALE = 0.5
+DriftHelpers.scaleHandlerFrame = nil
+DriftHelpers.prevMouseX = nil
+DriftHelpers.prevMouseY = nil
+DriftHelpers.frameBeingScaled = nil
 
 --------------------------------------------------------------------------------
 -- Core Logic
@@ -18,7 +29,17 @@ local function getInCombatLockdown()
     return InCombatLockdown()
 end
 
-local function shouldMove()
+local function frameCannotBeModified(frame)
+    -- Do not reset protected frame if in combat to avoid Lua errors
+    -- Refer to https://wowwiki.fandom.com/wiki/API_InCombatLockdown
+    return frame:IsProtected() and getInCombatLockdown()
+end
+
+local function shouldModify(frame)
+    if frameCannotBeModified(frame) then
+        return false
+    end
+
     if not DriftOptions.framesAreLocked then
         return true
     elseif DriftOptions.dragKeyFunc then
@@ -63,23 +84,61 @@ local function getFrame(frameName)
     return frame
 end
 
-local function onDragStart(frame)
+local function onDragStart(frame, button)
     local frameToMove = frame.DriftDelegate or frame
-    if shouldMove() then
+
+    if not shouldModify(frameToMove) then
+        return
+    end
+
+    -- Left click is move
+    if button == "LeftButton" then
         -- Start moving
         frameToMove:StartMoving()
+
+        -- Set alpha
         frameToMove:SetAlpha(0.3)
+
+        -- Set the frame as moving
         frameToMove.DriftIsMoving = true
+
+    -- Right click is scale
+    elseif button == "RightButton" then
+        -- TODO: Make it so frame scales from center
+
+        -- Set alpha
+        frameToMove:SetAlpha(0.3)
+
+        -- Set the frame as scaling
+        frameToMove.DriftIsScaling = true
+
+        -- Reset the previous mouse position
+        DriftHelpers.prevMouseX = nil
+        DriftHelpers.prevMouseY = nil
+
+        -- Set the global frame being scaled
+        DriftHelpers.frameBeingScaled = frameToMove
     end
 end
 
 local function onDragStop(frame)
     local frameToMove = frame.DriftDelegate or frame
 
-    -- Stop moving
+    -- Stop moving or scaling and reset alpha
     frameToMove:StopMovingOrSizing()
     frameToMove:SetAlpha(1)
+
+    -- Clear frame's moving state
     frameToMove.DriftIsMoving = false
+
+    -- Clear frame's scaling state
+    frameToMove.DriftIsScaling = false
+
+    -- Clear global frame being scaled
+    DriftHelpers.frameBeingScaled = nil
+
+    -- Hide GameTooltip
+    GameTooltip:Hide()
 
     -- Save position
     local point, relativeTo, relativePoint, xOfs, yOfs = frameToMove:GetPoint()
@@ -90,17 +149,17 @@ local function onDragStop(frame)
         ["xOfs"] = xOfs,
         ["yOfs"] = yOfs
     }
+
+    -- TODO: Save scale and make it so set scale on start up
 end
 
 local function resetPosition(frame)
-    -- Do not reset protected frame if in combat to avoid Lua errors
-    -- Refer to https://wowwiki.fandom.com/wiki/API_InCombatLockdown
-    if (frame:IsProtected() and getInCombatLockdown()) then
+    if frameCannotBeModified(frame) then
         return
     end
 
-    -- Do not reset if frame is being dragged
-    if (frame.DriftIsMoving) then
+    -- Do not reset if frame is moving or scaling
+    if frame.DriftIsMoving or frame.DriftIsScaling then
         return
     end
 
@@ -118,8 +177,8 @@ local function resetPosition(frame)
     end
 end
 
-local function makeMovable(frame)
-    if frame.DriftMovable then
+local function makeModifiable(frame)
+    if frame.DriftModifiable then
         return
     end
 
@@ -128,11 +187,11 @@ local function makeMovable(frame)
     frameToMove:SetMovable(true)
     frame:EnableMouse(true)
     frame:SetClampedToScreen(true)
-    frame:RegisterForDrag("LeftButton")
+    frame:RegisterForDrag("LeftButton", "RightButton")
     frame:SetScript("OnDragStart", onDragStart)
     frame:SetScript("OnDragStop", onDragStop)
 
-    frame.DriftMovable = true
+    frame.DriftModifiable = true
 end
 
 local function makeSticky(frame, frames)
@@ -192,6 +251,58 @@ function DriftHelpers:ModifyFrames(frames)
         return
     end
 
+    -- Set up scaling
+    if DriftHelpers.scaleHandlerFrame == nil then
+        DriftHelpers.scaleHandlerFrame = CreateFrame("Frame", "ScaleHandlerFrame", UIParent)
+        DriftHelpers.scaleHandlerFrame:SetScript(
+            "OnUpdate",
+            function(self)
+                if (DriftHelpers.frameBeingScaled) then
+                    -- Get current mouse position
+                    local curMouseX, curMouseY = GetCursorPosition()
+
+                    -- Only try to scale once there was at least one previous position
+                    if DriftHelpers.prevMouseX and DriftHelpers.prevMouseY then
+                        if curMouseY > DriftHelpers.prevMouseY then
+                            -- Add to scale
+                            local newScale = math.min(
+                                DriftHelpers.frameBeingScaled:GetScale() + 0.01,
+                                MAX_SCALE
+                            )
+
+                            -- Scale
+                            DriftHelpers.frameBeingScaled:SetScale(newScale)
+                        elseif curMouseY < DriftHelpers.prevMouseY then
+                            -- Subtract from scale
+                            local newScale = math.max(
+                                DriftHelpers.frameBeingScaled:GetScale() - 0.01,
+                                MIN_SCALE
+                            )
+
+                            -- Scale
+                            DriftHelpers.frameBeingScaled:SetScale(newScale)
+                        end
+                    end
+
+                    -- Update tooltip
+                    GameTooltip:SetOwner(DriftHelpers.frameBeingScaled)
+                    GameTooltip:SetText(
+                        "" .. math.floor(DriftHelpers.frameBeingScaled:GetScale() * 100) .. "%",
+                        1.0, -- red
+                        1.0, -- green
+                        1.0, -- blue
+                        1.0, -- alpha
+                        true -- wrap
+                    )
+
+                    -- Update previous mouse position
+                    DriftHelpers.prevMouseX = curMouseX
+                    DriftHelpers.prevMouseY = curMouseY
+                end
+            end
+        )
+    end
+
     for frameName, properties in pairs(frames) do
         local frame = getFrame(frameName)
         if frame then
@@ -213,7 +324,7 @@ function DriftHelpers:ModifyFrames(frames)
                 end
             end
 
-            makeMovable(frame)
+            makeModifiable(frame)
             makeSticky(frame, frames)
             makeTabsSticky(frame, frames)
         end
@@ -305,20 +416,18 @@ end
 
 -- Remove TalkingHeadFrame from list of frames managed by UIParent
 function DriftHelpers:FixTalkingHeadFrame()
-    if (TalkingHeadFrame and TalkingHeadFrame.DriftMovable) then
+    if (TalkingHeadFrame and TalkingHeadFrame.DriftModifiable) then
         UIPARENT_MANAGED_FRAME_POSITIONS["TalkingHeadFrame"] = nil
     end
 end
 
 -- Remove ZoneAbilityFrame from list of frames managed by UIParent
 function DriftHelpers:FixZoneAbilityFrame()
-    if (ZoneAbilityFrame and ZoneAbilityFrame.DriftMovable) then
+    if (ZoneAbilityFrame and ZoneAbilityFrame.DriftModifiable) then
         UIPARENT_MANAGED_FRAME_POSITIONS["ZoneAbilityFrame"] = nil
     end
 end
 
-DriftHelpers.waitTable = {}
-DriftHelpers.waitFrame = nil
 function DriftHelpers:Wait(delay, func, ...)
     if type(delay) ~= "number" or type(func) ~= "function" then
         return false
