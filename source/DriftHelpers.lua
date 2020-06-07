@@ -128,6 +128,9 @@ local function onDragStop(frame)
     frameToMove:StopMovingOrSizing()
     frameToMove:SetAlpha(1)
 
+    -- Set IsUserPlaced to true
+    frameToMove:SetUserPlaced(true)
+
     -- Clear frame's moving state
     frameToMove.DriftIsMoving = false
 
