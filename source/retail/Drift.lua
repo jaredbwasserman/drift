@@ -157,6 +157,7 @@ local frames = {
     ["ZoneAbilityFrame"] = {},
     ["PlayerPowerBarAlt"] = {},
     ["TalkingHeadFrame"] = {},
+    ["ChallengesKeystoneFrame"] = {},
 }
 
 -- Modify pre-loaded frames
