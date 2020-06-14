@@ -6,7 +6,6 @@ CurseForge links:
  * [Drift (Classic)](https://www.curseforge.com/wow/addons/driftclassic)
 
 ## TODO
-1. Add scaling
 1. Per frame reset in config menu
 1. Remove delay for Guild & Communities
 

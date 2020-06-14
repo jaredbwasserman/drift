@@ -1,9 +1,9 @@
 ## Interface: 11304
 ## Title: Drift
 ## Notes: Modifies default UI frames so you can click and drag to move them around.
-## Version: 1.0.1
+## Version: 1.0.2
 ## Author: Jared Wasserman
-## SavedVariables: DriftPoints, DriftOptions
+## SavedVariables: DriftPoints, DriftScales, DriftOptions
 
 DriftHelpers.lua
 Drift.lua

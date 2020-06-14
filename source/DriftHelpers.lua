@@ -2,10 +2,15 @@
 -- Setup
 --------------------------------------------------------------------------------
 
-if not DriftPoints then DriftPoints = {} end
-if not DriftOptions then DriftOptions = {} end
+-- Variables for holding functions
 DriftHelpers = {}
-DriftOptionsPanel = {}
+
+-- Variables for moving
+if not DriftPoints then DriftPoints = {} end
+
+-- Variables for config
+if not DriftOptions then DriftOptions = {} end
+local DriftOptionsPanel = {}
 DriftOptionsPanel.config = {}
 
 -- Variables for timer
@@ -13,12 +18,19 @@ DriftHelpers.waitTable = {}
 DriftHelpers.waitFrame = nil
 
 -- Variables for scaling
-local MAX_SCALE = 1.5
-local MIN_SCALE = 0.5
+local MAX_SCALE = 1.5 -- TODO: Configurable
+local MIN_SCALE = 0.5 -- TODO: Configurable
+local SCALE_INCREMENT = 0.01 -- TODO: Configurable
 DriftHelpers.scaleHandlerFrame = nil
 DriftHelpers.prevMouseX = nil
 DriftHelpers.prevMouseY = nil
 DriftHelpers.frameBeingScaled = nil
+if not DriftScales then DriftScales = {} end
+
+-- Other variables
+local ALPHA_DURING_MOVE = 0.3 -- TODO: Configurable
+local ALPHA_DURING_SCALE = 0.3 -- TODO: Configurable
+
 
 --------------------------------------------------------------------------------
 -- Core Logic
@@ -97,7 +109,7 @@ local function onDragStart(frame, button)
         frameToMove:StartMoving()
 
         -- Set alpha
-        frameToMove:SetAlpha(0.3)
+        frameToMove:SetAlpha(ALPHA_DURING_MOVE)
 
         -- Set the frame as moving
         frameToMove.DriftIsMoving = true
@@ -107,7 +119,7 @@ local function onDragStart(frame, button)
         -- TODO: Make it so frame scales from center
 
         -- Set alpha
-        frameToMove:SetAlpha(0.3)
+        frameToMove:SetAlpha(ALPHA_DURING_SCALE)
 
         -- Set the frame as scaling
         frameToMove.DriftIsScaling = true
@@ -153,20 +165,29 @@ local function onDragStop(frame)
         ["yOfs"] = yOfs
     }
 
-    -- TODO: Save scale and make it so set scale on start up
+    -- Save scale
+    DriftScales[frameToMove:GetName()] = frameToMove:GetScale()
 end
 
-local function resetPosition(frame)
-    if frameCannotBeModified(frame) then
+local function resetScaleAndPosition(frame)
+    local frameToMove = frame.DriftDelegate or frame
+
+    if frameCannotBeModified(frameToMove) then
         return
     end
 
     -- Do not reset if frame is moving or scaling
-    if frame.DriftIsMoving or frame.DriftIsScaling then
+    if frameToMove.DriftIsMoving or frameToMove.DriftIsScaling then
         return
     end
 
-    local frameToMove = frame.DriftDelegate or frame
+    -- Reset scale
+    local scale = DriftScales[frameToMove:GetName()]
+    if scale then
+        frameToMove:SetScale(scale)
+    end
+
+    -- Reset position
     local point = DriftPoints[frameToMove:GetName()]
     if point then
         frameToMove:ClearAllPoints()
@@ -205,7 +226,7 @@ local function makeSticky(frame, frames)
     frame:HookScript(
         "OnShow",
         function(self, event, ...)
-            resetPosition(frame)
+            resetScaleAndPosition(frame)
             DriftHelpers:BroadcastReset(frames)
         end
     )
@@ -221,7 +242,7 @@ local function makeSticky(frame, frames)
         "OnUpdate",
         function(self, event, ...)
             if frame.DriftResetNeeded then
-                resetPosition(frame)
+                resetScaleAndPosition(frame)
                 frame.DriftResetNeeded = nil
             end
         end
@@ -237,7 +258,7 @@ local function makeTabsSticky(frame, frames)
                 tab:HookScript(
                     "OnClick",
                     function(self, event, ...)
-                        resetPosition(frame)
+                        resetScaleAndPosition(frame)
                         DriftHelpers:BroadcastReset(frames)
                     end
                 )
@@ -269,7 +290,7 @@ function DriftHelpers:ModifyFrames(frames)
                         if curMouseY > DriftHelpers.prevMouseY then
                             -- Add to scale
                             local newScale = math.min(
-                                DriftHelpers.frameBeingScaled:GetScale() + 0.01,
+                                DriftHelpers.frameBeingScaled:GetScale() + SCALE_INCREMENT,
                                 MAX_SCALE
                             )
 
@@ -278,7 +299,7 @@ function DriftHelpers:ModifyFrames(frames)
                         elseif curMouseY < DriftHelpers.prevMouseY then
                             -- Subtract from scale
                             local newScale = math.max(
-                                DriftHelpers.frameBeingScaled:GetScale() - 0.01,
+                                DriftHelpers.frameBeingScaled:GetScale() - SCALE_INCREMENT,
                                 MIN_SCALE
                             )
 
