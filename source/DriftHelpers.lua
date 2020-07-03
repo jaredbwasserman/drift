@@ -114,6 +114,9 @@ local function onDragStart(frame, button)
         -- Set the frame as moving
         frameToMove.DriftIsMoving = true
 
+        -- Prevent scaling while moving
+        frame:RegisterForDrag("LeftButton")
+
     -- Right click is scale
     elseif button == "RightButton" then
         -- TODO: Make it so frame scales from center
@@ -130,6 +133,9 @@ local function onDragStart(frame, button)
 
         -- Set the global frame being scaled
         DriftHelpers.frameBeingScaled = frameToMove
+
+        -- Prevent moving while scaling
+        frame:RegisterForDrag("RightButton")
     end
 end
 
@@ -154,6 +160,9 @@ local function onDragStop(frame)
 
     -- Hide GameTooltip
     GameTooltip:Hide()
+
+    -- Allow for dragging with both buttons
+    frame:RegisterForDrag("LeftButton", "RightButton")
 
     -- Save position
     local point, relativeTo, relativePoint, xOfs, yOfs = frameToMove:GetPoint()
