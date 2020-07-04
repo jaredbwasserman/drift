@@ -158,6 +158,7 @@ local frames = {
     ["PlayerPowerBarAlt"] = {},
     ["TalkingHeadFrame"] = {},
     ["ChallengesKeystoneFrame"] = {},
+    ["BonusRollFrame"] = {},
 }
 
 -- Modify pre-loaded frames

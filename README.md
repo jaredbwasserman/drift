@@ -6,8 +6,10 @@ CurseForge links:
  * [Drift (Classic)](https://www.curseforge.com/wow/addons/driftclassic)
 
 ## TODO
-1. Per frame reset in config menu
+1. Per frame reset
 1. Remove delay for Guild & Communities
+1. Configurable variables
+1. Always scale from center
 
 ## Bugs
 1. Frames with tabs move from hotkey when on other tab
