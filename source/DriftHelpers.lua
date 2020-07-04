@@ -672,7 +672,19 @@ function DriftHelpers:SetupConfig()
         button1 = "Yes",
         button2 = "No",
         OnAccept = function()
+            -- Delete DriftPoints state
             DriftPoints = {}
+
+            -- Manually set scale to 1 for each frame
+            for frameName, _ in pairs(DriftScales) do
+                local frame = getFrame(frameName)
+                if frame then
+                    frame:SetScale(1)
+                end
+            end
+
+            -- Delete DriftScales state
+            DriftScales = {}
         end,
         timeout = 0,
         whileDead = true,
@@ -689,7 +701,7 @@ function DriftHelpers:SetupConfig()
         160,
         25,
         "Reset Frames",
-        "Reset position and scale for all frames",
+        "Reset position and scale for all frames.",
         function (self, button, down)
             StaticPopup_Show("DRIFT_RESET_POSITIONS")
         end

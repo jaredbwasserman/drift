@@ -1,5 +1,5 @@
 # Drift
-Addon for World of Warcraft that modifies default UI frames so you can click and drag to move them around.
+Addon for World of Warcraft that modifies default UI frames so you can click and drag to move and scale.
 
 CurseForge links:
  * [Drift (Retail)](https://www.curseforge.com/wow/addons/drift)
