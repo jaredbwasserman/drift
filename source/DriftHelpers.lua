@@ -599,7 +599,7 @@ function DriftHelpers:SetupConfig()
 
     local driftOptionsDesc = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
     driftOptionsDesc:SetFontObject("GameFontHighlight")
-    driftOptionsDesc:SetText("Modifies default UI frames so you can click and drag to move them around.")
+    driftOptionsDesc:SetText("Modifies default UI frames so you can click and drag to move and scale.")
     driftOptionsDesc:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -45)
 
     local driftOptionsVersionLabel = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
@@ -647,14 +647,14 @@ function DriftHelpers:SetupConfig()
         14,
         -50,
         " Lock Frames",
-        "While frames are locked, the Drag Key must be pressed when starting to drag a frame.",
+        "While frames are locked, the Modify Key must be pressed to move or scale.",
         nil
     )
     DriftOptionsPanel.config.framesAreLockedCheckbox:SetChecked(DriftOptions.framesAreLocked)
 
     local dragKeyDropdownTitle = DriftOptionsPanel.childpanel:CreateFontString(nil, "BACKGROUND")
     dragKeyDropdownTitle:SetFontObject("GameFontNormal")
-    dragKeyDropdownTitle:SetText("Drag Key")
+    dragKeyDropdownTitle:SetText("Modify Key")
     dragKeyDropdownTitle:SetPoint("TOPLEFT", DriftOptionsPanel.childpanel, "TOPLEFT", 20, -82)
 
     DriftOptionsPanel.config.dragKeyDropdown = createDragKeyDropdown(
@@ -668,7 +668,7 @@ function DriftHelpers:SetupConfig()
     DriftOptions.dragKeyFunc = getDragKeyFuncFromOrdinal(DriftOptions.dragKey)
 
     StaticPopupDialogs["DRIFT_RESET_POSITIONS"] = {
-        text = "Are you sure you want to reset all frames to their original positions?",
+        text = "Are you sure you want to reset position and scale for all frames?",
         button1 = "Yes",
         button2 = "No",
         OnAccept = function()
@@ -688,8 +688,8 @@ function DriftHelpers:SetupConfig()
         -145,
         160,
         25,
-        "Reset Frame Positions",
-        "Reset all frames to their original positions",
+        "Reset Frames",
+        "Reset position and scale for all frames",
         function (self, button, down)
             StaticPopup_Show("DRIFT_RESET_POSITIONS")
         end

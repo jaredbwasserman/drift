@@ -1,5 +1,5 @@
 ## Description
-Modifies default UI frames so you can click and drag to move them around. Once you move a frame, that frame will remain there until you move it again (even after logging out).
+Modifies default UI frames so you can click and drag to move and scale. Once you move a frame, that frame will remain there until you move it again (even after logging out).
 
 This is the classic version of the addon. The retail version is [Drift (Retail)](https://www.curseforge.com/wow/addons/drift).
 
@@ -17,6 +17,7 @@ Supported frames include:
 * Social
 * Spellbook
 * Talents
+* Flight Map
 * Game Menu
 * Gossip
 * Merchant
