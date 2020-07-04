@@ -46,10 +46,10 @@ local frames = {
     ["ItemTextFrame"] = {},
     ["PetStableFrame"] = {},
     ["TaxiFrame"] = {},
+    ["FlightMapFrame"] = {},
     ["PVPMatchScoreboard"] = {},
     ["PVPMatchResults"] = {},
     ["ChatConfigFrame"] = {},
-    ["FlightMapFrame"] = {}
 }
 
 -- Modify pre-loaded frames
