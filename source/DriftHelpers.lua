@@ -602,29 +602,44 @@ function DriftHelpers:SetupConfig()
     driftOptionsDesc:SetText("Modifies default UI frames so you can click and drag to move and scale.")
     driftOptionsDesc:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -45)
 
+    local driftOptionsInstr = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
+    driftOptionsInstr:SetFontObject("GameFontHighlight")
+    driftOptionsInstr:SetText("Left-click and drag anywhere to move a frame.")
+    driftOptionsInstr:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -75)
+
+    local driftOptionsInstr2 = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
+    driftOptionsInstr2:SetFontObject("GameFontHighlight")
+    driftOptionsInstr2:SetText("Right-click and drag up or down to scale a frame.")
+    driftOptionsInstr2:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -90)
+
+    local driftOptionsInstr3 = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
+    driftOptionsInstr3:SetFontObject("GameFontHighlight")
+    driftOptionsInstr3:SetText("Position and scale for each frame are saved.")
+    driftOptionsInstr3:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -105)
+
     local driftOptionsVersionLabel = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
     driftOptionsVersionLabel:SetFontObject("GameFontNormal")
     driftOptionsVersionLabel:SetText("Version:")
     driftOptionsVersionLabel:SetJustifyH("LEFT")
-    driftOptionsVersionLabel:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -90)
+    driftOptionsVersionLabel:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -135)
 
     local driftOptionsVersionContent = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
     driftOptionsVersionContent:SetFontObject("GameFontHighlight")
     driftOptionsVersionContent:SetText(GetAddOnMetadata("Drift", "Version"))
     driftOptionsVersionContent:SetJustifyH("LEFT")
-    driftOptionsVersionContent:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 75, -90)
+    driftOptionsVersionContent:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 75, -135)
 
     local driftOptionsAuthorLabel = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
     driftOptionsAuthorLabel:SetFontObject("GameFontNormal")
     driftOptionsAuthorLabel:SetText("Author:")
     driftOptionsAuthorLabel:SetJustifyH("LEFT")
-    driftOptionsAuthorLabel:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -110)
+    driftOptionsAuthorLabel:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -150)
 
     local driftOptionsAuthorContent = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
     driftOptionsAuthorContent:SetFontObject("GameFontHighlight")
     driftOptionsAuthorContent:SetText("Jared Wasserman")
     driftOptionsAuthorContent:SetJustifyH("LEFT")
-    driftOptionsAuthorContent:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 75, -110)
+    driftOptionsAuthorContent:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 75, -150)
 
     InterfaceOptions_AddCategory(DriftOptionsPanel.panel)
 

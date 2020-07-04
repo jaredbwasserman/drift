@@ -1,5 +1,9 @@
 ## Description
-Modifies default UI frames so you can click and drag to move and scale. Once you move a frame, that frame will remain there until you move it again (even after logging out).
+Modifies default UI frames so you can click and drag to move and scale.
+
+Left-click and drag anywhere to move a frame.
+Right-click and drag up or down to scale a frame.
+Position and scale for each frame are saved.
 
 This is the retail version of the addon. The classic version is [Drift (Classic)](https://www.curseforge.com/wow/addons/driftclassic).
 
