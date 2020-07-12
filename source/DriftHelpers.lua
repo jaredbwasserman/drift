@@ -105,6 +105,9 @@ local function onDragStart(frame, button)
 
     -- Left click is move
     if button == "LeftButton" then
+        -- Prevent scaling while moving
+        frame:RegisterForDrag("LeftButton")
+
         -- Start moving
         frameToMove:StartMoving()
 
@@ -114,12 +117,18 @@ local function onDragStart(frame, button)
         -- Set the frame as moving
         frameToMove.DriftIsMoving = true
 
-        -- Prevent scaling while moving
-        frame:RegisterForDrag("LeftButton")
-
     -- Right click is scale
     elseif button == "RightButton" then
-        -- TODO: Make it so frame scales from center
+        -- Prevent moving while scaling
+        frame:RegisterForDrag("RightButton")
+
+        -- Prevent unscalable frames from being scaled
+        if frameToMove.DriftUnscalable then
+            print("Drift scaling not supported for " .. frameToMove:GetName())
+            return
+        end
+
+        -- TODO: Make frames always scale from center
 
         -- Set alpha
         frameToMove:SetAlpha(ALPHA_DURING_SCALE)
@@ -133,9 +142,6 @@ local function onDragStart(frame, button)
 
         -- Set the global frame being scaled
         DriftHelpers.frameBeingScaled = frameToMove
-
-        -- Prevent moving while scaling
-        frame:RegisterForDrag("RightButton")
     end
 end
 
@@ -343,6 +349,9 @@ function DriftHelpers:ModifyFrames(frames)
                 frame.GetName = function()
                     return frameName
                 end
+            end
+            if properties.DriftUnscalable then
+                frame.DriftUnscalable = true
             end
             if properties.DriftDelegate then
                 frame.DriftDelegate = getFrame(properties.DriftDelegate) or frame

@@ -34,7 +34,10 @@ local frames = {
         DriftDelegate = "AchievementFrame"
     },
     ["AchievementFrame.searchResults"] = {},
-    ["WorldMapFrame"] = {},
+    ["WorldMapFrame"] = {
+        -- TODO: Add scaling support for WorldMapFrame
+        DriftUnscalable = true
+    },
     ["QuestScrollFrame"] = {
         DriftDelegate = "WorldMapFrame"
     },

@@ -6,6 +6,7 @@ CurseForge links:
  * [Drift (Classic)](https://www.curseforge.com/wow/addons/driftclassic)
 
 ## TODO
+1. Add scaling support for WorldMapFrame
 1. Per frame reset
 1. Remove delay for Guild & Communities
 1. Configurable variables

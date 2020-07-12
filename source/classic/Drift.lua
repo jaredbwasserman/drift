@@ -7,7 +7,10 @@ local frames = {
     ["GossipFrame"] = {},
     ["SpellBookFrame"] = {},
     ["TalentFrame"] = {},
-    ["WorldMapFrame"] = {},
+    ["WorldMapFrame"] = {
+        -- TODO: Add scaling support for WorldMapFrame
+        DriftUnscalable = true
+    },
     ["FriendsFrame"] = {},
     ["ChannelFrame"] = {},
     ["RaidInfoFrame"] = {},
