@@ -13,7 +13,7 @@ CurseForge links:
    1. Max and min scale
    1. Scale increment
 1. Always scale from center
-1. Make ZoneAbilityFrame, ExtraActionButton1, PlayerPowerBarAlt have better handles
+1. Make ZoneAbilityFrame, ExtraActionButton1 have better handles
 
 ## Bugs
 1. Scaling Bugs
