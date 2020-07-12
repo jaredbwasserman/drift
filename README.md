@@ -24,3 +24,4 @@ CurseForge links:
 1. Frames with tabs move from hotkey when on other tab
 1. ColorPickerFrame moves when it's not supposed to
 1. TimeManagerFrame and TalkingHeadFrame do not move depending on addons loaded
+1. GameMenuFrame does not reset its position after Reset Frames is invoked
