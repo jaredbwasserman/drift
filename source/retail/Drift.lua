@@ -162,7 +162,6 @@ local frames = {
     ["TalkingHeadFrame"] = {},
     ["ChallengesKeystoneFrame"] = {},
     ["BonusRollFrame"] = {},
-    ["ReadyCheckListenerFrame"] = {},
 }
 
 -- Modify pre-loaded frames
