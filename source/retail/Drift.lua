@@ -162,6 +162,7 @@ local frames = {
     ["TalkingHeadFrame"] = {},
     ["ChallengesKeystoneFrame"] = {},
     ["BonusRollFrame"] = {},
+    ["ObliterumForgeFrame"] = {},
 }
 
 -- Modify pre-loaded frames
