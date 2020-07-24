@@ -380,6 +380,14 @@ function DriftHelpers:ModifyFrames(frames)
     -- Fix bags
     DriftHelpers:FixBags()
 
+    -- Fix UpdateContainerFrameAnchors
+    local UpdateContainerFrameAnchors_Original = UpdateContainerFrameAnchors
+    UpdateContainerFrameAnchors = function ()
+        DriftHelpers:FixBags()
+        UpdateContainerFrameAnchors_Original()
+        DriftHelpers:BroadcastReset(frames)
+    end
+
     -- Fix PVP talents list
     DriftHelpers:FixPVPTalentsList(frames)
 
