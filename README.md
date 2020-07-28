@@ -15,6 +15,7 @@ CurseForge links:
    1. Scale increment
 1. Always scale from center
 1. Make ZoneAbilityFrame, ExtraActionButton1 have better handles
+1. Make modified UpdateContainerFrameAnchors more performant
 
 ## Bugs
 1. Scaling Bugs

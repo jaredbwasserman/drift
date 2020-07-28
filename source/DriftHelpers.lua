@@ -404,7 +404,7 @@ end
 -- Fix bag Lua errors
 function DriftHelpers:FixBags()
     -- Set UpdateContainerFrameAnchors to do nothing
-    UpdateContainerFrameAnchorsO = UpdateContainerFrameAnchors
+    local UpdateContainerFrameAnchors_Original = UpdateContainerFrameAnchors
     UpdateContainerFrameAnchors = function () end
 
     -- Clear all points on all Containers
@@ -447,8 +447,11 @@ function DriftHelpers:FixBags()
     _G['ContainerFrame13']:ClearAllPoints()
     _G['ContainerFrame13'].ClickableTitleFrame:ClearAllPoints()
 
+    -- Set ContainerFrame1 BOTTOMRIGHT to avoid Lua errors
+    _G['ContainerFrame1']:SetPoint("BOTTOMRIGHT", "UIParent", "BOTTOMRIGHT", 0, 0)
+
     -- Put back the original UpdateContainerFrameAnchors
-    UpdateContainerFrameAnchors = UpdateContainerFrameAnchorsO
+    UpdateContainerFrameAnchors = UpdateContainerFrameAnchors_Original
 end
 
 -- Make it so clicking Close button for PVP talents causes reset

@@ -234,8 +234,6 @@ local function eventHandler(self, event, ...)
         DriftHelpers:ModifyFrames(frames)
     elseif event == "VARIABLES_LOADED" then
         DriftHelpers:SetupConfig()
-    elseif event == "BANKFRAME_OPENED" then
-        DriftHelpers:FixBags()
     else
         DriftHelpers:BroadcastReset(frames)
     end
@@ -255,9 +253,6 @@ Drift:RegisterEvent("ITEM_LOCKED")
 
 -- Config
 Drift:RegisterEvent("VARIABLES_LOADED")
-
--- Bags
-Drift:RegisterEvent("BANKFRAME_OPENED")
 
 -- Modify frames after an addon loads
 DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
