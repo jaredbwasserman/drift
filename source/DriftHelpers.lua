@@ -377,15 +377,12 @@ function DriftHelpers:ModifyFrames(frames)
         EncounterJournalTooltip:ClearAllPoints()
     end
 
-    -- Fix bags
-    DriftHelpers:FixBags()
-
     -- Fix UpdateContainerFrameAnchors
     local UpdateContainerFrameAnchors_Original = UpdateContainerFrameAnchors
     UpdateContainerFrameAnchors = function ()
-        DriftHelpers:FixBags()
+        DriftHelpers:ClearBags()
         UpdateContainerFrameAnchors_Original()
-        DriftHelpers:BroadcastReset(frames)
+        DriftHelpers:ResetBags()
     end
 
     -- Fix PVP talents list
@@ -401,57 +398,74 @@ function DriftHelpers:ModifyFrames(frames)
     DriftHelpers:BroadcastReset(frames)
 end
 
--- Fix bag Lua errors
-function DriftHelpers:FixBags()
+-- Make bags able to be updated by UpdateContainerFrameAnchors
+function DriftHelpers:ClearBags()
     -- Set UpdateContainerFrameAnchors to do nothing
     local UpdateContainerFrameAnchors_Original = UpdateContainerFrameAnchors
     UpdateContainerFrameAnchors = function () end
 
     -- Clear all points on all Containers
-    _G['ContainerFrame1']:ClearAllPoints()
-    _G['ContainerFrame1'].ClickableTitleFrame:ClearAllPoints()
+    ContainerFrame1:ClearAllPoints()
+    ContainerFrame1.ClickableTitleFrame:ClearAllPoints()
 
-    _G['ContainerFrame2']:ClearAllPoints()
-    _G['ContainerFrame2'].ClickableTitleFrame:ClearAllPoints()
+    ContainerFrame2:ClearAllPoints()
+    ContainerFrame2.ClickableTitleFrame:ClearAllPoints()
 
-    _G['ContainerFrame3']:ClearAllPoints()
-    _G['ContainerFrame3'].ClickableTitleFrame:ClearAllPoints()
+    ContainerFrame3:ClearAllPoints()
+    ContainerFrame3.ClickableTitleFrame:ClearAllPoints()
 
-    _G['ContainerFrame4']:ClearAllPoints()
-    _G['ContainerFrame4'].ClickableTitleFrame:ClearAllPoints()
+    ContainerFrame4:ClearAllPoints()
+    ContainerFrame4.ClickableTitleFrame:ClearAllPoints()
 
-    _G['ContainerFrame5']:ClearAllPoints()
-    _G['ContainerFrame5'].ClickableTitleFrame:ClearAllPoints()
+    ContainerFrame5:ClearAllPoints()
+    ContainerFrame5.ClickableTitleFrame:ClearAllPoints()
 
-    _G['ContainerFrame6']:ClearAllPoints()
-    _G['ContainerFrame6'].ClickableTitleFrame:ClearAllPoints()
+    ContainerFrame6:ClearAllPoints()
+    ContainerFrame6.ClickableTitleFrame:ClearAllPoints()
 
-    _G['ContainerFrame7']:ClearAllPoints()
-    _G['ContainerFrame7'].ClickableTitleFrame:ClearAllPoints()
+    ContainerFrame7:ClearAllPoints()
+    ContainerFrame7.ClickableTitleFrame:ClearAllPoints()
 
-    _G['ContainerFrame8']:ClearAllPoints()
-    _G['ContainerFrame8'].ClickableTitleFrame:ClearAllPoints()
+    ContainerFrame8:ClearAllPoints()
+    ContainerFrame8.ClickableTitleFrame:ClearAllPoints()
 
-    _G['ContainerFrame9']:ClearAllPoints()
-    _G['ContainerFrame9'].ClickableTitleFrame:ClearAllPoints()
+    ContainerFrame9:ClearAllPoints()
+    ContainerFrame9.ClickableTitleFrame:ClearAllPoints()
 
-    _G['ContainerFrame10']:ClearAllPoints()
-    _G['ContainerFrame10'].ClickableTitleFrame:ClearAllPoints()
+    ContainerFrame10:ClearAllPoints()
+    ContainerFrame10.ClickableTitleFrame:ClearAllPoints()
 
-    _G['ContainerFrame11']:ClearAllPoints()
-    _G['ContainerFrame11'].ClickableTitleFrame:ClearAllPoints()
+    ContainerFrame11:ClearAllPoints()
+    ContainerFrame11.ClickableTitleFrame:ClearAllPoints()
 
-    _G['ContainerFrame12']:ClearAllPoints()
-    _G['ContainerFrame12'].ClickableTitleFrame:ClearAllPoints()
+    ContainerFrame12:ClearAllPoints()
+    ContainerFrame12.ClickableTitleFrame:ClearAllPoints()
 
-    _G['ContainerFrame13']:ClearAllPoints()
-    _G['ContainerFrame13'].ClickableTitleFrame:ClearAllPoints()
+    ContainerFrame13:ClearAllPoints()
+    ContainerFrame13.ClickableTitleFrame:ClearAllPoints()
 
     -- Set ContainerFrame1 BOTTOMRIGHT to avoid Lua errors
-    _G['ContainerFrame1']:SetPoint("BOTTOMRIGHT", "UIParent", "BOTTOMRIGHT", 0, 0)
+    ContainerFrame1:SetPoint("BOTTOMRIGHT", "UIParent", "BOTTOMRIGHT", 0, 0)
 
     -- Put back the original UpdateContainerFrameAnchors
     UpdateContainerFrameAnchors = UpdateContainerFrameAnchors_Original
+end
+
+-- Reset bag position and scale
+function DriftHelpers:ResetBags()
+    resetScaleAndPosition(ContainerFrame1)
+    resetScaleAndPosition(ContainerFrame2)
+    resetScaleAndPosition(ContainerFrame3)
+    resetScaleAndPosition(ContainerFrame4)
+    resetScaleAndPosition(ContainerFrame5)
+    resetScaleAndPosition(ContainerFrame6)
+    resetScaleAndPosition(ContainerFrame7)
+    resetScaleAndPosition(ContainerFrame8)
+    resetScaleAndPosition(ContainerFrame9)
+    resetScaleAndPosition(ContainerFrame10)
+    resetScaleAndPosition(ContainerFrame11)
+    resetScaleAndPosition(ContainerFrame12)
+    resetScaleAndPosition(ContainerFrame13)
 end
 
 -- Make it so clicking Close button for PVP talents causes reset
