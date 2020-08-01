@@ -453,19 +453,45 @@ end
 
 -- Reset bag position and scale
 function DriftHelpers:ResetBags()
-    resetScaleAndPosition(ContainerFrame1)
-    resetScaleAndPosition(ContainerFrame2)
-    resetScaleAndPosition(ContainerFrame3)
-    resetScaleAndPosition(ContainerFrame4)
-    resetScaleAndPosition(ContainerFrame5)
-    resetScaleAndPosition(ContainerFrame6)
-    resetScaleAndPosition(ContainerFrame7)
-    resetScaleAndPosition(ContainerFrame8)
-    resetScaleAndPosition(ContainerFrame9)
-    resetScaleAndPosition(ContainerFrame10)
-    resetScaleAndPosition(ContainerFrame11)
-    resetScaleAndPosition(ContainerFrame12)
-    resetScaleAndPosition(ContainerFrame13)
+    if (ContainerFrame1:IsShown()) then
+        resetScaleAndPosition(ContainerFrame1)
+    end
+    if (ContainerFrame2:IsShown()) then
+        resetScaleAndPosition(ContainerFrame2)
+    end
+    if (ContainerFrame3:IsShown()) then
+        resetScaleAndPosition(ContainerFrame3)
+    end
+    if (ContainerFrame4:IsShown()) then
+        resetScaleAndPosition(ContainerFrame4)
+    end
+    if (ContainerFrame5:IsShown()) then
+        resetScaleAndPosition(ContainerFrame5)
+    end
+    if (ContainerFrame6:IsShown()) then
+        resetScaleAndPosition(ContainerFrame6)
+    end
+    if (ContainerFrame7:IsShown()) then
+        resetScaleAndPosition(ContainerFrame7)
+    end
+    if (ContainerFrame8:IsShown()) then
+        resetScaleAndPosition(ContainerFrame8)
+    end
+    if (ContainerFrame9:IsShown()) then
+        resetScaleAndPosition(ContainerFrame9)
+    end
+    if (ContainerFrame10:IsShown()) then
+        resetScaleAndPosition(ContainerFrame10)
+    end
+    if (ContainerFrame11:IsShown()) then
+        resetScaleAndPosition(ContainerFrame11)
+    end
+    if (ContainerFrame12:IsShown()) then
+        resetScaleAndPosition(ContainerFrame12)
+    end
+    if (ContainerFrame13:IsShown()) then
+        resetScaleAndPosition(ContainerFrame13)
+    end
 end
 
 -- Make it so clicking Close button for PVP talents causes reset
