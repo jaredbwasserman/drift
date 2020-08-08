@@ -152,16 +152,27 @@ local function onDragStop(frame)
     frameToMove:StopMovingOrSizing()
     frameToMove:SetAlpha(1)
 
-    -- Set IsUserPlaced to true
-    frameToMove:SetUserPlaced(true)
+    -- Save position
+    if (frameToMove.DriftIsMoving) then
+        local point, _, relativePoint, xOfs, yOfs = frameToMove:GetPoint()
+        DriftPoints[frameToMove:GetName()] = {
+            ["point"] = point,
+            ["relativeTo"] = "UIParent",
+            ["relativePoint"] = relativePoint,
+            ["xOfs"] = xOfs,
+            ["yOfs"] = yOfs
+        }
 
-    -- Clear frame's moving state
+        -- Set IsUserPlaced to true
+        frameToMove:SetUserPlaced(true)
+    end
     frameToMove.DriftIsMoving = false
 
-    -- Clear frame's scaling state
+    -- Save scale
+    if (frameToMove.DriftIsScaling) then
+        DriftScales[frameToMove:GetName()] = frameToMove:GetScale()
+    end
     frameToMove.DriftIsScaling = false
-
-    -- Clear global frame being scaled
     DriftHelpers.frameBeingScaled = nil
 
     -- Hide GameTooltip
@@ -169,19 +180,6 @@ local function onDragStop(frame)
 
     -- Allow for dragging with both buttons
     frame:RegisterForDrag("LeftButton", "RightButton")
-
-    -- Save position
-    local point, relativeTo, relativePoint, xOfs, yOfs = frameToMove:GetPoint()
-    DriftPoints[frameToMove:GetName()] = {
-        ["point"] = point,
-        ["relativeTo"] = "UIParent",
-        ["relativePoint"] = relativePoint,
-        ["xOfs"] = xOfs,
-        ["yOfs"] = yOfs
-    }
-
-    -- Save scale
-    DriftScales[frameToMove:GetName()] = frameToMove:GetScale()
 end
 
 local function resetScaleAndPosition(frame)
@@ -219,6 +217,10 @@ end
 local function getModified(frame)
     local modifiedSet = {}
     local frameToMove = frame.DriftDelegate or frame
+
+    if frameToMove.DriftIsMoving or frameToMove.DriftIsScaling then
+        modifiedSet["isModifying"] = true
+    end
 
     local scale = DriftScales[frameToMove:GetName()]
     if scale then
@@ -471,12 +473,12 @@ function DriftHelpers:UpdateContainerFrameAnchors()
         local modifiedSet = getModified(frame)
 
         -- Conditionally apply containerScale
-        if not modifiedSet["scale"] then
+        if not modifiedSet["scale"] and not modifiedSet["isModifying"] then
             frame:SetScale(containerScale)
         end
 
-        -- Conditionally apply Drift point
-        if not modifiedSet["position"] then
+        -- Conditionally apply original container position
+        if not modifiedSet["position"] and not modifiedSet["isModifying"] then
             frame:ClearAllPoints()
 		    if ( index == 1 ) then
 		        -- First bag
