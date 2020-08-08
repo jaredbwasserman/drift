@@ -128,8 +128,6 @@ local function onDragStart(frame, button)
             return
         end
 
-        -- TODO: Make frames always scale from center
-
         -- Set alpha
         frameToMove:SetAlpha(ALPHA_DURING_SCALE)
 
@@ -183,21 +181,25 @@ local function onDragStop(frame)
 end
 
 local function resetScaleAndPosition(frame)
+    local modifiedSet = {}
     local frameToMove = frame.DriftDelegate or frame
 
     if frameCannotBeModified(frameToMove) then
-        return
+        modifiedSet["unmodifiable"] = true
+        return modifiedSet
     end
 
     -- Do not reset if frame is moving or scaling
     if frameToMove.DriftIsMoving or frameToMove.DriftIsScaling then
-        return
+        modifiedSet["isModifying"] = true
+        return modifiedSet
     end
 
     -- Reset scale
     local scale = DriftScales[frameToMove:GetName()]
     if scale then
         frameToMove:SetScale(scale)
+        modifiedSet["scale"] = true
     end
 
     -- Reset position
@@ -211,24 +213,6 @@ local function resetScaleAndPosition(frame)
             point["xOfs"],
             point["yOfs"]
         )
-    end
-end
-
-local function getModified(frame)
-    local modifiedSet = {}
-    local frameToMove = frame.DriftDelegate or frame
-
-    if frameToMove.DriftIsMoving or frameToMove.DriftIsScaling then
-        modifiedSet["isModifying"] = true
-    end
-
-    local scale = DriftScales[frameToMove:GetName()]
-    if scale then
-        modifiedSet["scale"] = true
-    end
-
-    local point = DriftPoints[frameToMove:GetName()]
-    if point then
         modifiedSet["position"] = true
     end
 
@@ -467,18 +451,15 @@ function DriftHelpers:UpdateContainerFrameAnchors()
         frame = _G[frameName]
 
         -- Try to apply Drift settings
-        resetScaleAndPosition(frame)
-
-        -- Get Drift settings
-        local modifiedSet = getModified(frame)
+        local modifiedSet = resetScaleAndPosition(frame)
 
         -- Conditionally apply containerScale
-        if not modifiedSet["scale"] and not modifiedSet["isModifying"] then
+        if not modifiedSet["scale"] and not (modifiedSet["unmodifiable"] or modifiedSet["isModifying"]) then
             frame:SetScale(containerScale)
         end
 
         -- Conditionally apply original container position
-        if not modifiedSet["position"] and not modifiedSet["isModifying"] then
+        if not modifiedSet["position"] and not (modifiedSet["unmodifiable"] or modifiedSet["isModifying"]) then
             frame:ClearAllPoints()
 		    if ( index == 1 ) then
 		        -- First bag
