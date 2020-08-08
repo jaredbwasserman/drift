@@ -216,6 +216,23 @@ local function resetScaleAndPosition(frame)
     end
 end
 
+local function getModified(frame)
+    local modifiedSet = {}
+    local frameToMove = frame.DriftDelegate or frame
+
+    local scale = DriftScales[frameToMove:GetName()]
+    if scale then
+        modifiedSet["scale"] = true
+    end
+
+    local point = DriftPoints[frameToMove:GetName()]
+    if point then
+        modifiedSet["position"] = true
+    end
+
+    return modifiedSet
+end
+
 local function makeModifiable(frame)
     if frame.DriftModifiable then
         return
@@ -377,13 +394,8 @@ function DriftHelpers:ModifyFrames(frames)
         EncounterJournalTooltip:ClearAllPoints()
     end
 
-    -- Fix UpdateContainerFrameAnchors
-    local UpdateContainerFrameAnchors_Original = UpdateContainerFrameAnchors
-    UpdateContainerFrameAnchors = function ()
-        DriftHelpers:ClearBags()
-        UpdateContainerFrameAnchors_Original()
-        DriftHelpers:ResetBags()
-    end
+    -- Modify UpdateContainerFrameAnchors
+    UpdateContainerFrameAnchors = DriftHelpers.UpdateContainerFrameAnchors
 
     -- Fix PVP talents list
     DriftHelpers:FixPVPTalentsList(frames)
@@ -398,99 +410,89 @@ function DriftHelpers:ModifyFrames(frames)
     DriftHelpers:BroadcastReset(frames)
 end
 
--- Make bags able to be updated by UpdateContainerFrameAnchors
-function DriftHelpers:ClearBags()
-    -- Set UpdateContainerFrameAnchors to do nothing
-    local UpdateContainerFrameAnchors_Original = UpdateContainerFrameAnchors
-    UpdateContainerFrameAnchors = function () end
+function DriftHelpers:UpdateContainerFrameAnchors()
+    -- This variable does not exist in classic
+    local MINIMUM_CONTAINER_OFFSET_X = MINIMUM_CONTAINER_OFFSET_X or 10
 
-    -- Clear all points on all Containers
-    ContainerFrame1:ClearAllPoints()
-    ContainerFrame1.ClickableTitleFrame:ClearAllPoints()
+	local containerFrameOffsetX = math.max(CONTAINER_OFFSET_X, MINIMUM_CONTAINER_OFFSET_X)
+	local frame, xOffset, yOffset, screenHeight, freeScreenHeight, leftMostPoint, column
+	local screenWidth = GetScreenWidth()
+	local containerScale = 1
+	local leftLimit = 0
+	if ( BankFrame:IsShown() ) then
+		leftLimit = BankFrame:GetRight() - 25
+	end
 
-    ContainerFrame2:ClearAllPoints()
-    ContainerFrame2.ClickableTitleFrame:ClearAllPoints()
+	while ( containerScale > CONTAINER_SCALE ) do
+		screenHeight = GetScreenHeight() / containerScale
+		-- Adjust the start anchor for bags depending on the multibars
+		xOffset = containerFrameOffsetX / containerScale
+		yOffset = CONTAINER_OFFSET_Y / containerScale
+		-- freeScreenHeight determines when to start a new column of bags
+		freeScreenHeight = screenHeight - yOffset
+		leftMostPoint = screenWidth - xOffset
+		column = 1
+		local frameHeight
+		for _, frameName in ipairs(ContainerFrame1.bags) do
+			frameHeight = _G[frameName]:GetHeight()
+			if ( freeScreenHeight < frameHeight ) then
+				-- Start a new column
+				column = column + 1
+				leftMostPoint = screenWidth - ( column * CONTAINER_WIDTH * containerScale ) - xOffset
+				freeScreenHeight = screenHeight - yOffset
+			end
+			freeScreenHeight = freeScreenHeight - frameHeight - VISIBLE_CONTAINER_SPACING
+		end
+		if ( leftMostPoint < leftLimit ) then
+			containerScale = containerScale - 0.01
+		else
+			break
+		end
+	end
 
-    ContainerFrame3:ClearAllPoints()
-    ContainerFrame3.ClickableTitleFrame:ClearAllPoints()
+	if ( containerScale < CONTAINER_SCALE ) then
+		containerScale = CONTAINER_SCALE
+	end
 
-    ContainerFrame4:ClearAllPoints()
-    ContainerFrame4.ClickableTitleFrame:ClearAllPoints()
+	screenHeight = GetScreenHeight() / containerScale
+	-- Adjust the start anchor for bags depending on the multibars
+	xOffset = containerFrameOffsetX / containerScale
+	yOffset = CONTAINER_OFFSET_Y / containerScale
+	-- freeScreenHeight determines when to start a new column of bags
+	freeScreenHeight = screenHeight - yOffset
+	column = 0
+	for index, frameName in ipairs(ContainerFrame1.bags) do
+        frame = _G[frameName]
 
-    ContainerFrame5:ClearAllPoints()
-    ContainerFrame5.ClickableTitleFrame:ClearAllPoints()
+        -- Try to apply Drift settings
+        resetScaleAndPosition(frame)
 
-    ContainerFrame6:ClearAllPoints()
-    ContainerFrame6.ClickableTitleFrame:ClearAllPoints()
+        -- Get Drift settings
+        local modifiedSet = getModified(frame)
 
-    ContainerFrame7:ClearAllPoints()
-    ContainerFrame7.ClickableTitleFrame:ClearAllPoints()
+        -- Conditionally apply containerScale
+        if not modifiedSet["scale"] then
+            frame:SetScale(containerScale)
+        end
 
-    ContainerFrame8:ClearAllPoints()
-    ContainerFrame8.ClickableTitleFrame:ClearAllPoints()
+        -- Conditionally apply Drift point
+        if not modifiedSet["position"] then
+            frame:ClearAllPoints()
+		    if ( index == 1 ) then
+		        -- First bag
+		        frame:SetPoint("BOTTOMRIGHT", frame:GetParent(), "BOTTOMRIGHT", -xOffset, yOffset )
+		    elseif ( freeScreenHeight < frame:GetHeight() ) then
+		        -- Start a new column
+		        column = column + 1
+		        freeScreenHeight = screenHeight - yOffset
+		        frame:SetPoint("BOTTOMRIGHT", frame:GetParent(), "BOTTOMRIGHT", -(column * CONTAINER_WIDTH) - xOffset, yOffset)
+		    else
+		        -- Anchor to the previous bag
+		        frame:SetPoint("BOTTOMRIGHT", ContainerFrame1.bags[index - 1], "TOPRIGHT", 0, CONTAINER_SPACING)
+            end
+        end
 
-    ContainerFrame9:ClearAllPoints()
-    ContainerFrame9.ClickableTitleFrame:ClearAllPoints()
-
-    ContainerFrame10:ClearAllPoints()
-    ContainerFrame10.ClickableTitleFrame:ClearAllPoints()
-
-    ContainerFrame11:ClearAllPoints()
-    ContainerFrame11.ClickableTitleFrame:ClearAllPoints()
-
-    ContainerFrame12:ClearAllPoints()
-    ContainerFrame12.ClickableTitleFrame:ClearAllPoints()
-
-    ContainerFrame13:ClearAllPoints()
-    ContainerFrame13.ClickableTitleFrame:ClearAllPoints()
-
-    -- Set ContainerFrame1 BOTTOMRIGHT to avoid Lua errors
-    ContainerFrame1:SetPoint("BOTTOMRIGHT", "UIParent", "BOTTOMRIGHT", 0, 0)
-
-    -- Put back the original UpdateContainerFrameAnchors
-    UpdateContainerFrameAnchors = UpdateContainerFrameAnchors_Original
-end
-
--- Reset bag position and scale
-function DriftHelpers:ResetBags()
-    if (ContainerFrame1:IsShown()) then
-        resetScaleAndPosition(ContainerFrame1)
-    end
-    if (ContainerFrame2:IsShown()) then
-        resetScaleAndPosition(ContainerFrame2)
-    end
-    if (ContainerFrame3:IsShown()) then
-        resetScaleAndPosition(ContainerFrame3)
-    end
-    if (ContainerFrame4:IsShown()) then
-        resetScaleAndPosition(ContainerFrame4)
-    end
-    if (ContainerFrame5:IsShown()) then
-        resetScaleAndPosition(ContainerFrame5)
-    end
-    if (ContainerFrame6:IsShown()) then
-        resetScaleAndPosition(ContainerFrame6)
-    end
-    if (ContainerFrame7:IsShown()) then
-        resetScaleAndPosition(ContainerFrame7)
-    end
-    if (ContainerFrame8:IsShown()) then
-        resetScaleAndPosition(ContainerFrame8)
-    end
-    if (ContainerFrame9:IsShown()) then
-        resetScaleAndPosition(ContainerFrame9)
-    end
-    if (ContainerFrame10:IsShown()) then
-        resetScaleAndPosition(ContainerFrame10)
-    end
-    if (ContainerFrame11:IsShown()) then
-        resetScaleAndPosition(ContainerFrame11)
-    end
-    if (ContainerFrame12:IsShown()) then
-        resetScaleAndPosition(ContainerFrame12)
-    end
-    if (ContainerFrame13:IsShown()) then
-        resetScaleAndPosition(ContainerFrame13)
+		freeScreenHeight = freeScreenHeight - frame:GetHeight() - VISIBLE_CONTAINER_SPACING
     end
 end
 
