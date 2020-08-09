@@ -179,6 +179,14 @@ local frames = {
     ["SplashFrame"] = {},
     ["WardrobeFrame"] = {},
     ["CalendarFrame"] = {},
+    ["CalendarViewEventFrame"] = {},
+    ["CalendarViewEventFrame.Header"] = {
+        DriftDelegate = "CalendarViewEventFrame"
+    },
+    ["CalendarViewEventFrame.HeaderFrame"] = {
+        DriftDelegate = "CalendarViewEventFrame"
+    },
+    ["CalendarViewHolidayFrame"] = {},
     ["ClassTrainerFrame"] = {},
     ["AuctionFrame"] = {},
     ["AuctionHouseFrame"] = {},
