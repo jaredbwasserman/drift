@@ -71,8 +71,9 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
   * Order Hall Missions
 * Petition
 * Player Power Bar Alt
-* PVP Results
-* PVP Scoreboard
+* PVP Frames
+  * PVP Results
+  * PVP Scoreboard
 * Quest
 * Quest Log
 * Raid Info
