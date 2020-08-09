@@ -11,40 +11,40 @@ This is the classic version of the addon. The retail version is [Drift (Retail)]
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/giUjFml4eJ8/0.jpg)](http://www.youtube.com/watch?v=giUjFml4eJ8)
 
 ## Supported Frames
-* AddOn List
-* Auction House
-* Bags
-* Bank
-* Character Info
-* Chat Channels
-* Class Trainer
-* Clock
-* Color Picker
-* Customer Support
-* Dressing Room
-* Gossip
-* Inspect
-* Loot
-* Macros
-* Mail
-* Main Menu
-* Merchant
-* Petition
-* PVP Frames
-   * PVP Results
-   * PVP Scoreboard
-* Quest
-* Quest Log
-* Raid Info
-* Social
-* Spellbook
-* Stable
-* Tabard
-* Talents
-* Taxi
-* Trade
-* Trade Skill
-* World Map
+- AddOn List  
+- Auction House  
+- Bags  
+- Bank  
+- Character Info  
+- Chat Channels  
+- Class Trainer  
+- Clock  
+- Color Picker  
+- Customer Support  
+- Dressing Room  
+- Gossip  
+- Inspect  
+- Loot  
+- Macros  
+- Mail  
+- Main Menu  
+- Merchant  
+- Petition  
+- PVP Frames  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- PVP Results  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- PVP Scoreboard  
+- Quest  
+- Quest Log  
+- Raid Info  
+- Social  
+- Spellbook  
+- Stable  
+- Tabard  
+- Talents  
+- Taxi  
+- Trade  
+- Trade Skill  
+- World Map  
 
 ## Bugs and Feature Requests
 Please use the [Github issues page](https://github.com/jaredbwasserman/Drift/issues) to report bugs or request features.
