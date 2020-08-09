@@ -31,8 +31,8 @@ This is the classic version of the addon. The retail version is [Drift (Retail)]
 * Merchant
 * Petition
 * PVP Frames
-  * PVP Results
-  * PVP Scoreboard
+   * PVP Results
+   * PVP Scoreboard
 * Quest
 * Quest Log
 * Raid Info

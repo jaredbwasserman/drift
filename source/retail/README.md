@@ -19,9 +19,9 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 * Artifact
 * Auction House
 * Azerite Frames
-  * Azerite Empowered Item
-  * Azerite Essence
-  * Azerite Respec
+   * Azerite Empowered Item
+   * Azerite Essence
+   * Azerite Respec
 * Bags
 * Bank
 * Barber Shop
@@ -29,9 +29,9 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 * Black Market Auction House
 * Bonus Roll
 * Calendar Frames
-  * Calendar
-  * Calendar View Event
-  * Calendar View Holiday
+   * Calendar
+   * Calendar View Event
+   * Calendar View Holiday
 * Challenges Keystone
 * Character Info
 * Chat Channels
@@ -45,14 +45,14 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 * Flight Map
 * Game Menu
 * Garrison Frames
-  * Garrison Architect
-  * Garrison Capacitive Display
-  * Garrison Landing Page
-  * Garrison Missions
-  * Garrison Monument
-  * Garrison Recruiter
-  * Garrison Recruit Select
-  * Garrison Shipyard
+   * Garrison Architect
+   * Garrison Capacitive Display
+   * Garrison Landing Page
+   * Garrison Missions
+   * Garrison Monument
+   * Garrison Recruiter
+   * Garrison Recruit Select
+   * Garrison Shipyard
 * Gossip
 * Group Finder
 * Guild
@@ -67,13 +67,13 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 * Merchant
 * Obliterum
 * Order Hall Frames
-  * Order Advancement
-  * Order Hall Missions
+   * Order Advancement
+   * Order Hall Missions
 * Petition
 * Player Power Bar Alt
 * PVP Frames
-  * PVP Results
-  * PVP Scoreboard
+   * PVP Results
+   * PVP Scoreboard
 * Quest
 * Quest Log
 * Raid Info
