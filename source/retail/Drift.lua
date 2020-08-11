@@ -64,6 +64,7 @@ local frames = {
     ["QuestLogPopupDetailFrame"] = {},
     ["QuestLogFrame"] = {},
     ["QuestFrame"] = {},
+    ["QuestChoiceFrame"] = {},
     ["WarboardQuestChoiceFrame"] = {},
     ["GossipFrame"] = {},
     ["CollectionsJournal"] = {},

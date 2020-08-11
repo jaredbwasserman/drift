@@ -72,7 +72,8 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - PVP Results
 - PVP Scoreboard
 - Quest
-- Quest Log
+- Quest Choice
+- Quest Log Popup Detail
 - Raid Info
 - Recruit A Friend Rewards
 - Reforging
@@ -86,9 +87,9 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Talking Head
 - Trade
 - Trade Skill
+- Transmogrify
 - Void Storage
-- Warboard
-- Wardrobe
+- Warboard Quest Choice
 - What's New
 - World Map
 - Zone Ability
