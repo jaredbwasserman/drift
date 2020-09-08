@@ -52,6 +52,9 @@ local frames = {
         DriftDelegate = "ContainerFrame13"
     },
     ["CharacterFrame"] = {},
+    ["HonorFrame"] = {
+        DriftDelegate = "CharacterFrame"
+    },
     ["TradeSkillFrame"] = {},
     ["CraftFrame"] = {},
     ["QuestLogFrame"] = {},
