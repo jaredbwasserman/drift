@@ -232,6 +232,7 @@ local function makeModifiable(frame)
     frame:RegisterForDrag("LeftButton", "RightButton")
     frame:SetScript("OnDragStart", onDragStart)
     frame:SetScript("OnDragStop", onDragStop)
+    frame:HookScript("OnHide", onDragStop)
 
     frame.DriftModifiable = true
 end
