@@ -259,6 +259,7 @@ Drift:RegisterEvent("PET_SPECIALIZATION_CHANGED")
 
 -- Azerite
 Drift:RegisterEvent("ITEM_LOCKED")
+Drift:RegisterEvent("ITEM_DATA_LOAD_RESULT")
 
 -- Config
 Drift:RegisterEvent("VARIABLES_LOADED")
