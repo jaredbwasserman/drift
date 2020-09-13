@@ -95,4 +95,4 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Zone Ability
 
 ## Bugs and Feature Requests
-Please use the [Github issues page](https://github.com/jaredbwasserman/Drift/issues) to report bugs or request features.
+Please use the [GitHub issues page](https://github.com/jaredbwasserman/Drift/issues) to report bugs or request features.

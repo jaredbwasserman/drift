@@ -49,4 +49,4 @@ This is the classic version of the addon. The retail version is [Drift (Retail)]
 - World Map
 
 ## Bugs and Feature Requests
-Please use the [Github issues page](https://github.com/jaredbwasserman/Drift/issues) to report bugs or request features.
+Please use the [GitHub issues page](https://github.com/jaredbwasserman/Drift/issues) to report bugs or request features.
