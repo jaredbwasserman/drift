@@ -27,6 +27,10 @@ DriftHelpers.prevMouseY = nil
 DriftHelpers.frameBeingScaled = nil
 if not DriftScales then DriftScales = {} end
 
+-- Variables for slash commands
+local DRIFTRESET = "DRIFTRESET"
+SLASH_DRIFTRESET1 = "/driftreset"
+
 -- Other variables
 local ALPHA_DURING_MOVE = 0.3 -- TODO: Configurable
 local ALPHA_DURING_SCALE = 0.3 -- TODO: Configurable
@@ -285,6 +289,22 @@ local function makeTabsSticky(frame, frames)
             end
         end
     end
+end
+
+local function deleteDriftState()
+    -- Delete DriftPoints state
+    DriftPoints = {}
+
+    -- Manually set scale to 1 for each frame
+    for frameName, _ in pairs(DriftScales) do
+        local frame = getFrame(frameName)
+        if frame then
+            frame:SetScale(1)
+        end
+    end
+
+    -- Delete DriftScales state
+    DriftScales = {}
 end
 
 -- Global functions
@@ -732,21 +752,7 @@ function DriftHelpers:SetupConfig()
         text = "Are you sure you want to reset position and scale for all frames?",
         button1 = "Yes",
         button2 = "No",
-        OnAccept = function()
-            -- Delete DriftPoints state
-            DriftPoints = {}
-
-            -- Manually set scale to 1 for each frame
-            for frameName, _ in pairs(DriftScales) do
-                local frame = getFrame(frameName)
-                if frame then
-                    frame:SetScale(1)
-                end
-            end
-
-            -- Delete DriftScales state
-            DriftScales = {}
-        end,
+        OnAccept = deleteDriftState,
         timeout = 0,
         whileDead = true,
         hideOnEscape = true,
@@ -775,3 +781,10 @@ function DriftHelpers:SetupConfig()
         DriftOptions.dragKeyFunc = getDragKeyFuncFromOrdinal(DriftOptions.dragKey)
     end
 end
+
+
+--------------------------------------------------------------------------------
+-- Slash Commands
+--------------------------------------------------------------------------------
+
+SlashCmdList[DRIFTRESET] = deleteDriftState
