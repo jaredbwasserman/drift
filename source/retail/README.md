@@ -5,6 +5,8 @@ Left-click and drag anywhere to move a frame.
 Right-click and drag up or down to scale a frame.  
 Position and scale for each frame are saved.
 
+/driftreset&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reset position and scale for all frames.
+
 This is the retail version of the addon. The classic version is [Drift (Classic)](https://www.curseforge.com/wow/addons/driftclassic).
 
 ## Demo
