@@ -14,6 +14,7 @@ CurseForge links:
    1. Max and min scale
    1. Scale increment
 1. Make ZoneAbilityFrame, ExtraActionButton1 have better handles
+1. Add "/drift reset" alias to "/driftreset" and maybe more commands
 
 ## Bugs
 1. Scaling Bugs
@@ -29,3 +30,4 @@ CurseForge links:
    1. Interface / Interface Options
    1. Key Bindings
    1. AddOn List
+1. Opening Recruit A Friend Rewards SideDressUpFrame reverts positions 
