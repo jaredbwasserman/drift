@@ -15,6 +15,7 @@ CurseForge links:
    1. Scale increment
 1. Make ZoneAbilityFrame, ExtraActionButton1 have better handles
 1. Add "/drift reset" alias to "/driftreset" and maybe more commands
+   1. Make sure to update documentation
 
 ## Bugs
 1. Scaling Bugs
