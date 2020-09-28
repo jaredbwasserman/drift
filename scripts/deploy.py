@@ -23,18 +23,27 @@ source_helpers = os.path.join(source_dir, 'DriftHelpers.lua')
 dest_helpers_retail = os.path.join(dest_dir_retail, 'DriftHelpers.lua')
 dest_helpers_classic = os.path.join(dest_dir_classic, 'DriftHelpers.lua')
 
+# Option file locations
+source_options = os.path.join(source_dir, 'DriftOptions.lua')
+dest_options_retail = os.path.join(dest_dir_retail, 'DriftOptions.lua')
+dest_options_classic = os.path.join(dest_dir_classic, 'DriftOptions.lua')
+
 # Copy retail
 if os.path.exists(dest_dir_retail):
     shutil.rmtree(dest_dir_retail)
-print("Copying\n  {0} to\n  {1}".format(source_dir_retail, dest_dir_retail))
+print('Copying\n  {0} to\n  {1}'.format(source_dir_retail, dest_dir_retail))
 shutil.copytree(source_dir_retail, dest_dir_retail)
-print("Copying\n  {0} to\n  {1}".format(source_helpers, dest_helpers_retail))
+print('Copying\n  {0} to\n  {1}'.format(source_helpers, dest_helpers_retail))
 shutil.copy2(source_helpers, dest_helpers_retail)
+print('Copying\n  {0} to\n  {1}'.format(source_options, dest_options_retail))
+shutil.copy2(source_options, dest_options_retail)
 
 # Copy classic
 if os.path.exists(dest_dir_classic):
     shutil.rmtree(dest_dir_classic)
-print("Copying\n  {0} to\n  {1}".format(source_dir_classic, dest_dir_classic))
+print('Copying\n  {0} to\n  {1}'.format(source_dir_classic, dest_dir_classic))
 shutil.copytree(source_dir_classic, dest_dir_classic)
-print("Copying\n  {0} to\n  {1}".format(source_helpers, dest_helpers_classic))
+print('Copying\n  {0} to\n  {1}'.format(source_helpers, dest_helpers_classic))
 shutil.copy2(source_helpers, dest_helpers_classic)
+print('Copying\n  {0} to\n  {1}'.format(source_options, dest_options_classic))
+shutil.copy2(source_options, dest_options_classic)
