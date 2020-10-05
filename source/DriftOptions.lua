@@ -125,52 +125,73 @@ function DriftHelpers:SetupConfig()
     driftOptionsInstr3:SetText("Position and scale for each frame are saved.")
     driftOptionsInstr3:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -105)
 
-    local driftOptionsInstr4 = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
-    driftOptionsInstr4:SetFontObject("GameFontHighlight")
-    driftOptionsInstr4:SetText("/driftreset      Reset position and scale for all frames.")
-    driftOptionsInstr4:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -135)
-
     local driftOptionsVersionLabel = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
     driftOptionsVersionLabel:SetFontObject("GameFontNormal")
     driftOptionsVersionLabel:SetText("Version:")
     driftOptionsVersionLabel:SetJustifyH("LEFT")
-    driftOptionsVersionLabel:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -165)
+    driftOptionsVersionLabel:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -135)
 
     local driftOptionsVersionContent = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
     driftOptionsVersionContent:SetFontObject("GameFontHighlight")
     driftOptionsVersionContent:SetText(GetAddOnMetadata("Drift", "Version"))
     driftOptionsVersionContent:SetJustifyH("LEFT")
-    driftOptionsVersionContent:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 75, -165)
+    driftOptionsVersionContent:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 75, -135)
 
     local driftOptionsAuthorLabel = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
     driftOptionsAuthorLabel:SetFontObject("GameFontNormal")
     driftOptionsAuthorLabel:SetText("Author:")
     driftOptionsAuthorLabel:SetJustifyH("LEFT")
-    driftOptionsAuthorLabel:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -180)
+    driftOptionsAuthorLabel:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -150)
 
     local driftOptionsAuthorContent = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
     driftOptionsAuthorContent:SetFontObject("GameFontHighlight")
     driftOptionsAuthorContent:SetText("Jared Wasserman")
     driftOptionsAuthorContent:SetJustifyH("LEFT")
-    driftOptionsAuthorContent:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 75, -180)
+    driftOptionsAuthorContent:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 75, -150)
 
     InterfaceOptions_AddCategory(DriftOptionsPanel.panel)
 
-    -- Make a child panel
-    DriftOptionsPanel.childpanel = CreateFrame("Frame", "DriftOptionsPanelChild", DriftOptionsPanel.panel)
-    DriftOptionsPanel.childpanel.name = "General Options"
-    DriftOptionsPanel.childpanel.parent = DriftOptionsPanel.panel.name
-    local driftOptionsChildTitle = DriftOptionsPanel.childpanel:CreateFontString(nil, "BACKGROUND")
-    driftOptionsChildTitle:SetFontObject("GameFontNormalLarge")
-    driftOptionsChildTitle:SetText("General Options")
-    driftOptionsChildTitle:SetPoint("TOPLEFT", DriftOptionsPanel.childpanel, "TOPLEFT", 16, -15)
-    InterfaceOptions_AddCategory(DriftOptionsPanel.childpanel)
+    -- Slash Commands panel
+    DriftOptionsPanel.slashpanel = CreateFrame("Frame", "DriftSlashCommandsPanelChild", DriftOptionsPanel.panel)
+    DriftOptionsPanel.slashpanel.name = "Slash Commands"
+    DriftOptionsPanel.slashpanel.parent = DriftOptionsPanel.panel.name
+    local driftSlashChildTitle = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
+    driftSlashChildTitle:SetFontObject("GameFontNormalLarge")
+    driftSlashChildTitle:SetText("Slash Commands")
+    driftSlashChildTitle:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -15)
+    InterfaceOptions_AddCategory(DriftOptionsPanel.slashpanel)
 
-    -- Child panel content
+    -- Slash Commands panel content
+    local slashResetTitle = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
+    slashResetTitle:SetFontObject("GameFontNormal")
+    slashResetTitle:SetText("Reset Frames")
+    slashResetTitle:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -45)
+
+    local slashResetCommand = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
+    slashResetCommand:SetFontObject("GameFontHighlight")
+    slashResetCommand:SetText("/driftreset")
+    slashResetCommand:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -60)
+
+    local slashResetInfo = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
+    slashResetInfo:SetFontObject("GameFontHighlight")
+    slashResetInfo:SetText("Reset position and scale for all frames.")
+    slashResetInfo:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -75)
+
+    -- Options panel
+    DriftOptionsPanel.optionspanel = CreateFrame("Frame", "DriftOptionsPanelChild", DriftOptionsPanel.panel)
+    DriftOptionsPanel.optionspanel.name = "Options"
+    DriftOptionsPanel.optionspanel.parent = DriftOptionsPanel.panel.name
+    local driftOptionsChildTitle = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
+    driftOptionsChildTitle:SetFontObject("GameFontNormalLarge")
+    driftOptionsChildTitle:SetText("Options")
+    driftOptionsChildTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 16, -15)
+    InterfaceOptions_AddCategory(DriftOptionsPanel.optionspanel)
+
+    -- Options panel content
     DriftOptionsPanel.config.framesAreLockedCheckbox = createCheckbox(
         "FramesAreLockedCheckbox",
         "TOPLEFT",
-        DriftOptionsPanel.childpanel,
+        DriftOptionsPanel.optionspanel,
         "TOPLEFT",
         14,
         -50,
@@ -180,15 +201,15 @@ function DriftHelpers:SetupConfig()
     )
     DriftOptionsPanel.config.framesAreLockedCheckbox:SetChecked(DriftOptions.framesAreLocked)
 
-    local dragKeyDropdownTitle = DriftOptionsPanel.childpanel:CreateFontString(nil, "BACKGROUND")
+    local dragKeyDropdownTitle = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
     dragKeyDropdownTitle:SetFontObject("GameFontNormal")
     dragKeyDropdownTitle:SetText("Modify Key")
-    dragKeyDropdownTitle:SetPoint("TOPLEFT", DriftOptionsPanel.childpanel, "TOPLEFT", 20, -82)
+    dragKeyDropdownTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 20, -82)
 
     DriftOptionsPanel.config.dragKeyDropdown = createDragKeyDropdown(
         "DragKeyDropdown",
         "TOPLEFT",
-        DriftOptionsPanel.childpanel,
+        DriftOptionsPanel.optionspanel,
         "TOPLEFT",
         0,
         -100
@@ -199,7 +220,7 @@ function DriftHelpers:SetupConfig()
         text = "Are you sure you want to reset position and scale for all frames?",
         button1 = "Yes",
         button2 = "No",
-        OnAccept = deleteDriftState,
+        OnAccept = DriftHelpers.DeleteDriftState,
         timeout = 0,
         whileDead = true,
         hideOnEscape = true,
@@ -208,7 +229,7 @@ function DriftHelpers:SetupConfig()
     DriftOptionsPanel.config.resetButton = createButton(
         "ResetButton",
         "TOPLEFT",
-        DriftOptionsPanel.childpanel,
+        DriftOptionsPanel.optionspanel,
         "TOPLEFT",
         15,
         -145,
@@ -234,4 +255,4 @@ end
 -- Slash Commands
 --------------------------------------------------------------------------------
 
-SlashCmdList[DRIFTRESET] = deleteDriftState
+SlashCmdList[DRIFTRESET] = DriftHelpers.DeleteDriftState

@@ -282,7 +282,8 @@ local function makeTabsSticky(frame, frames)
     end
 end
 
-local function deleteDriftState()
+-- Global functions
+function DriftHelpers:DeleteDriftState()
     -- Delete DriftPoints state
     DriftPoints = {}
 
@@ -298,7 +299,6 @@ local function deleteDriftState()
     DriftScales = {}
 end
 
--- Global functions
 function DriftHelpers:ModifyFrames(frames)
     -- Do not modify frames during combat
     if (getInCombatLockdown()) then
