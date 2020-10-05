@@ -42,15 +42,33 @@ local function frameCannotBeModified(frame)
     return frame:IsProtected() and getInCombatLockdown()
 end
 
-local function shouldModify(frame)
+local function shouldMove(frame)
     if frameCannotBeModified(frame) then
         return false
     end
 
-    if not DriftOptions.framesAreLocked then
+    if not DriftOptions.frameDragIsLocked then
         return true
     elseif DriftOptions.dragKeyFunc then
         if DriftOptions.dragKeyFunc() then
+            return true
+        else
+            return false
+        end
+    else
+        return false
+    end
+end
+
+local function shouldScale(frame)
+    if frameCannotBeModified(frame) then
+        return false
+    end
+
+    if not DriftOptions.frameScaleIsLocked then
+        return true
+    elseif DriftOptions.scaleKeyFunc then
+        if DriftOptions.scaleKeyFunc() then
             return true
         else
             return false
@@ -94,12 +112,12 @@ end
 local function onDragStart(frame, button)
     local frameToMove = frame.DriftDelegate or frame
 
-    if not shouldModify(frameToMove) then
-        return
-    end
-
     -- Left click is move
     if button == "LeftButton" then
+        if not shouldMove(frameToMove) then
+            return
+        end
+
         -- Prevent scaling while moving
         frame:RegisterForDrag("LeftButton")
 
@@ -114,6 +132,10 @@ local function onDragStart(frame, button)
 
     -- Right click is scale
     elseif button == "RightButton" then
+        if not shouldScale(frameToMove) then
+            return
+        end
+
         -- Prevent moving while scaling
         frame:RegisterForDrag("RightButton")
 

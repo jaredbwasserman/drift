@@ -11,6 +11,14 @@ DriftOptionsPanel.config = {}
 local DRIFTRESET = "DRIFTRESET"
 SLASH_DRIFTRESET1 = "/driftreset"
 
+-- Other variables
+local DROPDOWN_KEYS = {
+    "ALT key",
+    "CTRL key",
+    "SHIFT key",
+    "None"
+}
+
 
 --------------------------------------------------------------------------------
 -- Interface Options
@@ -50,16 +58,9 @@ local function createButton(name, point, relativeFrame, relativePoint, xOffset, 
     return button
 end
 
-local function createDragKeyDropdown(name, point, relativeFrame, relativePoint, xOffset, yOffset)
+local function createKeyDropdown(name, point, relativeFrame, relativePoint, xOffset, yOffset, selected)
     local dropdown = CreateFrame("Frame", name, relativeFrame, "UIDropDownMenuTemplate")
     dropdown:SetPoint(point, relativeFrame, relativePoint, xOffset, yOffset)
-
-    local items = {
-        "ALT key",
-        "CTRL key",
-        "SHIFT key",
-        "None"
-    }
 
     local function OnClick(self)
         UIDropDownMenu_SetSelectedID(dropdown, self:GetID())
@@ -67,7 +68,7 @@ local function createDragKeyDropdown(name, point, relativeFrame, relativePoint, 
 
     local function initialize(self, level)
         local info = UIDropDownMenu_CreateInfo()
-        for k, v in pairs(items) do
+        for k, v in pairs(DROPDOWN_KEYS) do
             info = UIDropDownMenu_CreateInfo()
             info.text = v
             info.value = v
@@ -80,11 +81,11 @@ local function createDragKeyDropdown(name, point, relativeFrame, relativePoint, 
     UIDropDownMenu_SetWidth(dropdown, 100)
     UIDropDownMenu_SetButtonWidth(dropdown, 124)
     UIDropDownMenu_JustifyText(dropdown, "LEFT")
-    UIDropDownMenu_SetSelectedID(dropdown, DriftOptions.dragKey or 1)
+    UIDropDownMenu_SetSelectedID(dropdown, selected or 1)
     return dropdown
 end
 
-local function getDragKeyFuncFromOrdinal(ordinal)
+local function getKeyFuncFromOrdinal(ordinal)
     if ordinal == 1 then
         return IsAltKeyDown
     elseif ordinal == 2 then
@@ -170,12 +171,12 @@ function DriftHelpers:SetupConfig()
     local slashResetCommand = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
     slashResetCommand:SetFontObject("GameFontHighlight")
     slashResetCommand:SetText("/driftreset")
-    slashResetCommand:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -60)
+    slashResetCommand:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -65)
 
     local slashResetInfo = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
     slashResetInfo:SetFontObject("GameFontHighlight")
     slashResetInfo:SetText("Reset position and scale for all frames.")
-    slashResetInfo:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -75)
+    slashResetInfo:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -80)
 
     -- Options panel
     DriftOptionsPanel.optionspanel = CreateFrame("Frame", "DriftOptionsPanelChild", DriftOptionsPanel.panel)
@@ -188,34 +189,77 @@ function DriftHelpers:SetupConfig()
     InterfaceOptions_AddCategory(DriftOptionsPanel.optionspanel)
 
     -- Options panel content
-    DriftOptionsPanel.config.framesAreLockedCheckbox = createCheckbox(
-        "FramesAreLockedCheckbox",
+    -- Frame Movement
+    local lockMoveTitle = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
+    lockMoveTitle:SetFontObject("GameFontNormal")
+    lockMoveTitle:SetText("Frame Movement")
+    lockMoveTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 16, -45)
+
+    DriftOptionsPanel.config.frameMoveLockedCheckbox = createCheckbox(
+        "FrameMoveLockedCheckbox",
         "TOPLEFT",
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
-        14,
-        -50,
-        " Lock Frames",
-        "While frames are locked, the Modify Key must be pressed to move or scale.",
+        13,
+        -65,
+        " Lock Frame Movement",
+        "While frame movement is locked, the Move Key must be pressed to move frames.",
         nil
     )
-    DriftOptionsPanel.config.framesAreLockedCheckbox:SetChecked(DriftOptions.framesAreLocked)
+    DriftOptionsPanel.config.frameMoveLockedCheckbox:SetChecked(DriftOptions.frameDragIsLocked)
 
     local dragKeyDropdownTitle = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
     dragKeyDropdownTitle:SetFontObject("GameFontNormal")
-    dragKeyDropdownTitle:SetText("Modify Key")
-    dragKeyDropdownTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 20, -82)
+    dragKeyDropdownTitle:SetText("Move Key")
+    dragKeyDropdownTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 32, -90)
 
-    DriftOptionsPanel.config.dragKeyDropdown = createDragKeyDropdown(
+    DriftOptionsPanel.config.dragKeyDropdown = createKeyDropdown(
         "DragKeyDropdown",
         "TOPLEFT",
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
-        0,
-        -100
+        14,
+        -105,
+        DriftOptions.dragKey
     )
-    DriftOptions.dragKeyFunc = getDragKeyFuncFromOrdinal(DriftOptions.dragKey)
+    DriftOptions.dragKeyFunc = getKeyFuncFromOrdinal(DriftOptions.dragKey)
 
+    -- Frame Scaling
+    local lockScaleTitle = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
+    lockScaleTitle:SetFontObject("GameFontNormal")
+    lockScaleTitle:SetText("Frame Scaling")
+    lockScaleTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 300, -45)
+
+    DriftOptionsPanel.config.frameScaleLockedCheckbox = createCheckbox(
+        "FrameScaleLockedCheckbox",
+        "TOPLEFT",
+        DriftOptionsPanel.optionspanel,
+        "TOPLEFT",
+        297,
+        -65,
+        " Lock Frame Scaling",
+        "While frame scaling is locked, the Scale Key must be pressed to scale frames.",
+        nil
+    )
+    DriftOptionsPanel.config.frameScaleLockedCheckbox:SetChecked(DriftOptions.frameScaleIsLocked)
+
+    local scaleKeyDropdownTitle = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
+    scaleKeyDropdownTitle:SetFontObject("GameFontNormal")
+    scaleKeyDropdownTitle:SetText("Scale Key")
+    scaleKeyDropdownTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 316, -90)
+
+    DriftOptionsPanel.config.scaleKeyDropdown = createKeyDropdown(
+        "ScaleKeyDropdown",
+        "TOPLEFT",
+        DriftOptionsPanel.optionspanel,
+        "TOPLEFT",
+        298,
+        -105,
+        DriftOptions.scaleKey
+    )
+    DriftOptions.scaleKeyFunc = getKeyFuncFromOrdinal(DriftOptions.scaleKey)
+
+    -- Reset button
     StaticPopupDialogs["DRIFT_RESET_POSITIONS"] = {
         text = "Are you sure you want to reset position and scale for all frames?",
         button1 = "Yes",
@@ -232,8 +276,8 @@ function DriftHelpers:SetupConfig()
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
         15,
-        -145,
-        160,
+        -180,
+        132,
         25,
         "Reset Frames",
         "Reset position and scale for all frames.",
@@ -244,9 +288,28 @@ function DriftHelpers:SetupConfig()
 
     -- Update logic
     DriftOptionsPanel.panel.okay = function (self)
-        DriftOptions.framesAreLocked = DriftOptionsPanel.config.framesAreLockedCheckbox:GetChecked()
+        -- Movement
+        DriftOptions.frameDragIsLocked = DriftOptionsPanel.config.frameMoveLockedCheckbox:GetChecked()
         DriftOptions.dragKey = UIDropDownMenu_GetSelectedID(DriftOptionsPanel.config.dragKeyDropdown)
-        DriftOptions.dragKeyFunc = getDragKeyFuncFromOrdinal(DriftOptions.dragKey)
+        DriftOptions.dragKeyFunc = getKeyFuncFromOrdinal(DriftOptions.dragKey)
+
+        -- Scaling
+        DriftOptions.frameScaleIsLocked = DriftOptionsPanel.config.frameScaleLockedCheckbox:GetChecked()
+        DriftOptions.scaleKey = UIDropDownMenu_GetSelectedID(DriftOptionsPanel.config.scaleKeyDropdown)
+        DriftOptions.scaleKeyFunc = getKeyFuncFromOrdinal(DriftOptions.scaleKey)
+    end
+
+    -- Cancel logic
+    DriftOptionsPanel.panel.cancel = function (self)
+        -- Movement
+        DriftOptionsPanel.config.frameMoveLockedCheckbox:SetChecked(DriftOptions.frameDragIsLocked)
+        UIDropDownMenu_SetSelectedID(DriftOptionsPanel.config.dragKeyDropdown, DriftOptions.dragKey or 1)
+        UIDropDownMenu_SetText(DriftOptionsPanel.config.dragKeyDropdown, DROPDOWN_KEYS[UIDropDownMenu_GetSelectedID(DriftOptionsPanel.config.dragKeyDropdown)])
+
+        -- Scaling
+        DriftOptionsPanel.config.frameScaleLockedCheckbox:SetChecked(DriftOptions.frameScaleIsLocked)
+        UIDropDownMenu_SetSelectedID(DriftOptionsPanel.config.scaleKeyDropdown, DriftOptions.scaleKey or 1)
+        UIDropDownMenu_SetText(DriftOptionsPanel.config.scaleKeyDropdown, DROPDOWN_KEYS[UIDropDownMenu_GetSelectedID(DriftOptionsPanel.config.scaleKeyDropdown)])
     end
 end
 
