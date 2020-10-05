@@ -15,6 +15,7 @@ This is the classic version of the addon. The retail version is [Drift (Retail)]
 - Auction House
 - Bags
 - Bank
+- Blizzard Groups
 - Character Info
 - Chat Channels
 - Class Trainer
@@ -23,6 +24,7 @@ This is the classic version of the addon. The retail version is [Drift (Retail)]
 - Customer Support
 - Dressing Room
 - Gossip
+- Guild Information
 - Inspect
 - Interface Options
 - Key Bindings
@@ -50,6 +52,7 @@ This is the classic version of the addon. The retail version is [Drift (Retail)]
 
 ## Slash Commands
 
+### Reset Frames
 /driftreset  
 Reset position and scale for all frames.
 

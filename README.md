@@ -25,10 +25,11 @@ CurseForge links:
 1. Frames with tabs move from hotkey when on other tab
 1. ColorPickerFrame moves when it's not supposed to
 1. TimeManagerFrame and TalkingHeadFrame do not move depending on addons loaded
+1. Blizzard Groups Drift Tabs do not work depending on addons loaded
 1. Some frames do not reset position after Reset Frames is invoked
    1. Game Menu / Main Menu
    1. System
    1. Interface / Interface Options
    1. Key Bindings
    1. AddOn List
-1. Opening Recruit A Friend Rewards SideDressUpFrame reverts positions 
+1. Opening Recruit A Friend Rewards SideDressUpFrame reverts positions

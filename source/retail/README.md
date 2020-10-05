@@ -53,7 +53,7 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Garrison Shipyard
 - Gossip
 - Group Finder
-- Guild
+- Guild & Communities
 - Guild Bank
 - Inspect
 - Interface
@@ -96,6 +96,7 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 
 ## Slash Commands
 
+### Reset Frames
 /driftreset  
 Reset position and scale for all frames.
 
