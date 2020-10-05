@@ -32,4 +32,6 @@ CurseForge links:
    1. Interface / Interface Options
    1. Key Bindings
    1. AddOn List
-1. Opening Recruit A Friend Rewards SideDressUpFrame reverts positions
+1. SideDressUpFrame Bugs
+   1. Opening Recruit A Friend Rewards SideDressUpFrame reverts positions (retail)
+   1. Opening Auction House SideDressUpFrame reverts positions (classic)
