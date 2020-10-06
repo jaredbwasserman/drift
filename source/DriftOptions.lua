@@ -259,6 +259,25 @@ function DriftHelpers:SetupConfig()
     )
     DriftOptions.scaleKeyFunc = getKeyFuncFromOrdinal(DriftOptions.scaleKey)
 
+    -- Frame Toggle
+    local frameToggleTitle = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
+    frameToggleTitle:SetFontObject("GameFontNormal")
+    frameToggleTitle:SetText("Frame Toggle")
+    frameToggleTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 16, -160)
+
+    DriftOptionsPanel.config.bagsEnabledCheckbox = createCheckbox(
+        "BagsEnabledCheckbox",
+        "TOPLEFT",
+        DriftOptionsPanel.optionspanel,
+        "TOPLEFT",
+        13,
+        -180,
+        " Bags Enabled",
+        "Whether Drift will modify Bags.",
+        nil
+    )
+    DriftOptionsPanel.config.bagsEnabledCheckbox:SetChecked(not DriftOptions.bagsDisabled)
+
     -- Reset button
     StaticPopupDialogs["DRIFT_RESET_POSITIONS"] = {
         text = "Are you sure you want to reset position and scale for all frames?",
@@ -276,7 +295,7 @@ function DriftHelpers:SetupConfig()
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
         15,
-        -180,
+        -300,
         132,
         25,
         "Reset Frames",
@@ -297,6 +316,9 @@ function DriftHelpers:SetupConfig()
         DriftOptions.frameScaleIsLocked = DriftOptionsPanel.config.frameScaleLockedCheckbox:GetChecked()
         DriftOptions.scaleKey = UIDropDownMenu_GetSelectedID(DriftOptionsPanel.config.scaleKeyDropdown)
         DriftOptions.scaleKeyFunc = getKeyFuncFromOrdinal(DriftOptions.scaleKey)
+
+        -- Toggle
+        DriftOptions.bagsDisabled = not DriftOptionsPanel.config.bagsEnabledCheckbox:GetChecked()
     end
 
     -- Cancel logic
@@ -310,6 +332,9 @@ function DriftHelpers:SetupConfig()
         DriftOptionsPanel.config.frameScaleLockedCheckbox:SetChecked(DriftOptions.frameScaleIsLocked)
         UIDropDownMenu_SetSelectedID(DriftOptionsPanel.config.scaleKeyDropdown, DriftOptions.scaleKey or 1)
         UIDropDownMenu_SetText(DriftOptionsPanel.config.scaleKeyDropdown, DROPDOWN_KEYS[UIDropDownMenu_GetSelectedID(DriftOptionsPanel.config.scaleKeyDropdown)])
+
+        -- Toggle
+        DriftOptionsPanel.config.bagsEnabledCheckbox:SetChecked(not DriftOptions.bagsDisabled)
     end
 end
 

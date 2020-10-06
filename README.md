@@ -8,7 +8,7 @@ CurseForge links:
 ## TODO
 1. Add scaling support for WorldMapFrame
 1. Per frame reset
-1. Remove delay for Guild & Communities
+1. Remove delay for Guild & Communities (retail) and Blizzard Groups (classic)
 1. Configurable variables
    1. Opacity while moving and scaling
    1. Max and min scale
@@ -25,7 +25,6 @@ CurseForge links:
 1. Frames with tabs move from hotkey when on other tab
 1. ColorPickerFrame moves when it's not supposed to
 1. TimeManagerFrame and TalkingHeadFrame do not move depending on addons loaded
-1. Blizzard Groups Drift Tabs do not work depending on addons loaded
 1. Some frames do not reset position after Reset Frames is invoked
    1. Game Menu / Main Menu
    1. System

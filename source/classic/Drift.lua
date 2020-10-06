@@ -1,55 +1,94 @@
 local frames = {
-    ["ContainerFrame1"] = {},
+    ["ContainerFrame1"] = {
+        DriftDisabledBy = "bagsDisabled"
+    },
     ["ContainerFrame1.ClickableTitleFrame"] = {
-        DriftDelegate = "ContainerFrame1"
+        DriftDelegate = "ContainerFrame1",
+        DriftDisabledBy = "bagsDisabled"
     },
-    ["ContainerFrame2"] = {},
+    ["ContainerFrame2"] = {
+        DriftDisabledBy = "bagsDisabled"
+    },
     ["ContainerFrame2.ClickableTitleFrame"] = {
-        DriftDelegate = "ContainerFrame2"
+        DriftDelegate = "ContainerFrame2",
+        DriftDisabledBy = "bagsDisabled"
     },
-    ["ContainerFrame3"] = {},
+    ["ContainerFrame3"] = {
+        DriftDisabledBy = "bagsDisabled"
+    },
     ["ContainerFrame3.ClickableTitleFrame"] = {
-        DriftDelegate = "ContainerFrame3"
+        DriftDelegate = "ContainerFrame3",
+        DriftDisabledBy = "bagsDisabled"
     },
-    ["ContainerFrame4"] = {},
+    ["ContainerFrame4"] = {
+        DriftDisabledBy = "bagsDisabled"
+    },
     ["ContainerFrame4.ClickableTitleFrame"] = {
-        DriftDelegate = "ContainerFrame4"
+        DriftDelegate = "ContainerFrame4",
+        DriftDisabledBy = "bagsDisabled"
     },
-    ["ContainerFrame5"] = {},
+    ["ContainerFrame5"] = {
+        DriftDisabledBy = "bagsDisabled"
+    },
     ["ContainerFrame5.ClickableTitleFrame"] = {
-        DriftDelegate = "ContainerFrame5"
+        DriftDelegate = "ContainerFrame5",
+        DriftDisabledBy = "bagsDisabled"
     },
-    ["ContainerFrame6"] = {},
+    ["ContainerFrame6"] = {
+        DriftDisabledBy = "bagsDisabled"
+    },
     ["ContainerFrame6.ClickableTitleFrame"] = {
-        DriftDelegate = "ContainerFrame6"
+        DriftDelegate = "ContainerFrame6",
+        DriftDisabledBy = "bagsDisabled"
     },
-    ["ContainerFrame7"] = {},
+    ["ContainerFrame7"] = {
+        DriftDisabledBy = "bagsDisabled"
+    },
     ["ContainerFrame7.ClickableTitleFrame"] = {
-        DriftDelegate = "ContainerFrame7"
+        DriftDelegate = "ContainerFrame7",
+        DriftDisabledBy = "bagsDisabled"
     },
-    ["ContainerFrame8"] = {},
+    ["ContainerFrame8"] = {
+        DriftDisabledBy = "bagsDisabled"
+    },
     ["ContainerFrame8.ClickableTitleFrame"] = {
-        DriftDelegate = "ContainerFrame8"
+        DriftDelegate = "ContainerFrame8",
+        DriftDisabledBy = "bagsDisabled"
     },
-    ["ContainerFrame9"] = {},
+    ["ContainerFrame9"] = {
+        DriftDisabledBy = "bagsDisabled"
+    },
     ["ContainerFrame9.ClickableTitleFrame"] = {
-        DriftDelegate = "ContainerFrame9"
+        DriftDelegate = "ContainerFrame9",
+        DriftDisabledBy = "bagsDisabled"
     },
-    ["ContainerFrame10"] = {},
+    ["ContainerFrame10"] = {
+        DriftDisabledBy = "bagsDisabled"
+    },
     ["ContainerFrame10.ClickableTitleFrame"] = {
-        DriftDelegate = "ContainerFrame10"
+        DriftDelegate = "ContainerFrame10",
+        DriftDisabledBy = "bagsDisabled"
     },
-    ["ContainerFrame11"] = {},
+    ["ContainerFrame11"] = {
+        DriftDisabledBy = "bagsDisabled"
+    },
     ["ContainerFrame11.ClickableTitleFrame"] = {
-        DriftDelegate = "ContainerFrame11"
+        DriftDelegate = "ContainerFrame11",
+        DriftDisabledBy = "bagsDisabled"
     },
-    ["ContainerFrame12"] = {},
+    ["ContainerFrame12"] = {
+        DriftDisabledBy = "bagsDisabled"
+    },
     ["ContainerFrame12.ClickableTitleFrame"] = {
-        DriftDelegate = "ContainerFrame12"
+        DriftDelegate = "ContainerFrame12",
+        DriftDisabledBy = "bagsDisabled"
     },
-    ["ContainerFrame13"] = {},
+    ["ContainerFrame13"] = {
+        DriftDisabledBy = "bagsDisabled"
+    },
     ["ContainerFrame13.ClickableTitleFrame"] = {
-        DriftDelegate = "ContainerFrame13"
+        DriftDelegate = "ContainerFrame13",
+        DriftDisabledBy = "bagsDisabled"
     },
     ["CharacterFrame"] = {},
     ["HonorFrame"] = {
@@ -140,26 +179,44 @@ local frames = {
     ["ChatConfigFrame"] = {},
 }
 
--- Modify pre-loaded frames
-DriftHelpers:ModifyFrames(frames)
+-- Frame for handling events
+local Drift = CreateFrame("Frame")
 
 local function eventHandler(self, event, ...)
-    if event == "ADDON_LOADED" or event == "PLAYER_REGEN_ENABLED" then
+    if event == "ADDON_LOADED" then
+        local addonName = select(1, ...)
+
+        -- Blizzard Groups buttons are delayed for some reason
+        if addonName == "Blizzard_Communities" then
+            DriftHelpers:Wait(0.25, DriftHelpers.ModifyFrames, DriftHelpers, frames)
+        else
+            DriftHelpers:ModifyFrames(frames)
+        end
+    elseif event == "PLAYER_REGEN_ENABLED" then
         DriftHelpers:ModifyFrames(frames)
     elseif event == "VARIABLES_LOADED" then
+        -- Config
         DriftHelpers:SetupConfig()
+
+        -- Disable frames depending on DriftOptions
+        for frameName, properties in pairs(frames) do
+            local disabledBy = properties.DriftDisabledBy
+            if disabledBy ~= nil and DriftOptions[disabledBy] then
+                frames[frameName] = nil
+            end
+        end
+
+        -- Modify pre-loaded frames
+        DriftHelpers:ModifyFrames(frames)
+
+        -- Modify frames after an addon loads
+        DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
+
+        -- Modify frames after combat ends
+        Drift:RegisterEvent("PLAYER_REGEN_ENABLED")
     end
 end
 
 -- Respond to events to fix frames
-local Drift = CreateFrame("Frame")
 Drift:SetScript("OnEvent", eventHandler)
-
--- Config
 Drift:RegisterEvent("VARIABLES_LOADED")
-
--- Modify frames after an addon loads
-DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
-
--- Modify frames after combat ends
-Drift:RegisterEvent("PLAYER_REGEN_ENABLED")

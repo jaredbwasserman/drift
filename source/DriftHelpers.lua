@@ -415,7 +415,9 @@ function DriftHelpers:ModifyFrames(frames)
     end
 
     -- Modify UpdateContainerFrameAnchors
-    UpdateContainerFrameAnchors = DriftHelpers.UpdateContainerFrameAnchors
+    if not DriftOptions.bagsDisabled then
+        UpdateContainerFrameAnchors = DriftHelpers.UpdateContainerFrameAnchors
+    end
 
     -- Fix PVP talents list
     DriftHelpers:FixPVPTalentsList(frames)
