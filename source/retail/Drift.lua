@@ -139,6 +139,7 @@ local frames = {
     },
     ["EncounterJournal"] = {},
     ["FriendsFrame"] = {},
+    ["ReputationDetailFrame"] = {},
     ["RecruitAFriendRewardsFrame"] = {},
     ["ChannelFrame"] = {},
     ["RaidInfoFrame"] = {},

@@ -39,6 +39,7 @@ This is the classic version of the addon. The retail version is [Drift (Retail)]
 - Quest
 - Quest Log
 - Raid Info
+- Reputation Detail
 - Social
 - Spellbook
 - Stable

@@ -67,6 +67,7 @@ local frames = {
         DriftUnscalable = true
     },
     ["FriendsFrame"] = {},
+    ["ReputationDetailFrame"] = {},
     ["GuildInfoFrame"] = {},
     ["CommunitiesFrame"] = {
         DriftTabs = {

@@ -77,6 +77,7 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Raid Info
 - Recruit A Friend Rewards
 - Reforging
+- Reputation Detail
 - Scrapper
 - Social
 - Spellbook
