@@ -177,6 +177,7 @@ local frames = {
     ["PVPMatchScoreboard"] = {},
     ["PVPMatchResults"] = {},
     ["ChatConfigFrame"] = {},
+    ["GroupLootFrame1"] = {},
 }
 
 -- Frame for handling events

@@ -24,6 +24,7 @@ This is the classic version of the addon. The retail version is [Drift (Retail)]
 - Customer Support
 - Dressing Room
 - Gossip
+- Group Loot
 - Guild Information
 - Inspect
 - Interface Options
