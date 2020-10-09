@@ -144,6 +144,8 @@ local frames = {
             "CommunitiesFrame.RosterTab",
             "CommunitiesFrame.GuildBenefitsTab",
             "CommunitiesFrame.GuildInfoTab",
+            "CommunitiesFrame.MaximizeMinimizeFrame.MinimizeButton",
+            "CommunitiesFrame.MaximizeMinimizeFrame.MaximizeButton",
             "CommunitiesFrameCommunitiesListListScrollFrameButton1",
             "CommunitiesFrameCommunitiesListListScrollFrameButton2",
             "CommunitiesFrameCommunitiesListListScrollFrameButton3",
