@@ -148,6 +148,10 @@ local frames = {
     ["OpenMailFrame"] = {},
     ["BankFrame"] = {},
     ["LootFrame"] = {},
+    ["GroupLootFrame1"] = {},
+    ["GroupLootFrame2"] = {},
+    ["GroupLootFrame3"] = {},
+    ["GroupLootFrame4"] = {},
     ["GameMenuFrame"] = {},
     ["VideoOptionsFrame"] = {},
     ["AudioOptionsFrame"] = {},
@@ -177,7 +181,6 @@ local frames = {
     ["PVPMatchScoreboard"] = {},
     ["PVPMatchResults"] = {},
     ["ChatConfigFrame"] = {},
-    ["GroupLootFrame1"] = {},
 }
 
 -- Frame for handling events
