@@ -98,6 +98,20 @@ end
 
 -- Global functions
 function DriftHelpers:SetupConfig()
+    -- Initialize config options
+    if DriftOptions.frameDragIsLocked == nil then
+        DriftOptions.frameDragIsLocked = DriftOptions.framesAreLocked
+    end
+    if DriftOptions.frameScaleIsLocked == nil then
+        DriftOptions.frameScaleIsLocked = DriftOptions.framesAreLocked
+    end
+    if DriftOptions.scaleKey == nil then
+        DriftOptions.scaleKey = DriftOptions.dragKey
+    end
+    if DriftOptions.bagsDisabled == nil then
+        DriftOptions.bagsDisabled = false
+    end
+
     -- Make parent panel
     DriftOptionsPanel.panel = CreateFrame("Frame", "DriftOptionsPanel", UIParent)
     DriftOptionsPanel.panel.name = "Drift"
