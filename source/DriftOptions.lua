@@ -323,53 +323,10 @@ function DriftHelpers:SetupConfig()
         if oldBagsDisabled ~= DriftOptions.bagsDisabled then
             if DriftOptions.bagsDisabled then
                 -- Fix bag lua errors
-                -- Set UpdateContainerFrameAnchors to do nothing
-                UpdateContainerFrameAnchorsO = UpdateContainerFrameAnchors
-                UpdateContainerFrameAnchors = function () end
-
-                -- Clear all points on all Containers
-                _G['ContainerFrame1']:ClearAllPoints()
-                _G['ContainerFrame1']:SetScale(1)
-                _G['ContainerFrame1'].ClickableTitleFrame:ClearAllPoints()
-                _G['ContainerFrame2']:ClearAllPoints()
-                _G['ContainerFrame2']:SetScale(1)
-                _G['ContainerFrame2'].ClickableTitleFrame:ClearAllPoints()
-                _G['ContainerFrame3']:ClearAllPoints()
-                _G['ContainerFrame3']:SetScale(1)
-                _G['ContainerFrame3'].ClickableTitleFrame:ClearAllPoints()
-                _G['ContainerFrame4']:ClearAllPoints()
-                _G['ContainerFrame4']:SetScale(1)
-                _G['ContainerFrame4'].ClickableTitleFrame:ClearAllPoints()
-                _G['ContainerFrame5']:ClearAllPoints()
-                _G['ContainerFrame5']:SetScale(1)
-                _G['ContainerFrame5'].ClickableTitleFrame:ClearAllPoints()
-                _G['ContainerFrame6']:ClearAllPoints()
-                _G['ContainerFrame6']:SetScale(1)
-                _G['ContainerFrame6'].ClickableTitleFrame:ClearAllPoints()
-                _G['ContainerFrame7']:ClearAllPoints()
-                _G['ContainerFrame7']:SetScale(1)
-                _G['ContainerFrame7'].ClickableTitleFrame:ClearAllPoints()
-                _G['ContainerFrame8']:ClearAllPoints()
-                _G['ContainerFrame8']:SetScale(1)
-                _G['ContainerFrame8'].ClickableTitleFrame:ClearAllPoints()
-                _G['ContainerFrame9']:ClearAllPoints()
-                _G['ContainerFrame9']:SetScale(1)
-                _G['ContainerFrame9'].ClickableTitleFrame:ClearAllPoints()
-                _G['ContainerFrame10']:ClearAllPoints()
-                _G['ContainerFrame10']:SetScale(1)
-                _G['ContainerFrame10'].ClickableTitleFrame:ClearAllPoints()
-                _G['ContainerFrame11']:ClearAllPoints()
-                _G['ContainerFrame11']:SetScale(1)
-                _G['ContainerFrame11'].ClickableTitleFrame:ClearAllPoints()
-                _G['ContainerFrame12']:ClearAllPoints()
-                _G['ContainerFrame12']:SetScale(1)
-                _G['ContainerFrame12'].ClickableTitleFrame:ClearAllPoints()
-                _G['ContainerFrame13']:ClearAllPoints()
-                _G['ContainerFrame13']:SetScale(1)
-                _G['ContainerFrame13'].ClickableTitleFrame:ClearAllPoints()
-
-                -- Put back the original UpdateContainerFrameAnchors
-                UpdateContainerFrameAnchors = UpdateContainerFrameAnchorsO
+                for i=1,13 do
+                    _G['ContainerFrame'..i]:ClearAllPoints()
+                    _G['ContainerFrame'..i]:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 0)
+                end
             end
 
             ReloadUI()
