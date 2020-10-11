@@ -19,6 +19,9 @@ CurseForge links:
 
 ## Bugs
 1. LootFrame moves incorrectly when other windows open (retail and classic)
+   1. Check if it is a managed frame
+1. PlayerPowerBarAlt moves unexpectedly (retail)
+   1. Check if it is a managed frame
 1. Scaling Bugs
    1. Map does not work correctly after scaling WorldMapFrame
    1. Character model has incorrect size after scaling CharacterFrame
