@@ -433,8 +433,11 @@ function DriftHelpers:ModifyFrames(frames)
 end
 
 function DriftHelpers:UpdateContainerFrameAnchors()
-    -- This variable does not exist in classic
+    -- Fix variables that might not exist
     local MINIMUM_CONTAINER_OFFSET_X = MINIMUM_CONTAINER_OFFSET_X or 10
+    local CONTAINER_SCALE = CONTAINER_SCALE or 0.75
+    local VISIBLE_CONTAINER_SPACING = VISIBLE_CONTAINER_SPACING or 3
+    local CONTAINER_WIDTH = CONTAINER_WIDTH or 192
 
     local containerFrameOffsetX = math.max(CONTAINER_OFFSET_X, MINIMUM_CONTAINER_OFFSET_X)
     local frame, xOffset, yOffset, screenHeight, freeScreenHeight, leftMostPoint, column
