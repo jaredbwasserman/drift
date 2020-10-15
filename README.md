@@ -7,11 +7,13 @@ CurseForge links:
 
 ## TODO
 1. Output messages of the form "Drift: Sentence ending with period."
-   1. Reset from /driftreset (Drift: Reset position and scale for all frames complete.)
-   1. Reset from "Reset Frames" button (Drift: Reset position and scale for all frames complete.)
+   1. Reset from /driftreset (Drift: Reset position and scale for all supported frames complete.)
+   1. Reset from "Reset Frames" button (Drift: Reset position and scale for all supported frames complete.)
    1. Scaling not supported (Drift: Scaling not supported for XYZFrame.)
 1. Bag behavior different in retail and classic
    1. containerFrameOffsetX logic only exists in retail, so classic is not accurate
+1. Wording should be "Reset position and scale for all SUPPORTED frames"
+1. Add "Open Mail" frame to retail and classic README files and descriptions
 1. Add scaling support for WorldMapFrame
 1. Per frame reset
 1. Remove delay for Guild & Communities (retail) and Blizzard Groups (classic)
