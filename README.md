@@ -27,7 +27,9 @@ CurseForge links:
 1. Add frames
    1. PlayerChoiceFrame
    1. ChromieTimeFrame
+   1. BNToastFrame
 1. Make Achievements an optional frame
+1. Make /driftreset and "Reset Frames" cause the UI to reload
 
 ## Bugs
 1. LootFrame moves incorrectly when other windows open (retail and classic)
