@@ -24,6 +24,10 @@ CurseForge links:
 1. Make ZoneAbilityFrame, ExtraActionButton1 have better handles
 1. Add "/drift reset" alias to "/driftreset" and maybe more commands
    1. Make sure to update documentation
+1. Add frames
+   1. PlayerChoiceFrame
+   1. ChromieTimeFrame
+1. Make Achievements an optional frame
 
 ## Bugs
 1. LootFrame moves incorrectly when other windows open (retail and classic)
@@ -46,3 +50,4 @@ CurseForge links:
 1. SideDressUpFrame Bugs
    1. Opening Recruit A Friend Rewards SideDressUpFrame reverts positions (retail)
    1. Opening Auction House SideDressUpFrame reverts positions (classic)
+1. Leveling up causes frame positions to reset
