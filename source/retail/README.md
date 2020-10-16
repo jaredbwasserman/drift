@@ -23,7 +23,6 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Azerite Respec
 - Bags
 - Bank
-- Barber Shop
 - BFA Missions
 - Black Market Auction House
 - Bonus Roll

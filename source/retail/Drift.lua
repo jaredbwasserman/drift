@@ -216,7 +216,6 @@ local frames = {
     ["AzeriteRespecFrame"] = {},
     ["InspectFrame"] = {},
     ["ItemSocketingFrame"] = {},
-    ["BarberShopFrame"] = {},
     ["MacroFrame"] = {},
     ["VoidStorageFrame"] = {},
     ["SplashFrame"] = {},
