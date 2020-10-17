@@ -24,10 +24,11 @@ CurseForge links:
 1. Make ZoneAbilityFrame, ExtraActionButton1 have better handles
 1. Add "/drift reset" alias to "/driftreset" and maybe more commands
    1. Make sure to update documentation
-1. Add frames
+1. Add frames (+ update documentation)
    1. PlayerChoiceFrame
    1. ChromieTimeFrame
    1. BNToastFrame
+   1. WarfrontsPartyPoseFrame
 1. Make Achievements an optional frame
 1. Make /driftreset and "Reset Frames" cause the UI to reload
 
