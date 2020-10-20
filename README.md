@@ -39,6 +39,7 @@ CurseForge links:
    1. Check if it is a managed frame
 1. ZoneAbilityFrame moves unexpectedly (retail)
    1. Check if it is a managed frame
+   1. Look into ExtraAbilityContainer and maybe use this frame instead
    1. Double check TalkingHeadFrame too
 1. Scaling Bugs
    1. Map does not work correctly after scaling WorldMapFrame
