@@ -17,12 +17,12 @@ DriftHelpers.waitFrame = nil
 local MAX_SCALE = 1.5 -- TODO: Configurable
 local MIN_SCALE = 0.5 -- TODO: Configurable
 local SCALE_INCREMENT = 0.01 -- TODO: Configurable
+local ALPHA_DURING_SCALE = 0.3 -- TODO: Configurable
 DriftHelpers.scaleHandlerFrame = nil
 DriftHelpers.prevMouseX = nil
 DriftHelpers.prevMouseY = nil
 DriftHelpers.frameBeingScaled = nil
 if not DriftScales then DriftScales = {} end
-local ALPHA_DURING_SCALE = 0.3 -- TODO: Configurable
 
 -- Other variables
 local hasFixedPVPTalentList = false
@@ -179,9 +179,6 @@ local function onDragStop(frame)
             ["xOfs"] = xOfs,
             ["yOfs"] = yOfs
         }
-
-        -- Set IsUserPlaced to true
-        frameToMove:SetUserPlaced(true)
     end
     frameToMove.DriftIsMoving = false
 
@@ -246,6 +243,7 @@ local function makeModifiable(frame)
     local frameToMove = frame.DriftDelegate or frame
     frame:SetMovable(true)
     frameToMove:SetMovable(true)
+    frameToMove:SetUserPlaced(true)
     frame:EnableMouse(true)
     frame:SetClampedToScreen(true)
     frame:RegisterForDrag("LeftButton", "RightButton")
@@ -427,11 +425,8 @@ function DriftHelpers:ModifyFrames(frames)
     -- Fix PlayerChoiceFrame
     DriftHelpers:FixPlayerChoiceFrame()
 
-    -- Fix TalkingHeadFrame
-    DriftHelpers:FixTalkingHeadFrame()
-
-    -- Fix ZoneAbilityFrame
-    DriftHelpers:FixZoneAbilityFrame()
+    -- Fix managed frames
+    DriftHelpers:FixManagedFrames()
 
     -- Reset everything in case there was a delay
     DriftHelpers:BroadcastReset(frames)
@@ -558,17 +553,21 @@ function DriftHelpers:FixPlayerChoiceFrame()
     end
 end
 
--- Remove TalkingHeadFrame from list of frames managed by UIParent
-function DriftHelpers:FixTalkingHeadFrame()
+-- Remove frames from list of frames managed by UIParent
+function DriftHelpers:FixManagedFrames()
+    -- PlayerPowerBarAlt
+    if (PlayerPowerBarAlt and PlayerPowerBarAlt.DriftModifiable) then
+        UIPARENT_MANAGED_FRAME_POSITIONS["PlayerPowerBarAlt"] = nil
+    end
+
+    -- ExtraAbilityContainer
+    if (ExtraAbilityContainer and ExtraAbilityContainer.DriftModifiable) then
+        UIPARENT_MANAGED_FRAME_POSITIONS["ExtraAbilityContainer"] = nil
+    end
+
+    -- TalkingHeadFrame
     if (TalkingHeadFrame and TalkingHeadFrame.DriftModifiable) then
         UIPARENT_MANAGED_FRAME_POSITIONS["TalkingHeadFrame"] = nil
-    end
-end
-
--- Remove ZoneAbilityFrame from list of frames managed by UIParent
-function DriftHelpers:FixZoneAbilityFrame()
-    if (ZoneAbilityFrame and ZoneAbilityFrame.DriftModifiable) then
-        UIPARENT_MANAGED_FRAME_POSITIONS["ZoneAbilityFrame"] = nil
     end
 end
 

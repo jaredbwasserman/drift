@@ -183,6 +183,7 @@ local frames = {
     ["WorldStateScoreFrame"] = {},
     ["BattlefieldFrame"] = {},
     ["ChatConfigFrame"] = {},
+    ["UIWidgetTopCenterContainerFrame"] = {},
 }
 
 -- Frame for handling events

@@ -36,6 +36,7 @@ This is the classic version of the addon. The retail version is [Drift (Retail)]
 - Mail
 - Main Menu
 - Merchant
+- Open Mail
 - Petition
 - PVP Scoreboard
 - Quest
@@ -51,6 +52,7 @@ This is the classic version of the addon. The retail version is [Drift (Retail)]
 - Taxi
 - Trade
 - Trade Skill
+- UI Widget Top Center
 - World Map
 
 ## Supported Buttons

@@ -13,7 +13,6 @@ CurseForge links:
 1. Bag behavior different in retail and classic
    1. containerFrameOffsetX logic only exists in retail, so classic is not accurate
 1. Wording should be "Reset position and scale for all SUPPORTED frames"
-1. Add "Open Mail" frame to retail and classic README files and descriptions
 1. Add scaling support for WorldMapFrame
 1. Per frame reset
 1. Remove delay for Guild & Communities (retail) and Blizzard Groups (classic)
@@ -21,23 +20,14 @@ CurseForge links:
    1. Opacity while moving and scaling
    1. Max and min scale
    1. Scale increment
-1. Make ZoneAbilityFrame, ExtraActionButton1 have better handles
+1. Make ExtraActionButton1 have better handle
 1. Add "/drift reset" alias to "/driftreset" and maybe more commands
    1. Make sure to update documentation
 1. Make Achievements an optional frame
 1. Make /driftreset and "Reset Frames" cause the UI to reload
-1. Add frames + document
-   1. UIWidgetTopCenterContainerFrame AKA PVP Score (classic)
+1. Fix UIWidgetTopCenterContainerFrame (retail and classic)
 
 ## Bugs
-1. LootFrame moves incorrectly when other windows open (retail and classic)
-   1. Check if it is a managed frame
-1. PlayerPowerBarAlt moves unexpectedly (retail)
-   1. Check if it is a managed frame
-1. ZoneAbilityFrame moves unexpectedly (retail)
-   1. Check if it is a managed frame
-   1. Look into ExtraAbilityContainer and maybe use this frame instead
-   1. Double check TalkingHeadFrame too
 1. Scaling Bugs
    1. Map does not work correctly after scaling WorldMapFrame
    1. Character model has incorrect size after scaling CharacterFrame

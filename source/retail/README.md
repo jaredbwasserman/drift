@@ -41,7 +41,6 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Color Picker
 - Customer Support
 - Dressing Room
-- Extra Action Button
 - Flight Map
 - Game Menu
 - Garrison Architect
@@ -67,12 +66,12 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Mail
 - Merchant
 - Obliterum Forge
+- Open Mail
 - Order Advancement
 - Petition
 - Player Choice
 - Player Power Bar Alt
 - PVP Results
-- PVP Score
 - PVP Scoreboard
 - Quest
 - Quest Choice
@@ -92,14 +91,16 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Trade
 - Trade Skill
 - Transmogrify
+- UI Widget Top Center
 - Void Storage
 - Warboard Quest Choice
 - Warfront Party Pose
 - What's New
 - World Map
-- Zone Ability
 
 ## Supported Buttons
+- Extra Ability Container
+- Extra Action
 - Garrison Minimap
 - Open Ticket
 
