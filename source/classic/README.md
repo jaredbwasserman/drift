@@ -15,6 +15,7 @@ This is the classic version of the addon. The retail version is [Drift (Retail)]
 - Auction House
 - Bags
 - Bank
+- Battle.net Toast
 - Blizzard Groups
 - Character Info
 - Chat Channels
@@ -28,6 +29,7 @@ This is the classic version of the addon. The retail version is [Drift (Retail)]
 - Guild Information
 - Inspect
 - Interface Options
+- Join Battleground
 - Key Bindings
 - Loot
 - Macros
@@ -35,7 +37,6 @@ This is the classic version of the addon. The retail version is [Drift (Retail)]
 - Main Menu
 - Merchant
 - Petition
-- PVP Results
 - PVP Scoreboard
 - Quest
 - Quest Log
@@ -51,6 +52,9 @@ This is the classic version of the addon. The retail version is [Drift (Retail)]
 - Trade
 - Trade Skill
 - World Map
+
+## Supported Buttons
+- Open Ticket
 
 ## Slash Commands
 

@@ -24,13 +24,10 @@ CurseForge links:
 1. Make ZoneAbilityFrame, ExtraActionButton1 have better handles
 1. Add "/drift reset" alias to "/driftreset" and maybe more commands
    1. Make sure to update documentation
-1. Add frames (+ update documentation)
-   1. PlayerChoiceFrame
-   1. ChromieTimeFrame
-   1. BNToastFrame
-   1. WarfrontsPartyPoseFrame
 1. Make Achievements an optional frame
 1. Make /driftreset and "Reset Frames" cause the UI to reload
+1. Add frames + document
+   1. UIWidgetTopCenterContainerFrame AKA PVP Score (classic)
 
 ## Bugs
 1. LootFrame moves incorrectly when other windows open (retail and classic)
@@ -47,7 +44,10 @@ CurseForge links:
    1. Item models have incorrect size after scaling CollectionsJournal
 1. Frames with tabs move from hotkey when on other tab
 1. ColorPickerFrame moves when it's not supposed to
-1. TimeManagerFrame and TalkingHeadFrame do not move depending on addons loaded
+1. Some frames do not move depending on addons loaded
+   1. TimeManagerFrame
+   1. TalkingHeadFrame
+   1. PlayerChoiceFrame (seems to only break right after login)
 1. Some frames do not reset position after Reset Frames is invoked
    1. Game Menu / Main Menu
    1. System

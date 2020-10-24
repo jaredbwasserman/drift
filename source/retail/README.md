@@ -23,6 +23,7 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Azerite Respec
 - Bags
 - Bank
+- Battle.net Toast
 - BFA Missions
 - Black Market Auction House
 - Bonus Roll
@@ -32,6 +33,7 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Challenges Keystone
 - Character Info
 - Chat Channels
+- Chromie Time
 - Class Hall Missions
 - Class Trainer
 - Clock
@@ -64,11 +66,13 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Macros
 - Mail
 - Merchant
-- Obliterum
+- Obliterum Forge
 - Order Advancement
 - Petition
+- Player Choice
 - Player Power Bar Alt
 - PVP Results
+- PVP Score
 - PVP Scoreboard
 - Quest
 - Quest Choice
@@ -90,9 +94,14 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Transmogrify
 - Void Storage
 - Warboard Quest Choice
+- Warfront Party Pose
 - What's New
 - World Map
 - Zone Ability
+
+## Supported Buttons
+- Garrison Minimap
+- Open Ticket
 
 ## Slash Commands
 

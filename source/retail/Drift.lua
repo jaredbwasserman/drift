@@ -180,6 +180,7 @@ local frames = {
     },
     ["EncounterJournal"] = {},
     ["FriendsFrame"] = {},
+    ["BNToastFrame"] = {},
     ["ReputationDetailFrame"] = {},
     ["RecruitAFriendRewardsFrame"] = {},
     ["ChannelFrame"] = {},
@@ -200,6 +201,7 @@ local frames = {
     ["InterfaceOptionsFrame"] = {},
     ["KeyBindingFrame"] = {},
     ["HelpFrame"] = {},
+    ["HelpOpenWebTicketButton"] = {},
     ["RaidParentFrame"] = {},
     ["RaidBrowserFrame"] = {},
     ["TradeFrame"] = {},
@@ -242,6 +244,7 @@ local frames = {
     ["GarrisonRecruiterFrame"] = {},
     ["GarrisonRecruitSelectFrame"] = {},
     ["GarrisonCapacitiveDisplayFrame"] = {},
+    ["GarrisonLandingPageMinimapButton"] = {},
     ["OrderHallMissionFrame"] = {},
     ["OrderHallTalentFrame"] = {},
     ["BFAMissionFrame"] = {},
@@ -252,6 +255,7 @@ local frames = {
     ["FlightMapFrame"] = {},
     ["PVPMatchScoreboard"] = {},
     ["PVPMatchResults"] = {},
+    ["UIWidgetTopCenterContainerFrame"] = {},
     ["AlliedRacesFrame"] = {},
     ["ChatConfigFrame"] = {},
     ["ScrappingMachineFrame"] = {},
@@ -265,6 +269,9 @@ local frames = {
     ["ChallengesKeystoneFrame"] = {},
     ["BonusRollFrame"] = {},
     ["ObliterumForgeFrame"] = {},
+    ["PlayerChoiceFrame"] = {},
+    ["ChromieTimeFrame"] = {},
+    ["WarfrontsPartyPoseFrame"] = {},
 }
 
 -- Frame for handling events

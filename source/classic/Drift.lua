@@ -106,6 +106,7 @@ local frames = {
         DriftUnscalable = true
     },
     ["FriendsFrame"] = {},
+    ["BNToastFrame"] = {},
     ["ReputationDetailFrame"] = {},
     ["GuildInfoFrame"] = {},
     ["CommunitiesFrame"] = {
@@ -158,6 +159,7 @@ local frames = {
     ["InterfaceOptionsFrame"] = {},
     ["KeyBindingFrame"] = {},
     ["HelpFrame"] = {},
+    ["HelpOpenWebTicketButton"] = {},
     ["RaidParentFrame"] = {},
     ["RaidBrowserFrame"] = {},
     ["TradeFrame"] = {},
@@ -178,8 +180,8 @@ local frames = {
     ["PetStableFrame"] = {},
     ["TaxiFrame"] = {},
     ["FlightMapFrame"] = {},
-    ["PVPMatchScoreboard"] = {},
-    ["PVPMatchResults"] = {},
+    ["WorldStateScoreFrame"] = {},
+    ["BattlefieldFrame"] = {},
     ["ChatConfigFrame"] = {},
 }
 

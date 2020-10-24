@@ -7,6 +7,7 @@ DriftHelpers = {}
 
 -- Variables for moving
 if not DriftPoints then DriftPoints = {} end
+local ALPHA_DURING_MOVE = 0.3 -- TODO: Configurable
 
 -- Variables for timer
 DriftHelpers.waitTable = {}
@@ -21,10 +22,11 @@ DriftHelpers.prevMouseX = nil
 DriftHelpers.prevMouseY = nil
 DriftHelpers.frameBeingScaled = nil
 if not DriftScales then DriftScales = {} end
+local ALPHA_DURING_SCALE = 0.3 -- TODO: Configurable
 
 -- Other variables
-local ALPHA_DURING_MOVE = 0.3 -- TODO: Configurable
-local ALPHA_DURING_SCALE = 0.3 -- TODO: Configurable
+local hasFixedPVPTalentList = false
+local hasFixedPlayerChoice = false
 
 
 --------------------------------------------------------------------------------
@@ -422,6 +424,9 @@ function DriftHelpers:ModifyFrames(frames)
     -- Fix PVP talents list
     DriftHelpers:FixPVPTalentsList(frames)
 
+    -- Fix PlayerChoiceFrame
+    DriftHelpers:FixPlayerChoiceFrame()
+
     -- Fix TalkingHeadFrame
     DriftHelpers:FixTalkingHeadFrame()
 
@@ -520,6 +525,10 @@ end
 
 -- Make it so clicking Close button for PVP talents causes reset
 function DriftHelpers:FixPVPTalentsList(frames)
+    if hasFixedPVPTalentList then
+        return
+    end
+
     local talentListFrame = _G['PlayerTalentFrameTalentsPvpTalentFrameTalentList']
     if (talentListFrame) then
         talentListFrame:HookScript(
@@ -528,6 +537,24 @@ function DriftHelpers:FixPVPTalentsList(frames)
                 DriftHelpers:BroadcastReset(frames)
             end
         )
+        hasFixedPVPTalentList = true
+    end
+end
+
+-- ClearAllPoints OnHide to avoid Lua errors
+function DriftHelpers:FixPlayerChoiceFrame()
+    if hasFixedPlayerChoice then
+        return
+    end
+
+    if (PlayerChoiceFrame) then
+        PlayerChoiceFrame:HookScript(
+            "OnHide",
+            function()
+                PlayerChoiceFrame:ClearAllPoints()
+            end
+        )
+        hasFixedPlayerChoice = true
     end
 end
 
