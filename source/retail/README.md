@@ -65,6 +65,7 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Macros
 - Mail
 - Merchant
+- Objectives
 - Obliterum Forge
 - Open Mail
 - Order Advancement
@@ -100,7 +101,6 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 
 ## Supported Buttons
 - Extra Ability Container
-- Extra Action
 - Garrison Minimap
 - Open Ticket
 

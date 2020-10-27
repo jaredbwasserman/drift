@@ -20,7 +20,6 @@ CurseForge links:
    1. Opacity while moving and scaling
    1. Max and min scale
    1. Scale increment
-1. Make ExtraActionButton1 have better handle
 1. Add "/drift reset" alias to "/driftreset" and maybe more commands
    1. Make sure to update documentation
 1. Make Achievements an optional frame

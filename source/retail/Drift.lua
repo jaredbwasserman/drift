@@ -100,6 +100,10 @@ local frames = {
     ["TradeSkillFrame"] = {},
     ["CraftFrame"] = {},
     ["ArchaeologyFrame"] = {},
+    ["ObjectiveTrackerBlocksFrame"] = {},
+    ["ObjectiveTrackerFrame"] = {
+        DriftDelegate = "ObjectiveTrackerBlocksFrame"
+    },
     ["QuestLogPopupDetailFrame"] = {},
     ["QuestLogFrame"] = {},
     ["QuestFrame"] = {},
@@ -262,8 +266,10 @@ local frames = {
     ["IslandsQueueFrame"] = {},
     ["ItemUpgradeFrame"] = {},
     ["ItemInteractionFrame"] = {},
-    ["ExtraActionButton1"] = {},
     ["ExtraAbilityContainer"] = {},
+    ["ExtraActionBarFrame"] = {
+        DriftDelegate = "ExtraAbilityContainer"
+    },
     ["PlayerPowerBarAlt"] = {},
     ["TalkingHeadFrame"] = {},
     ["ChallengesKeystoneFrame"] = {},
