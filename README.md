@@ -24,9 +24,17 @@ CurseForge links:
    1. Make sure to update documentation
 1. Make Achievements an optional frame
 1. Make /driftreset and "Reset Frames" cause the UI to reload
-1. Fix UIWidgetTopCenterContainerFrame (retail and classic)
+1. Why do Drift Delegates make the mouse move the drag distance before moving their frame?
 
 ## Bugs
+1. Fix UIWidgetTopCenterContainerFrame (retail and classic)
+   1. Dragging "Time Remaining" in BG causes the widget to get stuck in drag mode
+   1. Sometimes the children do not get to be made movers, e.g. return from BG
+   1. Need some recursion for the child movers, e.g. BG Horde and Ally bars
+1. Clicking PlayerChoiceFrame buttons resets PlayerChoiceFrame (retail)
+   1. Example is in Warfronts
+   1. To fix, need to add Drift Tabs
+1. LootFrame resets when opening other frames (retail and classic) 
 1. Scaling Bugs
    1. Map does not work correctly after scaling WorldMapFrame
    1. Character model has incorrect size after scaling CharacterFrame
