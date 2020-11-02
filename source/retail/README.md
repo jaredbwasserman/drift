@@ -30,6 +30,7 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Calendar
 - Calendar View Event
 - Calendar View Holiday
+- Calendar View Raid
 - Challenges Keystone
 - Character Info
 - Chat Channels

@@ -100,10 +100,7 @@ local frames = {
     ["TradeSkillFrame"] = {},
     ["CraftFrame"] = {},
     ["ArchaeologyFrame"] = {},
-    ["ObjectiveTrackerBlocksFrame"] = {},
-    ["ObjectiveTrackerFrame"] = {
-        DriftDelegate = "ObjectiveTrackerBlocksFrame"
-    },
+    ["ObjectiveTrackerFrame"] = {}, -- TODO fix objectives
     ["QuestLogPopupDetailFrame"] = {},
     ["QuestLogFrame"] = {},
     ["QuestFrame"] = {},
@@ -235,6 +232,7 @@ local frames = {
         DriftDelegate = "CalendarViewEventFrame"
     },
     ["CalendarViewHolidayFrame"] = {},
+    ["CalendarViewRaidFrame"] = {},
     ["ClassTrainerFrame"] = {},
     ["AuctionFrame"] = {},
     ["AuctionHouseFrame"] = {},
