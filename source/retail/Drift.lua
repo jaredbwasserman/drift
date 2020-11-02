@@ -257,7 +257,9 @@ local frames = {
     ["FlightMapFrame"] = {},
     ["PVPMatchScoreboard"] = {},
     ["PVPMatchResults"] = {},
-    ["UIWidgetTopCenterContainerFrame"] = {},
+    ["UIWidgetTopCenterContainerFrame"] = {
+        DriftChildMovers = true
+    },
     ["AlliedRacesFrame"] = {},
     ["ChatConfigFrame"] = {},
     ["ScrappingMachineFrame"] = {},

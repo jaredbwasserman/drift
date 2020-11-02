@@ -183,7 +183,9 @@ local frames = {
     ["WorldStateScoreFrame"] = {},
     ["BattlefieldFrame"] = {},
     ["ChatConfigFrame"] = {},
-    ["UIWidgetTopCenterContainerFrame"] = {},
+    ["UIWidgetTopCenterContainerFrame"] = {
+        DriftChildMovers = true
+    },
 }
 
 -- Frame for handling events

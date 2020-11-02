@@ -304,6 +304,43 @@ local function makeTabsSticky(frame, frames)
     end
 end
 
+local function makeChildMovers(frame, frames)
+    -- Exit if not configured
+    if not frame.DriftChildMovers then
+        return
+    end
+
+    -- Exit if already hooked
+    if frame.DriftChildMoversHooked then
+        return
+    end
+
+    -- Run once in case log in to a place with the widget
+    local function makeMovers()
+        local children = { frame:GetChildren() }
+        for _, child in ipairs(children) do
+            child.DriftDelegate = frame
+            makeModifiable(child)
+            makeSticky(child, frames)
+            makeTabsSticky(child, frames)
+        end
+    end
+    makeMovers()
+
+    -- Run each time there is an update
+    frame:RegisterEvent("UPDATE_UI_WIDGET")
+    frame:HookScript(
+        "OnEvent",
+        function(self, event, ...)
+            if event == "UPDATE_UI_WIDGET" then
+                makeMovers()
+            end
+        end
+    )
+
+    frame.DriftChildMoversHooked = true
+end
+
 -- Global functions
 function DriftHelpers:DeleteDriftState()
     -- Delete DriftPoints state
@@ -402,10 +439,14 @@ function DriftHelpers:ModifyFrames(frames)
                     end
                 end
             end
+            if properties.DriftChildMovers then
+                frame.DriftChildMovers = true
+            end
 
             makeModifiable(frame)
             makeSticky(frame, frames)
             makeTabsSticky(frame, frames)
+            makeChildMovers(frame, frames)
         end
     end
 
