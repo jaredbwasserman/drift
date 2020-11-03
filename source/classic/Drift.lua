@@ -98,6 +98,7 @@ local frames = {
     ["CraftFrame"] = {},
     ["QuestLogFrame"] = {},
     ["QuestFrame"] = {},
+    ["QuestWatchFrame"] = {},
     ["GossipFrame"] = {},
     ["SpellBookFrame"] = {},
     ["TalentFrame"] = {},
@@ -218,11 +219,16 @@ local function eventHandler(self, event, ...)
         -- Modify pre-loaded frames
         DriftHelpers:ModifyFrames(frames)
 
+        -- Quest Watch
+        Drift:RegisterEvent("QUEST_WATCH_LIST_CHANGED")
+
         -- Modify frames after an addon loads
         DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
 
         -- Modify frames after combat ends
         Drift:RegisterEvent("PLAYER_REGEN_ENABLED")
+    else
+        DriftHelpers:BroadcastReset(frames)
     end
 end
 

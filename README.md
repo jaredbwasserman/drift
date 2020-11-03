@@ -42,9 +42,10 @@ CurseForge links:
 1. Frames with tabs move from hotkey when on other tab
 1. ColorPickerFrame moves when it's not supposed to
 1. Some frames do not move depending on addons loaded
-   1. TimeManagerFrame
-   1. TalkingHeadFrame
-   1. PlayerChoiceFrame (seems to only break right after login)
+   1. TimeManagerFrame (retail and classic)
+   1. TalkingHeadFrame (retail)
+   1. PlayerChoiceFrame (retail, seems to only break right after login)
+   1. QuestWatchFrame (classic)
 1. Some frames do not reset position after Reset Frames is invoked
    1. Game Menu / Main Menu
    1. System
