@@ -325,7 +325,7 @@ function DriftHelpers:SetupConfig()
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
         15,
-        -250,
+        -300,
         132,
         25,
         "Reset Frames",
