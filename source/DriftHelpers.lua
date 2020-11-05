@@ -25,8 +25,10 @@ DriftHelpers.frameBeingScaled = nil
 if not DriftScales then DriftScales = {} end
 
 -- Other variables
+local OBJECTIVE_TRACKER_HEIGHT = 0.65 -- TODO: Configurable
 local hasFixedPVPTalentList = false
 local hasFixedPlayerChoice = false
+local hasFixedObjectiveTracker = false
 
 
 --------------------------------------------------------------------------------
@@ -466,6 +468,11 @@ function DriftHelpers:ModifyFrames(frames)
     -- Fix PlayerChoiceFrame
     DriftHelpers:FixPlayerChoiceFrame()
 
+    -- Fix Objectives
+    if not DriftOptions.objectivesDisabled then
+        DriftHelpers:FixObjectiveTrackerFrame()
+    end
+
     -- Fix managed frames
     DriftHelpers:FixManagedFrames()
 
@@ -591,6 +598,33 @@ function DriftHelpers:FixPlayerChoiceFrame()
             end
         )
         hasFixedPlayerChoice = true
+    end
+end
+
+-- Set height for ObjectiveTrackerFrame so it has enough room
+function DriftHelpers:FixObjectiveTrackerFrame()
+    if hasFixedObjectiveTracker then
+        return
+    end
+
+    if (ObjectiveTrackerFrame) then
+        local height = GetScreenHeight() * OBJECTIVE_TRACKER_HEIGHT
+        ObjectiveTrackerFrame:SetHeight(height)
+
+        -- Hook collapse and expand to avoid dragging minimized
+        local ObjectiveTracker_Collapse_Original = ObjectiveTracker_Collapse
+        ObjectiveTracker_Collapse = function()
+            ObjectiveTrackerFrame:EnableMouse(false)
+            ObjectiveTracker_Collapse_Original()
+        end
+
+        local ObjectiveTracker_Expand_Original = ObjectiveTracker_Expand
+        ObjectiveTracker_Expand = function()
+            ObjectiveTrackerFrame:EnableMouse(true)
+            ObjectiveTracker_Expand_Original()
+        end
+
+        hasFixedObjectiveTracker = true
     end
 end
 

@@ -36,12 +36,12 @@ This is the classic version of the addon. The retail version is [Drift (Retail)]
 - Mail
 - Main Menu
 - Merchant
+- Objective Tracker
 - Open Mail
 - Petition
 - PVP Scoreboard
 - Quest
 - Quest Log
-- Quest Watch
 - Raid Info
 - Reputation Detail
 - Social

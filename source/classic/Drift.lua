@@ -98,7 +98,9 @@ local frames = {
     ["CraftFrame"] = {},
     ["QuestLogFrame"] = {},
     ["QuestFrame"] = {},
-    ["QuestWatchFrame"] = {},
+    ["QuestWatchFrame"] = {
+        DriftDisabledBy = "objectivesDisabled"
+    },
     ["GossipFrame"] = {},
     ["SpellBookFrame"] = {},
     ["TalentFrame"] = {},

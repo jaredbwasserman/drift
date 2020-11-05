@@ -100,7 +100,9 @@ local frames = {
     ["TradeSkillFrame"] = {},
     ["CraftFrame"] = {},
     ["ArchaeologyFrame"] = {},
-    ["ObjectiveTrackerFrame"] = {}, -- TODO fix objectives
+    ["ObjectiveTrackerFrame"] = {
+        DriftDisabledBy = "objectivesDisabled"
+    },
     ["QuestLogPopupDetailFrame"] = {},
     ["QuestLogFrame"] = {},
     ["QuestFrame"] = {},

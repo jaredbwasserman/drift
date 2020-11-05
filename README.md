@@ -25,6 +25,10 @@ CurseForge links:
 1. Make Achievements an optional frame
 1. Make /driftreset and "Reset Frames" cause the UI to reload
 1. Why do Drift Delegates make the mouse move the drag distance before moving their frame?
+1. Make frames optional
+   1. All the menu frames
+1. Make ObjectiveTrackerFrame (retail) have dynamic height instead of fixed 
+   1. Or if not dynamic, some height parameter in Drift Options
 
 ## Bugs
 1. Fix UIWidgetTopCenterContainerFrame (retail and classic)

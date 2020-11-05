@@ -111,6 +111,9 @@ function DriftHelpers:SetupConfig()
     if DriftOptions.bagsDisabled == nil then
         DriftOptions.bagsDisabled = false
     end
+    if DriftOptions.objectivesDisabled == nil then
+        DriftOptions.objectivesDisabled = true
+    end
 
     -- Make parent panel
     DriftOptionsPanel.panel = CreateFrame("Frame", "DriftOptionsPanel", UIParent)
@@ -292,6 +295,19 @@ function DriftHelpers:SetupConfig()
     )
     DriftOptionsPanel.config.bagsEnabledCheckbox:SetChecked(not DriftOptions.bagsDisabled)
 
+    DriftOptionsPanel.config.objectivesEnabledCheckbox = createCheckbox(
+        "ObjectivesEnabledCheckbox",
+        "TOPLEFT",
+        DriftOptionsPanel.optionspanel,
+        "TOPLEFT",
+        13,
+        -210,
+        " Objective Tracker Enabled",
+        "Whether Drift will modify the Objective Tracker. Enabling or disabling the Objective Tracker will cause the UI to reload.",
+        nil
+    )
+    DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
+
     -- Reset button
     StaticPopupDialogs["DRIFT_RESET_POSITIONS"] = {
         text = "Are you sure you want to reset position and scale for all frames?",
@@ -321,6 +337,8 @@ function DriftHelpers:SetupConfig()
 
     -- Update logic
     DriftOptionsPanel.panel.okay = function (self)
+        local shouldReloadUI = false
+
         -- Movement
         DriftOptions.frameDragIsLocked = DriftOptionsPanel.config.frameMoveLockedCheckbox:GetChecked()
         DriftOptions.dragKey = UIDropDownMenu_GetSelectedID(DriftOptionsPanel.config.dragKeyDropdown)
@@ -343,6 +361,17 @@ function DriftHelpers:SetupConfig()
                 end
             end
 
+            shouldReloadUI = true
+        end
+
+        local oldObjectivesDisabled = DriftOptions.objectivesDisabled
+        DriftOptions.objectivesDisabled = not DriftOptionsPanel.config.objectivesEnabledCheckbox:GetChecked()
+        if oldObjectivesDisabled ~= DriftOptions.objectivesDisabled then
+            shouldReloadUI = true
+        end
+
+        -- Reload if needed
+        if shouldReloadUI then
             ReloadUI()
         end
     end
@@ -361,6 +390,8 @@ function DriftHelpers:SetupConfig()
 
         -- Optional Frames
         DriftOptionsPanel.config.bagsEnabledCheckbox:SetChecked(not DriftOptions.bagsDisabled)
+
+        DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
     end
 end
 

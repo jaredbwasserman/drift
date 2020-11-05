@@ -66,7 +66,7 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Macros
 - Mail
 - Merchant
-- Objectives
+- Objective Tracker
 - Obliterum Forge
 - Open Mail
 - Order Advancement
