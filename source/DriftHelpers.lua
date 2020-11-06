@@ -29,6 +29,7 @@ local OBJECTIVE_TRACKER_HEIGHT = 0.65 -- TODO: Configurable
 local hasFixedPVPTalentList = false
 local hasFixedPlayerChoice = false
 local hasFixedObjectiveTracker = false
+local hasFixedQuestWatch = false
 
 
 --------------------------------------------------------------------------------
@@ -473,6 +474,11 @@ function DriftHelpers:ModifyFrames(frames)
         DriftHelpers:FixObjectiveTrackerFrame()
     end
 
+    -- Fix Quest Watch
+    if not DriftOptions.objectivesDisabled then
+        DriftHelpers:FixQuestWatchFrame(frames)
+    end
+
     -- Fix managed frames
     DriftHelpers:FixManagedFrames()
 
@@ -625,6 +631,23 @@ function DriftHelpers:FixObjectiveTrackerFrame()
         end
 
         hasFixedObjectiveTracker = true
+    end
+end
+
+-- Hook FCF_DockUpdate since it gets called at the end of UIParentManageFramePositions
+function DriftHelpers:FixQuestWatchFrame(frames)
+    if hasFixedQuestWatch then
+        return
+    end
+
+    if (QuestWatchFrame) then
+        local FCF_DockUpdate_Original = FCF_DockUpdate
+        FCF_DockUpdate = function()
+            FCF_DockUpdate_Original()
+            DriftHelpers:BroadcastReset(frames)
+        end
+
+        hasFixedQuestWatch = true
     end
 end
 
