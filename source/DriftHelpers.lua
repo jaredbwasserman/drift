@@ -25,7 +25,7 @@ DriftHelpers.frameBeingScaled = nil
 if not DriftScales then DriftScales = {} end
 
 -- Other variables
-local OBJECTIVE_TRACKER_HEIGHT = 0.65 -- TODO: Configurable
+local OBJECTIVE_TRACKER_HEIGHT = 0.5 -- TODO: Configurable
 local hasFixedPVPTalentList = false
 local hasFixedPlayerChoice = false
 local hasFixedObjectiveTracker = false
@@ -146,7 +146,7 @@ local function onDragStart(frame, button)
 
         -- Prevent unscalable frames from being scaled
         if frameToMove.DriftUnscalable then
-            print("Drift scaling not supported for " .. frameToMove:GetName())
+            print("|cFFFFFF00Drift:|r Scaling not supported for " .. frameToMove:GetName() .. ".")
             return
         end
 
@@ -359,6 +359,9 @@ function DriftHelpers:DeleteDriftState()
 
     -- Delete DriftScales state
     DriftScales = {}
+
+    -- Reload UI
+    ReloadUI()
 end
 
 function DriftHelpers:ModifyFrames(frames)
