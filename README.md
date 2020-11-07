@@ -23,6 +23,7 @@ CurseForge links:
    1. Achievements
 1. Make ObjectiveTrackerFrame (retail) have dynamic height instead of fixed 
    1. Or if not dynamic, some height parameter in Drift Options
+   1. Or figure out some other way of not dragging around empty space
 
 ## Bugs
 1. Fix UIWidgetTopCenterContainerFrame (retail and classic)
