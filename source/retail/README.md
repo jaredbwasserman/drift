@@ -8,7 +8,7 @@ Position and scale for each frame are saved.
 This is the retail version of the addon. The classic version is [Drift (Classic)](https://www.curseforge.com/wow/addons/driftclassic).
 
 ## Demo
-[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/9OM5_nuK7Ac/0.jpg)](http://www.youtube.com/watch?v=9OM5_nuK7Ac)
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/R8d-QYxyN7Y/maxresdefault.jpg)](https://youtu.be/R8d-QYxyN7Y)
 
 ## Supported Frames
 - Achievements
