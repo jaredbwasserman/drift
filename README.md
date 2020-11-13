@@ -19,11 +19,13 @@ CurseForge links:
    1. Make sure to update documentation
 1. Why do Drift Delegates make the mouse move the drag distance before moving their frame?
 1. Make frames optional
+   1. Buttons (Garrison minimap button for example)
    1. All the menu frames
    1. Achievements
 1. Make ObjectiveTrackerFrame (retail) have dynamic height instead of fixed 
    1. Or if not dynamic, some height parameter in Drift Options
    1. Or figure out some other way of not dragging around empty space
+1. Error message for when try to open a window in combat and it cannot move it
 
 ## Bugs
 1. Fix UIWidgetTopCenterContainerFrame (retail and classic)
