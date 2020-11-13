@@ -42,6 +42,7 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Color Picker
 - Customer Support
 - Dressing Room
+- Extra Ability Container
 - Flight Map
 - Game Menu
 - Garrison Architect
@@ -101,7 +102,6 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - World Map
 
 ## Supported Buttons
-- Extra Ability Container
 - Garrison Minimap
 - Open Ticket
 

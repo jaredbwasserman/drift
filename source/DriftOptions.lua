@@ -289,7 +289,7 @@ function DriftHelpers:SetupConfig()
         "TOPLEFT",
         13,
         -180,
-        " Bags Enabled",
+        " Bags",
         "Whether Drift will modify Bags. Enabling or disabling Bags will cause the UI to reload.",
         nil
     )
@@ -302,7 +302,7 @@ function DriftHelpers:SetupConfig()
         "TOPLEFT",
         13,
         -210,
-        " Objective Tracker Enabled",
+        " Objective Tracker",
         "Whether Drift will modify the Objective Tracker. Enabling or disabling the Objective Tracker will cause the UI to reload.",
         nil
     )
