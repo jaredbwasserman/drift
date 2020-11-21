@@ -49,6 +49,7 @@ end
 
 local function shouldMove(frame)
     if frameCannotBeModified(frame) then
+        print("|cFFFFFF00Drift:|r Cannot move " .. frame:GetName() .. " during combat.")
         return false
     end
 
@@ -67,6 +68,7 @@ end
 
 local function shouldScale(frame)
     if frameCannotBeModified(frame) then
+        print("|cFFFFFF00Drift:|r Cannot scale " .. frame:GetName() .. " during combat.")
         return false
     end
 
@@ -204,6 +206,7 @@ local function resetScaleAndPosition(frame)
     local frameToMove = frame.DriftDelegate or frame
 
     if frameCannotBeModified(frameToMove) then
+        print("|cFFFFFF00Drift:|r Cannot modify " .. frameToMove:GetName() .. " during combat.")
         modifiedSet["unmodifiable"] = true
         return modifiedSet
     end

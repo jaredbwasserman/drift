@@ -25,7 +25,6 @@ CurseForge links:
 1. Make ObjectiveTrackerFrame (retail) have dynamic height instead of fixed 
    1. Or if not dynamic, some height parameter in Drift Options
    1. Or figure out some other way of not dragging around empty space
-1. Error message for when try to open a window in combat and it cannot move it
 
 ## Bugs
 1. Fix UIWidgetTopCenterContainerFrame (retail and classic)
