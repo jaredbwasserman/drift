@@ -7,7 +7,7 @@ Position and scale for each frame are saved.
 
 This is the retail version of the addon. The classic version is [Drift (Classic)](https://www.curseforge.com/wow/addons/driftclassic).
 
-## Demo
+## Demo Video
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/R8d-QYxyN7Y/maxresdefault.jpg)](https://youtu.be/R8d-QYxyN7Y)
 
 ## Supported Frames
@@ -80,7 +80,7 @@ You can enabled or disable frames by going to Interface -> AddOns -> Drift -> Op
 - Guild Bank
 - Guild Registrar
 - Inspect
-- Interface
+- Interface Options
 - Islands
 - Item Socketing
 - Item Upgrade
@@ -108,7 +108,7 @@ You can enabled or disable frames by going to Interface -> AddOns -> Drift -> Op
 - Social
 - Spellbook
 - Stable
-- System
+- System Options
 - Tabard
 - Talents
 - Trade

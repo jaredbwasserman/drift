@@ -299,7 +299,7 @@ function DriftHelpers:SetupConfig()
         13,
         -180,
         " Buttons",
-        "Whether Drift will modify Buttons. Enabling or disabling Buttons will cause the UI to reload.",
+        "Whether Drift will modify Buttons (example: Open Ticket). Enabling or disabling Buttons will cause the UI to reload.",
         nil
     )
     DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
@@ -338,7 +338,7 @@ function DriftHelpers:SetupConfig()
         13,
         -270,
         " Windows",
-        "Whether Drift will modify Windows. Enabling or disabling Windows will cause the UI to reload.",
+        "Whether Drift will modify Windows (example: Talents). Enabling or disabling Windows will cause the UI to reload.",
         nil
     )
     DriftOptionsPanel.config.windowsEnabledCheckbox:SetChecked(not DriftOptions.windowsDisabled)
@@ -351,7 +351,7 @@ function DriftHelpers:SetupConfig()
         13,
         -300,
         " Miscellaneous",
-        "Whether Drift will modify Miscellaneous frames. Enabling or disabling Miscellaneous frames will cause the UI to reload.",
+        "Whether Drift will modify Miscellaneous frames (example: Battle.net Toast). Enabling or disabling Miscellaneous frames will cause the UI to reload.",
         nil
     )
     DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)

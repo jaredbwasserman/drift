@@ -7,7 +7,7 @@ Position and scale for each frame are saved.
 
 This is the classic version of the addon. The retail version is [Drift (Retail)](https://www.curseforge.com/wow/addons/drift).
 
-## Demo
+## Demo Video
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/R8d-QYxyN7Y/maxresdefault.jpg)](https://youtu.be/R8d-QYxyN7Y)
 
 ## Supported Frames
@@ -69,7 +69,7 @@ You can enabled or disable frames by going to Interface -> AddOns -> Drift -> Op
 - Social
 - Spellbook
 - Stable
-- System
+- System Options
 - Tabard
 - Talents
 - Taxi
