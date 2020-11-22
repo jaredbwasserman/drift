@@ -90,29 +90,56 @@ local frames = {
         DriftDelegate = "ContainerFrame13",
         DriftDisabledBy = "bagsDisabled"
     },
-    ["CharacterFrame"] = {},
+    ["CharacterFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
     ["HonorFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
         DriftDelegate = "CharacterFrame"
     },
-    ["TradeSkillFrame"] = {},
-    ["CraftFrame"] = {},
-    ["QuestLogFrame"] = {},
-    ["QuestFrame"] = {},
+    ["TradeSkillFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["CraftFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["QuestLogFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["QuestFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
     ["QuestWatchFrame"] = {
         DriftDisabledBy = "objectivesDisabled"
     },
-    ["GossipFrame"] = {},
-    ["SpellBookFrame"] = {},
-    ["TalentFrame"] = {},
+    ["GossipFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["SpellBookFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["TalentFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
     ["WorldMapFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
         -- TODO: Add scaling support for WorldMapFrame
         DriftUnscalable = true
     },
-    ["FriendsFrame"] = {},
-    ["BNToastFrame"] = {},
-    ["ReputationDetailFrame"] = {},
-    ["GuildInfoFrame"] = {},
+    ["FriendsFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["BNToastFrame"] = {
+        DriftDisabledBy = "miscellaneousDisabled",
+    },
+    ["ReputationDetailFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["GuildInfoFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
     ["CommunitiesFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
         DriftTabs = {
             "CommunitiesFrame.ChatTab",
             "CommunitiesFrame.RosterTab",
@@ -140,53 +167,138 @@ local frames = {
             "CommunitiesFrameCommunitiesListListScrollFrameButton20"
         }
     },
-    ["ChannelFrame"] = {},
-    ["RaidInfoFrame"] = {},
-    ["DressUpFrame"] = {},
-    ["AddonList"] = {},
-    ["MerchantFrame"] = {},
-    ["MailFrame"] = {},
+    ["ChannelFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["RaidInfoFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["DressUpFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["AddonList"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["MerchantFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["MailFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
     ["SendMailFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
         DriftDelegate = "MailFrame"
     },
-    ["OpenMailFrame"] = {},
-    ["BankFrame"] = {},
-    ["LootFrame"] = {},
-    ["GroupLootFrame1"] = {},
-    ["GroupLootFrame2"] = {},
-    ["GroupLootFrame3"] = {},
-    ["GroupLootFrame4"] = {},
-    ["GameMenuFrame"] = {},
-    ["VideoOptionsFrame"] = {},
-    ["AudioOptionsFrame"] = {},
-    ["InterfaceOptionsFrame"] = {},
-    ["KeyBindingFrame"] = {},
-    ["HelpFrame"] = {},
-    ["HelpOpenWebTicketButton"] = {},
-    ["RaidParentFrame"] = {},
-    ["RaidBrowserFrame"] = {},
-    ["TradeFrame"] = {},
-    ["SUFWrapperFrame"] = {},
-    ["TimeManagerFrame"] = {},
-    ["TabardFrame"] = {},
-    ["GuildBankFrame"] = {},
-    ["GuildRegistrarFrame"] = {},
-    ["GuildControlUI"] = {},
-    ["PetitionFrame"] = {},
-    ["ColorPickerFrame"] = {},
-    ["InspectFrame"] = {},
-    ["MacroFrame"] = {},
-    ["WardrobeFrame"] = {},
-    ["ClassTrainerFrame"] = {},
-    ["AuctionFrame"] = {},
-    ["ItemTextFrame"] = {},
-    ["PetStableFrame"] = {},
-    ["TaxiFrame"] = {},
-    ["FlightMapFrame"] = {},
-    ["WorldStateScoreFrame"] = {},
-    ["BattlefieldFrame"] = {},
-    ["ChatConfigFrame"] = {},
+    ["OpenMailFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["BankFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["LootFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["GroupLootFrame1"] = {
+        DriftDisabledBy = "miscellaneousDisabled",
+    },
+    ["GroupLootFrame2"] = {
+        DriftDisabledBy = "miscellaneousDisabled",
+    },
+    ["GroupLootFrame3"] = {
+        DriftDisabledBy = "miscellaneousDisabled",
+    },
+    ["GroupLootFrame4"] = {
+        DriftDisabledBy = "miscellaneousDisabled",
+    },
+    ["GameMenuFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["VideoOptionsFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["AudioOptionsFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["InterfaceOptionsFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["KeyBindingFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["HelpFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["HelpOpenWebTicketButton"] = {
+        DriftDisabledBy = "buttonsDisabled",
+    },
+    ["RaidParentFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["RaidBrowserFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["TradeFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["SUFWrapperFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["TimeManagerFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["TabardFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["GuildRegistrarFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["GuildControlUI"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["PetitionFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["ColorPickerFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["InspectFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["MacroFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["WardrobeFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["ClassTrainerFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["AuctionFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["ItemTextFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["PetStableFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["TaxiFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["FlightMapFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["WorldStateScoreFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["BattlefieldFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["ChatConfigFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
     ["UIWidgetTopCenterContainerFrame"] = {
+        DriftDisabledBy = "miscellaneousDisabled",
         DriftChildMovers = true
     },
 }

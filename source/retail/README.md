@@ -11,6 +11,31 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/R8d-QYxyN7Y/maxresdefault.jpg)](https://youtu.be/R8d-QYxyN7Y)
 
 ## Supported Frames
+You can enabled or disable frames by going to Interface -> AddOns -> Drift -> Options and then modifying the "Enabled Frames" section.
+
+### Buttons (enabled by default)
+- Garrison Minimap
+- Open Ticket
+
+### Bags (disabled by default)
+- Bag 1
+- Bag 2
+- Bag 3
+- Bag 4
+- Bag 5
+- Bag 6
+- Bag 7
+- Bag 8
+- Bag 9
+- Bag 10
+- Bag 11
+- Bag 12
+- Bag 13
+
+### Objective Tracker (disabled by default)
+- Objective Tracker
+
+### Windows (enabled by default)
 - Achievements
 - AddOn List
 - Adventure Guide
@@ -21,12 +46,9 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Azerite Empowered Item
 - Azerite Essence
 - Azerite Respec
-- Bags
 - Bank
-- Battle.net Toast
 - BFA Missions
 - Black Market Auction House
-- Bonus Roll
 - Calendar
 - Calendar View Event
 - Calendar View Holiday
@@ -42,7 +64,6 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Color Picker
 - Customer Support
 - Dressing Room
-- Extra Ability Container
 - Flight Map
 - Game Menu
 - Garrison Architect
@@ -57,6 +78,7 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Group Finder
 - Guild & Communities
 - Guild Bank
+- Guild Registrar
 - Inspect
 - Interface
 - Islands
@@ -67,13 +89,11 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - Macros
 - Mail
 - Merchant
-- Objective Tracker
 - Obliterum Forge
 - Open Mail
 - Order Advancement
 - Petition
 - Player Choice
-- Player Power Bar Alt
 - PVP Results
 - PVP Scoreboard
 - Quest
@@ -90,26 +110,27 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 - System
 - Tabard
 - Talents
-- Talking Head
 - Trade
 - Trade Skill
 - Transmogrify
-- UI Widget Top Center
 - Void Storage
 - Warboard Quest Choice
 - Warfront Party Pose
 - What's New
 - World Map
 
-## Supported Buttons
-- Garrison Minimap
-- Open Ticket
+### Miscellaneous (enabled by default)
+- Battle.net Toast
+- Bonus Roll
+- Extra Ability Container
+- Player Power Bar Alt
+- Talking Head
+- UI Widget Top Center
 
 ## Slash Commands
-
 ### Reset Frames
-/driftreset  
-Reset position and scale for all frames.
+`/driftreset`  
+Reset position and scale for all modified frames.
 
 ## Bugs and Feature Requests
 Please use the [GitHub issues page](https://github.com/jaredbwasserman/Drift/issues) to report bugs or request features.

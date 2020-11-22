@@ -108,11 +108,20 @@ function DriftHelpers:SetupConfig()
     if DriftOptions.scaleKey == nil then
         DriftOptions.scaleKey = DriftOptions.dragKey
     end
+    if DriftOptions.buttonsDisabled == nil then
+        DriftOptions.buttonsDisabled = false
+    end
     if DriftOptions.bagsDisabled == nil then
-        DriftOptions.bagsDisabled = false
+        DriftOptions.bagsDisabled = true
     end
     if DriftOptions.objectivesDisabled == nil then
         DriftOptions.objectivesDisabled = true
+    end
+    if DriftOptions.windowsDisabled == nil then
+        DriftOptions.windowsDisabled = false
+    end
+    if DriftOptions.miscellaneousDisabled == nil then
+        DriftOptions.miscellaneousDisabled = false
     end
 
     -- Make parent panel
@@ -192,7 +201,7 @@ function DriftHelpers:SetupConfig()
 
     local slashResetInfo = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
     slashResetInfo:SetFontObject("GameFontHighlight")
-    slashResetInfo:SetText("Reset position and scale for all frames.")
+    slashResetInfo:SetText("Reset position and scale for all modified frames.")
     slashResetInfo:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -80)
 
     -- Options panel
@@ -276,11 +285,24 @@ function DriftHelpers:SetupConfig()
     )
     DriftOptions.scaleKeyFunc = getKeyFuncFromOrdinal(DriftOptions.scaleKey)
 
-    -- Optional Frames
+    -- Enabled Frames
     local frameToggleTitle = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
     frameToggleTitle:SetFontObject("GameFontNormal")
-    frameToggleTitle:SetText("Optional Frames")
+    frameToggleTitle:SetText("Enabled Frames")
     frameToggleTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 16, -160)
+
+    DriftOptionsPanel.config.buttonsEnabledCheckbox = createCheckbox(
+        "ButtonsEnabledCheckbox",
+        "TOPLEFT",
+        DriftOptionsPanel.optionspanel,
+        "TOPLEFT",
+        13,
+        -180,
+        " Buttons",
+        "Whether Drift will modify Buttons. Enabling or disabling Buttons will cause the UI to reload.",
+        nil
+    )
+    DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
 
     DriftOptionsPanel.config.bagsEnabledCheckbox = createCheckbox(
         "BagsEnabledCheckbox",
@@ -288,7 +310,7 @@ function DriftHelpers:SetupConfig()
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
         13,
-        -180,
+        -210,
         " Bags",
         "Whether Drift will modify Bags. Enabling or disabling Bags will cause the UI to reload.",
         nil
@@ -301,16 +323,42 @@ function DriftHelpers:SetupConfig()
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
         13,
-        -210,
+        -240,
         " Objective Tracker",
         "Whether Drift will modify the Objective Tracker. Enabling or disabling the Objective Tracker will cause the UI to reload.",
         nil
     )
     DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
 
+    DriftOptionsPanel.config.windowsEnabledCheckbox = createCheckbox(
+        "WindowsEnabledCheckbox",
+        "TOPLEFT",
+        DriftOptionsPanel.optionspanel,
+        "TOPLEFT",
+        13,
+        -270,
+        " Windows",
+        "Whether Drift will modify Windows. Enabling or disabling Windows will cause the UI to reload.",
+        nil
+    )
+    DriftOptionsPanel.config.windowsEnabledCheckbox:SetChecked(not DriftOptions.windowsDisabled)
+
+    DriftOptionsPanel.config.miscellaneousEnabledCheckbox = createCheckbox(
+        "MiscellaneousEnabledCheckbox",
+        "TOPLEFT",
+        DriftOptionsPanel.optionspanel,
+        "TOPLEFT",
+        13,
+        -300,
+        " Miscellaneous",
+        "Whether Drift will modify Miscellaneous frames. Enabling or disabling Miscellaneous frames will cause the UI to reload.",
+        nil
+    )
+    DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)
+
     -- Reset button
     StaticPopupDialogs["DRIFT_RESET_POSITIONS"] = {
-        text = "Are you sure you want to reset position and scale for all frames?",
+        text = "Are you sure you want to reset position and scale for all modified frames?",
         button1 = "Yes",
         button2 = "No",
         OnAccept = DriftHelpers.DeleteDriftState,
@@ -324,12 +372,12 @@ function DriftHelpers:SetupConfig()
         "TOPLEFT",
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
-        15,
-        -300,
+        297,
+        -160,
         132,
         25,
         "Reset Frames",
-        "Reset position and scale for all frames.",
+        "Reset position and scale for all modified frames.",
         function (self, button, down)
             StaticPopup_Show("DRIFT_RESET_POSITIONS")
         end
@@ -350,6 +398,12 @@ function DriftHelpers:SetupConfig()
         DriftOptions.scaleKeyFunc = getKeyFuncFromOrdinal(DriftOptions.scaleKey)
 
         -- Optional Frames
+        local oldButtonsDisabled = DriftOptions.buttonsDisabled
+        DriftOptions.buttonsDisabled = not DriftOptionsPanel.config.buttonsEnabledCheckbox:GetChecked()
+        if oldButtonsDisabled ~= DriftOptions.buttonsDisabled then
+            shouldReloadUI = true
+        end
+
         local oldBagsDisabled = DriftOptions.bagsDisabled
         DriftOptions.bagsDisabled = not DriftOptionsPanel.config.bagsEnabledCheckbox:GetChecked()
         if oldBagsDisabled ~= DriftOptions.bagsDisabled then
@@ -367,6 +421,18 @@ function DriftHelpers:SetupConfig()
         local oldObjectivesDisabled = DriftOptions.objectivesDisabled
         DriftOptions.objectivesDisabled = not DriftOptionsPanel.config.objectivesEnabledCheckbox:GetChecked()
         if oldObjectivesDisabled ~= DriftOptions.objectivesDisabled then
+            shouldReloadUI = true
+        end
+
+        local oldWindowsDisabled = DriftOptions.windowsDisabled
+        DriftOptions.windowsDisabled = not DriftOptionsPanel.config.windowsEnabledCheckbox:GetChecked()
+        if oldWindowsDisabled ~= DriftOptions.windowsDisabled then
+            shouldReloadUI = true
+        end
+
+        local oldMiscellaneousDisabled = DriftOptions.miscellaneousDisabled
+        DriftOptions.miscellaneousDisabled = not DriftOptionsPanel.config.miscellaneousEnabledCheckbox:GetChecked()
+        if oldMiscellaneousDisabled ~= DriftOptions.miscellaneousDisabled then
             shouldReloadUI = true
         end
 
@@ -389,9 +455,15 @@ function DriftHelpers:SetupConfig()
         UIDropDownMenu_SetText(DriftOptionsPanel.config.scaleKeyDropdown, DROPDOWN_KEYS[UIDropDownMenu_GetSelectedID(DriftOptionsPanel.config.scaleKeyDropdown)])
 
         -- Optional Frames
+        DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
+
         DriftOptionsPanel.config.bagsEnabledCheckbox:SetChecked(not DriftOptions.bagsDisabled)
 
         DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
+
+        DriftOptionsPanel.config.windowsEnabledCheckbox:SetChecked(not DriftOptions.windowsDisabled)
+
+        DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)
     end
 end
 

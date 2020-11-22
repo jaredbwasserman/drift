@@ -9,7 +9,6 @@ CurseForge links:
 1. Bag behavior different in retail and classic
    1. containerFrameOffsetX logic only exists in retail, so classic is not accurate
 1. Add scaling support for WorldMapFrame
-1. Per frame reset
 1. Remove delay for Guild & Communities (retail) and Blizzard Groups (classic)
 1. Configurable variables
    1. Opacity while moving and scaling
@@ -19,7 +18,6 @@ CurseForge links:
    1. Make sure to update documentation
 1. Why do Drift Delegates make the mouse move the drag distance before moving their frame?
 1. Make frames optional
-   1. Buttons (Garrison minimap button for example)
    1. All the menu frames
    1. Achievements
 1. Make ObjectiveTrackerFrame (retail) have dynamic height instead of fixed 

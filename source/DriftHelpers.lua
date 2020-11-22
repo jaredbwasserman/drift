@@ -460,7 +460,7 @@ function DriftHelpers:ModifyFrames(frames)
     end
 
     -- ClearAllPoints is needed to avoid Lua errors
-    if EncounterJournalTooltip then
+    if not DriftOptions.windowsDisabled and EncounterJournalTooltip then
         EncounterJournalTooltip:ClearAllPoints()
     end
 
@@ -470,10 +470,14 @@ function DriftHelpers:ModifyFrames(frames)
     end
 
     -- Fix PVP talents list
-    DriftHelpers:FixPVPTalentsList(frames)
+    if not DriftOptions.windowsDisabled then
+        DriftHelpers:FixPVPTalentsList(frames)
+    end
 
     -- Fix PlayerChoiceFrame
-    DriftHelpers:FixPlayerChoiceFrame()
+    if not DriftOptions.windowsDisabled then
+        DriftHelpers:FixPlayerChoiceFrame()
+    end
 
     -- Fix Objectives
     if not DriftOptions.objectivesDisabled then
