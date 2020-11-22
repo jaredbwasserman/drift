@@ -65,6 +65,7 @@ You can enabled or disable frames by going to Interface -> AddOns -> Drift -> Op
 - Quest Log
 - Raid Info
 - Reputation Detail
+- Side Dressing Room
 - Social
 - Spellbook
 - Stable

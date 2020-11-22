@@ -20,7 +20,7 @@ CurseForge links:
 1. Make frames optional
    1. All the menu frames
    1. Achievements
-1. Make ObjectiveTrackerFrame (retail) have dynamic height instead of fixed 
+1. Make ObjectiveTrackerFrame (retail) have dynamic height instead of fixed
    1. Or if not dynamic, some height parameter in Drift Options
    1. Or figure out some other way of not dragging around empty space
 
@@ -49,7 +49,4 @@ CurseForge links:
    1. Interface / Interface Options
    1. Key Bindings
    1. AddOn List
-1. SideDressUpFrame Bugs
-   1. Opening Recruit A Friend Rewards SideDressUpFrame reverts positions (retail)
-   1. Opening Auction House SideDressUpFrame reverts positions (classic)
 1. Leveling up causes frame positions to reset

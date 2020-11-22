@@ -104,6 +104,7 @@ You can enabled or disable frames by going to Interface -> AddOns -> Drift -> Op
 - Reforging
 - Reputation Detail
 - Scrapper
+- Side Dressing Room
 - Social
 - Spellbook
 - Stable

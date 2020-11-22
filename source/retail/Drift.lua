@@ -242,6 +242,9 @@ local frames = {
     ["DressUpFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
+    ["SideDressUpFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
     ["AddonList"] = {
         DriftDisabledBy = "windowsDisabled",
     },
