@@ -206,7 +206,6 @@ local function resetScaleAndPosition(frame)
     local frameToMove = frame.DriftDelegate or frame
 
     if frameCannotBeModified(frameToMove) then
-        print("|cFFFFFF00Drift:|r Cannot modify " .. frameToMove:GetName() .. " during combat.")
         modifiedSet["unmodifiable"] = true
         return modifiedSet
     end
