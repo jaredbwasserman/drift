@@ -227,6 +227,15 @@ local frames = {
     ["BNToastFrame"] = {
         DriftDisabledBy = "miscellaneousDisabled",
     },
+    ["QuickJoinToastButton"] = { -- Social
+        DriftDisabledBy = "buttonsDisabled",
+    },
+    ["QuickJoinToastButton.Toast"] = {
+        DriftDisabledBy = "miscellaneousDisabled",
+    },
+    ["QuickJoinToastButton.Toast2"] = {
+        DriftDisabledBy = "miscellaneousDisabled",
+    },
     ["ReputationDetailFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
@@ -491,6 +500,21 @@ local frames = {
         DriftDisabledBy = "windowsDisabled",
     },
     ["WarfrontsPartyPoseFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["CovenantPreviewFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["CovenantRenownFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["CovenantSanctumFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["CovenantMissionFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["SoulbindViewer"] = {
         DriftDisabledBy = "windowsDisabled",
     },
 }

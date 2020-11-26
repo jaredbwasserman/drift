@@ -23,8 +23,14 @@ CurseForge links:
 1. Make ObjectiveTrackerFrame (retail) have dynamic height instead of fixed
    1. Or if not dynamic, some height parameter in Drift Options
    1. Or figure out some other way of not dragging around empty space
+1. Add Vehicle Seat Indicator
 
 ## Bugs
+1. VehicleSeatIndicator bugs
+   1. Moving VehicleSeatIndicator will move the ObjectiveTracker
+   1. Sometimes, the ObjectiveTracker gets hidden when the VehicleSeatIndicator moved
+   1. VehicleSeatIndicator stretches out sometimes because of SetPoint called elsewhere
+   1. VehicleSeatIndicator resets from other stuff too - probably managed
 1. Fix UIWidgetTopCenterContainerFrame (retail and classic)
    1. Dragging "Time Remaining" in BG causes the widget to get stuck in drag mode
    1. Sometimes the children do not get to be made movers, e.g. return from BG

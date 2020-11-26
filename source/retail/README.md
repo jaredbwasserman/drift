@@ -16,6 +16,7 @@ You can enabled or disable frames by going to Interface -> AddOns -> Drift -> Op
 ### Buttons (enabled by default)
 - Garrison Minimap
 - Open Ticket
+- Social
 
 ### Bags (disabled by default)
 - Bag 1
@@ -62,6 +63,10 @@ You can enabled or disable frames by going to Interface -> AddOns -> Drift -> Op
 - Clock
 - Collections
 - Color Picker
+- Covenant Mission
+- Covenant Preview
+- Covenant Renown
+- Covenant Sanctum
 - Customer Support
 - Dressing Room
 - Flight Map
@@ -106,6 +111,7 @@ You can enabled or disable frames by going to Interface -> AddOns -> Drift -> Op
 - Scrapper
 - Side Dressing Room
 - Social
+- Soulbind Viewer
 - Spellbook
 - Stable
 - System Options
@@ -125,6 +131,8 @@ You can enabled or disable frames by going to Interface -> AddOns -> Drift -> Op
 - Bonus Roll
 - Extra Ability Container
 - Player Power Bar Alt
+- Quick Join Toast 1
+- Quick Join Toast 2
 - Talking Head
 - UI Widget Top Center
 
