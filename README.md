@@ -26,6 +26,8 @@ CurseForge links:
 1. Add Vehicle Seat Indicator
 
 ## Bugs
+1. PlayerChoiceToggleButton reverts its position when PlayerChoiceFrame is shown
+   1. Happens in Torghast anima power choice
 1. VehicleSeatIndicator bugs
    1. Moving VehicleSeatIndicator will move the ObjectiveTracker
    1. Sometimes, the ObjectiveTracker gets hidden when the VehicleSeatIndicator moved

@@ -16,6 +16,7 @@ You can enabled or disable frames by going to Interface -> AddOns -> Drift -> Op
 ### Buttons (enabled by default)
 - Garrison Minimap
 - Open Ticket
+- Player Choice Toggle
 - Social
 
 ### Bags (disabled by default)
@@ -117,6 +118,7 @@ You can enabled or disable frames by going to Interface -> AddOns -> Drift -> Op
 - System Options
 - Tabard
 - Talents
+- Torghast Level Picker
 - Trade
 - Trade Skill
 - Transmogrify

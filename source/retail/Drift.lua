@@ -496,6 +496,21 @@ local frames = {
     ["PlayerChoiceFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
+    ["PlayerChoiceFrame.Option1.MouseOverOverride"] = {
+        DriftDisabledBy = "windowsDisabled",
+        DriftDelegate = "PlayerChoiceFrame",
+    },
+    ["PlayerChoiceFrame.Option2.MouseOverOverride"] = {
+        DriftDisabledBy = "windowsDisabled",
+        DriftDelegate = "PlayerChoiceFrame",
+    },
+    ["PlayerChoiceFrame.Option3.MouseOverOverride"] = {
+        DriftDisabledBy = "windowsDisabled",
+        DriftDelegate = "PlayerChoiceFrame",
+    },
+    ["PlayerChoiceToggleButton"] = {
+        DriftDisabledBy = "buttonsDisabled",
+    },
     ["ChromieTimeFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
@@ -515,6 +530,9 @@ local frames = {
         DriftDisabledBy = "windowsDisabled",
     },
     ["SoulbindViewer"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["TorghastLevelPickerFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
 }
