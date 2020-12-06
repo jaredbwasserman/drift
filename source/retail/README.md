@@ -109,6 +109,7 @@ You can enabled or disable frames by going to Interface -> AddOns -> Drift -> Op
 - Recruit A Friend Rewards
 - Reforging
 - Reputation Detail
+- Runecarving
 - Scrapper
 - Side Dressing Room
 - Social

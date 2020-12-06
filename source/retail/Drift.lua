@@ -535,6 +535,9 @@ local frames = {
     ["TorghastLevelPickerFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
+    ["RuneforgeFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
 }
 
 -- Frame for handling events
