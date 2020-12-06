@@ -11,7 +11,7 @@ This is the retail version of the addon. The classic version is [Drift (Classic)
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/R8d-QYxyN7Y/maxresdefault.jpg)](https://youtu.be/R8d-QYxyN7Y)
 
 ## Supported Frames
-You can enabled or disable frames by going to Interface -> AddOns -> Drift -> Options and then modifying the "Enabled Frames" section.
+You can enable or disable frames by going to Interface -> AddOns -> Drift -> Options and then modifying the "Enabled Frames" section.
 
 ### Buttons (enabled by default)
 - Garrison Minimap
