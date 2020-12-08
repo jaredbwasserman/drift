@@ -26,6 +26,7 @@ CurseForge links:
 1. Add Vehicle Seat Indicator
 
 ## Bugs
+1. Add Optional Reagent Side frame (retail) to avoid TradeSkill resetting
 1. PlayerChoiceToggleButton reverts its position when PlayerChoiceFrame is shown
    1. Happens in Torghast anima power choice
 1. VehicleSeatIndicator bugs
