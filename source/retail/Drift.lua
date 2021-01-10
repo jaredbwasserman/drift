@@ -327,8 +327,9 @@ local frames = {
     ["PetitionFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
-    ["ColorPickerFrame"] = {
+    ["ColorPickerFrame.Header"] = {
         DriftDisabledBy = "windowsDisabled",
+        DriftDelegate = "ColorPickerFrame"
     },
     ["AzeriteEmpoweredItemUI"] = {
         DriftDisabledBy = "windowsDisabled",

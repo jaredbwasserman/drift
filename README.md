@@ -51,7 +51,7 @@ CurseForge links:
    1. Character model has incorrect size after scaling CharacterFrame
    1. Item models have incorrect size after scaling CollectionsJournal
 1. Frames with tabs move from hotkey when on other tab
-1. ColorPickerFrame moves when it's not supposed to
+1. ColorPickerFrame moves when it's not supposed to (classic)
 1. Some frames do not move depending on addons loaded
    1. TimeManagerFrame (retail and classic)
    1. TalkingHeadFrame (retail)
