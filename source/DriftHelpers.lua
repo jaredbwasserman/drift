@@ -177,13 +177,15 @@ local function onDragStop(frame)
     -- Save position
     if (frameToMove.DriftIsMoving) then
         local point, _, relativePoint, xOfs, yOfs = frameToMove:GetPoint()
-        DriftPoints[frameToMove:GetName()] = {
-            ["point"] = point,
-            ["relativeTo"] = "UIParent",
-            ["relativePoint"] = relativePoint,
-            ["xOfs"] = xOfs,
-            ["yOfs"] = yOfs
-        }
+        if (point ~= nil and relativePoint ~= nil and xOfs ~= nil and yOfs ~= nil) then
+            DriftPoints[frameToMove:GetName()] = {
+                ["point"] = point,
+                ["relativeTo"] = "UIParent",
+                ["relativePoint"] = relativePoint,
+                ["xOfs"] = xOfs,
+                ["yOfs"] = yOfs
+            }
+        end
     end
     frameToMove.DriftIsMoving = false
 
