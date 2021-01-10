@@ -17,6 +17,7 @@ You can enable or disable frames by going to Interface -> AddOns -> Drift -> Opt
 - Garrison Minimap
 - Open Ticket
 - Player Choice Toggle
+- Return to Graveyard
 - Social
 
 ### Bags (disabled by default)

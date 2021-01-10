@@ -491,6 +491,9 @@ local frames = {
     ["BonusRollFrame"] = {
         DriftDisabledBy = "miscellaneousDisabled",
     },
+    ["GhostFrame"] = {
+        DriftDisabledBy = "buttonsDisabled",
+    },
     ["ObliterumForgeFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
