@@ -42,6 +42,7 @@ You can enable or disable frames by going to Interface -> AddOns -> Drift -> Opt
 - AddOn List
 - Adventure Guide
 - Allied Races
+- Anima Diversion
 - Archaeology
 - Artifact
 - Auction House
@@ -126,6 +127,7 @@ You can enable or disable frames by going to Interface -> AddOns -> Drift -> Opt
 - Void Storage
 - Warboard Quest Choice
 - Warfront Party Pose
+- Weekly Rewards
 - What's New
 - World Map
 

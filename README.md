@@ -25,8 +25,6 @@ CurseForge links:
    1. Or figure out some other way of not dragging around empty space
 1. Add Vehicle Seat Indicator
 1. Add frames
-   1. AnimaDiversionFrame
-   1. WeeklyRewardsFrame
    1. GhostFrame
 
 ## Bugs

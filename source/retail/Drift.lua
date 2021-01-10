@@ -539,6 +539,12 @@ local frames = {
     ["RuneforgeFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
+    ["WeeklyRewardsFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["AnimaDiversionFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
 }
 
 -- Frame for handling events
