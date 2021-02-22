@@ -24,6 +24,7 @@ CurseForge links:
    1. Or if not dynamic, some height parameter in Drift Options
    1. Or figure out some other way of not dragging around empty space
 1. Add Vehicle Seat Indicator
+1. Add MacroPopupFrame
 
 ## Bugs
 1. PlayerChoiceToggleButton reverts its position when PlayerChoiceFrame is shown
