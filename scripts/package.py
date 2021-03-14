@@ -59,8 +59,8 @@ interface_classic = get_toc_info(source_toc_classic, 'Interface')
 timestamp = str(math.trunc(time.time()))
 
 # Destinations
-dest_name_retail = '-'.join(['Drift', 'retail', version_retail, interface_retail, timestamp])
-dest_name_classic = '-'.join(['Drift', 'classic', version_classic, interface_classic, timestamp])
+dest_name_retail = '-'.join(['drift', 'retail', version_retail, interface_retail, timestamp])
+dest_name_classic = '-'.join(['drift', 'classic', version_classic, interface_classic, timestamp])
 dest_dir_retail = os.path.join(dest_dir, dest_name_retail)
 dest_dir_classic = os.path.join(dest_dir, dest_name_classic)
 dest_helpers_retail = os.path.join(dest_dir_retail, 'DriftHelpers.lua')
