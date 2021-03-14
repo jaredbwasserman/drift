@@ -148,4 +148,4 @@ You can enable or disable frames by going to Interface -> AddOns -> Drift -> Opt
 Reset position and scale for all modified frames.
 
 ## Bugs and Feature Requests
-Please use the [GitHub issues page](https://github.com/jaredbwasserman/Drift/issues) to report bugs or request features.
+Please use the [GitHub issues page](https://github.com/jaredbwasserman/drift/issues) to report bugs or request features.
