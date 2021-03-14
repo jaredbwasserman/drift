@@ -5,7 +5,7 @@ Left-click and drag anywhere to move a frame.
 Right-click and drag up or down to scale a frame.  
 Position and scale for each frame are saved.
 
-This is the classic version of the addon. The retail version is [Drift (Retail)](https://www.curseforge.com/wow/addons/drift).
+This is the classic version of the addon. The retail version is [Drift](https://www.curseforge.com/wow/addons/drift).
 
 ## Demo Video
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/R8d-QYxyN7Y/maxresdefault.jpg)](https://youtu.be/R8d-QYxyN7Y)
