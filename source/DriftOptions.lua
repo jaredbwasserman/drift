@@ -98,6 +98,9 @@ end
 
 -- Global functions
 function DriftHelpers:SetupConfig()
+    -- Keep track of retail or classic
+    local isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
+
     -- Initialize config options
     if DriftOptions.frameDragIsLocked == nil then
         DriftOptions.frameDragIsLocked = DriftOptions.framesAreLocked
@@ -317,6 +320,12 @@ function DriftHelpers:SetupConfig()
     )
     DriftOptionsPanel.config.bagsEnabledCheckbox:SetChecked(not DriftOptions.bagsDisabled)
 
+    local objectivesTitle = " Objective Tracker"
+    local objectivesDesc = "Whether Drift will modify the Objective Tracker. Enabling or disabling the Objective Tracker will cause the UI to reload."
+    if (isClassic) then
+        objectivesTitle = " Quest Watch List"
+        objectivesDesc = "Whether Drift will modify the Quest Watch List. Enabling or disabling the Quest Watch List will cause the UI to reload."
+    end
     DriftOptionsPanel.config.objectivesEnabledCheckbox = createCheckbox(
         "ObjectivesEnabledCheckbox",
         "TOPLEFT",
@@ -324,8 +333,8 @@ function DriftHelpers:SetupConfig()
         "TOPLEFT",
         13,
         -240,
-        " Objective Tracker",
-        "Whether Drift will modify the Objective Tracker. Enabling or disabling the Objective Tracker will cause the UI to reload.",
+        objectivesTitle,
+        objectivesDesc,
         nil
     )
     DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)

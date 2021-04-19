@@ -1,3 +1,5 @@
+Please download the latest classic release from [Drift](https://www.curseforge.com/wow/addons/drift).
+
 ## Description
 Modifies default UI frames so you can click and drag to move and scale.
 

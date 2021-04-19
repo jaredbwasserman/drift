@@ -50,8 +50,8 @@ source_options = os.path.join(source_dir, 'DriftOptions.lua')
 # Get version numbers and interface numbers
 source_toc_retail = os.path.join(source_dir_retail, 'Drift.toc')
 source_toc_classic = os.path.join(source_dir_classic, 'Drift.toc')
-version_retail = get_toc_info(source_toc_retail, 'Version')
-version_classic = get_toc_info(source_toc_classic, 'Version')
+version_retail = 'v' + get_toc_info(source_toc_retail, 'Version')
+version_classic = 'v' + get_toc_info(source_toc_classic, 'Version')
 interface_retail = get_toc_info(source_toc_retail, 'Interface')
 interface_classic = get_toc_info(source_toc_classic, 'Interface')
 
@@ -59,8 +59,8 @@ interface_classic = get_toc_info(source_toc_classic, 'Interface')
 timestamp = str(math.trunc(time.time()))
 
 # Destinations
-dest_name_retail = '-'.join(['drift', 'retail', version_retail, interface_retail, timestamp])
-dest_name_classic = '-'.join(['drift', 'classic', version_classic, interface_classic, timestamp])
+dest_name_retail = '-'.join(['drift', 'retail', version_retail])
+dest_name_classic = '-'.join(['drift', 'classic', version_classic])
 dest_dir_retail = os.path.join(dest_dir, dest_name_retail)
 dest_dir_classic = os.path.join(dest_dir, dest_name_classic)
 dest_helpers_retail = os.path.join(dest_dir_retail, 'DriftHelpers.lua')
