@@ -491,10 +491,12 @@ function DriftHelpers:SetupConfig()
             shouldReloadUI = true
         end
 
-        local oldPlayerChoiceDisabled = DriftOptions.playerChoiceDisabled
-        DriftOptions.playerChoiceDisabled = not DriftOptionsPanel.config.playerChoiceEnabledCheckbox:GetChecked()
-        if oldPlayerChoiceDisabled ~= DriftOptions.playerChoiceDisabled then
-            shouldReloadUI = true
+        if (isRetail) then
+            local oldPlayerChoiceDisabled = DriftOptions.playerChoiceDisabled
+            DriftOptions.playerChoiceDisabled = not DriftOptionsPanel.config.playerChoiceEnabledCheckbox:GetChecked()
+            if oldPlayerChoiceDisabled ~= DriftOptions.playerChoiceDisabled then
+                shouldReloadUI = true
+            end
         end
 
         -- Reload if needed
