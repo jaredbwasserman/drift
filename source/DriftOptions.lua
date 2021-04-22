@@ -114,17 +114,20 @@ function DriftHelpers:SetupConfig()
     if DriftOptions.buttonsDisabled == nil then
         DriftOptions.buttonsDisabled = false
     end
+    if DriftOptions.windowsDisabled == nil then
+        DriftOptions.windowsDisabled = false
+    end
+    if DriftOptions.miscellaneousDisabled == nil then
+        DriftOptions.miscellaneousDisabled = false
+    end
     if DriftOptions.bagsDisabled == nil then
         DriftOptions.bagsDisabled = true
     end
     if DriftOptions.objectivesDisabled == nil then
         DriftOptions.objectivesDisabled = true
     end
-    if DriftOptions.windowsDisabled == nil then
-        DriftOptions.windowsDisabled = false
-    end
-    if DriftOptions.miscellaneousDisabled == nil then
-        DriftOptions.miscellaneousDisabled = false
+    if DriftOptions.playerChoiceDisabled == nil then
+        DriftOptions.playerChoiceDisabled = true
     end
 
     -- Make parent panel
@@ -307,13 +310,39 @@ function DriftHelpers:SetupConfig()
     )
     DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
 
+    DriftOptionsPanel.config.windowsEnabledCheckbox = createCheckbox(
+        "WindowsEnabledCheckbox",
+        "TOPLEFT",
+        DriftOptionsPanel.optionspanel,
+        "TOPLEFT",
+        13,
+        -210,
+        " Windows",
+        "Whether Drift will modify Windows (example: Talents). Enabling or disabling Windows will cause the UI to reload.",
+        nil
+    )
+    DriftOptionsPanel.config.windowsEnabledCheckbox:SetChecked(not DriftOptions.windowsDisabled)
+
+    DriftOptionsPanel.config.miscellaneousEnabledCheckbox = createCheckbox(
+        "MiscellaneousEnabledCheckbox",
+        "TOPLEFT",
+        DriftOptionsPanel.optionspanel,
+        "TOPLEFT",
+        13,
+        -240,
+        " Miscellaneous",
+        "Whether Drift will modify Miscellaneous frames (example: Battle.net Toast). Enabling or disabling Miscellaneous frames will cause the UI to reload.",
+        nil
+    )
+    DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)
+
     DriftOptionsPanel.config.bagsEnabledCheckbox = createCheckbox(
         "BagsEnabledCheckbox",
         "TOPLEFT",
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
         13,
-        -210,
+        -270,
         " Bags",
         "Whether Drift will modify Bags. Enabling or disabling Bags will cause the UI to reload.",
         nil
@@ -332,38 +361,27 @@ function DriftHelpers:SetupConfig()
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
         13,
-        -240,
+        -300,
         objectivesTitle,
         objectivesDesc,
         nil
     )
     DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
 
-    DriftOptionsPanel.config.windowsEnabledCheckbox = createCheckbox(
-        "WindowsEnabledCheckbox",
-        "TOPLEFT",
-        DriftOptionsPanel.optionspanel,
-        "TOPLEFT",
-        13,
-        -270,
-        " Windows",
-        "Whether Drift will modify Windows (example: Talents). Enabling or disabling Windows will cause the UI to reload.",
-        nil
-    )
-    DriftOptionsPanel.config.windowsEnabledCheckbox:SetChecked(not DriftOptions.windowsDisabled)
-
-    DriftOptionsPanel.config.miscellaneousEnabledCheckbox = createCheckbox(
-        "MiscellaneousEnabledCheckbox",
-        "TOPLEFT",
-        DriftOptionsPanel.optionspanel,
-        "TOPLEFT",
-        13,
-        -300,
-        " Miscellaneous",
-        "Whether Drift will modify Miscellaneous frames (example: Battle.net Toast). Enabling or disabling Miscellaneous frames will cause the UI to reload.",
-        nil
-    )
-    DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)
+    if (not isClassic) then
+        DriftOptionsPanel.config.playerChoiceEnabledCheckbox = createCheckbox(
+            "PlayerChoiceEnabledCheckbox",
+            "TOPLEFT",
+            DriftOptionsPanel.optionspanel,
+            "TOPLEFT",
+            13,
+            -330,
+            " Player Choice",
+            "Whether Drift will modify Player Choice. Enabling or disabling Player Choice will cause the UI to reload.",
+            nil
+        )
+        DriftOptionsPanel.config.playerChoiceEnabledCheckbox:SetChecked(not DriftOptions.playerChoiceDisabled)
+    end
 
     -- Reset button
     StaticPopupDialogs["DRIFT_RESET_POSITIONS"] = {
@@ -413,6 +431,18 @@ function DriftHelpers:SetupConfig()
             shouldReloadUI = true
         end
 
+        local oldWindowsDisabled = DriftOptions.windowsDisabled
+        DriftOptions.windowsDisabled = not DriftOptionsPanel.config.windowsEnabledCheckbox:GetChecked()
+        if oldWindowsDisabled ~= DriftOptions.windowsDisabled then
+            shouldReloadUI = true
+        end
+
+        local oldMiscellaneousDisabled = DriftOptions.miscellaneousDisabled
+        DriftOptions.miscellaneousDisabled = not DriftOptionsPanel.config.miscellaneousEnabledCheckbox:GetChecked()
+        if oldMiscellaneousDisabled ~= DriftOptions.miscellaneousDisabled then
+            shouldReloadUI = true
+        end
+
         local oldBagsDisabled = DriftOptions.bagsDisabled
         DriftOptions.bagsDisabled = not DriftOptionsPanel.config.bagsEnabledCheckbox:GetChecked()
         if oldBagsDisabled ~= DriftOptions.bagsDisabled then
@@ -433,15 +463,9 @@ function DriftHelpers:SetupConfig()
             shouldReloadUI = true
         end
 
-        local oldWindowsDisabled = DriftOptions.windowsDisabled
-        DriftOptions.windowsDisabled = not DriftOptionsPanel.config.windowsEnabledCheckbox:GetChecked()
-        if oldWindowsDisabled ~= DriftOptions.windowsDisabled then
-            shouldReloadUI = true
-        end
-
-        local oldMiscellaneousDisabled = DriftOptions.miscellaneousDisabled
-        DriftOptions.miscellaneousDisabled = not DriftOptionsPanel.config.miscellaneousEnabledCheckbox:GetChecked()
-        if oldMiscellaneousDisabled ~= DriftOptions.miscellaneousDisabled then
+        local oldPlayerChoiceDisabled = DriftOptions.playerChoiceDisabled
+        DriftOptions.playerChoiceDisabled = not DriftOptionsPanel.config.playerChoiceEnabledCheckbox:GetChecked()
+        if oldPlayerChoiceDisabled ~= DriftOptions.playerChoiceDisabled then
             shouldReloadUI = true
         end
 
@@ -466,13 +490,15 @@ function DriftHelpers:SetupConfig()
         -- Optional Frames
         DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
 
+        DriftOptionsPanel.config.windowsEnabledCheckbox:SetChecked(not DriftOptions.windowsDisabled)
+
+        DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)
+
         DriftOptionsPanel.config.bagsEnabledCheckbox:SetChecked(not DriftOptions.bagsDisabled)
 
         DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
 
-        DriftOptionsPanel.config.windowsEnabledCheckbox:SetChecked(not DriftOptions.windowsDisabled)
-
-        DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)
+        DriftOptionsPanel.config.palyerChoiceEnabledCheckbox:SetChecked(not DriftOptions.playerChoiceDisabled)
     end
 end
 

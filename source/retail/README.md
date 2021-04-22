@@ -18,25 +18,6 @@ You can enable or disable frames by going to Interface -> AddOns -> Drift -> Opt
 - Return to Graveyard (retail)
 - Social (retail)
 
-### Bags (disabled by default)
-- Bag 1 (retail, classic)
-- Bag 2 (retail, classic)
-- Bag 3 (retail, classic)
-- Bag 4 (retail, classic)
-- Bag 5 (retail, classic)
-- Bag 6 (retail, classic)
-- Bag 7 (retail, classic)
-- Bag 8 (retail, classic)
-- Bag 9 (retail, classic)
-- Bag 10 (retail, classic)
-- Bag 11 (retail, classic)
-- Bag 12 (retail, classic)
-- Bag 13 (retail, classic)
-
-### Objectives (disabled by default)
-- Objective Tracker (retail)
-- Quest Watch List (classic)
-
 ### Windows (enabled by default)
 - Achievements (retail)
 - AddOn List (retail, classic)
@@ -104,7 +85,6 @@ You can enable or disable frames by going to Interface -> AddOns -> Drift -> Opt
 - Open Mail (retail, classic)
 - Order Advancement (retail)
 - Petition (retail, classic)
-- Player Choice (retail)
 - PVP Results (retail)
 - PVP Scoreboard (retail, classic)
 - Quest (retail, classic)
@@ -150,6 +130,28 @@ You can enable or disable frames by going to Interface -> AddOns -> Drift -> Opt
 - Quick Join Toast 2 (retail)
 - Talking Head (retail)
 - UI Widget Top Center (retail, classic)
+
+### Bags (disabled by default)
+- Bag 1 (retail, classic)
+- Bag 2 (retail, classic)
+- Bag 3 (retail, classic)
+- Bag 4 (retail, classic)
+- Bag 5 (retail, classic)
+- Bag 6 (retail, classic)
+- Bag 7 (retail, classic)
+- Bag 8 (retail, classic)
+- Bag 9 (retail, classic)
+- Bag 10 (retail, classic)
+- Bag 11 (retail, classic)
+- Bag 12 (retail, classic)
+- Bag 13 (retail, classic)
+
+### Objectives (disabled by default)
+- Objective Tracker (retail)
+- Quest Watch List (classic)
+
+### Player Choice (disabled by default)
+- Player Choice (retail)
 
 ## Slash Commands
 ### Reset Frames

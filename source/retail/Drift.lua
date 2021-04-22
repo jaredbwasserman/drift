@@ -502,18 +502,18 @@ local frames = {
         DriftDisabledBy = "windowsDisabled",
     },
     ["PlayerChoiceFrame"] = {
-        DriftDisabledBy = "windowsDisabled",
+        DriftDisabledBy = "playerChoiceDisabled",
     },
     ["PlayerChoiceFrame.Option1.MouseOverOverride"] = {
-        DriftDisabledBy = "windowsDisabled",
+        DriftDisabledBy = "playerChoiceDisabled",
         DriftDelegate = "PlayerChoiceFrame",
     },
     ["PlayerChoiceFrame.Option2.MouseOverOverride"] = {
-        DriftDisabledBy = "windowsDisabled",
+        DriftDisabledBy = "playerChoiceDisabled",
         DriftDelegate = "PlayerChoiceFrame",
     },
     ["PlayerChoiceFrame.Option3.MouseOverOverride"] = {
-        DriftDisabledBy = "windowsDisabled",
+        DriftDisabledBy = "playerChoiceDisabled",
         DriftDelegate = "PlayerChoiceFrame",
     },
     ["PlayerChoiceToggleButton"] = {
