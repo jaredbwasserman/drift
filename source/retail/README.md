@@ -154,8 +154,16 @@ You can enable or disable frames by going to Interface -> AddOns -> Drift -> Opt
 - Player Choice (retail)
 
 ## Slash Commands
+### Print Help
+`/drift help`  
+Print help message.
+
+### Print Version
+`/drift version`  
+Print addon version.
+
 ### Reset Frames
-`/driftreset`  
+`/drift reset`  
 Reset position and scale for all modified frames.
 
 ## Bugs and Feature Requests

@@ -8,6 +8,9 @@ local DriftOptionsPanel = {}
 DriftOptionsPanel.config = {}
 
 -- Variables for slash commands
+local DRIFT = "DRIFT"
+SLASH_DRIFT1 = "/drift"
+
 local DRIFTRESET = "DRIFTRESET"
 SLASH_DRIFTRESET1 = "/driftreset"
 
@@ -99,6 +102,7 @@ end
 -- Global functions
 function DriftHelpers:SetupConfig()
     -- Keep track of retail or classic
+    local isRetail = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE)
     local isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
 
     -- Initialize config options
@@ -195,20 +199,44 @@ function DriftHelpers:SetupConfig()
     InterfaceOptions_AddCategory(DriftOptionsPanel.slashpanel)
 
     -- Slash Commands panel content
+    local slashHelpTitle = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
+    slashHelpTitle:SetFontObject("GameFontNormal")
+    slashHelpTitle:SetText("Print Help")
+    slashHelpTitle:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -45)
+    local slashHelpCommand = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
+    slashHelpCommand:SetFontObject("GameFontHighlight")
+    slashHelpCommand:SetText("/drift help")
+    slashHelpCommand:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -65)
+    local slashHelpInfo = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
+    slashHelpInfo:SetFontObject("GameFontHighlight")
+    slashHelpInfo:SetText("Print help message.")
+    slashHelpInfo:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -80)
+
+    local slashVersionTitle = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
+    slashVersionTitle:SetFontObject("GameFontNormal")
+    slashVersionTitle:SetText("Print Version")
+    slashVersionTitle:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -110)
+    local slashVersionCommand = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
+    slashVersionCommand:SetFontObject("GameFontHighlight")
+    slashVersionCommand:SetText("/drift version")
+    slashVersionCommand:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -130)
+    local slashVersionInfo = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
+    slashVersionInfo:SetFontObject("GameFontHighlight")
+    slashVersionInfo:SetText("Print addon version.")
+    slashVersionInfo:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -145)
+
     local slashResetTitle = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
     slashResetTitle:SetFontObject("GameFontNormal")
     slashResetTitle:SetText("Reset Frames")
-    slashResetTitle:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -45)
-
+    slashResetTitle:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -175)
     local slashResetCommand = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
     slashResetCommand:SetFontObject("GameFontHighlight")
-    slashResetCommand:SetText("/driftreset")
-    slashResetCommand:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -65)
-
+    slashResetCommand:SetText("/drift reset")
+    slashResetCommand:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -195)
     local slashResetInfo = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
     slashResetInfo:SetFontObject("GameFontHighlight")
     slashResetInfo:SetText("Reset position and scale for all modified frames.")
-    slashResetInfo:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -80)
+    slashResetInfo:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -210)
 
     -- Options panel
     DriftOptionsPanel.optionspanel = CreateFrame("Frame", "DriftOptionsPanelChild", DriftOptionsPanel.panel)
@@ -368,7 +396,7 @@ function DriftHelpers:SetupConfig()
     )
     DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
 
-    if (not isClassic) then
+    if (isRetail) then
         DriftOptionsPanel.config.playerChoiceEnabledCheckbox = createCheckbox(
             "PlayerChoiceEnabledCheckbox",
             "TOPLEFT",
@@ -506,5 +534,9 @@ end
 --------------------------------------------------------------------------------
 -- Slash Commands
 --------------------------------------------------------------------------------
+
+SlashCmdList[DRIFT] = function(msg, editBox)
+    DriftHelpers:HandleSlashCommands(msg, editBox)
+end
 
 SlashCmdList[DRIFTRESET] = DriftHelpers.DeleteDriftState

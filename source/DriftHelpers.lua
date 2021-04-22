@@ -368,6 +368,41 @@ function DriftHelpers:DeleteDriftState()
     ReloadUI()
 end
 
+function DriftHelpers:PrintAllowedCommands()
+    local commandList = "        help        Print help message.\n" ..
+    "        version    Print addon version.\n" ..
+    "        reset       Reset position and scale for all modified frames."
+
+    print("|cFFFFFF00Drift:|r Allowed commands are:\n" .. commandList)
+end
+
+function DriftHelpers:PrintHelp()
+    local instructions = "        Left-click and drag anywhere to move a frame.\n" ..
+        "        Right-click and drag up or down to scale a frame.\n" ..
+        "        Position and scale for each frame are saved."
+
+    print("|cFFFFFF00Drift:|r Modifies default UI frames so you can click and drag to move and scale.\n" .. instructions)
+    DriftHelpers:PrintAllowedCommands()
+end
+
+function DriftHelpers:PrintVersion()
+    print("|cFFFFFF00Drift:|r Version " .. GetAddOnMetadata("Drift", "Version"))
+end
+
+function DriftHelpers:HandleSlashCommands(msg, editBox)
+    local cmd = msg
+    if (cmd == nil or cmd == "" or cmd == "help") then
+        DriftHelpers:PrintHelp()
+    elseif (cmd == "version") then
+        DriftHelpers:PrintVersion()
+    elseif (cmd == "reset") then
+        DriftHelpers:DeleteDriftState()
+    else
+        print("|cFFFFFF00Drift:|r Unknown command '" .. cmd .. "'")
+        DriftHelpers:PrintAllowedCommands()
+    end
+end
+
 function DriftHelpers:ModifyFrames(frames)
     -- Do not modify frames during combat
     if (getInCombatLockdown()) then

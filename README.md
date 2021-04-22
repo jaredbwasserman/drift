@@ -12,8 +12,6 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Opacity while moving and scaling
    1. Max and min scale
    1. Scale increment
-1. Add "/drift reset" alias to "/driftreset" and maybe more commands
-   1. Make sure to update documentation
 1. Why do Drift Delegates make the mouse move the drag distance before moving their frame?
 1. Make frames optional
    1. All the menu frames
