@@ -359,7 +359,7 @@ function DriftHelpers:SetupConfig()
         13,
         -240,
         " Miscellaneous",
-        "Whether Drift will modify Miscellaneous frames (example: Battle.net Toast). Enabling or disabling Miscellaneous frames will cause the UI to reload.",
+        "Whether Drift will modify Miscellaneous Frames (example: Battle.net Toast). Enabling or disabling Miscellaneous Frames will cause the UI to reload.",
         nil
     )
     DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)
@@ -405,7 +405,7 @@ function DriftHelpers:SetupConfig()
             13,
             -330,
             " Player Choice",
-            "Whether Drift will modify Player Choice. Enabling or disabling Player Choice will cause the UI to reload.",
+            "Whether Drift will modify the Player Choice Frame. Enabling or disabling the Player Choice Frame will cause the UI to reload.",
             nil
         )
         DriftOptionsPanel.config.playerChoiceEnabledCheckbox:SetChecked(not DriftOptions.playerChoiceDisabled)
