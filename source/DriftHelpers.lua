@@ -377,13 +377,24 @@ function DriftHelpers:PrintAllowedCommands()
 end
 
 function DriftHelpers:PrintHelp()
+    -- Keep track of retail or classic
+    local isRetail = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE)
+    local isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
+
     local instructions = "        Left-click and drag anywhere to move a frame.\n" ..
         "        Right-click and drag up or down to scale a frame.\n" ..
         "        Position and scale for each frame are saved."
 
     print("|cFFFFFF00Drift:|r Modifies default UI frames so you can click and drag to move and scale.\n" .. instructions)
     DriftHelpers:PrintAllowedCommands()
-    print("|cFFFFFF00Drift:|r For additional configuration options, visit Interface -> AddOns -> Drift -> Options.")
+
+    local interfaceOptionsLabel = "Interface"
+    if (isRetail) then
+        interfaceOptionsLabel = "Interface"
+    elseif (isClassic) then
+        interfaceOptionsLabel = "Interface Options"
+    end
+    print("|cFFFFFF00Drift:|r For additional configuration options, visit " .. interfaceOptionsLabel .. " -> AddOns -> Drift -> Options.")
 end
 
 function DriftHelpers:PrintVersion()
