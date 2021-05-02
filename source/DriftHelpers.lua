@@ -383,6 +383,7 @@ function DriftHelpers:PrintHelp()
 
     print("|cFFFFFF00Drift:|r Modifies default UI frames so you can click and drag to move and scale.\n" .. instructions)
     DriftHelpers:PrintAllowedCommands()
+    print("|cFFFFFF00Drift:|r For additional configuration options, visit Interface -> AddOns -> Drift -> Options.")
 end
 
 function DriftHelpers:PrintVersion()
