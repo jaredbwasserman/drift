@@ -122,7 +122,7 @@ function DriftHelpers:SetupConfig()
         DriftOptions.bagsDisabled = true
     end
     if DriftOptions.buttonsDisabled == nil then
-        DriftOptions.buttonsDisabled = false
+        DriftOptions.buttonsDisabled = true
     end
     if DriftOptions.objectivesDisabled == nil then
         DriftOptions.objectivesDisabled = true
@@ -131,7 +131,7 @@ function DriftHelpers:SetupConfig()
         DriftOptions.playerChoiceDisabled = true
     end
     if DriftOptions.miscellaneousDisabled == nil then
-        DriftOptions.miscellaneousDisabled = false
+        DriftOptions.miscellaneousDisabled = true
     end
 
     -- Make parent panel

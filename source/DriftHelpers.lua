@@ -49,7 +49,7 @@ end
 
 local function shouldMove(frame)
     if frameCannotBeModified(frame) then
-        print("|cff00ffffDrift:|r Cannot move " .. frame:GetName() .. " during combat.")
+        print("|cffFFC125Drift:|r Cannot move " .. frame:GetName() .. " during combat.")
         return false
     end
 
@@ -68,7 +68,7 @@ end
 
 local function shouldScale(frame)
     if frameCannotBeModified(frame) then
-        print("|cff00ffffDrift:|r Cannot scale " .. frame:GetName() .. " during combat.")
+        print("|cffFFC125Drift:|r Cannot scale " .. frame:GetName() .. " during combat.")
         return false
     end
 
@@ -148,7 +148,7 @@ local function onDragStart(frame, button)
 
         -- Prevent unscalable frames from being scaled
         if frameToMove.DriftUnscalable then
-            print("|cff00ffffDrift:|r Scaling not supported for " .. frameToMove:GetName() .. ".")
+            print("|cffFFC125Drift:|r Scaling not supported for " .. frameToMove:GetName() .. ".")
             return
         end
 
@@ -369,11 +369,11 @@ function DriftHelpers:DeleteDriftState()
 end
 
 function DriftHelpers:PrintAllowedCommands()
-    print("|cff00ffffDrift:|r Allowed commands:")
-    print("|cff00ffff/drift|r - Print allowed commands.")
-    print("|cff00ffff/drift help|r - Print help message.")
-    print("|cff00ffff/drift version|r - Print addon version.")
-    print("|cff00ffff/drift reset|r - Reset position and scale for all modified frames.")
+    print("|cffFFC125Drift:|r Allowed commands:")
+    print("|cffFFC125/drift|r - Print allowed commands.")
+    print("|cffFFC125/drift help|r - Print help message.")
+    print("|cffFFC125/drift version|r - Print addon version.")
+    print("|cffFFC125/drift reset|r - Reset position and scale for all modified frames.")
 end
 
 function DriftHelpers:PrintHelp()
@@ -388,7 +388,7 @@ function DriftHelpers:PrintHelp()
         interfaceOptionsLabel = "Interface Options"
     end
 
-    print("|cff00ffffDrift:|r Modifies default UI frames so you can click and drag to move and scale. " ..
+    print("|cffFFC125Drift:|r Modifies default UI frames so you can click and drag to move and scale. " ..
           "Left-click and drag anywhere to move a frame. " ..
           "Right-click and drag up or down to scale a frame. " ..
           "Position and scale for each frame are saved. " ..
@@ -397,7 +397,7 @@ function DriftHelpers:PrintHelp()
 end
 
 function DriftHelpers:PrintVersion()
-    print("|cff00ffffDrift:|r Version " .. GetAddOnMetadata("Drift", "Version"))
+    print("|cffFFC125Drift:|r Version " .. GetAddOnMetadata("Drift", "Version"))
 end
 
 function DriftHelpers:HandleSlashCommands(msg, editBox)
@@ -411,7 +411,7 @@ function DriftHelpers:HandleSlashCommands(msg, editBox)
     elseif (cmd == "reset") then
         DriftHelpers:DeleteDriftState()
     else
-        print("|cff00ffffDrift:|r Unknown command '" .. cmd .. "'")
+        print("|cffFFC125Drift:|r Unknown command '" .. cmd .. "'")
         DriftHelpers:PrintAllowedCommands()
     end
 end
