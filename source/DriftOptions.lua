@@ -115,23 +115,23 @@ function DriftHelpers:SetupConfig()
     if DriftOptions.scaleKey == nil then
         DriftOptions.scaleKey = DriftOptions.dragKey
     end
-    if DriftOptions.buttonsDisabled == nil then
-        DriftOptions.buttonsDisabled = false
-    end
     if DriftOptions.windowsDisabled == nil then
         DriftOptions.windowsDisabled = false
     end
-    if DriftOptions.miscellaneousDisabled == nil then
-        DriftOptions.miscellaneousDisabled = false
-    end
     if DriftOptions.bagsDisabled == nil then
         DriftOptions.bagsDisabled = true
+    end
+    if DriftOptions.buttonsDisabled == nil then
+        DriftOptions.buttonsDisabled = false
     end
     if DriftOptions.objectivesDisabled == nil then
         DriftOptions.objectivesDisabled = true
     end
     if DriftOptions.playerChoiceDisabled == nil then
         DriftOptions.playerChoiceDisabled = true
+    end
+    if DriftOptions.miscellaneousDisabled == nil then
+        DriftOptions.miscellaneousDisabled = false
     end
 
     -- Make parent panel
@@ -187,56 +187,6 @@ function DriftHelpers:SetupConfig()
     driftOptionsAuthorContent:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 75, -150)
 
     InterfaceOptions_AddCategory(DriftOptionsPanel.panel)
-
-    -- Slash Commands panel
-    DriftOptionsPanel.slashpanel = CreateFrame("Frame", "DriftSlashCommandsPanelChild", DriftOptionsPanel.panel)
-    DriftOptionsPanel.slashpanel.name = "Slash Commands"
-    DriftOptionsPanel.slashpanel.parent = DriftOptionsPanel.panel.name
-    local driftSlashChildTitle = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
-    driftSlashChildTitle:SetFontObject("GameFontNormalLarge")
-    driftSlashChildTitle:SetText("Slash Commands")
-    driftSlashChildTitle:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -15)
-    InterfaceOptions_AddCategory(DriftOptionsPanel.slashpanel)
-
-    -- Slash Commands panel content
-    local slashHelpTitle = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
-    slashHelpTitle:SetFontObject("GameFontNormal")
-    slashHelpTitle:SetText("Print Help")
-    slashHelpTitle:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -45)
-    local slashHelpCommand = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
-    slashHelpCommand:SetFontObject("GameFontHighlight")
-    slashHelpCommand:SetText("/drift help")
-    slashHelpCommand:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -65)
-    local slashHelpInfo = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
-    slashHelpInfo:SetFontObject("GameFontHighlight")
-    slashHelpInfo:SetText("Print help message.")
-    slashHelpInfo:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -80)
-
-    local slashVersionTitle = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
-    slashVersionTitle:SetFontObject("GameFontNormal")
-    slashVersionTitle:SetText("Print Version")
-    slashVersionTitle:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -110)
-    local slashVersionCommand = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
-    slashVersionCommand:SetFontObject("GameFontHighlight")
-    slashVersionCommand:SetText("/drift version")
-    slashVersionCommand:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -130)
-    local slashVersionInfo = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
-    slashVersionInfo:SetFontObject("GameFontHighlight")
-    slashVersionInfo:SetText("Print addon version.")
-    slashVersionInfo:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -145)
-
-    local slashResetTitle = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
-    slashResetTitle:SetFontObject("GameFontNormal")
-    slashResetTitle:SetText("Reset Frames")
-    slashResetTitle:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -175)
-    local slashResetCommand = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
-    slashResetCommand:SetFontObject("GameFontHighlight")
-    slashResetCommand:SetText("/drift reset")
-    slashResetCommand:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -195)
-    local slashResetInfo = DriftOptionsPanel.slashpanel:CreateFontString(nil, "BACKGROUND")
-    slashResetInfo:SetFontObject("GameFontHighlight")
-    slashResetInfo:SetText("Reset position and scale for all modified frames.")
-    slashResetInfo:SetPoint("TOPLEFT", DriftOptionsPanel.slashpanel, "TOPLEFT", 16, -210)
 
     -- Options panel
     DriftOptionsPanel.optionspanel = CreateFrame("Frame", "DriftOptionsPanelChild", DriftOptionsPanel.panel)
@@ -325,18 +275,7 @@ function DriftHelpers:SetupConfig()
     frameToggleTitle:SetText("Enabled Frames")
     frameToggleTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 16, -160)
 
-    DriftOptionsPanel.config.buttonsEnabledCheckbox = createCheckbox(
-        "ButtonsEnabledCheckbox",
-        "TOPLEFT",
-        DriftOptionsPanel.optionspanel,
-        "TOPLEFT",
-        13,
-        -180,
-        " Buttons",
-        "Whether Drift will modify Buttons (example: Open Ticket). Enabling or disabling Buttons will cause the UI to reload.",
-        nil
-    )
-    DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
+    local yOffset = -180;
 
     DriftOptionsPanel.config.windowsEnabledCheckbox = createCheckbox(
         "WindowsEnabledCheckbox",
@@ -344,25 +283,13 @@ function DriftHelpers:SetupConfig()
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
         13,
-        -210,
+        yOffset,
         " Windows",
         "Whether Drift will modify Windows (example: Talents). Enabling or disabling Windows will cause the UI to reload.",
         nil
     )
     DriftOptionsPanel.config.windowsEnabledCheckbox:SetChecked(not DriftOptions.windowsDisabled)
-
-    DriftOptionsPanel.config.miscellaneousEnabledCheckbox = createCheckbox(
-        "MiscellaneousEnabledCheckbox",
-        "TOPLEFT",
-        DriftOptionsPanel.optionspanel,
-        "TOPLEFT",
-        13,
-        -240,
-        " Miscellaneous",
-        "Whether Drift will modify Miscellaneous Frames (example: Battle.net Toast). Enabling or disabling Miscellaneous Frames will cause the UI to reload.",
-        nil
-    )
-    DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)
+    yOffset = yOffset - 30
 
     DriftOptionsPanel.config.bagsEnabledCheckbox = createCheckbox(
         "BagsEnabledCheckbox",
@@ -370,12 +297,27 @@ function DriftHelpers:SetupConfig()
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
         13,
-        -270,
+        yOffset,
         " Bags",
         "Whether Drift will modify Bags. Enabling or disabling Bags will cause the UI to reload.",
         nil
     )
     DriftOptionsPanel.config.bagsEnabledCheckbox:SetChecked(not DriftOptions.bagsDisabled)
+    yOffset = yOffset - 30
+
+    DriftOptionsPanel.config.buttonsEnabledCheckbox = createCheckbox(
+        "ButtonsEnabledCheckbox",
+        "TOPLEFT",
+        DriftOptionsPanel.optionspanel,
+        "TOPLEFT",
+        13,
+        yOffset,
+        " Buttons",
+        "Whether Drift will modify Buttons (example: Open Ticket). Enabling or disabling Buttons will cause the UI to reload.",
+        nil
+    )
+    DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
+    yOffset = yOffset - 30
 
     local objectivesTitle = " Objective Tracker"
     local objectivesDesc = "Whether Drift will modify the Objective Tracker. Enabling or disabling the Objective Tracker will cause the UI to reload."
@@ -389,12 +331,13 @@ function DriftHelpers:SetupConfig()
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
         13,
-        -300,
+        yOffset,
         objectivesTitle,
         objectivesDesc,
         nil
     )
     DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
+    yOffset = yOffset - 30
 
     if (isRetail) then
         DriftOptionsPanel.config.playerChoiceEnabledCheckbox = createCheckbox(
@@ -403,13 +346,27 @@ function DriftHelpers:SetupConfig()
             DriftOptionsPanel.optionspanel,
             "TOPLEFT",
             13,
-            -330,
+            yOffset,
             " Player Choice",
             "Whether Drift will modify the Player Choice Frame. Enabling or disabling the Player Choice Frame will cause the UI to reload.",
             nil
         )
         DriftOptionsPanel.config.playerChoiceEnabledCheckbox:SetChecked(not DriftOptions.playerChoiceDisabled)
+        yOffset = yOffset - 30
     end
+
+    DriftOptionsPanel.config.miscellaneousEnabledCheckbox = createCheckbox(
+        "MiscellaneousEnabledCheckbox",
+        "TOPLEFT",
+        DriftOptionsPanel.optionspanel,
+        "TOPLEFT",
+        13,
+        yOffset,
+        " Miscellaneous",
+        "Whether Drift will modify Miscellaneous Frames (example: Battle.net Toast). Enabling or disabling Miscellaneous Frames will cause the UI to reload.",
+        nil
+    )
+    DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)
 
     -- Reset button
     StaticPopupDialogs["DRIFT_RESET_POSITIONS"] = {
@@ -453,21 +410,9 @@ function DriftHelpers:SetupConfig()
         DriftOptions.scaleKeyFunc = getKeyFuncFromOrdinal(DriftOptions.scaleKey)
 
         -- Optional Frames
-        local oldButtonsDisabled = DriftOptions.buttonsDisabled
-        DriftOptions.buttonsDisabled = not DriftOptionsPanel.config.buttonsEnabledCheckbox:GetChecked()
-        if oldButtonsDisabled ~= DriftOptions.buttonsDisabled then
-            shouldReloadUI = true
-        end
-
         local oldWindowsDisabled = DriftOptions.windowsDisabled
         DriftOptions.windowsDisabled = not DriftOptionsPanel.config.windowsEnabledCheckbox:GetChecked()
         if oldWindowsDisabled ~= DriftOptions.windowsDisabled then
-            shouldReloadUI = true
-        end
-
-        local oldMiscellaneousDisabled = DriftOptions.miscellaneousDisabled
-        DriftOptions.miscellaneousDisabled = not DriftOptionsPanel.config.miscellaneousEnabledCheckbox:GetChecked()
-        if oldMiscellaneousDisabled ~= DriftOptions.miscellaneousDisabled then
             shouldReloadUI = true
         end
 
@@ -485,6 +430,12 @@ function DriftHelpers:SetupConfig()
             shouldReloadUI = true
         end
 
+        local oldButtonsDisabled = DriftOptions.buttonsDisabled
+        DriftOptions.buttonsDisabled = not DriftOptionsPanel.config.buttonsEnabledCheckbox:GetChecked()
+        if oldButtonsDisabled ~= DriftOptions.buttonsDisabled then
+            shouldReloadUI = true
+        end
+
         local oldObjectivesDisabled = DriftOptions.objectivesDisabled
         DriftOptions.objectivesDisabled = not DriftOptionsPanel.config.objectivesEnabledCheckbox:GetChecked()
         if oldObjectivesDisabled ~= DriftOptions.objectivesDisabled then
@@ -497,6 +448,12 @@ function DriftHelpers:SetupConfig()
             if oldPlayerChoiceDisabled ~= DriftOptions.playerChoiceDisabled then
                 shouldReloadUI = true
             end
+        end
+
+        local oldMiscellaneousDisabled = DriftOptions.miscellaneousDisabled
+        DriftOptions.miscellaneousDisabled = not DriftOptionsPanel.config.miscellaneousEnabledCheckbox:GetChecked()
+        if oldMiscellaneousDisabled ~= DriftOptions.miscellaneousDisabled then
+            shouldReloadUI = true
         end
 
         -- Reload if needed
@@ -518,17 +475,17 @@ function DriftHelpers:SetupConfig()
         UIDropDownMenu_SetText(DriftOptionsPanel.config.scaleKeyDropdown, DROPDOWN_KEYS[UIDropDownMenu_GetSelectedID(DriftOptionsPanel.config.scaleKeyDropdown)])
 
         -- Optional Frames
-        DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
-
         DriftOptionsPanel.config.windowsEnabledCheckbox:SetChecked(not DriftOptions.windowsDisabled)
 
-        DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)
-
         DriftOptionsPanel.config.bagsEnabledCheckbox:SetChecked(not DriftOptions.bagsDisabled)
+
+        DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
 
         DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
 
         DriftOptionsPanel.config.palyerChoiceEnabledCheckbox:SetChecked(not DriftOptions.playerChoiceDisabled)
+
+        DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)
     end
 end
 

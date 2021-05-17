@@ -9,16 +9,9 @@ Position and scale for each frame are saved.
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/R8d-QYxyN7Y/maxresdefault.jpg)](https://youtu.be/R8d-QYxyN7Y)
 
 ## Supported Frames
-You can enable or disable frames by going to Interface -> AddOns -> Drift -> Options and then modifying the "Enabled Frames" section.
+Only Windows are enabled by default. You can enable or disable groups of frames by going to Interface -> AddOns -> Drift -> Options and then modifying the "Enabled Frames" section.
 
-### Buttons (enabled by default)
-- Garrison Minimap (retail)
-- Open Ticket (retail, classic)
-- Player Choice Toggle (retail)
-- Return to Graveyard (retail)
-- Social (retail)
-
-### Windows (enabled by default)
+### Windows
 - Achievements (retail)
 - AddOn List (retail, classic)
 - Adventure Guide (retail)
@@ -117,21 +110,7 @@ You can enable or disable frames by going to Interface -> AddOns -> Drift -> Opt
 - What's New (retail)
 - World Map (retail, classic)
 
-### Miscellaneous (enabled by default)
-- Battle.net Toast (retail, classic)
-- Bonus Roll (retail)
-- Extra Ability Container (retail)
-- Group Loot 1 (classic)
-- Group Loot 2 (classic)
-- Group Loot 3 (classic)
-- Group Loot 4 (classic)
-- Player Power Bar Alt (retail)
-- Quick Join Toast 1 (retail)
-- Quick Join Toast 2 (retail)
-- Talking Head (retail)
-- UI Widget Top Center (retail, classic)
-
-### Bags (disabled by default)
+### Bags
 - Bag 1 (retail, classic)
 - Bag 2 (retail, classic)
 - Bag 3 (retail, classic)
@@ -146,25 +125,39 @@ You can enable or disable frames by going to Interface -> AddOns -> Drift -> Opt
 - Bag 12 (retail, classic)
 - Bag 13 (retail, classic)
 
-### Objectives (disabled by default)
+### Buttons
+- Garrison Minimap (retail)
+- Open Ticket (retail, classic)
+- Player Choice Toggle (retail)
+- Return to Graveyard (retail)
+- Social (retail)
+
+### Objectives
 - Objective Tracker (retail)
 - Quest Watch List (classic)
 
-### Player Choice (disabled by default)
+### Player Choice
 - Player Choice (retail)
 
+### Miscellaneous
+- Battle.net Toast (retail, classic)
+- Bonus Roll (retail)
+- Extra Ability Container (retail)
+- Group Loot 1 (classic)
+- Group Loot 2 (classic)
+- Group Loot 3 (classic)
+- Group Loot 4 (classic)
+- Player Power Bar Alt (retail)
+- Quick Join Toast 1 (retail)
+- Quick Join Toast 2 (retail)
+- Talking Head (retail)
+- UI Widget Top Center (retail, classic)
+
 ## Slash Commands
-### Print Help
-`/drift help`  
-Print help message.
-
-### Print Version
-`/drift version`  
-Print addon version.
-
-### Reset Frames
-`/drift reset`  
-Reset position and scale for all modified frames.
+`/drift` - Print allowed commands.  
+`/drift help` - Print help message.  
+`/drift version` - Print addon version.  
+`/drift reset` - Reset position and scale for all modified frames.
 
 ## Bugs and Feature Requests
 Please use the [GitHub issues page](https://github.com/jaredbwasserman/drift/issues) to report bugs or request features.

@@ -49,7 +49,7 @@ end
 
 local function shouldMove(frame)
     if frameCannotBeModified(frame) then
-        print("|cFFFFFF00Drift:|r Cannot move " .. frame:GetName() .. " during combat.")
+        print("|cff00ffffDrift:|r Cannot move " .. frame:GetName() .. " during combat.")
         return false
     end
 
@@ -68,7 +68,7 @@ end
 
 local function shouldScale(frame)
     if frameCannotBeModified(frame) then
-        print("|cFFFFFF00Drift:|r Cannot scale " .. frame:GetName() .. " during combat.")
+        print("|cff00ffffDrift:|r Cannot scale " .. frame:GetName() .. " during combat.")
         return false
     end
 
@@ -148,7 +148,7 @@ local function onDragStart(frame, button)
 
         -- Prevent unscalable frames from being scaled
         if frameToMove.DriftUnscalable then
-            print("|cFFFFFF00Drift:|r Scaling not supported for " .. frameToMove:GetName() .. ".")
+            print("|cff00ffffDrift:|r Scaling not supported for " .. frameToMove:GetName() .. ".")
             return
         end
 
@@ -369,11 +369,11 @@ function DriftHelpers:DeleteDriftState()
 end
 
 function DriftHelpers:PrintAllowedCommands()
-    local commandList = "        help        Print help message.\n" ..
-    "        version    Print addon version.\n" ..
-    "        reset       Reset position and scale for all modified frames."
-
-    print("|cFFFFFF00Drift:|r Allowed commands are:\n" .. commandList)
+    print("|cff00ffffDrift:|r Allowed commands:")
+    print("|cff00ffff/drift|r - Print allowed commands.")
+    print("|cff00ffff/drift help|r - Print help message.")
+    print("|cff00ffff/drift version|r - Print addon version.")
+    print("|cff00ffff/drift reset|r - Reset position and scale for all modified frames.")
 end
 
 function DriftHelpers:PrintHelp()
@@ -381,36 +381,37 @@ function DriftHelpers:PrintHelp()
     local isRetail = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE)
     local isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
 
-    local instructions = "        Left-click and drag anywhere to move a frame.\n" ..
-        "        Right-click and drag up or down to scale a frame.\n" ..
-        "        Position and scale for each frame are saved."
-
-    print("|cFFFFFF00Drift:|r Modifies default UI frames so you can click and drag to move and scale.\n" .. instructions)
-    DriftHelpers:PrintAllowedCommands()
-
     local interfaceOptionsLabel = "Interface"
     if (isRetail) then
         interfaceOptionsLabel = "Interface"
     elseif (isClassic) then
         interfaceOptionsLabel = "Interface Options"
     end
-    print("|cFFFFFF00Drift:|r For additional configuration options, visit " .. interfaceOptionsLabel .. " -> AddOns -> Drift -> Options.")
+
+    print("|cff00ffffDrift:|r Modifies default UI frames so you can click and drag to move and scale. " ..
+          "Left-click and drag anywhere to move a frame. " ..
+          "Right-click and drag up or down to scale a frame. " ..
+          "Position and scale for each frame are saved. " ..
+          "For additional configuration options, visit " .. interfaceOptionsLabel .. " -> AddOns -> Drift -> Options."
+    )
 end
 
 function DriftHelpers:PrintVersion()
-    print("|cFFFFFF00Drift:|r Version " .. GetAddOnMetadata("Drift", "Version"))
+    print("|cff00ffffDrift:|r Version " .. GetAddOnMetadata("Drift", "Version"))
 end
 
 function DriftHelpers:HandleSlashCommands(msg, editBox)
     local cmd = msg
-    if (cmd == nil or cmd == "" or cmd == "help") then
+    if (cmd == nil or cmd == "") then
+        DriftHelpers:PrintAllowedCommands()
+    elseif (cmd == "help") then
         DriftHelpers:PrintHelp()
     elseif (cmd == "version") then
         DriftHelpers:PrintVersion()
     elseif (cmd == "reset") then
         DriftHelpers:DeleteDriftState()
     else
-        print("|cFFFFFF00Drift:|r Unknown command '" .. cmd .. "'")
+        print("|cff00ffffDrift:|r Unknown command '" .. cmd .. "'")
         DriftHelpers:PrintAllowedCommands()
     end
 end
