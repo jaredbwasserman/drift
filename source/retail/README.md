@@ -9,7 +9,7 @@ Position and scale for each frame are saved.
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/R8d-QYxyN7Y/maxresdefault.jpg)](https://youtu.be/R8d-QYxyN7Y)
 
 ## Supported Frames
-Only Windows are enabled by default. You can enable or disable groups of frames by going to Interface -> AddOns -> Drift -> Options and then modifying the "Enabled Frames" section.
+Only Windows are enabled by default. You can enable or disable frames by going to Interface -> AddOns -> Drift -> Options and then modifying the "Enabled Frames" section.
 
 ### Windows
 - Achievements (retail)
