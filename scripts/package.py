@@ -1,8 +1,6 @@
 import os
 import sys
 import shutil
-import time
-import math
 from zipfile import ZipFile
 
 
@@ -36,10 +34,11 @@ if len(sys.argv) < 2:
     raise ValueError('Must give destination directory as first argument')
 dest_dir = sys.argv[1]
 
-# Retail and classic directories
+# Directories
 source_dir = os.path.join(drift_repo_dir, 'source')
 source_dir_retail = os.path.join(source_dir, 'retail')
 source_dir_classic = os.path.join(source_dir, 'classic')
+source_dir_bcc = os.path.join(source_dir, 'bcc')
 
 # Helper file location
 source_helpers = os.path.join(source_dir, 'DriftHelpers.lua')
@@ -50,23 +49,27 @@ source_options = os.path.join(source_dir, 'DriftOptions.lua')
 # Get version numbers and interface numbers
 source_toc_retail = os.path.join(source_dir_retail, 'Drift.toc')
 source_toc_classic = os.path.join(source_dir_classic, 'Drift.toc')
+source_toc_bcc = os.path.join(source_dir_bcc, 'Drift.toc')
 version_retail = 'v' + get_toc_info(source_toc_retail, 'Version')
 version_classic = 'v' + get_toc_info(source_toc_classic, 'Version')
+version_bcc = 'v' + get_toc_info(source_toc_bcc, 'Version')
 interface_retail = get_toc_info(source_toc_retail, 'Interface')
 interface_classic = get_toc_info(source_toc_classic, 'Interface')
-
-# Get date
-timestamp = str(math.trunc(time.time()))
+interface_bcc = get_toc_info(source_toc_bcc, 'Interface')
 
 # Destinations
-dest_name_retail = '-'.join(['drift', 'retail', version_retail])
-dest_name_classic = '-'.join(['drift', 'classic', version_classic])
+dest_name_retail = '-'.join(['drift', version_retail, 'retail'])
+dest_name_classic = '-'.join(['drift', version_classic, 'classic'])
+dest_name_bcc = '-'.join(['drift', version_bcc, 'bcc'])
 dest_dir_retail = os.path.join(dest_dir, dest_name_retail)
 dest_dir_classic = os.path.join(dest_dir, dest_name_classic)
+dest_dir_bcc = os.path.join(dest_dir, dest_name_bcc)
 dest_helpers_retail = os.path.join(dest_dir_retail, 'DriftHelpers.lua')
 dest_helpers_classic = os.path.join(dest_dir_classic, 'DriftHelpers.lua')
+dest_helpers_bcc = os.path.join(dest_dir_bcc, 'DriftHelpers.lua')
 dest_options_retail = os.path.join(dest_dir_retail, 'DriftOptions.lua')
 dest_options_classic = os.path.join(dest_dir_classic, 'DriftOptions.lua')
+dest_options_bcc = os.path.join(dest_dir_bcc, 'DriftOptions.lua')
 
 # Copy retail
 if os.path.exists(dest_dir_retail):
@@ -97,3 +100,18 @@ shutil.copy2(source_options, dest_options_classic)
 zip(dest_dir_classic)
 print('Removing {0}\n'.format(dest_dir_classic))
 shutil.rmtree(dest_dir_classic)
+
+# Copy bcc
+if os.path.exists(dest_dir_bcc):
+    shutil.rmtree(dest_dir_bcc)
+print('Copying\n  {0} to\n  {1}\n'.format(source_dir_bcc, dest_dir_bcc))
+shutil.copytree(source_dir_bcc, dest_dir_bcc)
+print('Copying\n  {0} to\n  {1}\n'.format(source_helpers, dest_helpers_bcc))
+shutil.copy2(source_helpers, dest_helpers_bcc)
+print('Copying\n  {0} to\n  {1}\n'.format(source_options, dest_options_bcc))
+shutil.copy2(source_options, dest_options_bcc)
+
+# Zip bcc and clean up
+zip(dest_dir_bcc)
+print('Removing {0}\n'.format(dest_dir_bcc))
+shutil.rmtree(dest_dir_bcc)
