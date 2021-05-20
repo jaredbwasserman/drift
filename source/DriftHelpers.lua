@@ -380,9 +380,10 @@ function DriftHelpers:PrintHelp()
     -- Keep track of retail or classic
     local isRetail = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE)
     local isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
+    local isBCC = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
 
     local interfaceOptionsLabel = "Interface"
-    if (isRetail) then
+    if (isRetail or isBCC) then
         interfaceOptionsLabel = "Interface"
     elseif (isClassic) then
         interfaceOptionsLabel = "Interface Options"

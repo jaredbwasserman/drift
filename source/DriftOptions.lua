@@ -104,6 +104,7 @@ function DriftHelpers:SetupConfig()
     -- Keep track of retail or classic
     local isRetail = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE)
     local isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
+    local isBCC = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
 
     -- Initialize config options
     if DriftOptions.frameDragIsLocked == nil then
@@ -321,7 +322,7 @@ function DriftHelpers:SetupConfig()
 
     local objectivesTitle = " Objective Tracker"
     local objectivesDesc = "Whether Drift will modify the Objective Tracker. Enabling or disabling the Objective Tracker will cause the UI to reload."
-    if (isClassic) then
+    if (isClassic or isBCC) then
         objectivesTitle = " Quest Watch List"
         objectivesDesc = "Whether Drift will modify the Quest Watch List. Enabling or disabling the Quest Watch List will cause the UI to reload."
     end
@@ -483,7 +484,9 @@ function DriftHelpers:SetupConfig()
 
         DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
 
-        DriftOptionsPanel.config.palyerChoiceEnabledCheckbox:SetChecked(not DriftOptions.playerChoiceDisabled)
+        if (isRetail) then
+            DriftOptionsPanel.config.palyerChoiceEnabledCheckbox:SetChecked(not DriftOptions.playerChoiceDisabled)
+        end
 
         DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)
     end
