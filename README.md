@@ -21,6 +21,7 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Or figure out some other way of not dragging around empty space
 1. Add Vehicle Seat Indicator
 1. Add MacroPopupFrame (retail and classic)
+1. Add GuildMemberDetailFrame (bcc) and equivalent for classic, retail
 
 ## Bugs
 1. PlayerChoiceToggleButton reverts its position when PlayerChoiceFrame is shown
