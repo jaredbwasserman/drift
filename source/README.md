@@ -128,6 +128,9 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Return to Graveyard (retail)
 - Social (retail)
 
+### Minimap
+- Minimap (retail, classic, bcc)
+
 ### Objectives
 - Objective Tracker (retail)
 - Quest Watch List (classic, bcc)
