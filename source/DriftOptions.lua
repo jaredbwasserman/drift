@@ -7,6 +7,11 @@ if not DriftOptions then DriftOptions = {} end
 local DriftOptionsPanel = {}
 DriftOptionsPanel.config = {}
 
+-- Variables for WoW version 
+local isRetail = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE)
+local isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
+local isBCC = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
+
 -- Variables for slash commands
 local DRIFT = "DRIFT"
 SLASH_DRIFT1 = "/drift"
@@ -101,11 +106,6 @@ end
 
 -- Global functions
 function DriftHelpers:SetupConfig()
-    -- Keep track of retail or classic
-    local isRetail = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE)
-    local isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
-    local isBCC = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
-
     -- Initialize config options
     if DriftOptions.frameDragIsLocked == nil then
         DriftOptions.frameDragIsLocked = DriftOptions.framesAreLocked
@@ -124,6 +124,9 @@ function DriftHelpers:SetupConfig()
     end
     if DriftOptions.buttonsDisabled == nil then
         DriftOptions.buttonsDisabled = true
+    end
+    if DriftOptions.minimapDisabled == nil then
+        DriftOptions.minimapDisabled = true
     end
     if DriftOptions.objectivesDisabled == nil then
         DriftOptions.objectivesDisabled = true
@@ -276,7 +279,7 @@ function DriftHelpers:SetupConfig()
     frameToggleTitle:SetText("Enabled Frames")
     frameToggleTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 16, -160)
 
-    local yOffset = -180;
+    local yOffset = -180
 
     DriftOptionsPanel.config.windowsEnabledCheckbox = createCheckbox(
         "WindowsEnabledCheckbox",
@@ -318,6 +321,20 @@ function DriftHelpers:SetupConfig()
         nil
     )
     DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
+    yOffset = yOffset - 30
+
+    DriftOptionsPanel.config.minimapEnabledCheckbox = createCheckbox(
+        "MinimapEnabledCheckbox",
+        "TOPLEFT",
+        DriftOptionsPanel.optionspanel,
+        "TOPLEFT",
+        13,
+        yOffset,
+        " Minimap",
+        "Whether Drift will modify the Minimap. Enabling or disabling the Minimap will cause the UI to reload.",
+        nil
+    )
+    DriftOptionsPanel.config.minimapEnabledCheckbox:SetChecked(not DriftOptions.minimapDisabled)
     yOffset = yOffset - 30
 
     local objectivesTitle = " Objective Tracker"
@@ -437,6 +454,12 @@ function DriftHelpers:SetupConfig()
             shouldReloadUI = true
         end
 
+        local oldMinimapDisabled = DriftOptions.minimapDisabled
+        DriftOptions.minimapDisabled = not DriftOptionsPanel.config.minimapEnabledCheckbox:GetChecked()
+        if oldMinimapDisabled ~= DriftOptions.minimapDisabled then
+            shouldReloadUI = true
+        end
+
         local oldObjectivesDisabled = DriftOptions.objectivesDisabled
         DriftOptions.objectivesDisabled = not DriftOptionsPanel.config.objectivesEnabledCheckbox:GetChecked()
         if oldObjectivesDisabled ~= DriftOptions.objectivesDisabled then
@@ -481,6 +504,8 @@ function DriftHelpers:SetupConfig()
         DriftOptionsPanel.config.bagsEnabledCheckbox:SetChecked(not DriftOptions.bagsDisabled)
 
         DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
+
+        DriftOptionsPanel.config.minimapEnabledcheckbox:SetChecked(not DriftOptions.minimapDisabled)
 
         DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
 

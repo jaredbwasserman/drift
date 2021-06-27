@@ -304,6 +304,13 @@ local frames = {
         DriftDisabledBy = "miscellaneousDisabled",
         DriftChildMovers = true
     },
+    ["MinimapCluster"] = {
+        DriftDisabledBy = "minimapDisabled",
+    },
+    ["MinimapZoneTextButton"] = {
+        DriftDisabledBy = "minimapDisabled",
+        DriftDelegate = "MinimapCluster"
+    },
 }
 
 -- Frame for handling events

@@ -552,6 +552,13 @@ local frames = {
     ["AnimaDiversionFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
+    ["MinimapCluster"] = {
+        DriftDisabledBy = "minimapDisabled",
+    },
+    ["MinimapZoneTextButton"] = {
+        DriftDisabledBy = "minimapDisabled",
+        DriftDelegate = "MinimapCluster"
+    },
 }
 
 -- Frame for handling events
