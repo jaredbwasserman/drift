@@ -1,13 +1,13 @@
-## Description
+# Description
 Modifies default UI frames so you can click and drag to move and scale. Left-click and drag anywhere to move a frame. Right-click and drag up or down to scale a frame. Position and scale for each frame are saved.
 
-## Demo Video
+# Demo Video
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/R8d-QYxyN7Y/maxresdefault.jpg)](https://youtu.be/R8d-QYxyN7Y)
 
-## Supported Frames
+# Supported Frames
 Only Windows are enabled by default. You can enable or disable frames by going to Interface -> AddOns -> Drift -> Options and then modifying the "Enabled Frames" section.
 
-### Windows
+## Windows
 - Achievements (retail)
 - AddOn List (retail, classic, bcc)
 - Adventure Guide (retail)
@@ -106,7 +106,7 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - What's New (retail)
 - World Map (retail, classic, bcc)
 
-### Bags
+## Bags
 - Bag 1 (retail, classic, bcc)
 - Bag 2 (retail, classic, bcc)
 - Bag 3 (retail, classic, bcc)
@@ -121,24 +121,24 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Bag 12 (retail, classic, bcc)
 - Bag 13 (retail, classic, bcc)
 
-### Buttons
+## Buttons
 - Garrison Minimap (retail)
 - Open Ticket (retail, classic, bcc)
 - Player Choice Toggle (retail)
 - Return to Graveyard (retail)
 - Social (retail)
 
-### Minimap
+## Minimap
 - Minimap (retail, classic, bcc)
 
-### Objectives
+## Objectives
 - Objective Tracker (retail)
 - Quest Watch List (classic, bcc)
 
-### Player Choice
+## Player Choice
 - Player Choice (retail)
 
-### Miscellaneous
+## Miscellaneous
 - Battle.net Toast (retail, classic, bcc)
 - Bonus Roll (retail)
 - Extra Ability Container (retail)
@@ -152,11 +152,11 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Talking Head (retail)
 - UI Widget Top Center (retail, classic, bcc)
 
-## Slash Commands
+# Slash Commands
 `/drift` - Print allowed commands.  
 `/drift help` - Print help message.  
 `/drift version` - Print addon version.  
 `/drift reset` - Reset position and scale for all modified frames.
 
-## Bugs and Feature Requests
+# Bugs and Feature Requests
 Please use the [GitHub issues page](https://github.com/jaredbwasserman/drift/issues) to report bugs or request features.
