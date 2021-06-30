@@ -4,8 +4,10 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 [CurseForge Link](https://www.curseforge.com/wow/addons/drift)
 
 ## TODO
-1. Bag behavior different in retail and classic
-   1. containerFrameOffsetX logic only exists in retail, so classic is not accurate
+1. UpdateContainerFrameAnchors
+   1. Bag behavior different in retail and classic - containerFrameOffsetX logic only exists in retail, so classic is not accurate
+   1. Create separate versions of the override for retail, classic, bcc
+   1. Probably need to update the existing retail function in case it's no longer accurate
 1. Add scaling support for WorldMapFrame
 1. Remove delay for Guild & Communities (retail) and Blizzard Groups (classic)
 1. Configurable variables
