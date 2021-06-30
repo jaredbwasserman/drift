@@ -150,7 +150,7 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Quick Join Toast 1 (retail)
 - Quick Join Toast 2 (retail)
 - Talking Head (retail)
-- UI Widget Top Center (retail, classic, bcc)
+- UI Widget Top Center (classic, bcc)
 
 # Slash Commands
 `/drift` - Print allowed commands.  

@@ -454,10 +454,10 @@ local frames = {
     ["PVPMatchResults"] = {
         DriftDisabledBy = "windowsDisabled",
     },
-    ["UIWidgetTopCenterContainerFrame"] = {
-        DriftDisabledBy = "miscellaneousDisabled",
-        DriftChildMovers = true
-    },
+    -- ["UIWidgetTopCenterContainerFrame"] = {
+    --     DriftDisabledBy = "miscellaneousDisabled",
+    --     DriftChildMovers = true
+    -- },
     ["AlliedRacesFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
