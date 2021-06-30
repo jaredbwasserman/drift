@@ -799,18 +799,26 @@ function DriftHelpers:FixMinimapDependentFramesRetail()
                 rightActionBars = 2
             end
         end
-    end    
-    -- BelowMinimap Widgets - need to move below buffs/debuffs if at least 1 right action bar is showing
+    end
+
+    -- BelowMinimap Widgets - need to move below buffs/debuffs
     if UIWidgetBelowMinimapContainerFrame and UIWidgetBelowMinimapContainerFrame:GetNumWidgetsShowing() > 0 then
-        if rightActionBars > 0 then
-            anchorY = min(anchorY, buffsAnchorY)
-        end
-    
-        UIWidgetBelowMinimapContainerFrame:ClearAllPoints()
+        anchorY = min(anchorY, buffsAnchorY)
+
         UIWidgetBelowMinimapContainerFrame:SetPoint("TOPRIGHT", phantomMinimapCluster, "BOTTOMRIGHT", -CONTAINER_OFFSET_X, anchorY)
-    
+
         anchorY = anchorY - UIWidgetBelowMinimapContainerFrame:GetHeight() - 4
-    end    
+    end
+
+    -- MawBuffsBelowMinimapFrame - need to move below buffs/debuffs
+    if MawBuffsBelowMinimapFrame and MawBuffsBelowMinimapFrame:IsShown() then
+        anchorY = min(anchorY, buffsAnchorY)
+
+        MawBuffsBelowMinimapFrame:SetPoint("TOPRIGHT", phantomMinimapCluster, "BOTTOMRIGHT", -CONTAINER_OFFSET_X, anchorY)
+
+        anchorY = anchorY - MawBuffsBelowMinimapFrame:GetHeight() - 4
+    end
+
     --Setup Vehicle seat indicator offset - needs to move below buffs/debuffs if both right action bars are showing
     if ( VehicleSeatIndicator and VehicleSeatIndicator:IsShown() ) then
         if ( rightActionBars == 2 ) then
@@ -823,7 +831,7 @@ function DriftHelpers:FixMinimapDependentFramesRetail()
         end
         anchorY = anchorY - VehicleSeatIndicator:GetHeight() - 4    --The -4 is there to give a small buffer for things like the QuestTimeFrame below the Seat Indicator
     end
-    
+
     -- Boss frames - need to move below buffs/debuffs if both right action bars are showing
     local numBossFrames = 0
     for i = 1, MAX_BOSS_FRAMES do
@@ -838,7 +846,7 @@ function DriftHelpers:FixMinimapDependentFramesRetail()
         Boss1TargetFrame:SetPoint("TOPRIGHT", phantomMinimapCluster, "BOTTOMRIGHT", -(CONTAINER_OFFSET_X * 1.3) + 60, anchorY * 1.333)    -- by 1.333 because it's 0.75 scale
         anchorY = anchorY - (numBossFrames * (68 + BOSS_FRAME_CASTBAR_HEIGHT) + BOSS_FRAME_CASTBAR_HEIGHT)
     end
-    
+
     -- Setup durability offset
     if ( DurabilityFrame ) then
         DurabilityFrame:SetPoint("TOPRIGHT", phantomMinimapCluster, "BOTTOMRIGHT", -CONTAINER_OFFSET_X, anchorY)
@@ -846,17 +854,17 @@ function DriftHelpers:FixMinimapDependentFramesRetail()
             anchorY = anchorY - DurabilityFrame:GetHeight()
         end
     end
-    
+
     if ( ArenaEnemyFrames ) then
         ArenaEnemyFrames:ClearAllPoints()
         ArenaEnemyFrames:SetPoint("TOPRIGHT", phantomMinimapCluster, "BOTTOMRIGHT", -CONTAINER_OFFSET_X, anchorY)
     end
-    
+
     if ( ArenaPrepFrames ) then
         ArenaPrepFrames:ClearAllPoints()
         ArenaPrepFrames:SetPoint("TOPRIGHT", phantomMinimapCluster, "BOTTOMRIGHT", -CONTAINER_OFFSET_X, anchorY)
     end
-    
+
     -- ObjectiveTracker - needs to move below buffs/debuffs if at least 1 right action bar is showing
     if ( rightActionBars > 0 ) then
         anchorY = min(anchorY, buffsAnchorY)
