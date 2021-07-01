@@ -61,7 +61,7 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Inspect (retail, classic, bcc)
 - Interface Options (retail, classic, bcc)
 - Islands (retail)
-- Item Socketing (retail)
+- Item Socketing (retail, bcc)
 - Item Upgrade (retail)
 - Join Battleground (classic, bcc)
 - Key Bindings (retail, classic, bcc)

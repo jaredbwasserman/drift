@@ -267,6 +267,9 @@ local frames = {
     ["InspectFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
+    ["ItemSocketingFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
     ["MacroFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
