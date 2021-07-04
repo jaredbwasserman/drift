@@ -600,6 +600,11 @@ local function eventHandler(self, event, ...)
         Drift:RegisterEvent("ITEM_LOCKED")
         Drift:RegisterEvent("ITEM_DATA_LOAD_RESULT")
 
+        -- TODO: Remove LFG events once a better solution exists
+        -- LFG
+        Drift:RegisterEvent("LFG_LIST_SEARCH_RESULTS_RECEIVED")
+        Drift:RegisterEvent("LFG_LIST_SEARCH_FAILED")
+
         -- Modify frames after an addon loads
         DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
 

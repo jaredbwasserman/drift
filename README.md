@@ -20,7 +20,10 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 1. Make ObjectiveTrackerFrame (retail) have dynamic height instead of fixed
    1. Or if not dynamic, some height parameter in Drift Options
    1. Or figure out some other way of not dragging around empty space
-1. Add Vehicle Seat Indicator
+1. Add frames
+   1. Vehicle Seat Indicator
+   1. Frames in UIPanelWindows (see UIParent)
+   1. Frames in UIChildWindows (see UIParent)
 1. Add MacroPopupFrame (retail and classic)
 1. Add GuildMemberDetailFrame (bcc) and equivalent for classic, retail
 
@@ -57,3 +60,7 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Key Bindings
    1. AddOn List
 1. Leveling up causes frame positions to reset
+1. LFG Button in Objective Tracker issues (retail)
+   1. Interface Action failed due to addon happens when in combat and click on LFG button in objective tracker
+   1. Click on LFG button in objective tracker causes frames to revert
+   1. Remove LFG events in code after fix
