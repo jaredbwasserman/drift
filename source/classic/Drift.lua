@@ -346,6 +346,9 @@ local function eventHandler(self, event, ...)
         -- Quest Watch
         Drift:RegisterEvent("QUEST_WATCH_LIST_CHANGED")
 
+        -- Groups
+        Drift:RegisterEvent("CLUB_TICKET_RECEIVED")
+
         -- Modify frames after an addon loads
         DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
 

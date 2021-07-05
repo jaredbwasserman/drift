@@ -605,6 +605,9 @@ local function eventHandler(self, event, ...)
         Drift:RegisterEvent("LFG_LIST_SEARCH_RESULTS_RECEIVED")
         Drift:RegisterEvent("LFG_LIST_SEARCH_FAILED")
 
+        -- Communities
+        Drift:RegisterEvent("CLUB_FINDER_RECRUITMENT_POST_RETURNED")
+
         -- Modify frames after an addon loads
         DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
 
