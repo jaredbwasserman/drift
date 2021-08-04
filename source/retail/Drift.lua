@@ -604,6 +604,7 @@ local function eventHandler(self, event, ...)
         -- LFG
         Drift:RegisterEvent("LFG_LIST_SEARCH_RESULTS_RECEIVED")
         Drift:RegisterEvent("LFG_LIST_SEARCH_FAILED")
+        Drift:RegisterEvent("LFG_LIST_SEARCH_RESULT_UPDATED")
 
         -- Communities
         Drift:RegisterEvent("CLUB_FINDER_RECRUITMENT_POST_RETURNED")
