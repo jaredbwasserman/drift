@@ -64,3 +64,9 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Interface Action failed due to addon happens when in combat and click on LFG button in objective tracker
    1. Click on LFG button in objective tracker (when window is already open) causes frames to revert
    1. Remove LFG events in code after fix
+1. Item upgrade issue
+   1. Open Item Upgrade frame
+   1. Open Character Info frame
+   1. Hit hot key for "Reputation" tab (Character Info)
+   1. Frames will revert (not desired behavior)
+   1. This might be the same bug as "Frames with tabs move from hotkey when on other tab"
