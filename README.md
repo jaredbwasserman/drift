@@ -70,3 +70,4 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Hit hot key for "Reputation" tab (Character Info)
    1. Frames will revert (not desired behavior)
    1. This might be the same bug as "Frames with tabs move from hotkey when on other tab"
+1. Runecarving frame reverts position sometimes
