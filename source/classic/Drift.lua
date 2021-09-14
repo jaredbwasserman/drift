@@ -270,6 +270,9 @@ local frames = {
     ["MacroFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
+    ["MacroPopupFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
     ["WardrobeFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },

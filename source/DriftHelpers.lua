@@ -550,6 +550,11 @@ function DriftHelpers:ModifyFrames(frames)
         DriftHelpers:FixMinimap()
     end
 
+    -- Fix MacroPopupFrame
+    if not DriftOptions.windowsDisabled then
+        MacroPopupFrame_AdjustAnchors = function() end
+    end
+
     -- Fix managed frames
     DriftHelpers:FixManagedFrames()
 

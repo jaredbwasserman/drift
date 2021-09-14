@@ -24,7 +24,6 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Vehicle Seat Indicator
    1. Frames in UIPanelWindows (see UIParent)
    1. Frames in UIChildWindows (see UIParent)
-1. Add MacroPopupFrame (retail and classic)
 1. Add GuildMemberDetailFrame (bcc) and equivalent for classic, retail
 
 ## Bugs

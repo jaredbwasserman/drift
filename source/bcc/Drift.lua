@@ -273,6 +273,9 @@ local frames = {
     ["MacroFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
+    ["MacroPopupFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
     ["WardrobeFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
@@ -313,6 +316,9 @@ local frames = {
     ["MinimapZoneTextButton"] = {
         DriftDisabledBy = "minimapDisabled",
         DriftDelegate = "MinimapCluster"
+    },
+    ["LFGParentFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
     },
 }
 
