@@ -118,7 +118,7 @@ local frames = {
     ["SpellBookFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
-    ["TalentFrame"] = {
+    ["PlayerTalentFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
     ["WorldMapFrame"] = {
