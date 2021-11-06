@@ -1084,7 +1084,7 @@ function DriftHelpers:FixCollectionsJournal()
 
     if (CollectionsJournal) then
         -- Set up mover
-        collectionsJournalMover:SetFrameStrata("HIGH")
+        collectionsJournalMover:SetFrameStrata("MEDIUM")
         collectionsJournalMover:SetWidth(CollectionsJournal:GetWidth()) 
         collectionsJournalMover:SetHeight(CollectionsJournal:GetHeight())
         collectionsJournalMoverTexture:SetTexture("Interface\\Collections\\CollectionsBackgroundTile.blp")
