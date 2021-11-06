@@ -134,6 +134,7 @@ local frames = {
     },
     ["CollectionsJournal"] = {
         DriftDisabledBy = "windowsDisabled",
+        DriftDelegate = "CollectionsJournalMover" -- This frame is created inside Drift code
     },
     ["SpellBookFrame"] = {
         DriftDisabledBy = "windowsDisabled",

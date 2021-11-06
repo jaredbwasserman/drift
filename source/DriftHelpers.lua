@@ -30,6 +30,10 @@ local phantomMinimapCluster = nil
 -- Variables for Objective Tracker
 local OBJECTIVE_TRACKER_HEIGHT = 0.5 -- TODO: Configurable
 
+-- Variables for Collections Journal
+local collectionsJournalMover = CreateFrame("Frame", "CollectionsJournalMover", UIParent)
+local collectionsJournalMoverTexture = collectionsJournalMover:CreateTexture(nil, "BACKGROUND")
+
 -- Variables for WoW version 
 local isRetail = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE)
 local isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
@@ -41,6 +45,7 @@ local hasFixedPlayerChoice = false
 local hasFixedObjectiveTracker = false
 local hasFixedQuestWatch = false
 local hasFixedMinimap = false
+local hasFixedCollections = false
 
 
 --------------------------------------------------------------------------------
@@ -196,6 +201,18 @@ local function onDragStop(frame)
                 ["xOfs"] = xOfs,
                 ["yOfs"] = yOfs
             }
+
+            -- TODO: This is messy
+            if ("CollectionsJournal" == frame:GetName()) then
+                frame:ClearAllPoints()
+                frame:SetPoint(
+                    point,
+                    "UIParent",
+                    relativePoint,
+                    xOfs,
+                    yOfs
+                )
+            end
         end
     end
     frameToMove.DriftIsMoving = false
@@ -247,6 +264,19 @@ local function resetScaleAndPosition(frame)
             point["xOfs"],
             point["yOfs"]
         )
+
+        -- TODO: This is messy
+        if ("CollectionsJournal" == frame:GetName()) then
+            frame:ClearAllPoints()
+            frame:SetPoint(
+                point["point"],
+                point["relativeTo"],
+                point["relativePoint"],
+                point["xOfs"],
+                point["yOfs"]
+            )
+        end
+
         modifiedSet["position"] = true
     end
 
@@ -553,6 +583,11 @@ function DriftHelpers:ModifyFrames(frames)
     -- Fix MacroPopupFrame
     if not DriftOptions.windowsDisabled then
         MacroPopupFrame_AdjustAnchors = function() end
+    end
+
+    -- Fix CollectionsJournal
+    if not DriftOptions.windowsDisabled then
+        DriftHelpers:FixCollectionsJournal()
     end
 
     -- Fix managed frames
@@ -1039,6 +1074,33 @@ function DriftHelpers:FixMinimapDependentFramesBCC()
     end
     if ( QuestWatchFrame and DriftOptions.objectivesDisabled ) then
         QuestWatchFrame:SetPoint("TOPRIGHT", phantomMinimapCluster, "BOTTOMRIGHT", -CONTAINER_OFFSET_X, anchorY)
+    end
+end
+
+function DriftHelpers:FixCollectionsJournal()
+    if hasFixedCollections then
+        return
+    end
+
+    if (CollectionsJournal) then
+        -- Set up mover
+        collectionsJournalMover:SetFrameStrata("HIGH")
+        collectionsJournalMover:SetWidth(CollectionsJournal:GetWidth()) 
+        collectionsJournalMover:SetHeight(CollectionsJournal:GetHeight())
+        collectionsJournalMoverTexture:SetTexture("Interface\\Collections\\CollectionsBackgroundTile.blp")
+        collectionsJournalMoverTexture:SetAllPoints(collectionsJournalMover)
+        collectionsJournalMover.texture = collectionsJournalMoverTexture
+        collectionsJournalMover:SetAllPoints(CollectionsJournal)
+        collectionsJournalMover:Show()
+
+        -- Fix parenting
+        CollectionsJournal:SetParent(collectionsJournalMover)
+
+        -- Show and hide collectionsJournalMover correctly
+        CollectionsJournal:HookScript("OnShow", function() collectionsJournalMover:SetAlpha(1) end)
+        CollectionsJournal:HookScript("OnHide", function() collectionsJournalMover:SetAlpha(0) end)
+
+        hasFixedCollections = true
     end
 end
 

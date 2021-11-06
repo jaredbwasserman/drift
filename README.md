@@ -27,7 +27,7 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 1. Add GuildMemberDetailFrame (bcc) and equivalent for classic, retail
 
 ## Bugs
-1. Leave Group causes Guild & Communities to revert position (retail)
+1. Leave Group/Leave Guild (left-hand side buttons) causes Guild & Communities to revert position (retail)
 1. PlayerChoiceToggleButton reverts its position when PlayerChoiceFrame is shown
    1. Happens in Torghast anima power choice
 1. VehicleSeatIndicator bugs
