@@ -255,6 +255,11 @@ local frames = {
     },
     ["DressUpFrame"] = {
         DriftDisabledBy = "windowsDisabled",
+        DriftTabs = {
+            "DressUpFrame.ToggleOutfitDetailsButton",
+            "DressUpFrame.MaximizeMinimizeFrame.MinimizeButton",
+            "DressUpFrame.MaximizeMinimizeFrame.MaximizeButton"
+        }
     },
     ["SideDressUpFrame"] = {
         DriftDisabledBy = "windowsDisabled",
