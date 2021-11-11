@@ -513,18 +513,6 @@ local frames = {
     ["PlayerChoiceFrame"] = {
         DriftDisabledBy = "playerChoiceDisabled",
     },
-    ["PlayerChoiceFrame.Option1.MouseOverOverride"] = {
-        DriftDisabledBy = "playerChoiceDisabled",
-        DriftDelegate = "PlayerChoiceFrame",
-    },
-    ["PlayerChoiceFrame.Option2.MouseOverOverride"] = {
-        DriftDisabledBy = "playerChoiceDisabled",
-        DriftDelegate = "PlayerChoiceFrame",
-    },
-    ["PlayerChoiceFrame.Option3.MouseOverOverride"] = {
-        DriftDisabledBy = "playerChoiceDisabled",
-        DriftDelegate = "PlayerChoiceFrame",
-    },
     ["PlayerChoiceToggleButton"] = {
         DriftDisabledBy = "buttonsDisabled",
     },
