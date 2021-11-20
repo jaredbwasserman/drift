@@ -25,8 +25,6 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Frames in UIPanelWindows (see UIParent)
    1. Frames in UIChildWindows (see UIParent)
 1. Add GuildMemberDetailFrame (bcc) and equivalent for classic, retail
-1. Add LFGParentFrame for classic
-   1. Update README (so it appears for classic and bcc)
 
 ## Bugs
 1. CollectionsJournalMover in a different place than CollectionsJournal if opened in combat

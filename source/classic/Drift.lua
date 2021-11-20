@@ -314,6 +314,9 @@ local frames = {
         DriftDisabledBy = "minimapDisabled",
         DriftDelegate = "MinimapCluster"
     },
+    ["LFGParentFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
 }
 
 -- Frame for handling events

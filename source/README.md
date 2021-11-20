@@ -66,7 +66,7 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Item Upgrade (retail)
 - Join Battleground (classic, bcc)
 - Key Bindings (retail, classic, bcc)
-- Looking For Group (bcc)
+- Looking For Group (classic, bcc)
 - Loot (retail, classic, bcc)
 - Macro Popup (retail, classic, bcc)
 - Macros (retail, classic, bcc)
