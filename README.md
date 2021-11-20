@@ -54,6 +54,7 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. TimeManagerFrame (retail and classic)
    1. TalkingHeadFrame (retail)
    1. PlayerChoiceFrame (retail, seems to only break right after login)
+   1. LFGParentFrame (classic)
 1. Some frames do not reset position after Reset Frames is invoked
    1. Game Menu / Main Menu
    1. System
