@@ -292,6 +292,7 @@ local function makeModifiable(frame)
     frame:SetMovable(true)
     frameToMove:SetMovable(true)
     frameToMove:SetUserPlaced(true)
+    frameToMove:SetClampedToScreen(true)
     frame:EnableMouse(true)
     frame:SetClampedToScreen(true)
     frame:RegisterForDrag("LeftButton", "RightButton")
@@ -1083,6 +1084,9 @@ function DriftHelpers:FixCollectionsJournal()
     end
 
     if (CollectionsJournal) then
+        -- Hide mover if Transmogrify is shown (only affects cases where Collections has not been moved)
+        WardrobeFrame:HookScript("OnShow", function() collectionsJournalMover:SetAlpha(0) end)
+
         -- Set up mover
         collectionsJournalMover:SetFrameStrata("MEDIUM")
         collectionsJournalMover:SetWidth(CollectionsJournal:GetWidth()) 
@@ -1097,7 +1101,26 @@ function DriftHelpers:FixCollectionsJournal()
         CollectionsJournal:SetParent(collectionsJournalMover)
 
         -- Show and hide collectionsJournalMover correctly
-        CollectionsJournal:HookScript("OnShow", function() collectionsJournalMover:SetAlpha(1) end)
+        local CollectionsJournal_OnShow_Original = CollectionsJournal_OnShow
+        CollectionsJournal:SetScript("OnShow", function()
+            WardrobeFrame:ClearAllPoints()
+
+            local point = DriftPoints["CollectionsJournalMover"]
+            if point then
+                CollectionsJournal:ClearAllPoints()
+                CollectionsJournal:SetPoint(
+                    point["point"],
+                    point["relativeTo"],
+                    point["relativePoint"],
+                    point["xOfs"],
+                    point["yOfs"]
+                )
+            end
+
+            collectionsJournalMover:SetAlpha(1)
+
+            CollectionsJournal_OnShow_Original(CollectionsJournal)
+        end)
         CollectionsJournal:HookScript("OnHide", function() collectionsJournalMover:SetAlpha(0) end)
 
         hasFixedCollections = true
