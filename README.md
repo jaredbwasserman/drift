@@ -25,6 +25,7 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Frames in UIPanelWindows (see UIParent)
    1. Frames in UIChildWindows (see UIParent)
 1. Add GuildMemberDetailFrame (bcc) and equivalent for classic, retail
+1. Add ContributionCollectionFrame (retail) (Legion mage tower)
 
 ## Bugs
 1. When Dressing Room is already open, viewing a pet reverts frame position
