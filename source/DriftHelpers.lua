@@ -1123,6 +1123,11 @@ function DriftHelpers:FixCollectionsJournal()
         end)
         CollectionsJournal:HookScript("OnHide", function() collectionsJournalMover:SetAlpha(0) end)
 
+        -- Hide collectionsJournalMover if CollectionsJournal is not shown
+        if not CollectionsJournal:IsShown() then
+            collectionsJournalMover:SetAlpha(0)
+        end
+
         hasFixedCollections = true
     end
 end
