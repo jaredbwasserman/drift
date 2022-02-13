@@ -430,7 +430,7 @@ function DriftHelpers:PrintHelp()
           "Left-click and drag anywhere to move a frame. " ..
           "Right-click and drag up or down to scale a frame. " ..
           "Position and scale for each frame are saved. " ..
-          "For additional configuration options, visit " .. interfaceOptionsLabel .. " -> AddOns -> Drift -> Options."
+          "For additional configuration options, visit " .. interfaceOptionsLabel .. " -> AddOns -> Drift."
     )
 end
 

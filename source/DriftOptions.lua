@@ -138,84 +138,28 @@ function DriftHelpers:SetupConfig()
         DriftOptions.miscellaneousDisabled = true
     end
 
-    -- Make parent panel
-    DriftOptionsPanel.panel = CreateFrame("Frame", "DriftOptionsPanel", UIParent)
-    DriftOptionsPanel.panel.name = "Drift"
-    local driftOptionsTitle = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
-    driftOptionsTitle:SetFontObject("GameFontNormalLarge")
-    driftOptionsTitle:SetText("Drift")
-    driftOptionsTitle:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -15)
-
-    local driftOptionsDesc = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
-    driftOptionsDesc:SetFontObject("GameFontHighlight")
-    driftOptionsDesc:SetText("Modifies default UI frames so you can click and drag to move and scale.")
-    driftOptionsDesc:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -45)
-
-    local driftOptionsInstr = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
-    driftOptionsInstr:SetFontObject("GameFontHighlight")
-    driftOptionsInstr:SetText("Left-click and drag anywhere to move a frame.")
-    driftOptionsInstr:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -60)
-
-    local driftOptionsInstr2 = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
-    driftOptionsInstr2:SetFontObject("GameFontHighlight")
-    driftOptionsInstr2:SetText("Right-click and drag up or down to scale a frame.")
-    driftOptionsInstr2:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -75)
-
-    local driftOptionsInstr3 = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
-    driftOptionsInstr3:SetFontObject("GameFontHighlight")
-    driftOptionsInstr3:SetText("Position and scale for each frame are saved.")
-    driftOptionsInstr3:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -90)
-
-    local driftOptionsVersionLabel = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
-    driftOptionsVersionLabel:SetFontObject("GameFontNormal")
-    driftOptionsVersionLabel:SetText("Version:")
-    driftOptionsVersionLabel:SetJustifyH("LEFT")
-    driftOptionsVersionLabel:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -135)
-
-    local driftOptionsVersionContent = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
-    driftOptionsVersionContent:SetFontObject("GameFontHighlight")
-    driftOptionsVersionContent:SetText(GetAddOnMetadata("Drift", "Version"))
-    driftOptionsVersionContent:SetJustifyH("LEFT")
-    driftOptionsVersionContent:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 75, -135)
-
-    local driftOptionsAuthorLabel = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
-    driftOptionsAuthorLabel:SetFontObject("GameFontNormal")
-    driftOptionsAuthorLabel:SetText("Author:")
-    driftOptionsAuthorLabel:SetJustifyH("LEFT")
-    driftOptionsAuthorLabel:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 16, -150)
-
-    local driftOptionsAuthorContent = DriftOptionsPanel.panel:CreateFontString(nil, "BACKGROUND")
-    driftOptionsAuthorContent:SetFontObject("GameFontHighlight")
-    driftOptionsAuthorContent:SetText("Jared Wasserman")
-    driftOptionsAuthorContent:SetJustifyH("LEFT")
-    driftOptionsAuthorContent:SetPoint("TOPLEFT", DriftOptionsPanel.panel, "TOPLEFT", 75, -150)
-
-    InterfaceOptions_AddCategory(DriftOptionsPanel.panel)
-
     -- Options panel
-    DriftOptionsPanel.optionspanel = CreateFrame("Frame", "DriftOptionsPanelChild", DriftOptionsPanel.panel)
-    DriftOptionsPanel.optionspanel.name = "Options"
-    DriftOptionsPanel.optionspanel.parent = DriftOptionsPanel.panel.name
+    DriftOptionsPanel.optionspanel = CreateFrame("Frame", "DriftOptionsPanel", UIParent)
+    DriftOptionsPanel.optionspanel.name = "Drift"
     local driftOptionsChildTitle = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
     driftOptionsChildTitle:SetFontObject("GameFontNormalLarge")
-    driftOptionsChildTitle:SetText("Options")
+    driftOptionsChildTitle:SetText("Drift")
     driftOptionsChildTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 16, -15)
     InterfaceOptions_AddCategory(DriftOptionsPanel.optionspanel)
 
-    -- Options panel content
     -- Frame Movement
     local lockMoveTitle = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
     lockMoveTitle:SetFontObject("GameFontNormal")
     lockMoveTitle:SetText("Frame Movement")
-    lockMoveTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 16, -45)
+    lockMoveTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 233, -90)
 
     DriftOptionsPanel.config.frameMoveLockedCheckbox = createCheckbox(
         "FrameMoveLockedCheckbox",
         "TOPLEFT",
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
-        13,
-        -65,
+        230,
+        -110,
         " Lock Frame Movement",
         "While frame movement is locked, the Move Key must be pressed to move frames.",
         nil
@@ -225,15 +169,15 @@ function DriftHelpers:SetupConfig()
     local dragKeyDropdownTitle = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
     dragKeyDropdownTitle:SetFontObject("GameFontNormal")
     dragKeyDropdownTitle:SetText("Move Key")
-    dragKeyDropdownTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 32, -90)
+    dragKeyDropdownTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 249, -135)
 
     DriftOptionsPanel.config.dragKeyDropdown = createKeyDropdown(
         "DragKeyDropdown",
         "TOPLEFT",
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
-        14,
-        -105,
+        230,
+        -150,
         DriftOptions.dragKey
     )
     DriftOptions.dragKeyFunc = getKeyFuncFromOrdinal(DriftOptions.dragKey)
@@ -242,15 +186,15 @@ function DriftHelpers:SetupConfig()
     local lockScaleTitle = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
     lockScaleTitle:SetFontObject("GameFontNormal")
     lockScaleTitle:SetText("Frame Scaling")
-    lockScaleTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 300, -45)
+    lockScaleTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 233, -200)
 
     DriftOptionsPanel.config.frameScaleLockedCheckbox = createCheckbox(
         "FrameScaleLockedCheckbox",
         "TOPLEFT",
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
-        297,
-        -65,
+        230,
+        -220,
         " Lock Frame Scaling",
         "While frame scaling is locked, the Scale Key must be pressed to scale frames.",
         nil
@@ -260,15 +204,15 @@ function DriftHelpers:SetupConfig()
     local scaleKeyDropdownTitle = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
     scaleKeyDropdownTitle:SetFontObject("GameFontNormal")
     scaleKeyDropdownTitle:SetText("Scale Key")
-    scaleKeyDropdownTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 316, -90)
+    scaleKeyDropdownTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 249, -245)
 
     DriftOptionsPanel.config.scaleKeyDropdown = createKeyDropdown(
         "ScaleKeyDropdown",
         "TOPLEFT",
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
-        298,
-        -105,
+        230,
+        -260,
         DriftOptions.scaleKey
     )
     DriftOptions.scaleKeyFunc = getKeyFuncFromOrdinal(DriftOptions.scaleKey)
@@ -277,16 +221,16 @@ function DriftHelpers:SetupConfig()
     local frameToggleTitle = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
     frameToggleTitle:SetFontObject("GameFontNormal")
     frameToggleTitle:SetText("Enabled Frames")
-    frameToggleTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 16, -160)
+    frameToggleTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 18, -90)
 
-    local yOffset = -180
+    local yOffset = -110
 
     DriftOptionsPanel.config.windowsEnabledCheckbox = createCheckbox(
         "WindowsEnabledCheckbox",
         "TOPLEFT",
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
-        13,
+        15,
         yOffset,
         " Windows",
         "Whether Drift will modify Windows (example: Talents). Enabling or disabling Windows will cause the UI to reload.",
@@ -300,7 +244,7 @@ function DriftHelpers:SetupConfig()
         "TOPLEFT",
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
-        13,
+        15,
         yOffset,
         " Bags",
         "Whether Drift will modify Bags. Enabling or disabling Bags will cause the UI to reload.",
@@ -314,7 +258,7 @@ function DriftHelpers:SetupConfig()
         "TOPLEFT",
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
-        13,
+        15,
         yOffset,
         " Buttons",
         "Whether Drift will modify Buttons (example: Open Ticket). Enabling or disabling Buttons will cause the UI to reload.",
@@ -328,7 +272,7 @@ function DriftHelpers:SetupConfig()
         "TOPLEFT",
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
-        13,
+        15,
         yOffset,
         " Minimap",
         "Whether Drift will modify the Minimap. Enabling or disabling the Minimap will cause the UI to reload.",
@@ -348,7 +292,7 @@ function DriftHelpers:SetupConfig()
         "TOPLEFT",
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
-        13,
+        15,
         yOffset,
         objectivesTitle,
         objectivesDesc,
@@ -363,7 +307,7 @@ function DriftHelpers:SetupConfig()
             "TOPLEFT",
             DriftOptionsPanel.optionspanel,
             "TOPLEFT",
-            13,
+            15,
             yOffset,
             " Player Choice",
             "Whether Drift will modify the Player Choice Frame. Enabling or disabling the Player Choice Frame will cause the UI to reload.",
@@ -378,7 +322,7 @@ function DriftHelpers:SetupConfig()
         "TOPLEFT",
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
-        13,
+        15,
         yOffset,
         " Miscellaneous",
         "Whether Drift will modify Miscellaneous Frames (example: Battle.net Toast). Enabling or disabling Miscellaneous Frames will cause the UI to reload.",
@@ -402,8 +346,8 @@ function DriftHelpers:SetupConfig()
         "TOPLEFT",
         DriftOptionsPanel.optionspanel,
         "TOPLEFT",
-        297,
-        -160,
+        16,
+        -45,
         132,
         25,
         "Reset Frames",
@@ -413,8 +357,33 @@ function DriftHelpers:SetupConfig()
         end
     )
 
+    -- Version and author
+    local driftOptionsVersionLabel = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
+    driftOptionsVersionLabel:SetFontObject("GameFontNormal")
+    driftOptionsVersionLabel:SetText("Version:")
+    driftOptionsVersionLabel:SetJustifyH("LEFT")
+    driftOptionsVersionLabel:SetPoint("BOTTOMLEFT", DriftOptionsPanel.optionspanel, "BOTTOMLEFT", 13, 30)
+
+    local driftOptionsVersionContent = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
+    driftOptionsVersionContent:SetFontObject("GameFontHighlight")
+    driftOptionsVersionContent:SetText(GetAddOnMetadata("Drift", "Version"))
+    driftOptionsVersionContent:SetJustifyH("LEFT")
+    driftOptionsVersionContent:SetPoint("BOTTOMLEFT", DriftOptionsPanel.optionspanel, "BOTTOMLEFT", 65, 30)
+
+    local driftOptionsAuthorLabel = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
+    driftOptionsAuthorLabel:SetFontObject("GameFontNormal")
+    driftOptionsAuthorLabel:SetText("Author:")
+    driftOptionsAuthorLabel:SetJustifyH("LEFT")
+    driftOptionsAuthorLabel:SetPoint("BOTTOMLEFT", DriftOptionsPanel.optionspanel, "BOTTOMLEFT", 13, 15)
+
+    local driftOptionsAuthorContent = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
+    driftOptionsAuthorContent:SetFontObject("GameFontHighlight")
+    driftOptionsAuthorContent:SetText("Jared Wasserman")
+    driftOptionsAuthorContent:SetJustifyH("LEFT")
+    driftOptionsAuthorContent:SetPoint("BOTTOMLEFT", DriftOptionsPanel.optionspanel, "BOTTOMLEFT", 65, 15)
+
     -- Update logic
-    DriftOptionsPanel.panel.okay = function (self)
+    DriftOptionsPanel.optionspanel.okay = function (self)
         local shouldReloadUI = false
 
         -- Movement
@@ -487,7 +456,7 @@ function DriftHelpers:SetupConfig()
     end
 
     -- Cancel logic
-    DriftOptionsPanel.panel.cancel = function (self)
+    DriftOptionsPanel.optionspanel.cancel = function (self)
         -- Movement
         DriftOptionsPanel.config.frameMoveLockedCheckbox:SetChecked(DriftOptions.frameDragIsLocked)
         UIDropDownMenu_SetSelectedID(DriftOptionsPanel.config.dragKeyDropdown, DriftOptions.dragKey or 1)
