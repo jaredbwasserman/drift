@@ -141,10 +141,10 @@ function DriftHelpers:SetupConfig()
     -- Options panel
     DriftOptionsPanel.optionspanel = CreateFrame("Frame", "DriftOptionsPanel", UIParent)
     DriftOptionsPanel.optionspanel.name = "Drift"
-    local driftOptionsChildTitle = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
-    driftOptionsChildTitle:SetFontObject("GameFontNormalLarge")
-    driftOptionsChildTitle:SetText("Drift")
-    driftOptionsChildTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 16, -15)
+    local driftOptionsTitle = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
+    driftOptionsTitle:SetFontObject("GameFontNormalLarge")
+    driftOptionsTitle:SetText("Drift")
+    driftOptionsTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 16, -15)
     InterfaceOptions_AddCategory(DriftOptionsPanel.optionspanel)
 
     -- Frame Movement
@@ -474,12 +474,12 @@ function DriftHelpers:SetupConfig()
 
         DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
 
-        DriftOptionsPanel.config.minimapEnabledcheckbox:SetChecked(not DriftOptions.minimapDisabled)
+        DriftOptionsPanel.config.minimapEnabledCheckbox:SetChecked(not DriftOptions.minimapDisabled)
 
         DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
 
         if (isRetail) then
-            DriftOptionsPanel.config.palyerChoiceEnabledCheckbox:SetChecked(not DriftOptions.playerChoiceDisabled)
+            DriftOptionsPanel.config.playerChoiceEnabledCheckbox:SetChecked(not DriftOptions.playerChoiceDisabled)
         end
 
         DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)
