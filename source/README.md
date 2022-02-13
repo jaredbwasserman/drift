@@ -36,6 +36,7 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Clock (retail, classic, bcc)
 - Collections (retail)
 - Color Picker (retail, classic, bcc)
+- Contribution Collection (retail)
 - Covenant Mission (retail)
 - Covenant Preview (retail)
 - Covenant Renown (retail)

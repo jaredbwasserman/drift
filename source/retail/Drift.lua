@@ -556,6 +556,9 @@ local frames = {
         DriftDisabledBy = "minimapDisabled",
         DriftDelegate = "MinimapCluster"
     },
+    ["ContributionCollectionFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
 }
 
 -- Frame for handling events
