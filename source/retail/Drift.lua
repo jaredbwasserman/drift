@@ -103,7 +103,6 @@ local frames = {
     },
     ["TradeSkillFrame.OptionalReagentList"] = {
         DriftDisabledBy = "windowsDisabled",
-        DriftDelegate = "TradeSkillFrame"
     },
     ["CraftFrame"] = {
         DriftDisabledBy = "windowsDisabled",
