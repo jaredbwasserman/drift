@@ -494,6 +494,9 @@ local frames = {
     ["PlayerPowerBarAlt"] = {
         DriftDisabledBy = "miscellaneousDisabled",
     },
+    ["UIWidgetPowerBarContainerFrame"] = {
+        DriftDisabledBy = "miscellaneousDisabled",
+    },
     ["TalkingHeadFrame"] = {
         DriftDisabledBy = "miscellaneousDisabled",
     },
