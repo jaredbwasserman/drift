@@ -518,6 +518,9 @@ local frames = {
     ["PlayerChoiceToggleButton"] = {
         DriftDisabledBy = "buttonsDisabled",
     },
+    ["CypherPlayerChoiceToggleButton"] = {
+        DriftDisabledBy = "buttonsDisabled",
+    },
     ["ChromieTimeFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
