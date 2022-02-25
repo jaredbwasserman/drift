@@ -8,6 +8,7 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Bag behavior different in retail and classic - containerFrameOffsetX logic only exists in retail, so classic is not accurate
    1. Create separate versions of the override for retail, classic, bcc
    1. Probably need to update the existing retail function in case it's no longer accurate
+1. Update FixMinimapDependentFrames functions if original code changed over time
 1. Add scaling support for WorldMapFrame
 1. Remove delay for Guild & Communities (retail) and Blizzard Groups (classic)
 1. Configurable variables
@@ -56,6 +57,7 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. TalkingHeadFrame (retail)
    1. PlayerChoiceFrame (retail, seems to only break right after login)
    1. LFGParentFrame (classic)
+   1. OrderHallTalentFrame (retail)
 1. Some frames do not reset position after Reset Frames is invoked
    1. Game Menu / Main Menu
    1. System

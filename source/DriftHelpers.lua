@@ -11,6 +11,7 @@ local ALPHA_DURING_MOVE = 0.3 -- TODO: Configurable
 
 -- Variables for timer
 DriftHelpers.waitTable = {}
+DriftHelpers.resetTable = {}
 DriftHelpers.waitFrame = nil
 
 -- Variables for scaling
@@ -589,6 +590,11 @@ function DriftHelpers:ModifyFrames(frames)
     -- Fix CollectionsJournal
     if not DriftOptions.windowsDisabled then
         DriftHelpers:FixCollectionsJournal()
+    end
+
+    -- Fix OrderHallTalentFrame
+    if not DriftOptions.windowsDisabled and OrderHallTalentFrame then
+        DriftHelpers.resetTable["OrderHallTalentFrame"] = OrderHallTalentFrame
     end
 
     -- Fix managed frames
@@ -1173,6 +1179,14 @@ function DriftHelpers:Wait(delay, func, ...)
                     else
                         count = count - 1
                         f(unpack(p))
+                    end
+                end
+
+                -- Reset frames that cannot reset themselves
+                for frameName, frame in pairs(DriftHelpers.resetTable) do
+                    if frame.DriftResetNeeded then
+                        resetScaleAndPosition(frame)
+                        frame.DriftResetNeeded = nil
                     end
                 end
             end
