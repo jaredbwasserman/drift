@@ -45,7 +45,6 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 1. Clicking PlayerChoiceFrame buttons resets PlayerChoiceFrame (retail)
    1. Example is in Warfronts
    1. To fix, need to add Drift Tabs
-1. LootFrame resets when opening other frames (retail and classic)
 1. Scaling Bugs
    1. Map does not work correctly after scaling WorldMapFrame
    1. Character model has incorrect size after scaling CharacterFrame

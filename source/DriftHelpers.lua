@@ -597,6 +597,11 @@ function DriftHelpers:ModifyFrames(frames)
         DriftHelpers.resetTable["OrderHallTalentFrame"] = OrderHallTalentFrame
     end
 
+    -- Fix LootFrame
+    if not DriftOptions.windowsDisabled and LootFrame then
+        DriftHelpers.resetTable["LootFrame"] = LootFrame
+    end
+
     -- Fix managed frames
     DriftHelpers:FixManagedFrames()
 
