@@ -23,10 +23,12 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Or figure out some other way of not dragging around empty space
 1. Add frames
    1. Vehicle Seat Indicator
+   1. LFG queue eye ball button (retail, classic, bcc)
    1. Frames in UIPanelWindows (see UIParent)
    1. Frames in UIChildWindows (see UIParent)
 1. Add GuildMemberDetailFrame (bcc) and equivalent for classic, retail
 1. Look into modifying UIPanelWindows so frames do not close other frames
+1. `Drift: v1.0.X` instad of `Drift: Version 1.0.X`
 
 ## Bugs
 1. When Dressing Room is already open, viewing a pet reverts frame position
