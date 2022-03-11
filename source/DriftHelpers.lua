@@ -1136,6 +1136,13 @@ function DriftHelpers:FixArenaFrames()
     end
 
     if (isRetail and ArenaPrepFrames and ArenaEnemyFrames) then
+        -- Hook SetScale so ArenaEnemyFrames always has ArenaPrepFrames scale
+        local ArenaPrepFrames_SetScale_Original = ArenaPrepFrames.SetScale
+        function ArenaPrepFrames:SetScale(newScale)
+            ArenaPrepFrames_SetScale_Original(self, newScale)
+            ArenaEnemyFrames:SetScale(ArenaPrepFrames:GetScale())
+        end
+
         -- Hook SetPoint to avoid reverting position
         local ArenaPrepFrames_SetPoint_Original = ArenaPrepFrames.SetPoint
         function ArenaPrepFrames:SetPoint(point, relativeFrame, relativePoint, ofsx, ofsy)
@@ -1152,9 +1159,6 @@ function DriftHelpers:FixArenaFrames()
         -- Hook SetPoint to place ArenaEnemyFrames on top of ArenaPrepFrames
         local ArenaEnemyFrames_SetPoint_Original = ArenaEnemyFrames.SetPoint
         function ArenaEnemyFrames:SetPoint(point, relativeFrame, relativePoint, ofsx, ofsy)
-            -- Copy ArenaPrepFrames scale
-            self:SetScale(ArenaPrepFrames:GetScale())
-
             ArenaEnemyFrames_SetPoint_Original(self, "TOPRIGHT", ArenaPrepFrames, "TOPRIGHT", 0, 0)
         end
 

@@ -28,7 +28,6 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Frames in UIChildWindows (see UIParent)
 1. Add GuildMemberDetailFrame (bcc) and equivalent for classic, retail
 1. Look into modifying UIPanelWindows so frames do not close other frames
-1. `Drift: v1.0.X` instad of `Drift: Version 1.0.X`
 1. Arena frames
    1. Add support for Arena frames for bcc
    1. Make individual Arena frames movable
