@@ -142,6 +142,9 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 ## Player Choice
 - Player Choice (retail)
 
+## Arena
+- Arena (retail)
+
 ## Miscellaneous
 - Battle.net Toast (retail, classic, bcc)
 - Bonus Roll (retail)

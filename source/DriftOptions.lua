@@ -134,6 +134,9 @@ function DriftHelpers:SetupConfig()
     if DriftOptions.playerChoiceDisabled == nil then
         DriftOptions.playerChoiceDisabled = true
     end
+    if DriftOptions.arenaDisabled == nil then
+        DriftOptions.arenaDisabled = true
+    end
     if DriftOptions.miscellaneousDisabled == nil then
         DriftOptions.miscellaneousDisabled = true
     end
@@ -233,7 +236,7 @@ function DriftHelpers:SetupConfig()
         15,
         yOffset,
         " Windows",
-        "Whether Drift will modify Windows (example: Talents). Enabling or disabling Windows will cause the UI to reload.",
+        "Whether Drift will modify Windows (example: Talents).",
         nil
     )
     DriftOptionsPanel.config.windowsEnabledCheckbox:SetChecked(not DriftOptions.windowsDisabled)
@@ -247,7 +250,7 @@ function DriftHelpers:SetupConfig()
         15,
         yOffset,
         " Bags",
-        "Whether Drift will modify Bags. Enabling or disabling Bags will cause the UI to reload.",
+        "Whether Drift will modify Bags.",
         nil
     )
     DriftOptionsPanel.config.bagsEnabledCheckbox:SetChecked(not DriftOptions.bagsDisabled)
@@ -261,7 +264,7 @@ function DriftHelpers:SetupConfig()
         15,
         yOffset,
         " Buttons",
-        "Whether Drift will modify Buttons (example: Open Ticket). Enabling or disabling Buttons will cause the UI to reload.",
+        "Whether Drift will modify Buttons (example: Open Ticket).",
         nil
     )
     DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
@@ -275,17 +278,17 @@ function DriftHelpers:SetupConfig()
         15,
         yOffset,
         " Minimap",
-        "Whether Drift will modify the Minimap. Enabling or disabling the Minimap will cause the UI to reload.",
+        "Whether Drift will modify the Minimap.",
         nil
     )
     DriftOptionsPanel.config.minimapEnabledCheckbox:SetChecked(not DriftOptions.minimapDisabled)
     yOffset = yOffset - 30
 
     local objectivesTitle = " Objective Tracker"
-    local objectivesDesc = "Whether Drift will modify the Objective Tracker. Enabling or disabling the Objective Tracker will cause the UI to reload."
+    local objectivesDesc = "Whether Drift will modify the Objective Tracker."
     if (isClassic or isBCC) then
         objectivesTitle = " Quest Watch List"
-        objectivesDesc = "Whether Drift will modify the Quest Watch List. Enabling or disabling the Quest Watch List will cause the UI to reload."
+        objectivesDesc = "Whether Drift will modify the Quest Watch List."
     end
     DriftOptionsPanel.config.objectivesEnabledCheckbox = createCheckbox(
         "ObjectivesEnabledCheckbox",
@@ -310,10 +313,24 @@ function DriftHelpers:SetupConfig()
             15,
             yOffset,
             " Player Choice",
-            "Whether Drift will modify the Player Choice Frame. Enabling or disabling the Player Choice Frame will cause the UI to reload.",
+            "Whether Drift will modify the Player Choice Frame.",
             nil
         )
         DriftOptionsPanel.config.playerChoiceEnabledCheckbox:SetChecked(not DriftOptions.playerChoiceDisabled)
+        yOffset = yOffset - 30
+
+        DriftOptionsPanel.config.arenaEnabledCheckbox = createCheckbox(
+            "ArenaEnabledCheckbox",
+            "TOPLEFT",
+            DriftOptionsPanel.optionspanel,
+            "TOPLEFT",
+            15,
+            yOffset,
+            " Arena",
+            "Whether Drift will modify Arena Frames.",
+            nil
+        )
+        DriftOptionsPanel.config.arenaEnabledCheckbox:SetChecked(not DriftOptions.arenaDisabled)
         yOffset = yOffset - 30
     end
 
@@ -325,7 +342,7 @@ function DriftHelpers:SetupConfig()
         15,
         yOffset,
         " Miscellaneous",
-        "Whether Drift will modify Miscellaneous Frames (example: Battle.net Toast). Enabling or disabling Miscellaneous Frames will cause the UI to reload.",
+        "Whether Drift will modify Miscellaneous Frames (example: Battle.net Toast).",
         nil
     )
     DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)
@@ -441,6 +458,12 @@ function DriftHelpers:SetupConfig()
             if oldPlayerChoiceDisabled ~= DriftOptions.playerChoiceDisabled then
                 shouldReloadUI = true
             end
+
+            local oldArenaDisabled = DriftOptions.arenaDisabled
+            DriftOptions.arenaDisabled = not DriftOptionsPanel.config.arenaEnabledCheckbox:GetChecked()
+            if oldArenaDisabled ~= DriftOptions.arenaDisabled then
+                shouldReloadUI = true
+            end
         end
 
         local oldMiscellaneousDisabled = DriftOptions.miscellaneousDisabled
@@ -480,6 +503,8 @@ function DriftHelpers:SetupConfig()
 
         if (isRetail) then
             DriftOptionsPanel.config.playerChoiceEnabledCheckbox:SetChecked(not DriftOptions.playerChoiceDisabled)
+
+            DriftOptionsPanel.config.arenaEnabledCheckbox:SetChecked(not DriftOptions.arenaDisabled)
         end
 
         DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)

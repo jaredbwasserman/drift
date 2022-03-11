@@ -44,9 +44,10 @@ local isBCC = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
 local hasFixedPVPTalentList = false
 local hasFixedPlayerChoice = false
 local hasFixedObjectiveTracker = false
-local hasFixedQuestWatch = false
 local hasFixedMinimap = false
 local hasFixedCollections = false
+local hasFixedArena = false
+local hasFixedManageFramePositions = false
 
 
 --------------------------------------------------------------------------------
@@ -572,11 +573,6 @@ function DriftHelpers:ModifyFrames(frames)
         DriftHelpers:FixObjectiveTrackerFrame()
     end
 
-    -- Fix Quest Watch
-    if not DriftOptions.objectivesDisabled then
-        DriftHelpers:FixQuestWatchFrame(frames)
-    end
-
     -- Fix Minimap
     if not DriftOptions.minimapDisabled then
         DriftHelpers:FixMinimap()
@@ -602,8 +598,16 @@ function DriftHelpers:ModifyFrames(frames)
         DriftHelpers.resetTable["LootFrame"] = LootFrame
     end
 
+    -- Fix Arena frames
+    if not DriftOptions.arenaDisabled then
+        DriftHelpers:FixArenaFrames()
+    end
+
     -- Fix managed frames
     DriftHelpers:FixManagedFrames()
+
+    -- Hook FCF_DockUpdate since it's called at the end of UIParentManageFramePositions
+    DriftHelpers:HookFCF_DockUpdate(frames)
 
     -- Reset everything in case there was a delay
     DriftHelpers:BroadcastReset(frames)
@@ -754,23 +758,6 @@ function DriftHelpers:FixObjectiveTrackerFrame()
         end
 
         hasFixedObjectiveTracker = true
-    end
-end
-
--- Hook FCF_DockUpdate since it gets called at the end of UIParentManageFramePositions
-function DriftHelpers:FixQuestWatchFrame(frames)
-    if hasFixedQuestWatch then
-        return
-    end
-
-    if (QuestWatchFrame) then
-        local FCF_DockUpdate_Original = FCF_DockUpdate
-        FCF_DockUpdate = function()
-            FCF_DockUpdate_Original()
-            DriftHelpers:BroadcastReset(frames)
-        end
-
-        hasFixedQuestWatch = true
     end
 end
 
@@ -1143,6 +1130,42 @@ function DriftHelpers:FixCollectionsJournal()
     end
 end
 
+function DriftHelpers:FixArenaFrames()
+    if hasFixedArena then
+        return
+    end
+
+    if (isRetail and ArenaPrepFrames and ArenaEnemyFrames) then
+        -- Hook SetPoint to avoid reverting position
+        local ArenaPrepFrames_SetPoint_Original = ArenaPrepFrames.SetPoint
+        function ArenaPrepFrames:SetPoint(point, relativeFrame, relativePoint, ofsx, ofsy)
+            -- Increase ArenaPrepFrames size so ArenaPrepFrames is movable
+            ArenaPrepFrames:SetSize(112, 160)
+
+            if relativeFrame == MinimapCluster and DriftPoints["ArenaPrepFrames"] then
+                ArenaPrepFrames.DriftResetNeeded = true
+                return
+            end
+            ArenaPrepFrames_SetPoint_Original(self, point, relativeFrame, relativePoint, ofsx, ofsy)
+        end
+
+        -- Hook SetPoint to place ArenaEnemyFrames on top of ArenaPrepFrames
+        local ArenaEnemyFrames_SetPoint_Original = ArenaEnemyFrames.SetPoint
+        function ArenaEnemyFrames:SetPoint(point, relativeFrame, relativePoint, ofsx, ofsy)
+            -- Copy ArenaPrepFrames scale
+            self:SetScale(ArenaPrepFrames:GetScale())
+
+            ArenaEnemyFrames_SetPoint_Original(self, "TOPRIGHT", ArenaPrepFrames, "TOPRIGHT", 0, 0)
+        end
+
+        -- Avoid weird ObjectiveTrackerFrame placement
+        ObjectiveTrackerFrame:SetMovable(true)
+        ObjectiveTrackerFrame:SetUserPlaced(true)
+
+        hasFixedArena = true
+    end
+end
+
 -- Remove frames from list of frames managed by UIParent
 function DriftHelpers:FixManagedFrames()
     -- PlayerPowerBarAlt
@@ -1159,6 +1182,20 @@ function DriftHelpers:FixManagedFrames()
     if (TalkingHeadFrame and TalkingHeadFrame.DriftModifiable) then
         UIPARENT_MANAGED_FRAME_POSITIONS["TalkingHeadFrame"] = nil
     end
+end
+
+function DriftHelpers:HookFCF_DockUpdate(frames)
+    if hasFixedManageFramePositions then
+        return
+    end
+
+    local FCF_DockUpdate_Original = FCF_DockUpdate
+    FCF_DockUpdate = function()
+        FCF_DockUpdate_Original()
+        DriftHelpers:BroadcastReset(frames)
+    end
+
+    hasFixedManageFramePositions = true
 end
 
 function DriftHelpers:Wait(delay, func, ...)

@@ -564,6 +564,9 @@ local frames = {
     ["ContributionCollectionFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
+    ["ArenaPrepFrames"] = {
+        DriftDisabledBy = "arenaDisabled",
+    },
 }
 
 -- Frame for handling events
