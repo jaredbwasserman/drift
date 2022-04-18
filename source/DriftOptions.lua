@@ -85,7 +85,9 @@ local function createKeyDropdown(name, point, relativeFrame, relativePoint, xOff
         end
     end
 
-    UIDropDownMenu_Initialize(dropdown, initialize)
+    -- https://www.townlong-yak.com/bugs/Kjq4hm-DisplayModeTaint
+    UIDropDownMenu_Initialize(dropdown, initialize, "MENU")
+
     UIDropDownMenu_SetWidth(dropdown, 100)
     UIDropDownMenu_SetButtonWidth(dropdown, 124)
     UIDropDownMenu_JustifyText(dropdown, "LEFT")
