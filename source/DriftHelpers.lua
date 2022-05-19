@@ -73,12 +73,10 @@ local function shouldMove(frame)
 
     if not DriftOptions.frameDragIsLocked then
         return true
-    elseif DriftOptions.dragKeyFunc then
-        if DriftOptions.dragKeyFunc() then
-            return true
-        else
-            return false
-        end
+    elseif ((DriftOptions.dragAltKeyEnabled and IsAltKeyDown()) or
+            (DriftOptions.dragCtrlKeyEnabled and IsControlKeyDown()) or
+            (DriftOptions.dragShiftKeyEnabled and IsShiftKeyDown())) then
+        return true
     else
         return false
     end
@@ -92,12 +90,10 @@ local function shouldScale(frame)
 
     if not DriftOptions.frameScaleIsLocked then
         return true
-    elseif DriftOptions.scaleKeyFunc then
-        if DriftOptions.scaleKeyFunc() then
-            return true
-        else
-            return false
-        end
+    elseif ((DriftOptions.scaleAltKeyEnabled and IsAltKeyDown()) or
+            (DriftOptions.scaleCtrlKeyEnabled and IsControlKeyDown()) or
+            (DriftOptions.scaleShiftKeyEnabled and IsShiftKeyDown())) then
+        return true
     else
         return false
     end
