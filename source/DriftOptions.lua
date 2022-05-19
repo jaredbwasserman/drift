@@ -101,10 +101,10 @@ function DriftHelpers:SetupConfig()
     driftOptionsTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 15, -15)
     InterfaceOptions_AddCategory(DriftOptionsPanel.optionspanel)
 
-    -- Frame Movement
+    -- Frame Dragging
     local lockMoveTitle = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
     lockMoveTitle:SetFontObject("GameFontNormal")
-    lockMoveTitle:SetText("Frame Movement")
+    lockMoveTitle:SetText("Frame Dragging")
     lockMoveTitle:SetPoint("TOPLEFT", DriftOptionsPanel.optionspanel, "TOPLEFT", 190, -90)
 
     local yOffset = -110
@@ -116,8 +116,8 @@ function DriftHelpers:SetupConfig()
         "TOPLEFT",
         190,
         yOffset,
-        " Lock Frame Movement",
-        "While frame movement is locked, a modifier key must be pressed to drag a frame.",
+        " Lock Frame Dragging",
+        "While frame dragging is locked, a modifier key must be pressed to drag a frame.",
         nil
     )
     DriftOptionsPanel.config.frameMoveLockedCheckbox:SetChecked(DriftOptions.frameDragIsLocked)
@@ -131,7 +131,7 @@ function DriftHelpers:SetupConfig()
         205,
         yOffset,
         " ALT To Drag",
-        "Whether ALT can be pressed while frame movement is locked to drag a frame.",
+        "Whether ALT can be pressed while frame dragging is locked to drag a frame.",
         nil
     )
     DriftOptionsPanel.config.dragAltKeyEnabledCheckbox:SetChecked(DriftOptions.dragAltKeyEnabled)
@@ -145,7 +145,7 @@ function DriftHelpers:SetupConfig()
         205,
         yOffset,
         " CTRL To Drag",
-        "Whether CTRL can be pressed while frame movement is locked to drag a frame.",
+        "Whether CTRL can be pressed while frame dragging is locked to drag a frame.",
         nil
     )
     DriftOptionsPanel.config.dragCtrlKeyEnabledCheckbox:SetChecked(DriftOptions.dragCtrlKeyEnabled)
@@ -159,7 +159,7 @@ function DriftHelpers:SetupConfig()
         205,
         yOffset,
         " SHIFT To Drag",
-        "Whether SHIFT can be pressed while frame movement is locked to drag a frame.",
+        "Whether SHIFT can be pressed while frame dragging is locked to drag a frame.",
         nil
     )
     DriftOptionsPanel.config.dragShiftKeyEnabledCheckbox:SetChecked(DriftOptions.dragShiftKeyEnabled)
@@ -410,7 +410,7 @@ function DriftHelpers:SetupConfig()
     DriftOptionsPanel.optionspanel.okay = function (self)
         local shouldReloadUI = false
 
-        -- Movement
+        -- Dragging
         DriftOptions.frameDragIsLocked = DriftOptionsPanel.config.frameMoveLockedCheckbox:GetChecked()
         DriftOptions.dragAltKeyEnabled = DriftOptionsPanel.config.dragAltKeyEnabledCheckbox:GetChecked()
         DriftOptions.dragCtrlKeyEnabled = DriftOptionsPanel.config.dragCtrlKeyEnabledCheckbox:GetChecked()
@@ -489,7 +489,7 @@ function DriftHelpers:SetupConfig()
 
     -- Cancel logic
     DriftOptionsPanel.optionspanel.cancel = function (self)
-        -- Movement
+        -- Dragging
         DriftOptionsPanel.config.frameMoveLockedCheckbox:SetChecked(DriftOptions.frameDragIsLocked)
         DriftOptionsPanel.config.dragAltKeyEnabledCheckbox:SetChecked(DriftOptions.dragAltKeyEnabled)
         DriftOptionsPanel.config.dragCtrlKeyEnabledCheckbox:SetChecked(DriftOptions.dragCtrlKeyEnabled)
