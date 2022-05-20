@@ -40,6 +40,7 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Make individual Arena frames movable
    1. Make Arena enemy unit frames clickable so targeting works
 1. Fix taint
+1. Publish to WowUp Hub
 
 ## Bugs
 1. When Dressing Room is already open, viewing a pet reverts frame position
