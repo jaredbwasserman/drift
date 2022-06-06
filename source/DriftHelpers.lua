@@ -1189,11 +1189,12 @@ function DriftHelpers:HookFCF_DockUpdate(frames)
         return
     end
 
-    local FCF_DockUpdate_Original = FCF_DockUpdate
-    FCF_DockUpdate = function()
-        FCF_DockUpdate_Original()
-        DriftHelpers:BroadcastReset(frames)
-    end
+    hooksecurefunc(
+        "FCF_DockUpdate",
+        function()
+            DriftHelpers:BroadcastReset(frames)
+        end
+    )
 
     hasFixedManageFramePositions = true
 end
