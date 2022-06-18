@@ -1,7 +1,7 @@
-## Interface: 90200
+## Interface: 90205
 ## Title: Drift
 ## Notes: Modifies default UI frames so you can click and drag to move and scale.
-## Version: 1.1.0
+## Version: 1.1.1
 ## Author: Jared Wasserman
 ## SavedVariables: DriftPoints, DriftScales, DriftOptions
 
