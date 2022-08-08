@@ -1189,7 +1189,10 @@ function DriftHelpers:FixFramesForElvUI()
 
     local UpdateUIPanelPositions_Original = UpdateUIPanelPositions
     function UpdateUIPanelPositions(currentFrame)
-        if currentFrame == FriendsFrame or currentFrame == CharacterFrame then
+        if currentFrame == FriendsFrame and DriftPoints["FriendsFrame"] then
+            return
+        end
+        if currentFrame == CharacterFrame and DriftPoints["CharacterFrame"] then
             return
         end
         UpdateUIPanelPositions_Original(currentFrame)
