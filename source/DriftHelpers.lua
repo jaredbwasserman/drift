@@ -47,6 +47,7 @@ local hasFixedObjectiveTracker = false
 local hasFixedMinimap = false
 local hasFixedCollections = false
 local hasFixedArena = false
+local hasFixedFramesForElvUI = false
 local hasFixedManageFramePositions = false
 
 
@@ -255,7 +256,10 @@ local function resetScaleAndPosition(frame)
     local point = DriftPoints[frameToMove:GetName()]
     if point then
         frameToMove:ClearAllPoints()
-        frameToMove:SetPoint(
+        xpcall(
+            frameToMove.SetPoint,
+            function() end,
+            frameToMove,
             point["point"],
             point["relativeTo"],
             point["relativePoint"],
@@ -266,7 +270,10 @@ local function resetScaleAndPosition(frame)
         -- TODO: This is messy
         if ("CollectionsJournal" == frame:GetName()) then
             frame:ClearAllPoints()
-            frame:SetPoint(
+            xpcall(
+                frame.SetPoint,
+                function() end,
+                frame,
                 point["point"],
                 point["relativeTo"],
                 point["relativePoint"],
@@ -598,6 +605,12 @@ function DriftHelpers:ModifyFrames(frames)
     if not DriftOptions.arenaDisabled then
         DriftHelpers:FixArenaFrames()
     end
+
+    -- ElvUI compatibility BCC
+    -- https://github.com/jaredbwasserman/drift/issues/31
+    if isBCC and not DriftOptions.windowsDisabled then
+        DriftHelpers:FixFramesForElvUI()
+    end 
 
     -- Fix managed frames
     DriftHelpers:FixManagedFrames()
@@ -1102,7 +1115,10 @@ function DriftHelpers:FixCollectionsJournal()
             local point = DriftPoints["CollectionsJournalMover"]
             if point then
                 CollectionsJournal:ClearAllPoints()
-                CollectionsJournal:SetPoint(
+                xpcall(
+                    CollectionsJournal.SetPoint,
+                    function() end,
+                    CollectionsJournal,
                     point["point"],
                     point["relativeTo"],
                     point["relativePoint"],
@@ -1164,6 +1180,22 @@ function DriftHelpers:FixArenaFrames()
 
         hasFixedArena = true
     end
+end
+
+function DriftHelpers:FixFramesForElvUI()
+    if hasFixedFramesForElvUI then
+        return
+    end
+
+    local UpdateUIPanelPositions_Original = UpdateUIPanelPositions
+    function UpdateUIPanelPositions(currentFrame)
+        if currentFrame == FriendsFrame or currentFrame == CharacterFrame then
+            return
+        end
+        UpdateUIPanelPositions_Original(currentFrame)
+    end
+
+    hasFixedFramesForElvUI = true
 end
 
 -- Remove frames from list of frames managed by UIParent
