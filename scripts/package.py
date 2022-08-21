@@ -35,7 +35,7 @@ if len(sys.argv) < 2:
 dest_dir = sys.argv[1]
 
 # Directories
-source_dir = os.path.join(drift_repo_dir, 'source')
+source_dir = os.path.join(drift_repo_dir, 'src')
 source_dir_retail = os.path.join(source_dir, 'retail')
 source_dir_classic = os.path.join(source_dir, 'classic')
 source_dir_bcc = os.path.join(source_dir, 'bcc')
