@@ -4,8 +4,8 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 * [CurseForge Link](https://www.curseforge.com/wow/addons/drift)
 
 ## Update Checklist
-1. Bump Addon version for retail, classic, bcc, wc.
-1. Test retail, classic, bcc, wc.
+1. Bump Addon version for retail, classic, wc.
+1. Test retail, classic, wc.
 1. Update CurseForge description if needed.
 1. Create a new GitHub release.
 1. Use file naming convention `vX.Y.Z-<GAME>` (e.g. `v1.0.25-retail`).
