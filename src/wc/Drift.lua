@@ -106,10 +106,13 @@ local frames = {
     ["QuestLogFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
+	["QuestLogDetailFrame"] = {
+		DriftDisabledBy = "windowsDisabled",
+	},
     ["QuestFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
-    ["QuestWatchFrame"] = {
+    ["WatchFrame"] = {
         DriftDisabledBy = "objectivesDisabled"
     },
     ["GossipFrame"] = {
@@ -119,6 +122,16 @@ local frames = {
         DriftDisabledBy = "windowsDisabled",
     },
     ["PlayerTalentFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["AchievementFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["AchievementFrameHeader"] = {
+        DriftDisabledBy = "windowsDisabled",
+        DriftDelegate = "AchievementFrame"
+    },
+    ["AchievementFrame.searchResults"] = {
         DriftDisabledBy = "windowsDisabled",
     },
     ["WorldMapFrame"] = {
@@ -279,6 +292,26 @@ local frames = {
     ["WardrobeFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
+    ["CalendarFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["CalendarViewEventFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["CalendarViewEventFrame.Header"] = {
+        DriftDisabledBy = "windowsDisabled",
+        DriftDelegate = "CalendarViewEventFrame"
+    },
+    ["CalendarViewEventFrame.HeaderFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+        DriftDelegate = "CalendarViewEventFrame"
+    },
+    ["CalendarViewHolidayFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
+    ["CalendarViewRaidFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
     ["ClassTrainerFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
@@ -320,6 +353,10 @@ local frames = {
     ["LFGParentFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
+	["PVPFrame"] = {
+		DriftDisabledBy = "windowsDisabled",
+		DriftDelegate = "PVPParentFrame"
+	},
 }
 
 -- Frame for handling events

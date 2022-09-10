@@ -39,6 +39,7 @@ local collectionsJournalMoverTexture = collectionsJournalMover:CreateTexture(nil
 local isRetail = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE)
 local isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
 local isBCC = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
+local isWC = (WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC)
 
 -- Other variables
 local hasFixedPVPTalentList = false
@@ -425,9 +426,7 @@ end
 
 function DriftHelpers:PrintHelp()
     local interfaceOptionsLabel = "Interface"
-    if (isRetail or isBCC) then
-        interfaceOptionsLabel = "Interface"
-    elseif (isClassic) then
+    if isClassic then
         interfaceOptionsLabel = "Interface Options"
     end
 

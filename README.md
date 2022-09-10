@@ -90,3 +90,4 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Frames will revert (not desired behavior)
    1. This might be the same bug as "Frames with tabs move from hotkey when on other tab"
 1. Runecarving frame reverts position sometimes
+1. Bags are probably broken for wc (might need to rethink how to deal with bags in general)

@@ -11,6 +11,7 @@ DriftOptionsPanel.config = {}
 local isRetail = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE)
 local isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
 local isBCC = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
+local isWC = (WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC)
 
 -- Variables for slash commands
 local DRIFT = "DRIFT"

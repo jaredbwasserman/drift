@@ -8,7 +8,7 @@ Modifies default UI frames so you can click and drag to move and scale. Left-cli
 Only Windows are enabled by default. You can enable or disable frames by going to Interface -> AddOns -> Drift and then modifying the "Enabled Frames" section.
 
 ## Windows
-- Achievements (retail)
+- Achievements (retail, wc)
 - AddOn List (retail, classic, wc)
 - Adventure Guide (retail)
 - Allied Races (retail)
@@ -23,10 +23,10 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - BFA Missions (retail)
 - Black Market Auction House (retail)
 - Blizzard Groups (classic, wc)
-- Calendar (retail)
-- Calendar View Event (retail)
-- Calendar View Holiday (retail)
-- Calendar View Raid (retail)
+- Calendar (retail, wc)
+- Calendar View Event (retail, wc)
+- Calendar View Holiday (retail, wc)
+- Calendar View Raid (retail, wc)
 - Challenges Keystone (retail)
 - Character Info (retail, classic, wc)
 - Chat Channels (retail, classic, wc)
@@ -78,12 +78,13 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Open Mail (retail, classic, wc)
 - Order Advancement (retail)
 - Petition (retail, classic, wc)
+- PVP (wc)
 - PVP Results (retail)
 - PVP Scoreboard (retail, classic, wc)
 - Quest (retail, classic, wc)
 - Quest Choice (retail)
 - Quest Log (classic, wc)
-- Quest Log Popup Detail (retail)
+- Quest Detail (retail, wc)
 - Raid Info (retail, classic, wc)
 - Recruit A Friend Rewards (retail)
 - Reforging (retail)
@@ -136,8 +137,8 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Minimap (retail, classic, wc)
 
 ## Objectives
-- Objective Tracker (retail)
-- Quest Watch List (classic, wc)
+- Objective Tracker (retail, wc)
+- Quest Watch List (classic)
 
 ## Player Choice
 - Player Choice (retail)
