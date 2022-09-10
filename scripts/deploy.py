@@ -15,22 +15,22 @@ wow_dir = sys.argv[1]
 source_dir = os.path.join(drift_repo_dir, 'src')
 source_dir_retail = os.path.join(source_dir, 'retail')
 source_dir_classic = os.path.join(source_dir, 'classic')
-source_dir_bcc = os.path.join(source_dir, 'bcc')
+source_dir_wc = os.path.join(source_dir, 'wc')
 dest_dir_retail = os.path.join(wow_dir, '_retail_/Interface/AddOns/Drift')
 dest_dir_classic = os.path.join(wow_dir, '_classic_era_/Interface/AddOns/Drift')
-dest_dir_bcc = os.path.join(wow_dir, '_classic_/Interface/AddOns/Drift')
+dest_dir_wc = os.path.join(wow_dir, '_classic_/Interface/AddOns/Drift')
 
 # Helper file locations
 source_helpers = os.path.join(source_dir, 'DriftHelpers.lua')
 dest_helpers_retail = os.path.join(dest_dir_retail, 'DriftHelpers.lua')
 dest_helpers_classic = os.path.join(dest_dir_classic, 'DriftHelpers.lua')
-dest_helpers_bcc = os.path.join(dest_dir_bcc, 'DriftHelpers.lua')
+dest_helpers_wc = os.path.join(dest_dir_wc, 'DriftHelpers.lua')
 
 # Option file locations
 source_options = os.path.join(source_dir, 'DriftOptions.lua')
 dest_options_retail = os.path.join(dest_dir_retail, 'DriftOptions.lua')
 dest_options_classic = os.path.join(dest_dir_classic, 'DriftOptions.lua')
-dest_options_bcc = os.path.join(dest_dir_bcc, 'DriftOptions.lua')
+dest_options_wc = os.path.join(dest_dir_wc, 'DriftOptions.lua')
 
 # Copy retail
 if os.path.exists(dest_dir_retail):
@@ -52,12 +52,12 @@ shutil.copy2(source_helpers, dest_helpers_classic)
 print('Copying\n  {0} to\n  {1}'.format(source_options, dest_options_classic))
 shutil.copy2(source_options, dest_options_classic)
 
-# Copy bcc
-if os.path.exists(dest_dir_bcc):
-    shutil.rmtree(dest_dir_bcc)
-print('Copying\n  {0} to\n  {1}'.format(source_dir_bcc, dest_dir_bcc))
-shutil.copytree(source_dir_bcc, dest_dir_bcc)
-print('Copying\n  {0} to\n  {1}'.format(source_helpers, dest_helpers_bcc))
-shutil.copy2(source_helpers, dest_helpers_bcc)
-print('Copying\n  {0} to\n  {1}'.format(source_options, dest_options_bcc))
-shutil.copy2(source_options, dest_options_bcc)
+# Copy wc
+if os.path.exists(dest_dir_wc):
+    shutil.rmtree(dest_dir_wc)
+print('Copying\n  {0} to\n  {1}'.format(source_dir_wc, dest_dir_wc))
+shutil.copytree(source_dir_wc, dest_dir_wc)
+print('Copying\n  {0} to\n  {1}'.format(source_helpers, dest_helpers_wc))
+shutil.copy2(source_helpers, dest_helpers_wc)
+print('Copying\n  {0} to\n  {1}'.format(source_options, dest_options_wc))
+shutil.copy2(source_options, dest_options_wc)
