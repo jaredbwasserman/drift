@@ -6,11 +6,11 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 
 ## Update Checklist
 1. Bump addon version for retail, classic, bcc, wc.
+1. Update Wago script interface versions.
 1. Test retail, classic, wc.
 1. Update CurseForge and Wago descriptions if needed.
 1. Create a new GitHub release.
 1. Use file naming convention `vX.Y.Z-<GAME>` (e.g. `v1.0.25-retail`).
-1. Update Wago script interface version.
 1. Release on CurseForge and Wago.
 
 ## TODO
@@ -42,8 +42,6 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Add support for Arena frames for bcc
    1. Make individual Arena frames movable
    1. Make Arena enemy unit frames clickable so targeting works
-1. Fix taint
-1. Publish to WowUp Hub
 
 ## Bugs
 1. When Dressing Room is already open, viewing a pet reverts frame position
