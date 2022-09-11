@@ -115,3 +115,22 @@ shutil.copy2(source_options, dest_options_wc)
 zip(dest_dir_wc)
 print('Removing {0}\n'.format(dest_dir_wc))
 shutil.rmtree(dest_dir_wc)
+
+# Write info to file
+package_info_path = os.path.join(dest_dir, 'package-info.txt')
+with open(package_info_path, 'x') as f:
+    f.write('retail\n')
+    f.write(dest_name_retail[6:] + '\n')
+    f.write(interface_retail + '\n')
+    f.write(dest_dir_retail + '.zip\n')
+
+    f.write('classic\n')
+    f.write(dest_name_classic[6:] + '\n')
+    f.write(interface_classic + '\n')
+    f.write(dest_dir_classic +'.zip\n')
+
+    f.write('wc\n')
+    f.write(dest_name_wc[6:] + '\n')
+    f.write(interface_wc + '\n')
+    f.write(dest_dir_wc + '.zip\n')
+print('Wrote package info to {0}\n'.format(package_info_path))
