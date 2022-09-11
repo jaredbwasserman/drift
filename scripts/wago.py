@@ -11,6 +11,13 @@ patch_key = {
     'wc': 'supported_wotlk_patch',
 }
 
+# Current interface versions
+interface_version = {
+    'retail': '9.2.7',
+    'classic': '1.14.3',
+    'wc': '3.4.0',
+}
+
 # Get source directory
 if len(sys.argv) < 2:
     raise ValueError('Must give source directory as first argument')
@@ -26,7 +33,7 @@ with open(os.path.join(source_dir, 'package-info.txt'), 'r') as f:
     while count < 3:
         name = f.readline().strip()
         label = f.readline().strip()
-        interface_version = f.readline().strip()
+        addon_version = f.readline().strip()
         file_path = f.readline().strip()
         count = count + 1
 
@@ -34,7 +41,7 @@ with open(os.path.join(source_dir, 'package-info.txt'), 'r') as f:
             'label': label,
             'stability': 'stable',
             'changelog': '#Changelog',
-            patch_key[name]: interface_version,
+            patch_key[name]: interface_version[name],
         }
 
         session = requests.Session()
