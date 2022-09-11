@@ -42,6 +42,9 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Add support for Arena frames for bcc
    1. Make individual Arena frames movable
    1. Make Arena enemy unit frames clickable so targeting works
+1. Add CharacterFrame tabs for wc
+   1. Pet
+   1. Reputation
 
 ## Bugs
 1. When Dressing Room is already open, viewing a pet reverts frame position
