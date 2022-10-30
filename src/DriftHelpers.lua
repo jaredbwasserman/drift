@@ -609,10 +609,7 @@ function DriftHelpers:ModifyFrames(frames)
     -- https://github.com/jaredbwasserman/drift/issues/31
     if isBCC and not DriftOptions.windowsDisabled then
         DriftHelpers:FixFramesForElvUI()
-    end 
-
-    -- Fix managed frames
-    DriftHelpers:FixManagedFrames()
+    end
 
     -- Hook FCF_DockUpdate since it's called at the end of UIParentManageFramePositions
     DriftHelpers:HookFCF_DockUpdate(frames)
@@ -1198,24 +1195,6 @@ function DriftHelpers:FixFramesForElvUI()
     end
 
     hasFixedFramesForElvUI = true
-end
-
--- Remove frames from list of frames managed by UIParent
-function DriftHelpers:FixManagedFrames()
-    -- PlayerPowerBarAlt
-    if (PlayerPowerBarAlt and PlayerPowerBarAlt.DriftModifiable) then
-        UIPARENT_MANAGED_FRAME_POSITIONS["PlayerPowerBarAlt"] = nil
-    end
-
-    -- ExtraAbilityContainer
-    if (ExtraAbilityContainer and ExtraAbilityContainer.DriftModifiable) then
-        UIPARENT_MANAGED_FRAME_POSITIONS["ExtraAbilityContainer"] = nil
-    end
-
-    -- TalkingHeadFrame
-    if (TalkingHeadFrame and TalkingHeadFrame.DriftModifiable) then
-        UIPARENT_MANAGED_FRAME_POSITIONS["TalkingHeadFrame"] = nil
-    end
 end
 
 function DriftHelpers:HookFCF_DockUpdate(frames)

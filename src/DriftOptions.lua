@@ -26,12 +26,11 @@ SLASH_DRIFTRESET1 = "/driftreset"
 --------------------------------------------------------------------------------
 
 -- Local functions
-local function createCheckbox(name, point, relativeFrame, relativePoint, xOffset, yOffset, text, tooltipText, onClickFunction)
+local function createCheckbox(name, point, relativeFrame, relativePoint, xOffset, yOffset, text, tooltipText)
     local checkbox = CreateFrame("CheckButton", name, relativeFrame, "ChatConfigCheckButtonTemplate")
     checkbox:SetPoint(point, relativeFrame, relativePoint, xOffset, yOffset)
     getglobal(checkbox:GetName() .. "Text"):SetText(text)
     checkbox.tooltip = tooltipText
-    checkbox:SetScript("OnClick", onClickFunction)
     return checkbox
 end
 
@@ -118,8 +117,7 @@ function DriftHelpers:SetupConfig()
         190,
         yOffset,
         " Lock Frame Dragging",
-        "While frame dragging is locked, a modifier key must be pressed to drag a frame.",
-        nil
+        "While frame dragging is locked, a modifier key must be pressed to drag a frame."
     )
     DriftOptionsPanel.config.frameMoveLockedCheckbox:SetChecked(DriftOptions.frameDragIsLocked)
     yOffset = yOffset - 30
@@ -132,8 +130,7 @@ function DriftHelpers:SetupConfig()
         205,
         yOffset,
         " ALT To Drag",
-        "Whether ALT can be pressed while frame dragging is locked to drag a frame.",
-        nil
+        "Whether ALT can be pressed while frame dragging is locked to drag a frame."
     )
     DriftOptionsPanel.config.dragAltKeyEnabledCheckbox:SetChecked(DriftOptions.dragAltKeyEnabled)
     yOffset = yOffset - 30
@@ -146,8 +143,7 @@ function DriftHelpers:SetupConfig()
         205,
         yOffset,
         " CTRL To Drag",
-        "Whether CTRL can be pressed while frame dragging is locked to drag a frame.",
-        nil
+        "Whether CTRL can be pressed while frame dragging is locked to drag a frame."
     )
     DriftOptionsPanel.config.dragCtrlKeyEnabledCheckbox:SetChecked(DriftOptions.dragCtrlKeyEnabled)
     yOffset = yOffset - 30
@@ -160,8 +156,7 @@ function DriftHelpers:SetupConfig()
         205,
         yOffset,
         " SHIFT To Drag",
-        "Whether SHIFT can be pressed while frame dragging is locked to drag a frame.",
-        nil
+        "Whether SHIFT can be pressed while frame dragging is locked to drag a frame."
     )
     DriftOptionsPanel.config.dragShiftKeyEnabledCheckbox:SetChecked(DriftOptions.dragShiftKeyEnabled)
     yOffset = yOffset - 40
@@ -181,8 +176,7 @@ function DriftHelpers:SetupConfig()
         190,
         yOffset,
         " Lock Frame Scaling",
-        "While frame scaling is locked, a modifier key must be pressed to scale a frame.",
-        nil
+        "While frame scaling is locked, a modifier key must be pressed to scale a frame."
     )
     DriftOptionsPanel.config.frameScaleLockedCheckbox:SetChecked(DriftOptions.frameScaleIsLocked)
     yOffset = yOffset - 30
@@ -195,8 +189,7 @@ function DriftHelpers:SetupConfig()
         205,
         yOffset,
         " ALT To Scale",
-        "Whether ALT can be pressed while frame scaling is locked to scale a frame.",
-        nil
+        "Whether ALT can be pressed while frame scaling is locked to scale a frame."
     )
     DriftOptionsPanel.config.scaleAltKeyEnabledCheckbox:SetChecked(DriftOptions.scaleAltKeyEnabled)
     yOffset = yOffset - 30
@@ -209,8 +202,7 @@ function DriftHelpers:SetupConfig()
         205,
         yOffset,
         " CTRL To Scale",
-        "Whether CTRL can be pressed while frame scaling is locked to scale a frame.",
-        nil
+        "Whether CTRL can be pressed while frame scaling is locked to scale a frame."
     )
     DriftOptionsPanel.config.scaleCtrlKeyEnabledCheckbox:SetChecked(DriftOptions.scaleCtrlKeyEnabled)
     yOffset = yOffset - 30
@@ -223,8 +215,7 @@ function DriftHelpers:SetupConfig()
         205,
         yOffset,
         " SHIFT To Scale",
-        "Whether SHIFT can be pressed while frame scaling is locked to scale a frame.",
-        nil
+        "Whether SHIFT can be pressed while frame scaling is locked to scale a frame."
     )
     DriftOptionsPanel.config.scaleShiftKeyEnabledCheckbox:SetChecked(DriftOptions.scaleShiftKeyEnabled)
 
@@ -244,8 +235,7 @@ function DriftHelpers:SetupConfig()
         15,
         yOffset,
         " Windows",
-        "Whether Drift will modify Windows (example: Talents).",
-        nil
+        "Whether Drift will modify Windows (example: Talents)."
     )
     DriftOptionsPanel.config.windowsEnabledCheckbox:SetChecked(not DriftOptions.windowsDisabled)
     yOffset = yOffset - 30
@@ -258,8 +248,7 @@ function DriftHelpers:SetupConfig()
         15,
         yOffset,
         " Bags",
-        "Whether Drift will modify Bags.",
-        nil
+        "Whether Drift will modify Bags."
     )
     DriftOptionsPanel.config.bagsEnabledCheckbox:SetChecked(not DriftOptions.bagsDisabled)
     yOffset = yOffset - 30
@@ -272,8 +261,7 @@ function DriftHelpers:SetupConfig()
         15,
         yOffset,
         " Buttons",
-        "Whether Drift will modify Buttons (example: Open Ticket).",
-        nil
+        "Whether Drift will modify Buttons (example: Open Ticket)."
     )
     DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
     yOffset = yOffset - 30
@@ -286,8 +274,7 @@ function DriftHelpers:SetupConfig()
         15,
         yOffset,
         " Minimap",
-        "Whether Drift will modify the Minimap.",
-        nil
+        "Whether Drift will modify the Minimap."
     )
     DriftOptionsPanel.config.minimapEnabledCheckbox:SetChecked(not DriftOptions.minimapDisabled)
     yOffset = yOffset - 30
@@ -306,8 +293,7 @@ function DriftHelpers:SetupConfig()
         15,
         yOffset,
         objectivesTitle,
-        objectivesDesc,
-        nil
+        objectivesDesc
     )
     DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
     yOffset = yOffset - 30
@@ -321,8 +307,7 @@ function DriftHelpers:SetupConfig()
             15,
             yOffset,
             " Player Choice",
-            "Whether Drift will modify the Player Choice Frame.",
-            nil
+            "Whether Drift will modify the Player Choice Frame."
         )
         DriftOptionsPanel.config.playerChoiceEnabledCheckbox:SetChecked(not DriftOptions.playerChoiceDisabled)
         yOffset = yOffset - 30
@@ -335,8 +320,7 @@ function DriftHelpers:SetupConfig()
             15,
             yOffset,
             " Arena",
-            "Whether Drift will modify Arena Frames.",
-            nil
+            "Whether Drift will modify Arena Frames."
         )
         DriftOptionsPanel.config.arenaEnabledCheckbox:SetChecked(not DriftOptions.arenaDisabled)
         yOffset = yOffset - 30
@@ -350,8 +334,7 @@ function DriftHelpers:SetupConfig()
         15,
         yOffset,
         " Miscellaneous",
-        "Whether Drift will modify Miscellaneous Frames (example: Battle.net Toast).",
-        nil
+        "Whether Drift will modify Miscellaneous Frames (example: Battle.net Toast)."
     )
     DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)
 
@@ -408,7 +391,7 @@ function DriftHelpers:SetupConfig()
     driftOptionsAuthorContent:SetPoint("BOTTOMLEFT", DriftOptionsPanel.optionspanel, "BOTTOMLEFT", 70, 15)
 
     -- Update logic
-    DriftOptionsPanel.optionspanel.okay = function (self)
+    DriftOptionsPanel.optionspanel:SetScript("OnHide", function()
         local shouldReloadUI = false
 
         -- Dragging
@@ -486,41 +469,7 @@ function DriftHelpers:SetupConfig()
         if shouldReloadUI then
             ReloadUI()
         end
-    end
-
-    -- Cancel logic
-    DriftOptionsPanel.optionspanel.cancel = function (self)
-        -- Dragging
-        DriftOptionsPanel.config.frameMoveLockedCheckbox:SetChecked(DriftOptions.frameDragIsLocked)
-        DriftOptionsPanel.config.dragAltKeyEnabledCheckbox:SetChecked(DriftOptions.dragAltKeyEnabled)
-        DriftOptionsPanel.config.dragCtrlKeyEnabledCheckbox:SetChecked(DriftOptions.dragCtrlKeyEnabled)
-        DriftOptionsPanel.config.dragShiftKeyEnabledCheckbox:SetChecked(DriftOptions.dragShiftKeyEnabled)
-
-        -- Scaling
-        DriftOptionsPanel.config.frameScaleLockedCheckbox:SetChecked(DriftOptions.frameScaleIsLocked)
-        DriftOptionsPanel.config.scaleAltKeyEnabledCheckbox:SetChecked(DriftOptions.scaleAltKeyEnabled)
-        DriftOptionsPanel.config.scaleCtrlKeyEnabledCheckbox:SetChecked(DriftOptions.scaleCtrlKeyEnabled)
-        DriftOptionsPanel.config.scaleShiftKeyEnabledCheckbox:SetChecked(DriftOptions.scaleShiftKeyEnabled)
-
-        -- Optional Frames
-        DriftOptionsPanel.config.windowsEnabledCheckbox:SetChecked(not DriftOptions.windowsDisabled)
-
-        DriftOptionsPanel.config.bagsEnabledCheckbox:SetChecked(not DriftOptions.bagsDisabled)
-
-        DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
-
-        DriftOptionsPanel.config.minimapEnabledCheckbox:SetChecked(not DriftOptions.minimapDisabled)
-
-        DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
-
-        if (isRetail) then
-            DriftOptionsPanel.config.playerChoiceEnabledCheckbox:SetChecked(not DriftOptions.playerChoiceDisabled)
-
-            DriftOptionsPanel.config.arenaEnabledCheckbox:SetChecked(not DriftOptions.arenaDisabled)
-        end
-
-        DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)
-    end
+    end)
 end
 
 

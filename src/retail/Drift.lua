@@ -104,6 +104,9 @@ local frames = {
     ["TradeSkillFrame.OptionalReagentList"] = {
         DriftDisabledBy = "windowsDisabled",
     },
+	["ProfessionsFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+    },
     ["CraftFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
@@ -138,30 +141,17 @@ local frames = {
     ["SpellBookFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
-    ["PlayerTalentFrame"] = {
-        DriftDisabledBy = "windowsDisabled",
-        DriftTabs = {
-            "PlayerTalentFrameTab1",
-            "PlayerTalentFrameTab2",
-            "PlayerTalentFrameTab3",
-            "PlayerTalentFrameTalentsPvpTalentButton",
-            "PlayerTalentFrameTalentsPvpTalentFrame.TrinketSlot",
-            "PlayerTalentFrameTalentsPvpTalentFrame.TalentSlot1",
-            "PlayerTalentFrameTalentsPvpTalentFrame.TalentSlot2",
-            "PlayerTalentFrameTalentsPvpTalentFrame.TalentSlot3"
-        }
-    },
-    ["TalentFrame"] = {
+    ["ClassTalentFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
     ["AchievementFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
-    ["AchievementFrameHeader"] = {
+    ["AchievementFrame.Header"] = {
         DriftDisabledBy = "windowsDisabled",
         DriftDelegate = "AchievementFrame"
     },
-    ["AchievementFrame.searchResults"] = {
+    ["AchievementFrame.SearchResults"] = {
         DriftDisabledBy = "windowsDisabled",
     },
     ["WorldMapFrame"] = {
@@ -175,41 +165,6 @@ local frames = {
     },
     ["LookingForGuildFrame"] = {
         DriftDisabledBy = "windowsDisabled",
-    },
-    ["CommunitiesFrame"] = {
-        DriftDisabledBy = "windowsDisabled",
-        DriftTabs = {
-            "ClubFinderGuildFinderFrame.ClubFinderSearchTab",
-            "ClubFinderCommunityAndGuildFinderFrame.ClubFinderSearchTab",
-            "ClubFinderGuildFinderFrame.ClubFinderPendingTab",
-            "ClubFinderCommunityAndGuildFinderFrame.ClubFinderPendingTab",
-            "CommunitiesFrame.ChatTab",
-            "CommunitiesFrame.RosterTab",
-            "CommunitiesFrame.GuildBenefitsTab",
-            "CommunitiesFrame.GuildInfoTab",
-            "CommunitiesFrame.MaximizeMinimizeFrame.MinimizeButton",
-            "CommunitiesFrame.MaximizeMinimizeFrame.MaximizeButton",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton1",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton2",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton3",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton4",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton5",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton6",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton7",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton8",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton9",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton10",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton11",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton12",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton13",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton14",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton15",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton16",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton17",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton18",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton19",
-            "CommunitiesFrameCommunitiesListListScrollFrameButton20"
-        }
     },
     ["PVEFrame"] = {
         DriftDisabledBy = "windowsDisabled",
@@ -288,6 +243,9 @@ local frames = {
     ["GameMenuFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
+	["SettingsPanel"] = {
+		DriftDisabledBy = "windowsDisabled",
+	},
     ["VideoOptionsFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
@@ -462,10 +420,6 @@ local frames = {
     ["PVPMatchResults"] = {
         DriftDisabledBy = "windowsDisabled",
     },
-    -- ["UIWidgetTopCenterContainerFrame"] = {
-    --     DriftDisabledBy = "miscellaneousDisabled",
-    --     DriftChildMovers = true
-    -- },
     ["AlliedRacesFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
@@ -616,6 +570,9 @@ local function eventHandler(self, event, ...)
 
         -- Communities
         Drift:RegisterEvent("CLUB_FINDER_RECRUITMENT_POST_RETURNED")
+
+		-- Professions
+		Drift:RegisterEvent("TRADE_SKILL_LIST_UPDATE")
 
         -- Modify frames after an addon loads
         DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")

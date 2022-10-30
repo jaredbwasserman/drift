@@ -25,26 +25,14 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Opacity while moving and scaling
    1. Max and min scale
    1. Scale increment
-1. Make frames optional
-   1. All the menu frames
-   1. Achievements
-1. Make ObjectiveTrackerFrame (retail) have dynamic height instead of fixed
-   1. Or if not dynamic, some height parameter in Drift Options
-   1. Or figure out some other way of not dragging around empty space
-1. Add frames
-   1. Vehicle Seat Indicator
-   1. LFG queue eye ball button (retail, classic, bcc)
-   1. Frames in UIPanelWindows (see UIParent)
-   1. Frames in UIChildWindows (see UIParent)
 1. Add GuildMemberDetailFrame (bcc) and equivalent for classic, retail
-1. Look into modifying UIPanelWindows so frames do not close other frames
-1. Arena frames
-   1. Add support for Arena frames for bcc
-   1. Make individual Arena frames movable
-   1. Make Arena enemy unit frames clickable so targeting works
 1. Add CharacterFrame tabs for wc
    1. Pet
    1. Reputation
+1. Swap four spaces to tabs
+1. Make options panel look like first-party options panels
+   1. Also clean up code for options
+1. Add Guild & Communities (retail)
 
 ## Bugs
 1. When Dressing Room is already open, viewing a pet reverts frame position
@@ -52,12 +40,7 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 1. Leave Group/Leave Guild (left-hand side buttons) causes Guild & Communities to revert position (retail)
 1. PlayerChoiceToggleButton reverts its position when PlayerChoiceFrame is shown
    1. Happens in Torghast anima power choice
-1. VehicleSeatIndicator bugs
-   1. Moving VehicleSeatIndicator will move the ObjectiveTracker
-   1. Sometimes, the ObjectiveTracker gets hidden when the VehicleSeatIndicator moved
-   1. VehicleSeatIndicator stretches out sometimes because of SetPoint called elsewhere
-   1. VehicleSeatIndicator resets from other stuff too - probably managed
-1. Fix UIWidgetTopCenterContainerFrame (retail and classic)
+1. Fix UIWidgetTopCenterContainerFrame (classic)
    1. Dragging "Time Remaining" in BG causes the widget to get stuck in drag mode
    1. Sometimes the children do not get to be made movers, e.g. return from BG
    1. Need some recursion for the child movers, e.g. BG Horde and Ally bars
