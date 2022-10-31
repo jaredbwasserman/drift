@@ -68,7 +68,7 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Join Battleground (classic, wc)
 - Key Bindings (retail, classic, wc)
 - Looking For Group (classic, wc)
-- Loot (retail, classic, wc)
+- Loot (classic, wc)
 - Macro Popup (retail, classic, wc)
 - Macros (retail, classic, wc)
 - Mail (retail, classic, wc)
@@ -79,6 +79,7 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Options (retail)
 - Order Advancement (retail)
 - Petition (retail, classic, wc)
+- Player Choice (retail)
 - Professions (retail)
 - PVP (wc)
 - PVP Results (retail)
@@ -113,21 +114,6 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - What's New (retail)
 - World Map (retail, classic, wc)
 
-## Bags
-- Bag 1 (retail, classic, wc)
-- Bag 2 (retail, classic, wc)
-- Bag 3 (retail, classic, wc)
-- Bag 4 (retail, classic, wc)
-- Bag 5 (retail, classic, wc)
-- Bag 6 (retail, classic, wc)
-- Bag 7 (retail, classic, wc)
-- Bag 8 (retail, classic, wc)
-- Bag 9 (retail, classic, wc)
-- Bag 10 (retail, classic, wc)
-- Bag 11 (retail, classic, wc)
-- Bag 12 (retail, classic, wc)
-- Bag 13 (retail, classic, wc)
-
 ## Buttons
 - Garrison Minimap (retail)
 - Open Ticket (retail, classic, wc)
@@ -135,33 +121,15 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Return to Graveyard (retail)
 - Social (retail)
 
-## Minimap
-- Minimap (retail, classic, wc)
-
-## Objectives
-- Objective Tracker (retail, wc)
-- Quest Watch List (classic)
-
-## Player Choice
-- Player Choice (retail)
-
-## Arena
-- Arena (retail)
-
 ## Miscellaneous
 - Battle.net Toast (retail, classic, wc)
 - Bonus Roll (retail)
-- Extra Ability Container (retail)
 - Group Loot 1 (classic, wc)
 - Group Loot 2 (classic, wc)
 - Group Loot 3 (classic, wc)
 - Group Loot 4 (classic, wc)
-- Player Power Bar Alt (retail)
 - Quick Join Toast 1 (retail)
 - Quick Join Toast 2 (retail)
-- Talking Head (retail)
-- UI Widget Power Bar (retail)
-- UI Widget Top Center (classic, wc)
 
 # Slash Commands
 `/drift` - Print allowed commands.  

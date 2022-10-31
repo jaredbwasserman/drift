@@ -70,23 +70,8 @@ function DriftHelpers:SetupConfig()
 	if DriftOptions.windowsDisabled == nil then
 		DriftOptions.windowsDisabled = false
 	end
-	if DriftOptions.bagsDisabled == nil then
-		DriftOptions.bagsDisabled = true
-	end
 	if DriftOptions.buttonsDisabled == nil then
 		DriftOptions.buttonsDisabled = true
-	end
-	if DriftOptions.minimapDisabled == nil then
-		DriftOptions.minimapDisabled = true
-	end
-	if DriftOptions.objectivesDisabled == nil then
-		DriftOptions.objectivesDisabled = true
-	end
-	if DriftOptions.playerChoiceDisabled == nil then
-		DriftOptions.playerChoiceDisabled = true
-	end
-	if DriftOptions.arenaDisabled == nil then
-		DriftOptions.arenaDisabled = true
 	end
 	if DriftOptions.miscellaneousDisabled == nil then
 		DriftOptions.miscellaneousDisabled = true
@@ -240,19 +225,6 @@ function DriftHelpers:SetupConfig()
 	DriftOptionsPanel.config.windowsEnabledCheckbox:SetChecked(not DriftOptions.windowsDisabled)
 	yOffset = yOffset - 30
 
-	DriftOptionsPanel.config.bagsEnabledCheckbox = createCheckbox(
-		"BagsEnabledCheckbox",
-		"TOPLEFT",
-		DriftOptionsPanel.optionspanel,
-		"TOPLEFT",
-		15,
-		yOffset,
-		" Bags",
-		"Whether Drift will modify Bags."
-	)
-	DriftOptionsPanel.config.bagsEnabledCheckbox:SetChecked(not DriftOptions.bagsDisabled)
-	yOffset = yOffset - 30
-
 	DriftOptionsPanel.config.buttonsEnabledCheckbox = createCheckbox(
 		"ButtonsEnabledCheckbox",
 		"TOPLEFT",
@@ -265,66 +237,6 @@ function DriftHelpers:SetupConfig()
 	)
 	DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
 	yOffset = yOffset - 30
-
-	DriftOptionsPanel.config.minimapEnabledCheckbox = createCheckbox(
-		"MinimapEnabledCheckbox",
-		"TOPLEFT",
-		DriftOptionsPanel.optionspanel,
-		"TOPLEFT",
-		15,
-		yOffset,
-		" Minimap",
-		"Whether Drift will modify the Minimap."
-	)
-	DriftOptionsPanel.config.minimapEnabledCheckbox:SetChecked(not DriftOptions.minimapDisabled)
-	yOffset = yOffset - 30
-
-	local objectivesTitle = " Objective Tracker"
-	local objectivesDesc = "Whether Drift will modify the Objective Tracker."
-	if (isClassic or isBCC) then
-		objectivesTitle = " Quest Watch List"
-		objectivesDesc = "Whether Drift will modify the Quest Watch List."
-	end
-	DriftOptionsPanel.config.objectivesEnabledCheckbox = createCheckbox(
-		"ObjectivesEnabledCheckbox",
-		"TOPLEFT",
-		DriftOptionsPanel.optionspanel,
-		"TOPLEFT",
-		15,
-		yOffset,
-		objectivesTitle,
-		objectivesDesc
-	)
-	DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
-	yOffset = yOffset - 30
-
-	if (isRetail) then
-		DriftOptionsPanel.config.playerChoiceEnabledCheckbox = createCheckbox(
-			"PlayerChoiceEnabledCheckbox",
-			"TOPLEFT",
-			DriftOptionsPanel.optionspanel,
-			"TOPLEFT",
-			15,
-			yOffset,
-			" Player Choice",
-			"Whether Drift will modify the Player Choice Frame."
-		)
-		DriftOptionsPanel.config.playerChoiceEnabledCheckbox:SetChecked(not DriftOptions.playerChoiceDisabled)
-		yOffset = yOffset - 30
-
-		DriftOptionsPanel.config.arenaEnabledCheckbox = createCheckbox(
-			"ArenaEnabledCheckbox",
-			"TOPLEFT",
-			DriftOptionsPanel.optionspanel,
-			"TOPLEFT",
-			15,
-			yOffset,
-			" Arena",
-			"Whether Drift will modify Arena Frames."
-		)
-		DriftOptionsPanel.config.arenaEnabledCheckbox:SetChecked(not DriftOptions.arenaDisabled)
-		yOffset = yOffset - 30
-	end
 
 	DriftOptionsPanel.config.miscellaneousEnabledCheckbox = createCheckbox(
 		"MiscellaneousEnabledCheckbox",
@@ -413,50 +325,10 @@ function DriftHelpers:SetupConfig()
 			shouldReloadUI = true
 		end
 
-		local oldBagsDisabled = DriftOptions.bagsDisabled
-		DriftOptions.bagsDisabled = not DriftOptionsPanel.config.bagsEnabledCheckbox:GetChecked()
-		if oldBagsDisabled ~= DriftOptions.bagsDisabled then
-			if DriftOptions.bagsDisabled then
-				-- Fix bag lua errors
-				for i=1,13 do
-					_G['ContainerFrame'..i]:ClearAllPoints()
-					_G['ContainerFrame'..i]:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 0)
-				end
-			end
-
-			shouldReloadUI = true
-		end
-
 		local oldButtonsDisabled = DriftOptions.buttonsDisabled
 		DriftOptions.buttonsDisabled = not DriftOptionsPanel.config.buttonsEnabledCheckbox:GetChecked()
 		if oldButtonsDisabled ~= DriftOptions.buttonsDisabled then
 			shouldReloadUI = true
-		end
-
-		local oldMinimapDisabled = DriftOptions.minimapDisabled
-		DriftOptions.minimapDisabled = not DriftOptionsPanel.config.minimapEnabledCheckbox:GetChecked()
-		if oldMinimapDisabled ~= DriftOptions.minimapDisabled then
-			shouldReloadUI = true
-		end
-
-		local oldObjectivesDisabled = DriftOptions.objectivesDisabled
-		DriftOptions.objectivesDisabled = not DriftOptionsPanel.config.objectivesEnabledCheckbox:GetChecked()
-		if oldObjectivesDisabled ~= DriftOptions.objectivesDisabled then
-			shouldReloadUI = true
-		end
-
-		if (isRetail) then
-			local oldPlayerChoiceDisabled = DriftOptions.playerChoiceDisabled
-			DriftOptions.playerChoiceDisabled = not DriftOptionsPanel.config.playerChoiceEnabledCheckbox:GetChecked()
-			if oldPlayerChoiceDisabled ~= DriftOptions.playerChoiceDisabled then
-				shouldReloadUI = true
-			end
-
-			local oldArenaDisabled = DriftOptions.arenaDisabled
-			DriftOptions.arenaDisabled = not DriftOptionsPanel.config.arenaEnabledCheckbox:GetChecked()
-			if oldArenaDisabled ~= DriftOptions.arenaDisabled then
-				shouldReloadUI = true
-			end
 		end
 
 		local oldMiscellaneousDisabled = DriftOptions.miscellaneousDisabled

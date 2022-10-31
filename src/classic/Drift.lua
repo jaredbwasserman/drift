@@ -1,95 +1,4 @@
 local frames = {
-	["ContainerFrame1"] = {
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame1.ClickableTitleFrame"] = {
-		DriftDelegate = "ContainerFrame1",
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame2"] = {
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame2.ClickableTitleFrame"] = {
-		DriftDelegate = "ContainerFrame2",
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame3"] = {
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame3.ClickableTitleFrame"] = {
-		DriftDelegate = "ContainerFrame3",
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame4"] = {
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame4.ClickableTitleFrame"] = {
-		DriftDelegate = "ContainerFrame4",
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame5"] = {
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame5.ClickableTitleFrame"] = {
-		DriftDelegate = "ContainerFrame5",
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame6"] = {
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame6.ClickableTitleFrame"] = {
-		DriftDelegate = "ContainerFrame6",
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame7"] = {
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame7.ClickableTitleFrame"] = {
-		DriftDelegate = "ContainerFrame7",
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame8"] = {
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame8.ClickableTitleFrame"] = {
-		DriftDelegate = "ContainerFrame8",
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame9"] = {
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame9.ClickableTitleFrame"] = {
-		DriftDelegate = "ContainerFrame9",
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame10"] = {
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame10.ClickableTitleFrame"] = {
-		DriftDelegate = "ContainerFrame10",
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame11"] = {
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame11.ClickableTitleFrame"] = {
-		DriftDelegate = "ContainerFrame11",
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame12"] = {
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame12.ClickableTitleFrame"] = {
-		DriftDelegate = "ContainerFrame12",
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame13"] = {
-		DriftDisabledBy = "bagsDisabled"
-	},
-	["ContainerFrame13.ClickableTitleFrame"] = {
-		DriftDelegate = "ContainerFrame13",
-		DriftDisabledBy = "bagsDisabled"
-	},
 	["CharacterFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},
@@ -108,9 +17,6 @@ local frames = {
 	},
 	["QuestFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
-	},
-	["QuestWatchFrame"] = {
-		DriftDisabledBy = "objectivesDisabled"
 	},
 	["GossipFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
@@ -302,17 +208,6 @@ local frames = {
 	},
 	["ChatConfigFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
-	},
-	["UIWidgetTopCenterContainerFrame"] = {
-		DriftDisabledBy = "miscellaneousDisabled",
-		DriftChildMovers = true
-	},
-	["MinimapCluster"] = {
-		DriftDisabledBy = "minimapDisabled",
-	},
-	["MinimapZoneTextButton"] = {
-		DriftDisabledBy = "minimapDisabled",
-		DriftDelegate = "MinimapCluster"
 	},
 	["LFGParentFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
