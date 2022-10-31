@@ -115,11 +115,12 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - World Map (retail, classic, wc)
 
 ## Buttons
-- Garrison Minimap (retail)
-- Open Ticket (retail, classic, wc)
-- Player Choice Toggle (retail)
-- Return to Graveyard (retail)
-- Social (retail)
+- Expansion Landing Page Minimap Button (retail)
+- Garrison Minimap Button (retail)
+- Open Ticket Button (retail, classic, wc)
+- Player Choice Toggle Button (retail)
+- Return to Graveyard Button (retail)
+- Social Button (retail)
 
 ## Miscellaneous
 - Battle.net Toast (retail, classic, wc)

@@ -304,6 +304,9 @@ local frames = {
 	["GarrisonLandingPageMinimapButton"] = {
 		DriftDisabledBy = "buttonsDisabled",
 	},
+	["ExpansionLandingPageMinimapButton"] = {
+		DriftDisabledBy = "buttonsDisabled",
+	},
 	["OrderHallMissionFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},

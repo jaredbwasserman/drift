@@ -233,7 +233,7 @@ function DriftHelpers:SetupConfig()
 		15,
 		yOffset,
 		" Buttons",
-		"Whether Drift will modify Buttons (example: Open Ticket)."
+		"Whether Drift will modify Buttons (example: Open Ticket Button)."
 	)
 	DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
 	yOffset = yOffset - 30
