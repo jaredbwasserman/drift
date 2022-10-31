@@ -10,8 +10,10 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 1. Test retail, classic, wc.
 1. Update CurseForge and Wago descriptions if needed.
 1. Create a new GitHub release.
+   1. Upload artifacts in the new release.
 1. Use file naming convention `vX.Y.Z-<GAME>` (e.g. `v1.0.25-retail`).
 1. Release on CurseForge and Wago.
+   1. Set env vars for wago script.
 
 ## TODO
 1. Add scaling support for WorldMapFrame
@@ -24,6 +26,7 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 1. Make options panel look like first-party options panels
    1. Also clean up code for options
 1. Add Bags (retail, classic, wc)
+1. Okay and cancel options implementation (classic, wc)
 
 ## Bugs
 1. When Dressing Room is already open, viewing a pet reverts frame position
