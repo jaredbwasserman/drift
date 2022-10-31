@@ -6,21 +6,21 @@ import sys
 
 # Name of patch key
 patch_key = {
-    'retail': 'supported_retail_patch',
-    'classic': 'supported_classic_patch',
-    'wc': 'supported_wotlk_patch',
+	'retail': 'supported_retail_patch',
+	'classic': 'supported_classic_patch',
+	'wc': 'supported_wotlk_patch',
 }
 
 # Current interface versions
 interface_version = {
-    'retail': '9.2.7',
-    'classic': '1.14.3',
-    'wc': '3.4.0',
+	'retail': '9.2.7',
+	'classic': '1.14.3',
+	'wc': '3.4.0',
 }
 
 # Get source directory
 if len(sys.argv) < 2:
-    raise ValueError('Must give source directory as first argument')
+	raise ValueError('Must give source directory as first argument')
 source_dir = sys.argv[1]
 
 # Get env vars
@@ -30,33 +30,33 @@ wago_api_token = os.environ['WAGO_API_TOKEN']
 # Get package info
 count = 0
 with open(os.path.join(source_dir, 'package-info.txt'), 'r') as f:
-    while count < 3:
-        name = f.readline().strip()
-        label = f.readline().strip()
-        addon_version = f.readline().strip()
-        file_path = f.readline().strip()
-        count = count + 1
+	while count < 3:
+		name = f.readline().strip()
+		label = f.readline().strip()
+		addon_version = f.readline().strip()
+		file_path = f.readline().strip()
+		count = count + 1
 
-        metadata = {
-            'label': label,
-            'stability': 'stable',
-            'changelog': '#Changelog',
-            patch_key[name]: interface_version[name],
-        }
+		metadata = {
+			'label': label,
+			'stability': 'stable',
+			'changelog': '#Changelog',
+			patch_key[name]: interface_version[name],
+		}
 
-        session = requests.Session()
-        response = session.post(
-            'https://addons.wago.io/api/projects/{0}/version'.format(wago_project_id),
-            headers={
-                'authorization': 'Bearer {0}'.format(wago_api_token),
-                'accept': 'application/json',
-            },
-            data={
-                'metadata': json.dumps(metadata),
-            },
-            files={
-                'file': open(file_path, 'rb'),
-            }
-        )
-        print(response.text)
-        print()
+		session = requests.Session()
+		response = session.post(
+			'https://addons.wago.io/api/projects/{0}/version'.format(wago_project_id),
+			headers={
+				'authorization': 'Bearer {0}'.format(wago_api_token),
+				'accept': 'application/json',
+			},
+			data={
+				'metadata': json.dumps(metadata),
+			},
+			files={
+				'file': open(file_path, 'rb'),
+			}
+		)
+		print(response.text)
+		print()

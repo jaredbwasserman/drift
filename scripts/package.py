@@ -6,24 +6,24 @@ from zipfile import ZipFile
 
 # Get interface version from toc file
 def get_toc_info(toc_path, field):
-    with open(toc_path) as f:
-        line = f.readline()
-        while line:
-            if field in line:
-                return line.split(':')[1].strip()
-            line = f.readline()
-    return None
+	with open(toc_path) as f:
+		line = f.readline()
+		while line:
+			if field in line:
+				return line.split(':')[1].strip()
+			line = f.readline()
+	return None
 
 
 def zip(path):
-    with ZipFile('{0}.zip'.format(path), 'w') as zf:
-        print('Zipping\n  {0} as\n  {0}.zip\n'.format(path))
-        for root, dirs, files in os.walk(path):
-            for file in files:
-                zf.write(
-                    os.path.join(root, file),
-                    os.path.join('Drift', file)
-                )
+	with ZipFile('{0}.zip'.format(path), 'w') as zf:
+		print('Zipping\n  {0} as\n  {0}.zip\n'.format(path))
+		for root, dirs, files in os.walk(path):
+			for file in files:
+				zf.write(
+					os.path.join(root, file),
+					os.path.join('Drift', file)
+				)
 
 
 # Get repo directory
@@ -31,7 +31,7 @@ drift_repo_dir = os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0])))
 
 # Get destination directory
 if len(sys.argv) < 2:
-    raise ValueError('Must give destination directory as first argument')
+	raise ValueError('Must give destination directory as first argument')
 dest_dir = sys.argv[1]
 
 # Directories
@@ -73,7 +73,7 @@ dest_options_wc = os.path.join(dest_dir_wc, 'DriftOptions.lua')
 
 # Copy retail
 if os.path.exists(dest_dir_retail):
-    shutil.rmtree(dest_dir_retail)
+	shutil.rmtree(dest_dir_retail)
 print('Copying\n  {0} to\n  {1}\n'.format(source_dir_retail, dest_dir_retail))
 shutil.copytree(source_dir_retail, dest_dir_retail)
 print('Copying\n  {0} to\n  {1}\n'.format(source_helpers, dest_helpers_retail))
@@ -88,7 +88,7 @@ shutil.rmtree(dest_dir_retail)
 
 # Copy classic
 if os.path.exists(dest_dir_classic):
-    shutil.rmtree(dest_dir_classic)
+	shutil.rmtree(dest_dir_classic)
 print('Copying\n  {0} to\n  {1}\n'.format(source_dir_classic, dest_dir_classic))
 shutil.copytree(source_dir_classic, dest_dir_classic)
 print('Copying\n  {0} to\n  {1}\n'.format(source_helpers, dest_helpers_classic))
@@ -103,7 +103,7 @@ shutil.rmtree(dest_dir_classic)
 
 # Copy wc
 if os.path.exists(dest_dir_wc):
-    shutil.rmtree(dest_dir_wc)
+	shutil.rmtree(dest_dir_wc)
 print('Copying\n  {0} to\n  {1}\n'.format(source_dir_wc, dest_dir_wc))
 shutil.copytree(source_dir_wc, dest_dir_wc)
 print('Copying\n  {0} to\n  {1}\n'.format(source_helpers, dest_helpers_wc))
@@ -119,18 +119,18 @@ shutil.rmtree(dest_dir_wc)
 # Write info to file
 package_info_path = os.path.join(dest_dir, 'package-info.txt')
 with open(package_info_path, 'x') as f:
-    f.write('retail\n')
-    f.write(dest_name_retail[6:] + '\n')
-    f.write(interface_retail + '\n')
-    f.write(dest_dir_retail + '.zip\n')
+	f.write('retail\n')
+	f.write(dest_name_retail[6:] + '\n')
+	f.write(interface_retail + '\n')
+	f.write(dest_dir_retail + '.zip\n')
 
-    f.write('classic\n')
-    f.write(dest_name_classic[6:] + '\n')
-    f.write(interface_classic + '\n')
-    f.write(dest_dir_classic +'.zip\n')
+	f.write('classic\n')
+	f.write(dest_name_classic[6:] + '\n')
+	f.write(interface_classic + '\n')
+	f.write(dest_dir_classic +'.zip\n')
 
-    f.write('wc\n')
-    f.write(dest_name_wc[6:] + '\n')
-    f.write(interface_wc + '\n')
-    f.write(dest_dir_wc + '.zip\n')
+	f.write('wc\n')
+	f.write(dest_name_wc[6:] + '\n')
+	f.write(interface_wc + '\n')
+	f.write(dest_dir_wc + '.zip\n')
 print('Wrote package info to {0}\n'.format(package_info_path))

@@ -8,7 +8,7 @@ drift_repo_dir = os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0])))
 
 # Get WoW directory
 if len(sys.argv) < 2:
-    raise ValueError('Must give WoW directory as first argument')
+	raise ValueError('Must give WoW directory as first argument')
 wow_dir = sys.argv[1]
 
 # Directories
@@ -34,7 +34,7 @@ dest_options_wc = os.path.join(dest_dir_wc, 'DriftOptions.lua')
 
 # Copy retail
 if os.path.exists(dest_dir_retail):
-    shutil.rmtree(dest_dir_retail)
+	shutil.rmtree(dest_dir_retail)
 print('Copying\n  {0} to\n  {1}'.format(source_dir_retail, dest_dir_retail))
 shutil.copytree(source_dir_retail, dest_dir_retail)
 print('Copying\n  {0} to\n  {1}'.format(source_helpers, dest_helpers_retail))
@@ -44,7 +44,7 @@ shutil.copy2(source_options, dest_options_retail)
 
 # Copy classic
 if os.path.exists(dest_dir_classic):
-    shutil.rmtree(dest_dir_classic)
+	shutil.rmtree(dest_dir_classic)
 print('Copying\n  {0} to\n  {1}'.format(source_dir_classic, dest_dir_classic))
 shutil.copytree(source_dir_classic, dest_dir_classic)
 print('Copying\n  {0} to\n  {1}'.format(source_helpers, dest_helpers_classic))
@@ -54,7 +54,7 @@ shutil.copy2(source_options, dest_options_classic)
 
 # Copy wc
 if os.path.exists(dest_dir_wc):
-    shutil.rmtree(dest_dir_wc)
+	shutil.rmtree(dest_dir_wc)
 print('Copying\n  {0} to\n  {1}'.format(source_dir_wc, dest_dir_wc))
 shutil.copytree(source_dir_wc, dest_dir_wc)
 print('Copying\n  {0} to\n  {1}'.format(source_helpers, dest_helpers_wc))
