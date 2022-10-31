@@ -266,8 +266,10 @@ local function resetScaleAndPosition(frame)
 
 		-- TODO: This is messy
 		if ("CollectionsJournal" == frame:GetName() or "CommunitiesFrame" == frame:GetName()) then
-			communitiesMover:SetWidth(CommunitiesFrame:GetWidth())
-			communitiesMover:SetHeight(CommunitiesFrame:GetHeight())
+			if (hasFixedCommunities) then
+				communitiesMover:SetWidth(CommunitiesFrame:GetWidth())
+				communitiesMover:SetHeight(CommunitiesFrame:GetHeight())
+			end
 
 			frame:ClearAllPoints()
 			xpcall(
