@@ -20,7 +20,7 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Probably need to update the existing retail function in case it's no longer accurate
 1. Update FixMinimapDependentFrames functions if original code changed over time
 1. Add scaling support for WorldMapFrame
-1. Remove delay for Guild & Communities (retail) and Blizzard Groups (classic)
+1. Remove delay for Blizzard Groups (classic)
 1. Configurable variables
    1. Opacity while moving and scaling
    1. Max and min scale
@@ -32,11 +32,10 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 1. Swap four spaces to tabs
 1. Make options panel look like first-party options panels
    1. Also clean up code for options
-1. Add Guild & Communities (retail)
 
 ## Bugs
 1. When Dressing Room is already open, viewing a pet reverts frame position
-1. CollectionsJournalMover in a different place than CollectionsJournal if opened in combat
+1. CollectionsJournalMover and CommunitiesMover in a different place than frame if opened in combat
 1. Leave Group/Leave Guild (left-hand side buttons) causes Guild & Communities to revert position (retail)
 1. PlayerChoiceToggleButton reverts its position when PlayerChoiceFrame is shown
    1. Happens in Torghast anima power choice

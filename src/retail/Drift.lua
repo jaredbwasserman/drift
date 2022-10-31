@@ -138,6 +138,17 @@ local frames = {
         DriftDisabledBy = "windowsDisabled",
         DriftDelegate = "CollectionsJournalMover" -- This frame is created inside Drift code
     },
+	["CommunitiesFrame"] = {
+        DriftDisabledBy = "windowsDisabled",
+        DriftDelegate = "CommunitiesMover", -- This frame is created inside Drift code
+        DriftTabs = {
+			"CommunitiesFrame.MaximizeMinimizeFrame.MaximizeButton",
+			"CommunitiesFrame.MaximizeMinimizeFrame.MinimizeButton",
+			"CommunitiesFrame.ChatTab",
+			"CommunitiesFrame.RosterTab",
+			"ClubFinderCommunityAndGuildFinderFrame.ClubFinderPendingTab",
+        }
+	},
     ["SpellBookFrame"] = {
         DriftDisabledBy = "windowsDisabled",
     },
@@ -528,14 +539,7 @@ local Drift = CreateFrame("Frame")
 
 local function eventHandler(self, event, ...)
     if event == "ADDON_LOADED" then
-        local addonName = select(1, ...)
-
-        -- Blizzard Communities buttons are delayed for some reason
-        if addonName == "Blizzard_Communities" then
-            DriftHelpers:Wait(0.25, DriftHelpers.ModifyFrames, DriftHelpers, frames)
-        else
-            DriftHelpers:ModifyFrames(frames)
-        end
+		DriftHelpers:ModifyFrames(frames)
     elseif event == "PLAYER_REGEN_ENABLED" then
         DriftHelpers:ModifyFrames(frames)
     elseif event == "VARIABLES_LOADED" then
@@ -570,6 +574,7 @@ local function eventHandler(self, event, ...)
 
         -- Communities
         Drift:RegisterEvent("CLUB_FINDER_RECRUITMENT_POST_RETURNED")
+		Drift:RegisterEvent("CVAR_UPDATE")
 
 		-- Professions
 		Drift:RegisterEvent("TRADE_SKILL_LIST_UPDATE")

@@ -55,6 +55,7 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Garrison Shipyard (retail)
 - Gossip (retail, classic, wc)
 - Group Finder (retail)
+- Guild & Communities (retail)
 - Guild Information (classic, wc)
 - Guild Bank (retail)
 - Guild Registrar (retail, classic, wc)

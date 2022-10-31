@@ -35,6 +35,10 @@ local OBJECTIVE_TRACKER_HEIGHT = 0.5 -- TODO: Configurable
 local collectionsJournalMover = CreateFrame("Frame", "CollectionsJournalMover", UIParent)
 local collectionsJournalMoverTexture = collectionsJournalMover:CreateTexture(nil, "BACKGROUND")
 
+-- Variables for Communities
+local communitiesMover = CreateFrame("Frame", "CommunitiesMover", UIParent)
+local communitiesMoverTexture = communitiesMover:CreateTexture(nil, "BACKGROUND")
+
 -- Variables for WoW version 
 local isRetail = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE)
 local isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
@@ -47,6 +51,7 @@ local hasFixedPlayerChoice = false
 local hasFixedObjectiveTracker = false
 local hasFixedMinimap = false
 local hasFixedCollections = false
+local hasFixedCommunities = false
 local hasFixedArena = false
 local hasFixedFramesForElvUI = false
 local hasFixedManageFramePositions = false
@@ -203,7 +208,7 @@ local function onDragStop(frame)
             }
 
             -- TODO: This is messy
-            if ("CollectionsJournal" == frame:GetName()) then
+            if ("CollectionsJournal" == frame:GetName() or "CommunitiesFrame" == frame:GetName()) then
                 frame:ClearAllPoints()
                 frame:SetPoint(
                     point,
@@ -269,7 +274,10 @@ local function resetScaleAndPosition(frame)
         )
 
         -- TODO: This is messy
-        if ("CollectionsJournal" == frame:GetName()) then
+        if ("CollectionsJournal" == frame:GetName() or "CommunitiesFrame" == frame:GetName()) then
+			communitiesMover:SetWidth(CommunitiesFrame:GetWidth())
+			communitiesMover:SetHeight(CommunitiesFrame:GetHeight())
+
             frame:ClearAllPoints()
             xpcall(
                 frame.SetPoint,
@@ -589,6 +597,11 @@ function DriftHelpers:ModifyFrames(frames)
     if not DriftOptions.windowsDisabled then
         DriftHelpers:FixCollectionsJournal()
     end
+
+	-- Fix Communities
+	if not DriftOptions.windowsDisabled then
+		DriftHelpers:FixCommunities(frames)
+	end
 
     -- Fix OrderHallTalentFrame
     if not DriftOptions.windowsDisabled and OrderHallTalentFrame then
@@ -1135,6 +1148,83 @@ function DriftHelpers:FixCollectionsJournal()
         end
 
         hasFixedCollections = true
+    end
+end
+
+function DriftHelpers:FixCommunities(frames)
+    if hasFixedCommunities then
+        return
+    end
+
+    if (CommunitiesFrame) then
+        -- Set up mover
+        communitiesMover:SetFrameStrata("MEDIUM")
+        communitiesMover:SetWidth(CommunitiesFrame:GetWidth())
+        communitiesMover:SetHeight(CommunitiesFrame:GetHeight())
+        communitiesMoverTexture:SetTexture("Interface\\Collections\\CollectionsBackgroundTile.blp")
+        communitiesMoverTexture:SetAllPoints(communitiesMover)
+        communitiesMover.texture = communitiesMoverTexture
+        communitiesMover:SetAllPoints(CommunitiesFrame)
+        communitiesMover:Show()
+
+        -- Fix parenting
+        CommunitiesFrame:SetParent(communitiesMover)
+
+        -- Show and hide communitiesMover correctly
+        CommunitiesFrame:HookScript("OnShow", function()
+            local point = DriftPoints["CommunitiesFrameMover"]
+            if point then
+                CommunitiesFrame:ClearAllPoints()
+                xpcall(
+                    CommunitiesFrame.SetPoint,
+                    function() end,
+                    CommunitiesFrame,
+                    point["point"],
+                    point["relativeTo"],
+                    point["relativePoint"],
+                    point["xOfs"],
+                    point["yOfs"]
+                )
+            end
+
+            communitiesMover:SetAlpha(1)
+        end)
+        CommunitiesFrame:HookScript("OnHide", function() communitiesMover:SetAlpha(0) end)
+
+        -- Hide communitiesMover if CommunitiesFrame is not shown
+        if not CommunitiesFrame:IsShown() then
+            communitiesMover:SetAlpha(0)
+        end
+
+		-- Fix scroll buttons
+		if (ClubFinderGuildFinderFrame) then
+			ClubFinderGuildFinderFrame:HookScript(
+				"OnShow",
+				function(self, event, ...)
+					DriftHelpers:BroadcastReset(frames)
+				end
+			)
+		end
+
+		if (CommunitiesFrameInset) then
+			CommunitiesFrameInset:HookScript(
+				"OnShow",
+				function(self, event, ...)
+					DriftHelpers:BroadcastReset(frames)
+				end
+			)
+		end
+
+		if (ClubFinderCommunityAndGuildFinderFrame) then
+			ClubFinderCommunityAndGuildFinderFrame:HookScript(
+				"OnShow",
+				function(self, event, ...)
+					DriftHelpers:BroadcastReset(frames)
+				end
+			)
+		end
+
+        hasFixedCommunities = true
     end
 end
 
