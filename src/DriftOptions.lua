@@ -73,6 +73,12 @@ function DriftHelpers:SetupConfig()
 	if DriftOptions.buttonsDisabled == nil then
 		DriftOptions.buttonsDisabled = true
 	end
+	if DriftOptions.minimapDisabled == nil then
+		DriftOptions.minimapDisabled = true
+	end
+	if DriftOptions.objectivesDisabled == nil then
+		DriftOptions.objectivesDisabled = true
+	end
 	if DriftOptions.miscellaneousDisabled == nil then
 		DriftOptions.miscellaneousDisabled = true
 	end
@@ -212,6 +218,7 @@ function DriftHelpers:SetupConfig()
 
 	yOffset = -110
 
+	-- Windows
 	DriftOptionsPanel.config.windowsEnabledCheckbox = createCheckbox(
 		"WindowsEnabledCheckbox",
 		"TOPLEFT",
@@ -225,6 +232,7 @@ function DriftHelpers:SetupConfig()
 	DriftOptionsPanel.config.windowsEnabledCheckbox:SetChecked(not DriftOptions.windowsDisabled)
 	yOffset = yOffset - 30
 
+	-- Buttons
 	DriftOptionsPanel.config.buttonsEnabledCheckbox = createCheckbox(
 		"ButtonsEnabledCheckbox",
 		"TOPLEFT",
@@ -238,6 +246,37 @@ function DriftHelpers:SetupConfig()
 	DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
 	yOffset = yOffset - 30
 
+	if (not isRetail) then
+		-- Minimap
+		DriftOptionsPanel.config.minimapEnabledCheckbox = createCheckbox(
+			"MinimapEnabledCheckbox",
+			"TOPLEFT",
+			DriftOptionsPanel.optionspanel,
+			"TOPLEFT",
+			15,
+			yOffset,
+			" Minimap",
+			"Whether Drift will modify the Minimap."
+		)
+		DriftOptionsPanel.config.minimapEnabledCheckbox:SetChecked(not DriftOptions.minimapDisabled)
+		yOffset = yOffset - 30
+
+		-- Objectives
+		DriftOptionsPanel.config.objectivesEnabledCheckbox = createCheckbox(
+			"ObjectivesEnabledCheckbox",
+			"TOPLEFT",
+			DriftOptionsPanel.optionspanel,
+			"TOPLEFT",
+			15,
+			yOffset,
+			" Objectives",
+			"Whether Drift will modify Objectives."
+		)
+		DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
+		yOffset = yOffset - 30
+	end
+
+	-- Miscellaneous
 	DriftOptionsPanel.config.miscellaneousEnabledCheckbox = createCheckbox(
 		"MiscellaneousEnabledCheckbox",
 		"TOPLEFT",
@@ -302,8 +341,8 @@ function DriftHelpers:SetupConfig()
 	driftOptionsAuthorContent:SetJustifyH("LEFT")
 	driftOptionsAuthorContent:SetPoint("BOTTOMLEFT", DriftOptionsPanel.optionspanel, "BOTTOMLEFT", 70, 15)
 
-	-- Update logic
-	DriftOptionsPanel.optionspanel:SetScript("OnHide", function()
+	-- Update function
+	local updateFunction = function()
 		local shouldReloadUI = false
 
 		-- Dragging
@@ -331,6 +370,18 @@ function DriftHelpers:SetupConfig()
 			shouldReloadUI = true
 		end
 
+		local oldMinimapDisabled = DriftOptions.minimapDisabled
+		DriftOptions.minimapDisabled = not DriftOptionsPanel.config.minimapEnabledCheckbox:GetChecked()
+		if oldMinimapDisabled ~= DriftOptions.minimapDisabled then
+			shouldReloadUI = true
+		end
+
+		local oldObjectivesDisabled = DriftOptions.objectivesDisabled
+		DriftOptions.objectivesDisabled = not DriftOptionsPanel.config.objectivesEnabledCheckbox:GetChecked()
+		if oldObjectivesDisabled ~= DriftOptions.objectivesDisabled then
+			shouldReloadUI = true
+		end
+
 		local oldMiscellaneousDisabled = DriftOptions.miscellaneousDisabled
 		DriftOptions.miscellaneousDisabled = not DriftOptionsPanel.config.miscellaneousEnabledCheckbox:GetChecked()
 		if oldMiscellaneousDisabled ~= DriftOptions.miscellaneousDisabled then
@@ -341,7 +392,37 @@ function DriftHelpers:SetupConfig()
 		if shouldReloadUI then
 			ReloadUI()
 		end
-	end)
+	end
+
+	-- Cancel function
+	local cancelFunction = function()
+        -- Dragging
+        DriftOptionsPanel.config.frameMoveLockedCheckbox:SetChecked(DriftOptions.frameDragIsLocked)
+        DriftOptionsPanel.config.dragAltKeyEnabledCheckbox:SetChecked(DriftOptions.dragAltKeyEnabled)
+        DriftOptionsPanel.config.dragCtrlKeyEnabledCheckbox:SetChecked(DriftOptions.dragCtrlKeyEnabled)
+        DriftOptionsPanel.config.dragShiftKeyEnabledCheckbox:SetChecked(DriftOptions.dragShiftKeyEnabled)
+
+        -- Scaling
+        DriftOptionsPanel.config.frameScaleLockedCheckbox:SetChecked(DriftOptions.frameScaleIsLocked)
+        DriftOptionsPanel.config.scaleAltKeyEnabledCheckbox:SetChecked(DriftOptions.scaleAltKeyEnabled)
+        DriftOptionsPanel.config.scaleCtrlKeyEnabledCheckbox:SetChecked(DriftOptions.scaleCtrlKeyEnabled)
+        DriftOptionsPanel.config.scaleShiftKeyEnabledCheckbox:SetChecked(DriftOptions.scaleShiftKeyEnabled)
+
+        -- Optional Frames
+        DriftOptionsPanel.config.windowsEnabledCheckbox:SetChecked(not DriftOptions.windowsDisabled)
+        DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
+        DriftOptionsPanel.config.minimapEnabledCheckbox:SetChecked(not DriftOptions.minimapDisabled)
+        DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
+        DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)
+    end
+
+	-- Retail has different options behavior
+	if (isRetail) then
+		DriftOptionsPanel.optionspanel:SetScript("OnHide", updateFunction)
+	else
+		DriftOptionsPanel.optionspanel.okay = updateFunction
+		DriftOptionsPanel.optionspanel.cancel = cancelFunction
+	end
 end
 
 

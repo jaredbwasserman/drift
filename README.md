@@ -26,7 +26,7 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 1. Make options panel look like first-party options panels
    1. Also clean up code for options
 1. Add Bags (retail, classic, wc)
-1. Okay and cancel options implementation (classic, wc)
+1. Figure out how to get MinimapZoneTextButton to work for dragging Minimap (wc)
 
 ## Bugs
 1. When Dressing Room is already open, viewing a pet reverts frame position

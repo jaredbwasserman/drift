@@ -122,6 +122,12 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Return to Graveyard Button (retail)
 - Social Button (retail)
 
+## Minimap
+- Minimap (classic, wc)
+
+## Objectives
+- Objectives (classic, wc)
+
 ## Miscellaneous
 - Battle.net Toast (retail, classic, wc)
 - Bonus Roll (retail)

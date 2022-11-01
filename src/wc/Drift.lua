@@ -29,6 +29,13 @@ local frames = {
 	["QuestFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},
+	["WatchFrame"] = {
+		DriftDisabledBy = "objectivesDisabled"
+	},
+	["MinimapCluster"] = {
+		DriftDisabledBy = "minimapDisabled",
+		DriftDelegate = "MinimapMover", -- This frame is created inside Drift code
+	},
 	["GossipFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},

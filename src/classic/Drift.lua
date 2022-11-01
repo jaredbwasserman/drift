@@ -18,6 +18,16 @@ local frames = {
 	["QuestFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},
+	["QuestWatchFrame"] = {
+		DriftDisabledBy = "objectivesDisabled",
+	},
+	["MinimapCluster"] = {
+		DriftDisabledBy = "minimapDisabled",
+	},
+	["MinimapZoneTextButton"] = {
+		DriftDisabledBy = "minimapDisabled",
+		DriftDelegate = "MinimapCluster",
+	},
 	["GossipFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},

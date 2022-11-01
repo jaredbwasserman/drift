@@ -25,6 +25,11 @@ DriftHelpers.prevMouseY = nil
 DriftHelpers.frameBeingScaled = nil
 if not DriftScales then DriftScales = {} end
 
+-- Variables for Minimap
+local phantomMinimapCluster = nil
+local minimapMover = CreateFrame("Frame", "MinimapMover", UIParent)
+local minimapMoverTexture = minimapMover:CreateTexture(nil, "BACKGROUND")
+
 -- Variables for Collections Journal
 local collectionsJournalMover = CreateFrame("Frame", "CollectionsJournalMover", UIParent)
 local collectionsJournalMoverTexture = collectionsJournalMover:CreateTexture(nil, "BACKGROUND")
@@ -42,6 +47,7 @@ local isWC = (WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC)
 -- Other variables
 local hasFixedPVPTalentList = false
 local hasFixedPlayerChoice = false
+local hasFixedMinimap = false
 local hasFixedCollections = false
 local hasFixedCommunities = false
 local hasFixedFramesForElvUI = false
@@ -198,6 +204,7 @@ local function onDragStop(frame)
 				["yOfs"] = yOfs
 			}
 
+			-- TODO: xpcall
 			-- TODO: This is messy
 			if ("CollectionsJournal" == frame:GetName() or "CommunitiesFrame" == frame:GetName()) then
 				frame:ClearAllPoints()
@@ -209,6 +216,16 @@ local function onDragStop(frame)
 					yOfs
 				)
 			end
+			if (isWC) and ("MinimapCluster" == frame:GetName()) then
+				frame:ClearAllPoints()
+				frame:SetPoint(
+					point,
+					"UIParent",
+					relativePoint,
+					xOfs,
+					yOfs
+				)
+			end	
 		end
 	end
 	frameToMove.DriftIsMoving = false
@@ -271,6 +288,19 @@ local function resetScaleAndPosition(frame)
 				communitiesMover:SetHeight(CommunitiesFrame:GetHeight())
 			end
 
+			frame:ClearAllPoints()
+			xpcall(
+				frame.SetPoint,
+				function() end,
+				frame,
+				point["point"],
+				point["relativeTo"],
+				point["relativePoint"],
+				point["xOfs"],
+				point["yOfs"]
+			)
+		end
+		if (isWC) and ("MinimapCluster" == frame:GetName()) then
 			frame:ClearAllPoints()
 			xpcall(
 				frame.SetPoint,
@@ -566,6 +596,11 @@ function DriftHelpers:ModifyFrames(frames)
 		DriftHelpers:FixPlayerChoiceFrame()
 	end
 
+	-- Fix Minimap
+	if (not isRetail) and (not DriftOptions.minimapDisabled) then
+		DriftHelpers:FixMinimap()
+	end
+
 	-- Fix MacroPopupFrame
 	if not DriftOptions.windowsDisabled then
 		MacroPopupFrame_AdjustAnchors = function() end
@@ -587,7 +622,7 @@ function DriftHelpers:ModifyFrames(frames)
 	end
 
 	-- Fix LootFrame
-	if (isClassic or isBCC or isWC) and (not DriftOptions.windowsDisabled) and (LootFrame) then
+	if (not isRetail) and (not DriftOptions.windowsDisabled) and (LootFrame) then
 		DriftHelpers.resetTable["LootFrame"] = LootFrame
 	end
 
@@ -637,6 +672,79 @@ function DriftHelpers:FixPlayerChoiceFrame()
 		)
 		hasFixedPlayerChoice = true
 	end
+end
+
+function DriftHelpers:FixMinimap()
+	if hasFixedMinimap then
+		return
+	end
+
+	if nil == MinimapCluster then
+		return
+	end
+
+	-- Create phantom Minimap to trick update functions
+	phantomMinimapCluster = CreateFrame("Frame", "PhantomMinimapCluster", UIParent)
+	phantomMinimapCluster:SetFrameStrata("BACKGROUND")
+	phantomMinimapCluster:SetWidth(MinimapCluster:GetWidth())
+	phantomMinimapCluster:SetHeight(MinimapCluster:GetHeight())
+	phantomMinimapCluster:SetPoint("TOPRIGHT")
+
+	-- Override Minimap functions to trick Multibar update
+	MinimapCluster.GetBottom = function ()
+		return phantomMinimapCluster:GetBottom()
+	end
+
+	-- WC is special
+	if (isWC) then
+		-- Set up mover
+		minimapMover:SetFrameStrata("MEDIUM")
+		minimapMover:SetWidth(MinimapCluster:GetWidth())
+		minimapMover:SetHeight(MinimapCluster:GetHeight())
+		minimapMoverTexture:SetAllPoints(minimapMover)
+		minimapMover.texture = minimapMoverTexture
+		minimapMover:SetAllPoints(MinimapCluster)
+		minimapMover:Show()
+
+		-- Fix parenting
+		MinimapCluster:SetParent(minimapMover)
+
+		-- Show and hide minimapMover correctly
+		MinimapCluster:HookScript("OnShow", function()
+			local point = DriftPoints["MinimapMover"]
+			if point then
+				MinimapCluster:ClearAllPoints()
+				xpcall(
+					MinimapCluster.SetPoint,
+					function() end,
+					MinimapCluster,
+					point["point"],
+					point["relativeTo"],
+					point["relativePoint"],
+					point["xOfs"],
+					point["yOfs"]
+				)
+			end
+
+			minimapMover:SetAlpha(1)
+		end)
+		MinimapCluster:HookScript("OnHide", function() minimapMover:SetAlpha(0) end)
+
+		-- Texture should only show during movement
+		MinimapCluster:HookScript("OnDragStart", function()
+			minimapMoverTexture:SetTexture("Interface\\Collections\\CollectionsBackgroundTile.blp")
+		end)
+		MinimapCluster:HookScript("OnDragStop", function()
+			minimapMoverTexture:SetTexture(nil)
+		end)
+
+		-- Hide minimapMover if MinimapCluster is not shown
+		if not MinimapCluster:IsShown() then
+			minimapMover:SetAlpha(0)
+		end
+	end
+
+	hasFixedMinimap = true
 end
 
 function DriftHelpers:FixCollectionsJournal()
