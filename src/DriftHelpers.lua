@@ -586,6 +586,15 @@ function DriftHelpers:ModifyFrames(frames)
 		EncounterJournalTooltip:ClearAllPoints()
 	end
 
+	-- Modify UpdateContainerFrameAnchors
+	if not DriftOptions.bagsDisabled then
+		if (isRetail) then
+			UpdateContainerFrameAnchors = function() end
+		else
+			UpdateContainerFrameAnchors = DriftHelpers.UpdateContainerFrameAnchorsClassic
+		end
+	end
+
 	-- Fix PVP talents list
 	if not DriftOptions.windowsDisabled then
 		DriftHelpers:FixPVPTalentsList(frames)
@@ -637,6 +646,16 @@ function DriftHelpers:ModifyFrames(frames)
 
 	-- Reset everything in case there was a delay
 	DriftHelpers:BroadcastReset(frames)
+end
+
+function DriftHelpers:UpdateContainerFrameAnchorsClassic()
+	for i=1,13 do
+		local frameName = 'ContainerFrame'..i
+		if not DriftPoints[frameName] then
+			_G[frameName]:ClearAllPoints()
+			_G[frameName]:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 0)
+		end
+	end
 end
 
 -- Make it so clicking Close button for PVP talents causes reset
@@ -870,6 +889,24 @@ function DriftHelpers:FixCommunities(frames)
 
 		if (ClubFinderCommunityAndGuildFinderFrame) then
 			ClubFinderCommunityAndGuildFinderFrame:HookScript(
+				"OnShow",
+				function(self, event, ...)
+					DriftHelpers:BroadcastReset(frames)
+				end
+			)
+		end
+
+		if (CommunitiesFrame.ClubFinderInvitationFrame) then
+			CommunitiesFrame.ClubFinderInvitationFrame:HookScript(
+				"OnShow",
+				function(self, event, ...)
+					DriftHelpers:BroadcastReset(frames)
+				end
+			)
+		end
+
+		if (CommunitiesFrame.Chat) then
+			CommunitiesFrame.Chat:HookScript(
 				"OnShow",
 				function(self, event, ...)
 					DriftHelpers:BroadcastReset(frames)

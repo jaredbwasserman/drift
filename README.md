@@ -22,15 +22,14 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Opacity while moving and scaling
    1. Max and min scale
    1. Scale increment
-1. Add GuildMemberDetailFrame (bcc, wc) and equivalent for classic, retail
+1. Add GuildMemberDetailFrame classic, wc
 1. Make options panel look like first-party options panels
    1. Also clean up code for options
-1. Add Bags (retail, classic, wc)
 1. Figure out how to get MinimapZoneTextButton to work for dragging Minimap (wc)
 
 ## Bugs
 1. When Dressing Room is already open, viewing a pet reverts frame position
-1. CollectionsJournalMover and CommunitiesMover in a different place than frame if opened in combat
+1. CollectionsJournalMover, CommunitiesMover, MinimapMover in a different place than frame if opened in combat
 1. PlayerChoiceToggleButton reverts its position when PlayerChoiceFrame is shown
    1. Happens in Torghast anima power choice
 1. Clicking PlayerChoiceFrame buttons resets PlayerChoiceFrame (retail)

@@ -70,6 +70,9 @@ function DriftHelpers:SetupConfig()
 	if DriftOptions.windowsDisabled == nil then
 		DriftOptions.windowsDisabled = false
 	end
+	if DriftOptions.bagsDisabled == nil then
+		DriftOptions.bagsDisabled = true
+	end
 	if DriftOptions.buttonsDisabled == nil then
 		DriftOptions.buttonsDisabled = true
 	end
@@ -232,6 +235,20 @@ function DriftHelpers:SetupConfig()
 	DriftOptionsPanel.config.windowsEnabledCheckbox:SetChecked(not DriftOptions.windowsDisabled)
 	yOffset = yOffset - 30
 
+	-- Bags
+	DriftOptionsPanel.config.bagsEnabledCheckbox = createCheckbox(
+		"BagsEnabledCheckbox",
+		"TOPLEFT",
+		DriftOptionsPanel.optionspanel,
+		"TOPLEFT",
+		15,
+		yOffset,
+		" Bags",
+		"Whether Drift will modify Bags."
+	)
+	DriftOptionsPanel.config.bagsEnabledCheckbox:SetChecked(not DriftOptions.bagsDisabled)
+	yOffset = yOffset - 30
+
 	-- Buttons
 	DriftOptionsPanel.config.buttonsEnabledCheckbox = createCheckbox(
 		"ButtonsEnabledCheckbox",
@@ -364,6 +381,24 @@ function DriftHelpers:SetupConfig()
 			shouldReloadUI = true
 		end
 
+		local oldBagsDisabled = DriftOptions.bagsDisabled
+		DriftOptions.bagsDisabled = not DriftOptionsPanel.config.bagsEnabledCheckbox:GetChecked()
+		if oldBagsDisabled ~= DriftOptions.bagsDisabled then
+			if DriftOptions.bagsDisabled then
+				-- Fix bag lua errors
+				for i=1,13 do
+					_G['ContainerFrame'..i]:ClearAllPoints()
+					_G['ContainerFrame'..i]:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 0)
+				end
+				if (ContainerFrameCombinedBags) then
+					ContainerFrameCombinedBags:ClearAllPoints()
+					ContainerFrameCombinedBags:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 0)
+				end
+			end
+
+			shouldReloadUI = true
+		end
+
 		local oldButtonsDisabled = DriftOptions.buttonsDisabled
 		DriftOptions.buttonsDisabled = not DriftOptionsPanel.config.buttonsEnabledCheckbox:GetChecked()
 		if oldButtonsDisabled ~= DriftOptions.buttonsDisabled then
@@ -412,6 +447,7 @@ function DriftHelpers:SetupConfig()
 
 		-- Optional Frames
 		DriftOptionsPanel.config.windowsEnabledCheckbox:SetChecked(not DriftOptions.windowsDisabled)
+		DriftOptionsPanel.config.bagsEnabledCheckbox:SetChecked(not DriftOptions.bagsDisabled)
 		DriftOptionsPanel.config.buttonsEnabledCheckbox:SetChecked(not DriftOptions.buttonsDisabled)
 
 		if (not isRetail) then

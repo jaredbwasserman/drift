@@ -114,6 +114,22 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - What's New (retail)
 - World Map (retail, classic, wc)
 
+## Bags
+- Bag 1 (retail, classic, wc)
+- Bag 2 (retail, classic, wc)
+- Bag 3 (retail, classic, wc)
+- Bag 4 (retail, classic, wc)
+- Bag 5 (retail, classic, wc)
+- Bag 6 (retail, classic, wc)
+- Bag 7 (retail, classic, wc)
+- Bag 8 (retail, classic, wc)
+- Bag 9 (retail, classic, wc)
+- Bag 10 (retail, classic, wc)
+- Bag 11 (retail, classic, wc)
+- Bag 12 (retail, classic, wc)
+- Bag 13 (retail, classic, wc)
+- Combined Backpack (retail)
+
 ## Buttons
 - Expansion Landing Page Minimap Button (retail)
 - Garrison Minimap Button (retail)
