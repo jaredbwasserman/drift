@@ -345,9 +345,6 @@ local frames = {
 	["WorldStateScoreFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},
-	["BattlefieldFrame"] = {
-		DriftDisabledBy = "windowsDisabled",
-	},
 	["ChatConfigFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},
@@ -356,7 +353,11 @@ local frames = {
 	},
 	["PVPFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
-		DriftDelegate = "PVPParentFrame"
+		DriftDelegate = "PVPParentFrame",
+	},
+	["BattlefieldFrame"] = {
+		DriftDisabledBy = "windowsDisabled",
+		DriftDelegate = "PVPParentFrame",
 	},
 }
 
