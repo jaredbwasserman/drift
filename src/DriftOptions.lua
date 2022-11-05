@@ -62,10 +62,10 @@ end
 function DriftHelpers:SetupConfig()
 	-- Initialize config options
 	if DriftOptions.frameDragIsLocked == nil then
-		DriftOptions.frameDragIsLocked = DriftOptions.framesAreLocked
+		DriftOptions.frameDragIsLocked = false
 	end
 	if DriftOptions.frameScaleIsLocked == nil then
-		DriftOptions.frameScaleIsLocked = DriftOptions.framesAreLocked
+		DriftOptions.frameScaleIsLocked = false
 	end
 	if DriftOptions.windowsDisabled == nil then
 		DriftOptions.windowsDisabled = false
