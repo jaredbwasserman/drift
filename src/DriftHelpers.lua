@@ -48,6 +48,7 @@ local isWC = (WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC)
 local hasFixedPVPTalentList = false
 local hasFixedPlayerChoice = false
 local hasFixedMinimap = false
+local hasFixedObjectives = false
 local hasFixedCollections = false
 local hasFixedCommunities = false
 local hasFixedFramesForElvUI = false
@@ -610,6 +611,11 @@ function DriftHelpers:ModifyFrames(frames)
 		DriftHelpers:FixMinimap()
 	end
 
+	-- Fix Objectives
+	if not DriftOptions.objectivesDisabled then
+		DriftHelpers:FixObjectives()
+	end
+
 	-- Fix MacroPopupFrame
 	if not DriftOptions.windowsDisabled then
 		MacroPopupFrame_AdjustAnchors = function() end
@@ -764,6 +770,28 @@ function DriftHelpers:FixMinimap()
 	end
 
 	hasFixedMinimap = true
+end
+
+function DriftHelpers:FixObjectives()
+	if hasFixedObjectives then
+		return
+	end
+
+	if (not isClassic) then
+		return
+	end
+
+	if (QuestWatchFrame) then
+		local QuestWatchFrame_SetPoint_Original = QuestWatchFrame.SetPoint
+		QuestWatchFrame.SetPoint = function(_, point, relativeTo, relativePoint, ofsx, ofsy)
+			if "MinimapCluster" == relativeTo then
+				return
+			end
+			QuestWatchFrame_SetPoint_Original(QuestWatchFrame, point, relativeTo, relativePoint, ofsx, ofsy)
+		end
+
+		hasFixedObjectives = true
+	end
 end
 
 function DriftHelpers:FixCollectionsJournal()
