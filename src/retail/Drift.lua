@@ -158,6 +158,9 @@ local frames = {
 	["CommunitiesFrame.GuildMemberDetailFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},
+	["CommunitiesGuildLogFrame"] = {
+		DriftDisabledBy = "windowsDisabled",
+	},
 	["SpellBookFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},
