@@ -51,7 +51,8 @@ local hasFixedMinimap = false
 local hasFixedObjectives = false
 local hasFixedCollections = false
 local hasFixedCommunities = false
-local hasFixedFramesForElvUI = false
+local hasFixedFramesForElvUIBCC = false
+local hasFixedFramesForElvUIRetail = false
 local hasFixedManageFramePositions = false
 
 
@@ -643,8 +644,14 @@ function DriftHelpers:ModifyFrames(frames)
 
 	-- ElvUI compatibility BCC
 	-- https://github.com/jaredbwasserman/drift/issues/31
-	if isBCC and not DriftOptions.windowsDisabled then
-		DriftHelpers:FixFramesForElvUI()
+	if (isBCC) and (not DriftOptions.windowsDisabled) then
+		DriftHelpers:FixFramesForElvUIBCC()
+	end
+
+	-- ElvUI compatibility Retail
+	-- https://github.com/jaredbwasserman/drift/issues/39
+	if (isRetail) and (not DriftOptions.windowsDisabled) then
+		DriftHelpers:FixFramesForElvUIRetail()
 	end
 
 	-- Hook FCF_DockUpdate since it's called at the end of UIParentManageFramePositions
@@ -946,8 +953,12 @@ function DriftHelpers:FixCommunities(frames)
 	end
 end
 
-function DriftHelpers:FixFramesForElvUI()
-	if hasFixedFramesForElvUI then
+function DriftHelpers:FixFramesForElvUIBCC()
+	if hasFixedFramesForElvUIBCC then
+		return
+	end
+
+	if not isBCC then
 		return
 	end
 
@@ -962,7 +973,30 @@ function DriftHelpers:FixFramesForElvUI()
 		UpdateUIPanelPositions_Original(currentFrame)
 	end
 
-	hasFixedFramesForElvUI = true
+	hasFixedFramesForElvUIBCC = true
+end
+
+function DriftHelpers:FixFramesForElvUIRetail()
+	if hasFixedFramesForElvUIRetail then
+		return
+	end
+
+	if not isRetail then
+		return
+	end
+
+	if (MailFrame) then
+		MailFrame:HookScript(
+			"OnShow",
+			function()
+				if (MailFrameInset) and (MailFrameInset:GetParent() ~= MailFrame) then
+					MailFrameInset:SetParent(MailFrame)
+				end
+			end
+		)
+
+		hasFixedFramesForElvUIRetail = true
+	end
 end
 
 function DriftHelpers:HookFCF_DockUpdate(frames)
