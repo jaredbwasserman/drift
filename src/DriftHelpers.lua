@@ -668,16 +668,6 @@ function DriftHelpers:ModifyFrames(frames)
 	DriftHelpers:BroadcastReset(frames)
 end
 
-function DriftHelpers:UpdateContainerFrameAnchorsClassic()
-	for i=1,13 do
-		local frameName = "ContainerFrame"..i
-		if not DriftPoints[frameName] then
-			_G[frameName]:ClearAllPoints()
-			_G[frameName]:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 0)
-		end
-	end
-end
-
 function DriftHelpers:FixBags()
 	if hasFixedBags then
 		return
