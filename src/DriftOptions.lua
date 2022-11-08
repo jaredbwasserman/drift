@@ -384,18 +384,6 @@ function DriftHelpers:SetupConfig()
 		local oldBagsDisabled = DriftOptions.bagsDisabled
 		DriftOptions.bagsDisabled = not DriftOptionsPanel.config.bagsEnabledCheckbox:GetChecked()
 		if oldBagsDisabled ~= DriftOptions.bagsDisabled then
-			if DriftOptions.bagsDisabled then
-				-- Fix bag lua errors
-				for i=1,13 do
-					_G['ContainerFrame'..i]:ClearAllPoints()
-					_G['ContainerFrame'..i]:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 0)
-				end
-				if (ContainerFrameCombinedBags) then
-					ContainerFrameCombinedBags:ClearAllPoints()
-					ContainerFrameCombinedBags:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 0)
-				end
-			end
-
 			shouldReloadUI = true
 		end
 

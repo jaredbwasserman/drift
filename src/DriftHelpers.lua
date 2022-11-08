@@ -45,6 +45,7 @@ local isBCC = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
 local isWC = (WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC)
 
 -- Other variables
+local hasFixedBags = false
 local hasFixedPVPTalentList = false
 local hasFixedPlayerChoice = false
 local hasFixedMinimap = false
@@ -206,11 +207,13 @@ local function onDragStop(frame)
 				["yOfs"] = yOfs
 			}
 
-			-- TODO: xpcall
 			-- TODO: This is messy
 			if ("CollectionsJournal" == frame:GetName() or "CommunitiesFrame" == frame:GetName()) then
 				frame:ClearAllPoints()
-				frame:SetPoint(
+				xpcall(
+					frame.SetPoint,
+					function() end,
+					frame,
 					point,
 					"UIParent",
 					relativePoint,
@@ -220,7 +223,10 @@ local function onDragStop(frame)
 			end
 			if (isWC) and ("MinimapCluster" == frame:GetName()) then
 				frame:ClearAllPoints()
-				frame:SetPoint(
+				xpcall(
+					frame.SetPoint,
+					function() end,
+					frame,
 					point,
 					"UIParent",
 					relativePoint,
@@ -264,6 +270,7 @@ local function resetScaleAndPosition(frame)
 	-- Reset scale
 	local scale = DriftScales[frameToMove:GetName()]
 	if scale then
+		frameToMove.DriftAboutToSetScale = true
 		frameToMove:SetScale(scale)
 		modifiedSet["scale"] = true
 	end
@@ -272,6 +279,7 @@ local function resetScaleAndPosition(frame)
 	local point = DriftPoints[frameToMove:GetName()]
 	if point then
 		frameToMove:ClearAllPoints()
+		frameToMove.DriftAboutToSetPoint = true
 		xpcall(
 			frameToMove.SetPoint,
 			function() end,
@@ -438,6 +446,7 @@ function DriftHelpers:DeleteDriftState()
 	for frameName, _ in pairs(DriftScales) do
 		local frame = getFrame(frameName)
 		if frame then
+			frame.DriftAboutToSetScale = true
 			frame:SetScale(1)
 		end
 	end
@@ -517,6 +526,7 @@ function DriftHelpers:ModifyFrames(frames)
 							)
 
 							-- Scale
+							DriftHelpers.frameBeingScaled.DriftAboutToSetScale = true
 							DriftHelpers.frameBeingScaled:SetScale(newScale)
 						elseif curMouseY < DriftHelpers.prevMouseY then
 							-- Subtract from scale
@@ -526,6 +536,7 @@ function DriftHelpers:ModifyFrames(frames)
 							)
 
 							-- Scale
+							DriftHelpers.frameBeingScaled.DriftAboutToSetScale = true
 							DriftHelpers.frameBeingScaled:SetScale(newScale)
 						end
 					end
@@ -588,13 +599,9 @@ function DriftHelpers:ModifyFrames(frames)
 		EncounterJournalTooltip:ClearAllPoints()
 	end
 
-	-- Modify UpdateContainerFrameAnchors
+	-- Fix Bags
 	if not DriftOptions.bagsDisabled then
-		if (isRetail) then
-			UpdateContainerFrameAnchors = function() end
-		else
-			UpdateContainerFrameAnchors = DriftHelpers.UpdateContainerFrameAnchorsClassic
-		end
+		DriftHelpers:FixBags()
 	end
 
 	-- Fix PVP talents list
@@ -663,12 +670,79 @@ end
 
 function DriftHelpers:UpdateContainerFrameAnchorsClassic()
 	for i=1,13 do
-		local frameName = 'ContainerFrame'..i
+		local frameName = "ContainerFrame"..i
 		if not DriftPoints[frameName] then
 			_G[frameName]:ClearAllPoints()
 			_G[frameName]:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 0)
 		end
 	end
+end
+
+function DriftHelpers:FixBags()
+	if hasFixedBags then
+		return
+	end
+
+	for i=1,13 do
+		local frameName = "ContainerFrame"..i
+		local SetPoint_Original = _G[frameName].SetPoint
+		_G[frameName].SetPoint = function(_, point, relativeTo, relativePoint, ofsx, ofsy)
+			if (not _G[frameName].DriftAboutToSetPoint) then
+				return
+			end
+			SetPoint_Original(_G[frameName], point, relativeTo, relativePoint, ofsx, ofsy)
+			_G[frameName].DriftAboutToSetPoint = false
+		end
+
+		local SetScale_Original = _G[frameName].SetScale
+		_G[frameName].SetScale = function(_, newScale)
+			if (not _G[frameName].DriftAboutToSetScale) then
+				return
+			end
+			SetScale_Original(_G[frameName], newScale)
+			_G[frameName].DriftAboutToSetScale = false
+		end
+
+		_G[frameName]:HookScript(
+			"OnHide",
+			function(self, event, ...)
+				if (not DriftHelpers:IsAnyBagShown()) then
+					DriftHelpers:RevertBags()
+				end
+			end
+		)
+	end
+
+	if (ContainerFrameCombinedBags) then
+		local SetPoint_Original = ContainerFrameCombinedBags.SetPoint
+		ContainerFrameCombinedBags.SetPoint = function(_, point, relativeTo, relativePoint, ofsx, ofsy)
+			if (not ContainerFrameCombinedBags.DriftAboutToSetPoint) then
+				return
+			end
+			SetPoint_Original(ContainerFrameCombinedBags, point, relativeTo, relativePoint, ofsx, ofsy)
+			ContainerFrameCombinedBags.DriftAboutToSetPoint = false
+		end
+
+		local SetScale_Original = ContainerFrameCombinedBags.SetScale
+		ContainerFrameCombinedBags.SetScale = function(_, newScale)
+			if (not ContainerFrameCombinedBags.DriftAboutToSetScale) then
+				return
+			end
+			SetScale_Original(ContainerFrameCombinedBags, newScale)
+			ContainerFrameCombinedBags.DriftAboutToSetScale = false
+		end
+
+		ContainerFrameCombinedBags:HookScript(
+			"OnHide",
+			function(self, event, ...)
+				if (not DriftHelpers:IsAnyBagShown()) then
+					DriftHelpers:RevertBags()
+				end
+			end
+		)
+	end
+
+	hasFixedBags = true
 end
 
 -- Make it so clicking Close button for PVP talents causes reset
@@ -1061,5 +1135,51 @@ function DriftHelpers:BroadcastReset(frames)
 		if frame and frame:IsVisible() then
 			frame.DriftResetNeeded = true
 		end
+	end
+end
+
+function DriftHelpers:IsAnyBagShown()
+	local anyBagShown = false
+	for i=1,13 do
+		local frameName = "ContainerFrame"..i
+		if _G[frameName]:IsShown() then
+			anyBagShown = true
+		end
+	end
+	if ContainerFrameCombinedBags and ContainerFrameCombinedBags:IsShown() then
+		anyBagShown = true
+	end
+	return anyBagShown
+end
+
+function DriftHelpers:RevertBags()
+	for i=1,13 do
+		local frameName = "ContainerFrame"..i
+		_G[frameName]:ClearAllPoints()
+		_G[frameName].DriftAboutToSetPoint = true
+		xpcall(
+			_G[frameName].SetPoint,
+			function() end,
+			_G[frameName],
+			"BOTTOMRIGHT",
+			UIParent,
+			"BOTTOMRIGHT",
+			0,
+			0
+		)
+	end
+	if (ContainerFrameCombinedBags) then
+		ContainerFrameCombinedBags:ClearAllPoints()
+		ContainerFrameCombinedBags.DriftAboutToSetPoint = true
+		xpcall(
+			ContainerFrameCombinedBags.SetPoint,
+			function() end,
+			ContainerFrameCombinedBags,
+			"BOTTOMRIGHT",
+			UIParent,
+			"BOTTOMRIGHT",
+			0,
+			0
+		)
 	end
 end
