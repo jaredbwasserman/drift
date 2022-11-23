@@ -675,23 +675,30 @@ function DriftHelpers:FixBags()
 
 	for i=1,13 do
 		local frameName = "ContainerFrame"..i
-		local SetPoint_Original = _G[frameName].SetPoint
-		_G[frameName].SetPoint = function(_, point, relativeTo, relativePoint, ofsx, ofsy)
-			if (not _G[frameName].DriftAboutToSetPoint) then
-				return
-			end
-			SetPoint_Original(_G[frameName], point, relativeTo, relativePoint, ofsx, ofsy)
-			_G[frameName].DriftAboutToSetPoint = false
-		end
 
-		local SetScale_Original = _G[frameName].SetScale
-		_G[frameName].SetScale = function(_, newScale)
-			if (not _G[frameName].DriftAboutToSetScale) then
-				return
+		hooksecurefunc(
+			_G[frameName],
+			"SetPoint",
+			function()
+				if _G[frameName].DriftAboutToSetPoint then
+					_G[frameName].DriftAboutToSetPoint = false
+				else
+					resetScaleAndPosition(_G[frameName])
+				end
 			end
-			SetScale_Original(_G[frameName], newScale)
-			_G[frameName].DriftAboutToSetScale = false
-		end
+		)
+
+		hooksecurefunc(
+			_G[frameName],
+			"SetScale",
+			function()
+				if _G[frameName].DriftAboutToSetScale then
+					_G[frameName].DriftAboutToSetScale = false
+				else
+					resetScaleAndPosition(_G[frameName])
+				end
+			end
+		)
 
 		_G[frameName]:HookScript(
 			"OnHide",
@@ -704,23 +711,29 @@ function DriftHelpers:FixBags()
 	end
 
 	if (ContainerFrameCombinedBags) then
-		local SetPoint_Original = ContainerFrameCombinedBags.SetPoint
-		ContainerFrameCombinedBags.SetPoint = function(_, point, relativeTo, relativePoint, ofsx, ofsy)
-			if (not ContainerFrameCombinedBags.DriftAboutToSetPoint) then
-				return
+		hooksecurefunc(
+			ContainerFrameCombinedBags,
+			"SetPoint",
+			function()
+				if ContainerFrameCombinedBags.DriftAboutToSetPoint then
+					ContainerFrameCombinedBags.DriftAboutToSetPoint = false
+				else
+					resetScaleAndPosition(ContainerFrameCombinedBags)
+				end
 			end
-			SetPoint_Original(ContainerFrameCombinedBags, point, relativeTo, relativePoint, ofsx, ofsy)
-			ContainerFrameCombinedBags.DriftAboutToSetPoint = false
-		end
+		)
 
-		local SetScale_Original = ContainerFrameCombinedBags.SetScale
-		ContainerFrameCombinedBags.SetScale = function(_, newScale)
-			if (not ContainerFrameCombinedBags.DriftAboutToSetScale) then
-				return
+		hooksecurefunc(
+			ContainerFrameCombinedBags,
+			"SetScale",
+			function()
+				if ContainerFrameCombinedBags.DriftAboutToSetScale then
+					ContainerFrameCombinedBags.DriftAboutToSetScale = false
+				else
+					resetScaleAndPosition(ContainerFrameCombinedBags)
+				end
 			end
-			SetScale_Original(ContainerFrameCombinedBags, newScale)
-			ContainerFrameCombinedBags.DriftAboutToSetScale = false
-		end
+		)
 
 		ContainerFrameCombinedBags:HookScript(
 			"OnHide",
