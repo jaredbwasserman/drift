@@ -30,6 +30,7 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 1. Removal all unsafe hooks (`_Original`) to avoid taint
 1. Generalize movers (Collections, Minimap) functionality
 1. Fix in combat bugs for minimap (classic, wc) similar to Collections
+1. Remove tabs, sticky, broadcast reset, anything else no longer needed following `hookSet` addition
 
 ## Bugs
 1. When Dressing Room is already open, viewing a pet reverts frame position
