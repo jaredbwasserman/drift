@@ -886,8 +886,7 @@ function DriftHelpers:FixCollectionsJournal()
 		CollectionsJournal:SetParent(collectionsJournalMover)
 
 		-- Show and hide collectionsJournalMover correctly
-		local CollectionsJournal_OnShow_Original = CollectionsJournal_OnShow
-		CollectionsJournal:SetScript("OnShow", function()
+		CollectionsJournal:HookScript("OnShow", function()
 			WardrobeFrame:ClearAllPoints()
 
 			local point = DriftPoints["CollectionsJournalMover"]
@@ -906,8 +905,6 @@ function DriftHelpers:FixCollectionsJournal()
 			end
 
 			collectionsJournalMover:SetAlpha(1)
-
-			CollectionsJournal_OnShow_Original(CollectionsJournal)
 		end)
 		CollectionsJournal:HookScript("OnHide", function() collectionsJournalMover:SetAlpha(0) end)
 

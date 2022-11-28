@@ -27,6 +27,7 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Also clean up code for options
    1. Also default/cancel functionality retail
 1. Figure out how to get MinimapZoneTextButton to work for dragging Minimap (wc)
+1. Removal all unsafe hooks (`_Original`) to avoid taint
 
 ## Bugs
 1. When Dressing Room is already open, viewing a pet reverts frame position
