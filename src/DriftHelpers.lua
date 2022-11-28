@@ -38,13 +38,16 @@ local collectionsJournalMoverTexture = collectionsJournalMover:CreateTexture(nil
 local communitiesMover = CreateFrame("Frame", "CommunitiesMover", UIParent)
 local communitiesMoverTexture = communitiesMover:CreateTexture(nil, "BACKGROUND")
 
+-- Variables for Bags
+local TOTAL_BAGS = 13
+
 -- Variables for WoW version 
 local isRetail = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE)
 local isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
 local isBCC = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
 local isWC = (WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC)
 
--- Other variables
+-- Variables for whether components have been fixed
 local hasFixedBags = false
 local hasFixedPVPTalentList = false
 local hasFixedPlayerChoice = false
@@ -142,7 +145,7 @@ local function onDragStart(frame, button)
 
 	-- Left click is move
 	if button == "LeftButton" then
-		if not shouldMove(frameToMove) then
+		if not shouldMove(frame) or not shouldMove(frameToMove) then
 			return
 		end
 
@@ -160,7 +163,7 @@ local function onDragStart(frame, button)
 
 	-- Right click is scale
 	elseif button == "RightButton" then
-		if not shouldScale(frameToMove) then
+		if not shouldScale(frame) or not shouldScale(frameToMove) then
 			return
 		end
 
@@ -190,6 +193,10 @@ end
 
 local function onDragStop(frame)
 	local frameToMove = frame.DriftDelegate or frame
+
+	if frameCannotBeModified(frame) or frameCannotBeModified(frameToMove) then
+		return
+	end
 
 	-- Stop moving or scaling and reset alpha
 	frameToMove:StopMovingOrSizing()
@@ -256,7 +263,7 @@ local function resetScaleAndPosition(frame)
 	local modifiedSet = {}
 	local frameToMove = frame.DriftDelegate or frame
 
-	if frameCannotBeModified(frameToMove) then
+	if frameCannotBeModified(frame) or frameCannotBeModified(frameToMove) then
 		modifiedSet["unmodifiable"] = true
 		return modifiedSet
 	end
@@ -708,7 +715,7 @@ function DriftHelpers:FixBags()
 		return
 	end
 
-	for i=1,13 do
+	for i=1,TOTAL_BAGS do
 		_G["ContainerFrame"..i]:HookScript(
 			"OnHide",
 			function(self, event, ...)
@@ -882,31 +889,20 @@ function DriftHelpers:FixCollectionsJournal()
 		collectionsJournalMover:SetAllPoints(CollectionsJournal)
 		collectionsJournalMover:Show()
 
-		-- Fix parenting
-		CollectionsJournal:SetParent(collectionsJournalMover)
-
 		-- Show and hide collectionsJournalMover correctly
 		CollectionsJournal:HookScript("OnShow", function()
-			WardrobeFrame:ClearAllPoints()
-
-			local point = DriftPoints["CollectionsJournalMover"]
-			if point then
-				CollectionsJournal:ClearAllPoints()
-				xpcall(
-					CollectionsJournal.SetPoint,
-					function() end,
-					CollectionsJournal,
-					point["point"],
-					point["relativeTo"],
-					point["relativePoint"],
-					point["xOfs"],
-					point["yOfs"]
-				)
+			if frameCannotBeModified(CollectionsJournal) or frameCannotBeModified(collectionsJournalMover) then
+				return
 			end
 
+			WardrobeFrame:ClearAllPoints()
 			collectionsJournalMover:SetAlpha(1)
+			CollectionsJournal:SetParent(collectionsJournalMover)
 		end)
-		CollectionsJournal:HookScript("OnHide", function() collectionsJournalMover:SetAlpha(0) end)
+		CollectionsJournal:HookScript("OnHide", function()
+			CollectionsJournal:SetParent(UIParent)
+			collectionsJournalMover:SetAlpha(0)
+		end)
 
 		-- Hide collectionsJournalMover if CollectionsJournal is not shown
 		if not CollectionsJournal:IsShown() then
@@ -1125,7 +1121,7 @@ end
 
 function DriftHelpers:IsAnyBagShown()
 	local anyBagShown = false
-	for i=1,13 do
+	for i=1,TOTAL_BAGS do
 		local frameName = "ContainerFrame"..i
 		if _G[frameName]:IsShown() then
 			anyBagShown = true
@@ -1138,7 +1134,7 @@ function DriftHelpers:IsAnyBagShown()
 end
 
 function DriftHelpers:RevertBags()
-	for i=1,13 do
+	for i=1,TOTAL_BAGS do
 		local frameName = "ContainerFrame"..i
 		_G[frameName]:ClearAllPoints()
 		_G[frameName].DriftAboutToSetPoint = true
