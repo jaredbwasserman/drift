@@ -105,6 +105,12 @@ local frames = {
 			"CharacterFrameTab3"
 		}
 	},
+	["GearManagerPopupFrame"] = {
+		DriftDisabledBy = "windowsDisabled",
+	},
+	["TokenFramePopup"] = {
+		DriftDisabledBy = "windowsDisabled",
+	},
 	["TradeSkillFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},
