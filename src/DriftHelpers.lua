@@ -437,6 +437,40 @@ local function makeChildMovers(frame, frames)
 	frame.DriftChildMoversHooked = true
 end
 
+local function hookSet(frameOriginal)
+	local frame = frameOriginal.DriftDelegate or frameOriginal
+
+	if frame.DriftHookSet then
+		return
+	end
+
+	hooksecurefunc(
+		frame,
+		"SetPoint",
+		function()
+			if frame.DriftAboutToSetPoint then
+				frame.DriftAboutToSetPoint = false
+			else
+				resetScaleAndPosition(frame)
+			end
+		end
+	)
+
+	hooksecurefunc(
+		frame,
+		"SetScale",
+		function()
+			if frame.DriftAboutToSetScale then
+				frame.DriftAboutToSetScale = false
+			else
+				resetScaleAndPosition(frame)
+			end
+		end
+	)
+
+	frame.DriftHookSet = true
+end
+
 -- Global functions
 function DriftHelpers:DeleteDriftState()
 	-- Delete DriftPoints state
@@ -591,6 +625,7 @@ function DriftHelpers:ModifyFrames(frames)
 			makeSticky(frame, frames)
 			makeTabsSticky(frame, frames)
 			makeChildMovers(frame, frames)
+			hookSet(frame)
 		end
 	end
 
@@ -674,33 +709,7 @@ function DriftHelpers:FixBags()
 	end
 
 	for i=1,13 do
-		local frameName = "ContainerFrame"..i
-
-		hooksecurefunc(
-			_G[frameName],
-			"SetPoint",
-			function()
-				if _G[frameName].DriftAboutToSetPoint then
-					_G[frameName].DriftAboutToSetPoint = false
-				else
-					resetScaleAndPosition(_G[frameName])
-				end
-			end
-		)
-
-		hooksecurefunc(
-			_G[frameName],
-			"SetScale",
-			function()
-				if _G[frameName].DriftAboutToSetScale then
-					_G[frameName].DriftAboutToSetScale = false
-				else
-					resetScaleAndPosition(_G[frameName])
-				end
-			end
-		)
-
-		_G[frameName]:HookScript(
+		_G["ContainerFrame"..i]:HookScript(
 			"OnHide",
 			function(self, event, ...)
 				if (not DriftHelpers:IsAnyBagShown()) then
@@ -711,30 +720,6 @@ function DriftHelpers:FixBags()
 	end
 
 	if (ContainerFrameCombinedBags) then
-		hooksecurefunc(
-			ContainerFrameCombinedBags,
-			"SetPoint",
-			function()
-				if ContainerFrameCombinedBags.DriftAboutToSetPoint then
-					ContainerFrameCombinedBags.DriftAboutToSetPoint = false
-				else
-					resetScaleAndPosition(ContainerFrameCombinedBags)
-				end
-			end
-		)
-
-		hooksecurefunc(
-			ContainerFrameCombinedBags,
-			"SetScale",
-			function()
-				if ContainerFrameCombinedBags.DriftAboutToSetScale then
-					ContainerFrameCombinedBags.DriftAboutToSetScale = false
-				else
-					resetScaleAndPosition(ContainerFrameCombinedBags)
-				end
-			end
-		)
-
 		ContainerFrameCombinedBags:HookScript(
 			"OnHide",
 			function(self, event, ...)
