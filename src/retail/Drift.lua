@@ -389,6 +389,12 @@ local frames = {
 	["ReforgingFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},
+	["ExpansionLandingPage"] = {
+		DriftDisabledBy = "windowsDisabled",
+	},
+	["MajorFactionRenownFrame"] = {
+		DriftDisabledBy = "windowsDisabled",
+	},
 	["GarrisonBuildingFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},
