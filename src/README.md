@@ -150,7 +150,7 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Minimap (classic, wc)
 
 ## Objectives
-- Objectives (classic, wc)
+- Objectives (retail, classic, wc)
 
 ## Miscellaneous
 - Battle.net Toast (retail, classic, wc)

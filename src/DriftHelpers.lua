@@ -76,6 +76,11 @@ local function frameCannotBeModified(frame)
 end
 
 local function shouldMove(frame)
+	if frame.DriftUnmovable then
+		print("|cffFFC125Drift:|r Moving not supported for " .. frame:GetName() .. ".")
+		return false
+	end
+
 	if frameCannotBeModified(frame) then
 		print("|cffFFC125Drift:|r Cannot move " .. frame:GetName() .. " during combat.")
 		return false
@@ -93,6 +98,11 @@ local function shouldMove(frame)
 end
 
 local function shouldScale(frame)
+	if frame.DriftUnscalable then
+		print("|cffFFC125Drift:|r Scaling not supported for " .. frame:GetName() .. ".")
+		return false
+	end
+
 	if frameCannotBeModified(frame) then
 		print("|cffFFC125Drift:|r Cannot scale " .. frame:GetName() .. " during combat.")
 		return false
@@ -145,7 +155,7 @@ local function onDragStart(frame, button)
 
 	-- Left click is move
 	if button == "LeftButton" then
-		if not shouldMove(frame) or not shouldMove(frameToMove) then
+		if not shouldMove(frameToMove) or not shouldMove(frame) then
 			return
 		end
 
@@ -163,18 +173,12 @@ local function onDragStart(frame, button)
 
 	-- Right click is scale
 	elseif button == "RightButton" then
-		if not shouldScale(frame) or not shouldScale(frameToMove) then
+		if not shouldScale(frameToMove) or not shouldScale(frame) then
 			return
 		end
 
 		-- Prevent moving while scaling
 		frame:RegisterForDrag("RightButton")
-
-		-- Prevent unscalable frames from being scaled
-		if frameToMove.DriftUnscalable then
-			print("|cffFFC125Drift:|r Scaling not supported for " .. frameToMove:GetName() .. ".")
-			return
-		end
 
 		-- Set alpha
 		frameToMove:SetAlpha(ALPHA_DURING_SCALE)
@@ -611,6 +615,9 @@ function DriftHelpers:ModifyFrames(frames)
 			end
 			if properties.DriftUnscalable then
 				frame.DriftUnscalable = true
+			end
+			if properties.DriftUnmovable then
+				frame.DriftUnmovable = true
 			end
 			if properties.DriftDelegate then
 				frame.DriftDelegate = getFrame(properties.DriftDelegate) or frame

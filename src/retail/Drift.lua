@@ -539,6 +539,10 @@ local frames = {
 	["GenericTraitFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},
+	["ObjectiveTrackerFrame"] = {
+		DriftDisabledBy = "objectivesDisabled",
+		DriftUnmovable = true
+	},
 }
 
 -- Frame for handling events

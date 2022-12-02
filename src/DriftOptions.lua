@@ -277,21 +277,21 @@ function DriftHelpers:SetupConfig()
 		)
 		DriftOptionsPanel.config.minimapEnabledCheckbox:SetChecked(not DriftOptions.minimapDisabled)
 		yOffset = yOffset - 30
-
-		-- Objectives
-		DriftOptionsPanel.config.objectivesEnabledCheckbox = createCheckbox(
-			"ObjectivesEnabledCheckbox",
-			"TOPLEFT",
-			DriftOptionsPanel.optionspanel,
-			"TOPLEFT",
-			15,
-			yOffset,
-			" Objectives",
-			"Whether Drift will modify Objectives."
-		)
-		DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
-		yOffset = yOffset - 30
 	end
+
+	-- Objectives
+	DriftOptionsPanel.config.objectivesEnabledCheckbox = createCheckbox(
+		"ObjectivesEnabledCheckbox",
+		"TOPLEFT",
+		DriftOptionsPanel.optionspanel,
+		"TOPLEFT",
+		15,
+		yOffset,
+		" Objectives",
+		"Whether Drift will modify Objectives."
+	)
+	DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
+	yOffset = yOffset - 30
 
 	-- Miscellaneous
 	DriftOptionsPanel.config.miscellaneousEnabledCheckbox = createCheckbox(
@@ -399,12 +399,12 @@ function DriftHelpers:SetupConfig()
 			if oldMinimapDisabled ~= DriftOptions.minimapDisabled then
 				shouldReloadUI = true
 			end
+		end
 
-			local oldObjectivesDisabled = DriftOptions.objectivesDisabled
-			DriftOptions.objectivesDisabled = not DriftOptionsPanel.config.objectivesEnabledCheckbox:GetChecked()
-			if oldObjectivesDisabled ~= DriftOptions.objectivesDisabled then
-				shouldReloadUI = true
-			end
+		local oldObjectivesDisabled = DriftOptions.objectivesDisabled
+		DriftOptions.objectivesDisabled = not DriftOptionsPanel.config.objectivesEnabledCheckbox:GetChecked()
+		if oldObjectivesDisabled ~= DriftOptions.objectivesDisabled then
+			shouldReloadUI = true
 		end
 
 		local oldMiscellaneousDisabled = DriftOptions.miscellaneousDisabled
@@ -440,9 +440,9 @@ function DriftHelpers:SetupConfig()
 
 		if (not isRetail) then
 			DriftOptionsPanel.config.minimapEnabledCheckbox:SetChecked(not DriftOptions.minimapDisabled)
-			DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
 		end
 
+		DriftOptionsPanel.config.objectivesEnabledCheckbox:SetChecked(not DriftOptions.objectivesDisabled)
 		DriftOptionsPanel.config.miscellaneousEnabledCheckbox:SetChecked(not DriftOptions.miscellaneousDisabled)
 	end
 
