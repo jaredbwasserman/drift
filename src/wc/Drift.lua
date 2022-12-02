@@ -359,6 +359,12 @@ local frames = {
 		DriftDisabledBy = "windowsDisabled",
 		DriftDelegate = "PVPParentFrame",
 	},
+	["DurabilityFrame"] = {
+		DriftDisabledBy = "miscellaneousDisabled",
+	},
+	["VehicleSeatIndicator"] = {
+		DriftDisabledBy = "miscellaneousDisabled",
+	},
 }
 
 -- Frame for handling events

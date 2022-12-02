@@ -530,6 +530,12 @@ local frames = {
 	["ContributionCollectionFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},
+	["DurabilityFrame"] = {
+		DriftDisabledBy = "miscellaneousDisabled",
+	},
+	["VehicleSeatIndicator"] = {
+		DriftDisabledBy = "miscellaneousDisabled",
+	},
 }
 
 -- Frame for handling events

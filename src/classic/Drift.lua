@@ -313,6 +313,9 @@ local frames = {
 	["LFGParentFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},
+	["DurabilityFrame"] = {
+		DriftDisabledBy = "miscellaneousDisabled",
+	},
 }
 
 -- Frame for handling events
