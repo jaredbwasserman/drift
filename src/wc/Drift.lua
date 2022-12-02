@@ -268,9 +268,6 @@ local frames = {
 	["TradeFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},
-	["SUFWrapperFrame"] = {
-		DriftDisabledBy = "windowsDisabled",
-	},
 	["TimeManagerFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},
