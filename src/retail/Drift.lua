@@ -536,6 +536,9 @@ local frames = {
 	["VehicleSeatIndicator"] = {
 		DriftDisabledBy = "miscellaneousDisabled",
 	},
+	["GenericTraitFrame"] = {
+		DriftDisabledBy = "windowsDisabled",
+	},
 }
 
 -- Frame for handling events

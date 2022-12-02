@@ -57,6 +57,7 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Garrison Recruiter (retail)
 - Garrison Shipyard (retail)
 - Gear Manager Popup (retail)
+- Generic Trait (retail)
 - Gossip (retail, classic, wc)
 - Group Finder (retail)
 - Guild & Communities (retail)
