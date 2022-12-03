@@ -173,7 +173,6 @@ local frames = {
 	},
 	["WorldMapFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
-		-- TODO: Add scaling support for WorldMapFrame
 		DriftUnscalable = true
 	},
 	["QuestScrollFrame"] = {

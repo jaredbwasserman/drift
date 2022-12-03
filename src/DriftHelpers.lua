@@ -49,14 +49,14 @@ local isWC = (WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC)
 
 -- Variables for whether components have been fixed
 local hasFixedBags = false
-local hasFixedPVPTalentList = false
 local hasFixedPlayerChoice = false
 local hasFixedMinimap = false
-local hasFixedObjectives = false
 local hasFixedCollections = false
 local hasFixedCommunities = false
 local hasFixedFramesForElvUIRetail = false
-local hasFixedManageFramePositions = false
+local hasFixedQuestWatchClassic = false
+local hasFixedWatchWC = false
+local hasFixedTimeManager = false
 
 
 --------------------------------------------------------------------------------
@@ -471,6 +471,11 @@ function DriftHelpers:ModifyFrames(frames)
 		)
 	end
 
+	-- Fix QuestWatchFrame Classic
+	if (isClassic) and (not DriftOptions.objectivesDisabled) then
+		DriftHelpers:FixQuestWatchClassic()
+	end
+
 	for frameName, properties in pairs(frames) do
 		local frame = getFrame(frameName)
 		if frame then
@@ -526,6 +531,16 @@ function DriftHelpers:ModifyFrames(frames)
 	-- https://github.com/jaredbwasserman/drift/issues/39
 	if (isRetail) and (not DriftOptions.windowsDisabled) then
 		DriftHelpers:FixFramesForElvUIRetail()
+	end
+
+	-- Fix TimeManagerFrame
+	if not DriftOptions.windowsDisabled then
+		DriftHelpers:FixTimeManagerFrame()
+	end
+
+	-- Fix WatchFrame WC
+	if (isWC) and (not DriftOptions.objectivesDisabled) then
+		DriftHelpers:FixWatchWC()
 	end
 end
 
@@ -597,7 +612,6 @@ function DriftHelpers:FixMinimap()
 		return phantomMinimapCluster:GetBottom()
 	end
 
-	-- WC is special
 	if (isWC) then
 		-- Set up mover
 		minimapMover:SetFrameStrata("MEDIUM")
@@ -612,24 +626,7 @@ function DriftHelpers:FixMinimap()
 		MinimapCluster:SetParent(minimapMover)
 
 		-- Show and hide minimapMover correctly
-		MinimapCluster:HookScript("OnShow", function()
-			local point = DriftPoints["MinimapMover"]
-			if point then
-				MinimapCluster:ClearAllPoints()
-				xpcall(
-					MinimapCluster.SetPoint,
-					function() end,
-					MinimapCluster,
-					point["point"],
-					point["relativeTo"],
-					point["relativePoint"],
-					point["xOfs"],
-					point["yOfs"]
-				)
-			end
-
-			minimapMover:SetAlpha(1)
-		end)
+		MinimapCluster:HookScript("OnShow", function() minimapMover:SetAlpha(1) end)
 		MinimapCluster:HookScript("OnHide", function() minimapMover:SetAlpha(0) end)
 
 		-- Texture should only show during movement
@@ -644,6 +641,12 @@ function DriftHelpers:FixMinimap()
 		if not MinimapCluster:IsShown() then
 			minimapMover:SetAlpha(0)
 		end
+
+		-- Fix post-reload behavior
+		hooksecurefunc(
+			"FCF_DockUpdate",
+			function() resetScaleAndPosition(MinimapCluster) end
+		)
 	end
 
 	hasFixedMinimap = true
@@ -742,6 +745,61 @@ function DriftHelpers:FixFramesForElvUIRetail()
 		)
 
 		hasFixedFramesForElvUIRetail = true
+	end
+end
+
+function DriftHelpers:FixQuestWatchClassic()
+	if hasFixedQuestWatchClassic then
+		return
+	end
+
+	if (not isClassic) then
+		return
+	end
+
+	-- TODO: Fix this unsafe hook
+	if (QuestWatchFrame) then
+		local QuestWatchFrame_SetPoint_Original = QuestWatchFrame.SetPoint
+		QuestWatchFrame.SetPoint = function(_, point, relativeTo, relativePoint, ofsx, ofsy)
+			if "MinimapCluster" == relativeTo then
+				return
+			end
+			QuestWatchFrame_SetPoint_Original(QuestWatchFrame, point, relativeTo, relativePoint, ofsx, ofsy)
+		end
+
+		hasFixedQuestWatchClassic = true
+	end
+end
+
+function DriftHelpers:FixTimeManagerFrame()
+	if hasFixedTimeManager then
+		return
+	end
+
+	hooksecurefunc(
+		"TimeManager_LoadUI",
+		function() resetScaleAndPosition(TimeManagerFrame) end
+	)
+
+	hasFixedTimeManager = true
+end
+
+function DriftHelpers:FixWatchWC()
+	if hasFixedWatchWC then
+		return
+	end
+
+	if (not isWC) then
+		return
+	end
+
+	if (WatchFrame) then
+		hooksecurefunc(
+			"FCF_DockUpdate",
+			function() resetScaleAndPosition(WatchFrame) end
+		)
+
+		hasFixedWatchWC = true
 	end
 end
 

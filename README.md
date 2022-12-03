@@ -22,42 +22,19 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Opacity while moving and scaling
    1. Max and min scale
    1. Scale increment
-1. Add GuildMemberDetailFrame classic, wc
+1. Add GuildMemberDetailFrame (classic, wc)
 1. Make options panel look like first-party options panels
    1. Also clean up code for options
    1. Also default/cancel functionality retail
 1. Figure out how to get MinimapZoneTextButton to work for dragging Minimap (wc)
-1. Fix in combat bugs for minimap (classic, wc) similar to Collections
-1. Remove tabs, sticky, broadcast reset, events, `DriftHelpers:Wait`, anything else no longer needed following `hookSet` addition
+1. Remove `DriftHelpers:Wait`
 
 ## Bugs
-1. When Dressing Room is already open, viewing a pet reverts frame position
-1. CollectionsJournalMover, CommunitiesMover, MinimapMover in a different place than frame if opened in combat
-1. PlayerChoiceToggleButton reverts its position when PlayerChoiceFrame is shown
-   1. Happens in Torghast anima power choice
-1. Clicking PlayerChoiceFrame buttons resets PlayerChoiceFrame (retail)
-   1. Example is in Warfronts
-   1. To fix, need to add Drift Tabs
 1. Scaling Bugs
    1. Map does not work correctly after scaling WorldMapFrame
    1. Character model has incorrect size after scaling CharacterFrame
    1. Item models have incorrect size after scaling CollectionsJournal
-1. Frames with tabs move from hotkey when on other tab
-1. ColorPickerFrame moves when it's not supposed to (classic)
 1. Some frames do not move depending on addons loaded
-   1. TimeManagerFrame (retail and classic)
-   1. PlayerChoiceFrame (retail, seems to only break right after login)
+   1. TimeManagerFrame (retail, classic, wc)
+   1. PlayerChoiceFrame
    1. LFGParentFrame (classic)
-   1. OrderHallTalentFrame (retail)
-1. Leveling up causes frame positions to reset
-1. LFG Button in Objective Tracker issues (retail)
-   1. Interface Action failed due to addon happens when in combat and click on LFG button in objective tracker
-   1. Click on LFG button in objective tracker (when window is already open) causes frames to revert
-   1. Remove LFG events in code after fix
-1. Item upgrade issue
-   1. Open Item Upgrade frame
-   1. Open Character Info frame
-   1. Hit hot key for "Reputation" tab (Character Info)
-   1. Frames will revert (not desired behavior)
-   1. This might be the same bug as "Frames with tabs move from hotkey when on other tab"
-1. Runecarving frame reverts position sometimes
