@@ -44,7 +44,6 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Currency Options (retail)
 - Customer Support (retail, classic, wc)
 - Dressing Room (retail, classic, wc)
-- Durability (retail, classic, wc)
 - Expansion Landing Page (retail)
 - Flight Map (retail)
 - Game Menu (retail)
@@ -114,7 +113,6 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Trade (retail, classic, wc)
 - Trade Skill (classic, wc)
 - Transmogrify (retail)
-- Vehicle Seat Indicator (retail, wc)
 - Void Storage (retail)
 - Warboard Quest Choice (retail)
 - Warfront Party Pose (retail)
@@ -155,12 +153,14 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 ## Miscellaneous
 - Battle.net Toast (retail, classic, wc)
 - Bonus Roll (retail)
+- Durability (retail, classic, wc)
 - Group Loot 1 (classic, wc)
 - Group Loot 2 (classic, wc)
 - Group Loot 3 (classic, wc)
 - Group Loot 4 (classic, wc)
 - Quick Join Toast 1 (retail)
 - Quick Join Toast 2 (retail)
+- Vehicle Seat Indicator (retail, wc)
 
 # Slash Commands
 `/drift` - Print allowed commands.  
