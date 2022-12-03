@@ -99,11 +99,6 @@ local frames = {
 	},
 	["CharacterFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
-		DriftTabs = {
-			"CharacterFrameTab1",
-			"CharacterFrameTab2",
-			"CharacterFrameTab3"
-		}
 	},
 	["GearManagerPopupFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
@@ -146,20 +141,13 @@ local frames = {
 	},
 	["CollectionsJournal"] = {
 		DriftDisabledBy = "windowsDisabled",
-		DriftDelegate = "CollectionsJournalMover" -- This frame is created inside Drift code
+		DriftDelegate = "CollectionsJournalMover",
+		DriftHasMover = true,
 	},
 	["CommunitiesFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
-		DriftDelegate = "CommunitiesMover", -- This frame is created inside Drift code
-		DriftTabs = {
-			"CommunitiesFrame.MaximizeMinimizeFrame.MaximizeButton",
-			"CommunitiesFrame.MaximizeMinimizeFrame.MinimizeButton",
-			"CommunitiesFrame.ChatTab",
-			"CommunitiesFrame.RosterTab",
-			"CommunitiesFrame.GuildBenefitsTab",
-			"CommunitiesFrame.GuildInfoTab",
-			"ClubFinderCommunityAndGuildFinderFrame.ClubFinderPendingTab",
-		}
+		DriftDelegate = "CommunitiesMover",
+		DriftHasMover = true,
 	},
 	["CommunitiesFrame.GuildMemberDetailFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
@@ -197,14 +185,6 @@ local frames = {
 	},
 	["PVEFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
-		DriftTabs = {
-			"PVEFrameTab1",
-			"PVEFrameTab2",
-			"PVEFrameTab3",
-			"PVPQueueFrameCategoryButton1",
-			"PVPQueueFrameCategoryButton2",
-			"PVPQueueFrameCategoryButton3"
-		}
 	},
 	["EncounterJournal"] = {
 		DriftDisabledBy = "windowsDisabled",
@@ -238,11 +218,6 @@ local frames = {
 	},
 	["DressUpFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
-		DriftTabs = {
-			"DressUpFrame.ToggleOutfitDetailsButton",
-			"DressUpFrame.MaximizeMinimizeFrame.MinimizeButton",
-			"DressUpFrame.MaximizeMinimizeFrame.MaximizeButton"
-		}
 	},
 	["SideDressUpFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
@@ -546,9 +521,7 @@ local frames = {
 local Drift = CreateFrame("Frame")
 
 local function eventHandler(self, event, ...)
-	if event == "ADDON_LOADED" then
-		DriftHelpers:ModifyFrames(frames)
-	elseif event == "PLAYER_REGEN_ENABLED" then
+	if event == "ADDON_LOADED" or event == "PLAYER_REGEN_ENABLED" then
 		DriftHelpers:ModifyFrames(frames)
 	elseif event == "VARIABLES_LOADED" then
 		-- Config
@@ -565,35 +538,11 @@ local function eventHandler(self, event, ...)
 		-- Modify pre-loaded frames
 		DriftHelpers:ModifyFrames(frames)
 
-		-- Talents
-		Drift:RegisterEvent("PLAYER_TALENT_UPDATE")
-		Drift:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
-		Drift:RegisterEvent("PET_SPECIALIZATION_CHANGED")
-
-		-- Azerite
-		Drift:RegisterEvent("ITEM_LOCKED")
-		Drift:RegisterEvent("ITEM_DATA_LOAD_RESULT")
-
-		-- TODO: Remove LFG events once a better solution exists
-		-- LFG
-		Drift:RegisterEvent("LFG_LIST_SEARCH_RESULTS_RECEIVED")
-		Drift:RegisterEvent("LFG_LIST_SEARCH_FAILED")
-		Drift:RegisterEvent("LFG_LIST_SEARCH_RESULT_UPDATED")
-
-		-- Communities
-		Drift:RegisterEvent("CLUB_FINDER_RECRUITMENT_POST_RETURNED")
-		Drift:RegisterEvent("CVAR_UPDATE")
-
-		-- Professions
-		Drift:RegisterEvent("TRADE_SKILL_LIST_UPDATE")
-
 		-- Modify frames after an addon loads
 		DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
 
 		-- Modify frames after combat ends
 		Drift:RegisterEvent("PLAYER_REGEN_ENABLED")
-	else
-		DriftHelpers:BroadcastReset(frames)
 	end
 end
 

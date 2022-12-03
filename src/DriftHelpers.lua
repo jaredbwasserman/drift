@@ -55,7 +55,6 @@ local hasFixedMinimap = false
 local hasFixedObjectives = false
 local hasFixedCollections = false
 local hasFixedCommunities = false
-local hasFixedFramesForElvUIBCC = false
 local hasFixedFramesForElvUIRetail = false
 local hasFixedManageFramePositions = false
 
@@ -150,6 +149,61 @@ local function getFrame(frameName)
 	return frame
 end
 
+local function resetScaleAndPosition(frame)
+	local frameToMove = frame.DriftDelegate or frame
+
+	if frameCannotBeModified(frame) or frameCannotBeModified(frameToMove) then
+		return
+	end
+
+	if frameToMove.DriftIsMoving or frameToMove.DriftIsScaling then
+		return
+	end
+
+	-- Reset scale
+	local scale = DriftScales[frameToMove:GetName()]
+	if scale then
+		frameToMove.DriftAboutToSetScale = true
+		frameToMove:SetScale(scale)
+	end
+
+	-- Reset position
+	local point = DriftPoints[frameToMove:GetName()]
+	if point then
+		frameToMove:ClearAllPoints()
+		frameToMove.DriftAboutToSetPoint = true
+		xpcall(
+			frameToMove.SetPoint,
+			function() end,
+			frameToMove,
+			point["point"],
+			point["relativeTo"],
+			point["relativePoint"],
+			point["xOfs"],
+			point["yOfs"]
+		)
+
+		if frame.DriftHasMover then
+			if (hasFixedCommunities) then
+				communitiesMover:SetWidth(CommunitiesFrame:GetWidth())
+				communitiesMover:SetHeight(CommunitiesFrame:GetHeight())
+			end
+
+			frame:ClearAllPoints()
+			xpcall(
+				frame.SetPoint,
+				function() end,
+				frame,
+				point["point"],
+				point["relativeTo"],
+				point["relativePoint"],
+				point["xOfs"],
+				point["yOfs"]
+			)
+		end
+	end
+end
+
 local function onDragStart(frame, button)
 	local frameToMove = frame.DriftDelegate or frame
 
@@ -217,34 +271,6 @@ local function onDragStop(frame)
 				["xOfs"] = xOfs,
 				["yOfs"] = yOfs
 			}
-
-			-- TODO: This is messy
-			if ("CollectionsJournal" == frame:GetName() or "CommunitiesFrame" == frame:GetName()) then
-				frame:ClearAllPoints()
-				xpcall(
-					frame.SetPoint,
-					function() end,
-					frame,
-					point,
-					"UIParent",
-					relativePoint,
-					xOfs,
-					yOfs
-				)
-			end
-			if (isWC) and ("MinimapCluster" == frame:GetName()) then
-				frame:ClearAllPoints()
-				xpcall(
-					frame.SetPoint,
-					function() end,
-					frame,
-					point,
-					"UIParent",
-					relativePoint,
-					xOfs,
-					yOfs
-				)
-			end	
 		end
 	end
 	frameToMove.DriftIsMoving = false
@@ -256,89 +282,15 @@ local function onDragStop(frame)
 	frameToMove.DriftIsScaling = false
 	DriftHelpers.frameBeingScaled = nil
 
+	if frame.DriftHasMover then
+		resetScaleAndPosition(frame)
+	end
+
 	-- Hide GameTooltip
 	GameTooltip:Hide()
 
 	-- Allow for dragging with both buttons
 	frame:RegisterForDrag("LeftButton", "RightButton")
-end
-
-local function resetScaleAndPosition(frame)
-	local modifiedSet = {}
-	local frameToMove = frame.DriftDelegate or frame
-
-	if frameCannotBeModified(frame) or frameCannotBeModified(frameToMove) then
-		modifiedSet["unmodifiable"] = true
-		return modifiedSet
-	end
-
-	-- Do not reset if frame is moving or scaling
-	if frameToMove.DriftIsMoving or frameToMove.DriftIsScaling then
-		modifiedSet["isModifying"] = true
-		return modifiedSet
-	end
-
-	-- Reset scale
-	local scale = DriftScales[frameToMove:GetName()]
-	if scale then
-		frameToMove.DriftAboutToSetScale = true
-		frameToMove:SetScale(scale)
-		modifiedSet["scale"] = true
-	end
-
-	-- Reset position
-	local point = DriftPoints[frameToMove:GetName()]
-	if point then
-		frameToMove:ClearAllPoints()
-		frameToMove.DriftAboutToSetPoint = true
-		xpcall(
-			frameToMove.SetPoint,
-			function() end,
-			frameToMove,
-			point["point"],
-			point["relativeTo"],
-			point["relativePoint"],
-			point["xOfs"],
-			point["yOfs"]
-		)
-
-		-- TODO: This is messy
-		if ("CollectionsJournal" == frame:GetName() or "CommunitiesFrame" == frame:GetName()) then
-			if (hasFixedCommunities) then
-				communitiesMover:SetWidth(CommunitiesFrame:GetWidth())
-				communitiesMover:SetHeight(CommunitiesFrame:GetHeight())
-			end
-
-			frame:ClearAllPoints()
-			xpcall(
-				frame.SetPoint,
-				function() end,
-				frame,
-				point["point"],
-				point["relativeTo"],
-				point["relativePoint"],
-				point["xOfs"],
-				point["yOfs"]
-			)
-		end
-		if (isWC) and ("MinimapCluster" == frame:GetName()) then
-			frame:ClearAllPoints()
-			xpcall(
-				frame.SetPoint,
-				function() end,
-				frame,
-				point["point"],
-				point["relativeTo"],
-				point["relativePoint"],
-				point["xOfs"],
-				point["yOfs"]
-			)
-		end
-
-		modifiedSet["position"] = true
-	end
-
-	return modifiedSet
 end
 
 local function makeModifiable(frame)
@@ -361,120 +313,34 @@ local function makeModifiable(frame)
 	frame.DriftModifiable = true
 end
 
-local function makeSticky(frame, frames)
-	if frame.DriftSticky then
-		return
-	end
-
-	frame:HookScript(
-		"OnShow",
-		function(self, event, ...)
-			resetScaleAndPosition(frame)
-			DriftHelpers:BroadcastReset(frames)
-		end
-	)
-
-	frame:HookScript(
-		"OnHide",
-		function(self, event, ...)
-			DriftHelpers:BroadcastReset(frames)
-		end
-	)
-
-	frame:HookScript(
-		"OnUpdate",
-		function(self, event, ...)
-			if frame.DriftResetNeeded then
-				resetScaleAndPosition(frame)
-				frame.DriftResetNeeded = nil
-			end
-		end
-	)
-
-	frame.DriftSticky = true
-end
-
-local function makeTabsSticky(frame, frames)
-	if frame.DriftTabs then
-		for _, tab in pairs(frame.DriftTabs) do
-			if not tab.DriftTabSticky then
-				tab:HookScript(
-					"OnClick",
-					function(self, event, ...)
-						resetScaleAndPosition(frame)
-						DriftHelpers:BroadcastReset(frames)
-					end
-				)
-				tab.DriftTabSticky = true
-			end
-		end
-	end
-end
-
-local function makeChildMovers(frame, frames)
-	-- Exit if not configured
-	if not frame.DriftChildMovers then
-		return
-	end
-
-	-- Exit if already hooked
-	if frame.DriftChildMoversHooked then
-		return
-	end
-
-	-- Run once in case log in to a place with the widget
-	local function makeMovers()
-		local children = { frame:GetChildren() }
-		for _, child in ipairs(children) do
-			child.DriftDelegate = frame
-			makeModifiable(child)
-			makeSticky(child, frames)
-			makeTabsSticky(child, frames)
-		end
-	end
-	makeMovers()
-
-	-- Run each time there is an update
-	frame:RegisterEvent("UPDATE_UI_WIDGET")
-	frame:HookScript(
-		"OnEvent",
-		function(self, event, ...)
-			if event == "UPDATE_UI_WIDGET" then
-				makeMovers()
-			end
-		end
-	)
-
-	frame.DriftChildMoversHooked = true
-end
-
 local function hookSet(frameOriginal)
 	local frame = frameOriginal.DriftDelegate or frameOriginal
+	local setTarget = (frameOriginal.DriftHasMover and frameOriginal) or frame
 
 	if frame.DriftHookSet then
 		return
 	end
 
 	hooksecurefunc(
-		frame,
+		setTarget,
 		"SetPoint",
 		function()
 			if frame.DriftAboutToSetPoint then
 				frame.DriftAboutToSetPoint = false
 			else
-				resetScaleAndPosition(frame)
+				resetScaleAndPosition(setTarget)
 			end
 		end
 	)
 
 	hooksecurefunc(
-		frame,
+		setTarget,
 		"SetScale",
 		function()
 			if frame.DriftAboutToSetScale then
 				frame.DriftAboutToSetScale = false
 			else
-				resetScaleAndPosition(frame)
+				resetScaleAndPosition(setTarget)
 			end
 		end
 	)
@@ -619,43 +485,21 @@ function DriftHelpers:ModifyFrames(frames)
 			if properties.DriftUnmovable then
 				frame.DriftUnmovable = true
 			end
+			if properties.DriftHasMover then
+				frame.DriftHasMover = true
+			end
 			if properties.DriftDelegate then
 				frame.DriftDelegate = getFrame(properties.DriftDelegate) or frame
 			end
-			if properties.DriftTabs then
-				frame.DriftTabs = {}
-				for _, tabName in pairs(properties.DriftTabs) do
-					local tabFrame = getFrame(tabName)
-					if tabFrame then
-						table.insert(frame.DriftTabs, tabFrame)
-					end
-				end
-			end
-			if properties.DriftChildMovers then
-				frame.DriftChildMovers = true
-			end
 
 			makeModifiable(frame)
-			makeSticky(frame, frames)
-			makeTabsSticky(frame, frames)
-			makeChildMovers(frame, frames)
 			hookSet(frame)
 		end
-	end
-
-	-- ClearAllPoints is needed to avoid Lua errors
-	if not DriftOptions.windowsDisabled and EncounterJournalTooltip then
-		EncounterJournalTooltip:ClearAllPoints()
 	end
 
 	-- Fix Bags
 	if not DriftOptions.bagsDisabled then
 		DriftHelpers:FixBags()
-	end
-
-	-- Fix PVP talents list
-	if not DriftOptions.windowsDisabled then
-		DriftHelpers:FixPVPTalentsList(frames)
 	end
 
 	-- Fix PlayerChoiceFrame
@@ -668,16 +512,6 @@ function DriftHelpers:ModifyFrames(frames)
 		DriftHelpers:FixMinimap()
 	end
 
-	-- Fix Objectives
-	if not DriftOptions.objectivesDisabled then
-		DriftHelpers:FixObjectives()
-	end
-
-	-- Fix MacroPopupFrame
-	if not DriftOptions.windowsDisabled then
-		MacroPopupFrame_AdjustAnchors = function() end
-	end
-
 	-- Fix CollectionsJournal
 	if not DriftOptions.windowsDisabled then
 		DriftHelpers:FixCollectionsJournal()
@@ -688,33 +522,11 @@ function DriftHelpers:ModifyFrames(frames)
 		DriftHelpers:FixCommunities(frames)
 	end
 
-	-- Fix OrderHallTalentFrame
-	if not DriftOptions.windowsDisabled and OrderHallTalentFrame then
-		DriftHelpers.resetTable["OrderHallTalentFrame"] = OrderHallTalentFrame
-	end
-
-	-- Fix LootFrame
-	if (not isRetail) and (not DriftOptions.windowsDisabled) and (LootFrame) then
-		DriftHelpers.resetTable["LootFrame"] = LootFrame
-	end
-
-	-- ElvUI compatibility BCC
-	-- https://github.com/jaredbwasserman/drift/issues/31
-	if (isBCC) and (not DriftOptions.windowsDisabled) then
-		DriftHelpers:FixFramesForElvUIBCC()
-	end
-
 	-- ElvUI compatibility Retail
 	-- https://github.com/jaredbwasserman/drift/issues/39
 	if (isRetail) and (not DriftOptions.windowsDisabled) then
 		DriftHelpers:FixFramesForElvUIRetail()
 	end
-
-	-- Hook FCF_DockUpdate since it's called at the end of UIParentManageFramePositions
-	DriftHelpers:HookFCF_DockUpdate(frames)
-
-	-- Reset everything in case there was a delay
-	DriftHelpers:BroadcastReset(frames)
 end
 
 function DriftHelpers:FixBags()
@@ -745,24 +557,6 @@ function DriftHelpers:FixBags()
 	end
 
 	hasFixedBags = true
-end
-
--- Make it so clicking Close button for PVP talents causes reset
-function DriftHelpers:FixPVPTalentsList(frames)
-	if hasFixedPVPTalentList then
-		return
-	end
-
-	local talentListFrame = _G['PlayerTalentFrameTalentsPvpTalentFrameTalentList']
-	if (talentListFrame) then
-		talentListFrame:HookScript(
-			"OnHide",
-			function(self, event, ...)
-				DriftHelpers:BroadcastReset(frames)
-			end
-		)
-		hasFixedPVPTalentList = true
-	end
 end
 
 -- ClearAllPoints OnHide to avoid Lua errors
@@ -855,28 +649,6 @@ function DriftHelpers:FixMinimap()
 	hasFixedMinimap = true
 end
 
-function DriftHelpers:FixObjectives()
-	if hasFixedObjectives then
-		return
-	end
-
-	if (not isClassic) then
-		return
-	end
-
-	if (QuestWatchFrame) then
-		local QuestWatchFrame_SetPoint_Original = QuestWatchFrame.SetPoint
-		QuestWatchFrame.SetPoint = function(_, point, relativeTo, relativePoint, ofsx, ofsy)
-			if "MinimapCluster" == relativeTo then
-				return
-			end
-			QuestWatchFrame_SetPoint_Original(QuestWatchFrame, point, relativeTo, relativePoint, ofsx, ofsy)
-		end
-
-		hasFixedObjectives = true
-	end
-end
-
 function DriftHelpers:FixCollectionsJournal()
 	if hasFixedCollections then
 		return
@@ -940,102 +712,14 @@ function DriftHelpers:FixCommunities(frames)
 		CommunitiesFrame:SetParent(communitiesMover)
 
 		-- Show and hide communitiesMover correctly
-		CommunitiesFrame:HookScript("OnShow", function()
-			local point = DriftPoints["CommunitiesFrameMover"]
-			if point then
-				CommunitiesFrame:ClearAllPoints()
-				xpcall(
-					CommunitiesFrame.SetPoint,
-					function() end,
-					CommunitiesFrame,
-					point["point"],
-					point["relativeTo"],
-					point["relativePoint"],
-					point["xOfs"],
-					point["yOfs"]
-				)
-			end
-
-			communitiesMover:SetAlpha(1)
-		end)
+		CommunitiesFrame:HookScript("OnShow", function() communitiesMover:SetAlpha(1) end)
 		CommunitiesFrame:HookScript("OnHide", function() communitiesMover:SetAlpha(0) end)
 
 		-- Hide communitiesMover if CommunitiesFrame is not shown
-		if not CommunitiesFrame:IsShown() then
-			communitiesMover:SetAlpha(0)
-		end
-
-		-- Fix scroll buttons
-		if (ClubFinderGuildFinderFrame) then
-			ClubFinderGuildFinderFrame:HookScript(
-				"OnShow",
-				function(self, event, ...)
-					DriftHelpers:BroadcastReset(frames)
-				end
-			)
-		end
-
-		if (CommunitiesFrameInset) then
-			CommunitiesFrameInset:HookScript(
-				"OnShow",
-				function(self, event, ...)
-					DriftHelpers:BroadcastReset(frames)
-				end
-			)
-		end
-
-		if (ClubFinderCommunityAndGuildFinderFrame) then
-			ClubFinderCommunityAndGuildFinderFrame:HookScript(
-				"OnShow",
-				function(self, event, ...)
-					DriftHelpers:BroadcastReset(frames)
-				end
-			)
-		end
-
-		if (CommunitiesFrame.ClubFinderInvitationFrame) then
-			CommunitiesFrame.ClubFinderInvitationFrame:HookScript(
-				"OnShow",
-				function(self, event, ...)
-					DriftHelpers:BroadcastReset(frames)
-				end
-			)
-		end
-
-		if (CommunitiesFrame.Chat) then
-			CommunitiesFrame.Chat:HookScript(
-				"OnShow",
-				function(self, event, ...)
-					DriftHelpers:BroadcastReset(frames)
-				end
-			)
-		end
+		if not CommunitiesFrame:IsShown() then communitiesMover:SetAlpha(0) end
 
 		hasFixedCommunities = true
 	end
-end
-
-function DriftHelpers:FixFramesForElvUIBCC()
-	if hasFixedFramesForElvUIBCC then
-		return
-	end
-
-	if not isBCC then
-		return
-	end
-
-	local UpdateUIPanelPositions_Original = UpdateUIPanelPositions
-	function UpdateUIPanelPositions(currentFrame)
-		if currentFrame == FriendsFrame and DriftPoints["FriendsFrame"] then
-			return
-		end
-		if currentFrame == CharacterFrame and DriftPoints["CharacterFrame"] then
-			return
-		end
-		UpdateUIPanelPositions_Original(currentFrame)
-	end
-
-	hasFixedFramesForElvUIBCC = true
 end
 
 function DriftHelpers:FixFramesForElvUIRetail()
@@ -1059,21 +743,6 @@ function DriftHelpers:FixFramesForElvUIRetail()
 
 		hasFixedFramesForElvUIRetail = true
 	end
-end
-
-function DriftHelpers:HookFCF_DockUpdate(frames)
-	if hasFixedManageFramePositions then
-		return
-	end
-
-	hooksecurefunc(
-		"FCF_DockUpdate",
-		function()
-			DriftHelpers:BroadcastReset(frames)
-		end
-	)
-
-	hasFixedManageFramePositions = true
 end
 
 function DriftHelpers:Wait(delay, func, ...)
@@ -1101,29 +770,12 @@ function DriftHelpers:Wait(delay, func, ...)
 						f(unpack(p))
 					end
 				end
-
-				-- Reset frames that cannot reset themselves
-				for frameName, frame in pairs(DriftHelpers.resetTable) do
-					if frame.DriftResetNeeded then
-						resetScaleAndPosition(frame)
-						frame.DriftResetNeeded = nil
-					end
-				end
 			end
 		)
 	end
 
 	tinsert(DriftHelpers.waitTable, {delay, func, {...}})
 	return true
-end
-
-function DriftHelpers:BroadcastReset(frames)
-	for frameName, _ in pairs(frames) do
-		local frame = getFrame(frameName)
-		if frame and frame:IsVisible() then
-			frame.DriftResetNeeded = true
-		end
-	end
 end
 
 function DriftHelpers:IsAnyBagShown()

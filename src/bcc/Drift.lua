@@ -46,32 +46,6 @@ local frames = {
 	},
 	["CommunitiesFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
-		DriftTabs = {
-			"CommunitiesFrame.ChatTab",
-			"CommunitiesFrame.RosterTab",
-			"CommunitiesFrame.MaximizeMinimizeFrame.MinimizeButton",
-			"CommunitiesFrame.MaximizeMinimizeFrame.MaximizeButton",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton1",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton2",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton3",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton4",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton5",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton6",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton7",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton8",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton9",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton10",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton11",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton12",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton13",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton14",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton15",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton16",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton17",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton18",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton19",
-			"CommunitiesFrameCommunitiesListListScrollFrameButton20"
-		}
 	},
 	["ChannelFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
@@ -244,19 +218,11 @@ local function eventHandler(self, event, ...)
 		-- Modify pre-loaded frames
 		DriftHelpers:ModifyFrames(frames)
 
-		-- Quest Watch
-		Drift:RegisterEvent("QUEST_WATCH_LIST_CHANGED")
-
-		-- Groups
-		Drift:RegisterEvent("CLUB_TICKET_RECEIVED")
-
 		-- Modify frames after an addon loads
 		DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
 
 		-- Modify frames after combat ends
 		Drift:RegisterEvent("PLAYER_REGEN_ENABLED")
-	else
-		DriftHelpers:BroadcastReset(frames)
 	end
 end
 

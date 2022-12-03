@@ -17,7 +17,7 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 
 ## TODO
 1. Add scaling support for WorldMapFrame
-1. Remove delay for Blizzard Groups (classic)
+1. Remove delay for Blizzard Groups (classic, wc)
 1. Configurable variables
    1. Opacity while moving and scaling
    1. Max and min scale
@@ -27,8 +27,6 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Also clean up code for options
    1. Also default/cancel functionality retail
 1. Figure out how to get MinimapZoneTextButton to work for dragging Minimap (wc)
-1. Removal all unsafe hooks (`_Original`) to avoid taint
-1. Generalize movers (Collections, Minimap) functionality
 1. Fix in combat bugs for minimap (classic, wc) similar to Collections
 1. Remove tabs, sticky, broadcast reset, events, `DriftHelpers:Wait`, anything else no longer needed following `hookSet` addition
 
