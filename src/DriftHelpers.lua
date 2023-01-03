@@ -529,6 +529,7 @@ function DriftHelpers:ModifyFrames(frames)
 
 	-- ElvUI compatibility Retail
 	-- https://github.com/jaredbwasserman/drift/issues/39
+	-- https://github.com/jaredbwasserman/drift/issues/46
 	if (isRetail) and (not DriftOptions.windowsDisabled) then
 		DriftHelpers:FixFramesForElvUIRetail()
 	end
@@ -734,7 +735,11 @@ function DriftHelpers:FixFramesForElvUIRetail()
 		return
 	end
 
-	if (MailFrame) then
+	if not IsAddOnLoaded("ElvUI") then
+		return
+	end
+
+	if (MailFrame and TokenFrame and TokenFramePopup) then
 		MailFrame:HookScript(
 			"OnShow",
 			function()
@@ -742,6 +747,18 @@ function DriftHelpers:FixFramesForElvUIRetail()
 					MailFrameInset:SetParent(MailFrame)
 				end
 			end
+		)
+
+		TokenFramePopup:ClearAllPoints()
+		xpcall(
+			TokenFramePopup.SetPoint,
+			function() end,
+			TokenFramePopup,
+			"TOPLEFT",
+			TokenFrame,
+			"TOPRIGHT",
+			3,
+			-28
 		)
 
 		hasFixedFramesForElvUIRetail = true
