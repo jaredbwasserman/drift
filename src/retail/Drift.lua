@@ -514,6 +514,9 @@ local frames = {
 		DriftDisabledBy = "objectivesDisabled",
 		DriftUnmovable = true
 	},
+	["ProfessionsCustomerOrdersFrame"] = {
+		DriftDisabledBy = "windowsDisabled",
+	},
 }
 
 -- Frame for handling events

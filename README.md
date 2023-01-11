@@ -16,7 +16,6 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
    1. Set env vars for wago script.
 
 ## TODO
-1. Add ProfessionCustomerOrdersFrame (retail)
 1. Add scaling support for WorldMapFrame
 1. Remove delay for Blizzard Groups (classic, wc)
 1. Configurable variables
