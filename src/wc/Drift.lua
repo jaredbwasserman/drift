@@ -105,6 +105,10 @@ local frames = {
 		DriftDisabledBy = "windowsDisabled",
 		DriftDelegate = "CharacterFrame"
 	},
+	["PetPaperDollFramePetFrame"] = {
+		DriftDisabledBy = "windowsDisabled",
+		DriftDelegate = "CharacterFrame"
+	},
 	["TradeSkillFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},
