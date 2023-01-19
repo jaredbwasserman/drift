@@ -56,6 +56,7 @@ local hasFixedCommunities = false
 local hasFixedFramesForElvUIRetail = false
 local hasFixedQuestWatchClassic = false
 local hasFixedWatchWC = false
+local hasFixedAHWC = false
 local hasFixedTimeManager = false
 
 
@@ -543,6 +544,11 @@ function DriftHelpers:ModifyFrames(frames)
 	if (isWC) and (not DriftOptions.objectivesDisabled) then
 		DriftHelpers:FixWatchWC()
 	end
+
+	-- Fix AH WC
+	if (isWC) and (not DriftOptions.windowsDisabled) then
+		DriftHelpers:FixAHWC()
+	end
 end
 
 function DriftHelpers:FixBags()
@@ -817,6 +823,27 @@ function DriftHelpers:FixWatchWC()
 		)
 
 		hasFixedWatchWC = true
+	end
+end
+
+function DriftHelpers:FixAHWC()
+	if hasFixedAHWC then
+		return
+	end
+
+	if (not isWC) then
+		return
+	end
+
+	-- TODO: Fix this unsafe hook
+	if (SideDressUpFrame) then
+		local SetUpSideDressUpFrame_Original = SetUpSideDressUpFrame
+		SetUpSideDressUpFrame = function(parentFrame, closedWidth, openWidth, point, relativePoint, offsetX, offsetY)
+			SideDressUpFrame:ClearAllPoints()
+			SetUpSideDressUpFrame_Original(parentFrame, closedWidth, openWidth, point, relativePoint, offsetX, offsetY)
+		end
+
+		hasFixedAHWC = true
 	end
 end
 
