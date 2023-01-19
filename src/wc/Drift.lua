@@ -169,6 +169,8 @@ local frames = {
 	},
 	["CommunitiesFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
+		DriftDelegate = "CommunitiesMover",
+		DriftHasMover = true,
 	},
 	["ChannelFrame"] = {
 		DriftDisabledBy = "windowsDisabled",

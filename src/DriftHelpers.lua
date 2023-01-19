@@ -284,6 +284,7 @@ local function onDragStop(frame)
 	DriftHelpers.frameBeingScaled = nil
 
 	if frame.DriftHasMover then
+		frameToMove:SetAlpha(0)
 		resetScaleAndPosition(frame)
 	end
 
@@ -627,14 +628,8 @@ function DriftHelpers:FixMinimap()
 		minimapMoverTexture:SetAllPoints(minimapMover)
 		minimapMover.texture = minimapMoverTexture
 		minimapMover:SetAllPoints(MinimapCluster)
+		minimapMover:SetAlpha(0)
 		minimapMover:Show()
-
-		-- Fix parenting
-		MinimapCluster:SetParent(minimapMover)
-
-		-- Show and hide minimapMover correctly
-		MinimapCluster:HookScript("OnShow", function() minimapMover:SetAlpha(1) end)
-		MinimapCluster:HookScript("OnHide", function() minimapMover:SetAlpha(0) end)
 
 		-- Texture should only show during movement
 		MinimapCluster:HookScript("OnDragStart", function()
@@ -643,11 +638,6 @@ function DriftHelpers:FixMinimap()
 		MinimapCluster:HookScript("OnDragStop", function()
 			minimapMoverTexture:SetTexture(nil)
 		end)
-
-		-- Hide minimapMover if MinimapCluster is not shown
-		if not MinimapCluster:IsShown() then
-			minimapMover:SetAlpha(0)
-		end
 
 		-- Fix post-reload behavior
 		hooksecurefunc(
@@ -665,9 +655,6 @@ function DriftHelpers:FixCollectionsJournal()
 	end
 
 	if (CollectionsJournal) then
-		-- Hide mover if Transmogrify is shown (only affects cases where Collections has not been moved)
-		WardrobeFrame:HookScript("OnShow", function() collectionsJournalMover:SetAlpha(0) end)
-
 		-- Set up mover
 		collectionsJournalMover:SetFrameStrata("MEDIUM")
 		collectionsJournalMover:SetWidth(CollectionsJournal:GetWidth()) 
@@ -676,27 +663,8 @@ function DriftHelpers:FixCollectionsJournal()
 		collectionsJournalMoverTexture:SetAllPoints(collectionsJournalMover)
 		collectionsJournalMover.texture = collectionsJournalMoverTexture
 		collectionsJournalMover:SetAllPoints(CollectionsJournal)
+		collectionsJournalMover:SetAlpha(0)
 		collectionsJournalMover:Show()
-
-		-- Show and hide collectionsJournalMover correctly
-		CollectionsJournal:HookScript("OnShow", function()
-			if frameCannotBeModified(CollectionsJournal) or frameCannotBeModified(collectionsJournalMover) then
-				return
-			end
-
-			WardrobeFrame:ClearAllPoints()
-			collectionsJournalMover:SetAlpha(1)
-			CollectionsJournal:SetParent(collectionsJournalMover)
-		end)
-		CollectionsJournal:HookScript("OnHide", function()
-			CollectionsJournal:SetParent(UIParent)
-			collectionsJournalMover:SetAlpha(0)
-		end)
-
-		-- Hide collectionsJournalMover if CollectionsJournal is not shown
-		if not CollectionsJournal:IsShown() then
-			collectionsJournalMover:SetAlpha(0)
-		end
 
 		hasFixedCollections = true
 	end
@@ -716,17 +684,8 @@ function DriftHelpers:FixCommunities(frames)
 		communitiesMoverTexture:SetAllPoints(communitiesMover)
 		communitiesMover.texture = communitiesMoverTexture
 		communitiesMover:SetAllPoints(CommunitiesFrame)
+		communitiesMover:SetAlpha(0)
 		communitiesMover:Show()
-
-		-- Fix parenting
-		CommunitiesFrame:SetParent(communitiesMover)
-
-		-- Show and hide communitiesMover correctly
-		CommunitiesFrame:HookScript("OnShow", function() communitiesMover:SetAlpha(1) end)
-		CommunitiesFrame:HookScript("OnHide", function() communitiesMover:SetAlpha(0) end)
-
-		-- Hide communitiesMover if CommunitiesFrame is not shown
-		if not CommunitiesFrame:IsShown() then communitiesMover:SetAlpha(0) end
 
 		hasFixedCommunities = true
 	end
