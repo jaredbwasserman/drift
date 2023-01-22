@@ -348,16 +348,7 @@ local frames = {
 local Drift = CreateFrame("Frame")
 
 local function eventHandler(self, event, ...)
-	if event == "ADDON_LOADED" then
-		local addonName = select(1, ...)
-
-		-- Blizzard Groups buttons are delayed for some reason
-		if addonName == "Blizzard_Communities" then
-			DriftHelpers:Wait(0.25, DriftHelpers.ModifyFrames, DriftHelpers, frames)
-		else
-			DriftHelpers:ModifyFrames(frames)
-		end
-	elseif event == "PLAYER_REGEN_ENABLED" then
+	if event == "ADDON_LOADED" or event == "PLAYER_REGEN_ENABLED" then
 		DriftHelpers:ModifyFrames(frames)
 	elseif event == "VARIABLES_LOADED" then
 		-- Config

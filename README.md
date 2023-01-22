@@ -17,7 +17,6 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 
 ## TODO
 1. Add scaling support for WorldMapFrame
-1. Remove delay for Blizzard Groups (classic, wc)
 1. Configurable variables
    1. Opacity while moving and scaling
    1. Max and min scale
