@@ -5,7 +5,7 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 * [Drift (Wago)](https://addons.wago.io/addons/drift)
 
 ## Update Checklist
-1. Bump addon version for retail, classic, bcc, wc.
+1. Bump addon version for retail, classic, wc.
 1. Update Wago script interface versions.
 1. Test retail, classic, wc.
 1. Update CurseForge and Wago descriptions if needed.
