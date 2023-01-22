@@ -549,6 +549,14 @@ function DriftHelpers:ModifyFrames(frames)
 	if (isWC) and (not DriftOptions.windowsDisabled) then
 		DriftHelpers:FixAHWC()
 	end
+
+	-- Reset for good measure
+	for frameName, _ in pairs(frames) do
+		local frame = getFrame(frameName)
+		if frame then
+			resetScaleAndPosition(frame)
+		end
+	end
 end
 
 function DriftHelpers:FixBags()
