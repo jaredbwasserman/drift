@@ -1,4 +1,4 @@
-## Interface: 100002
+## Interface: 100005
 ## Title: Drift
 ## Notes: Modifies default UI frames so you can click and drag to move and scale.
 ## Version: 2.2.2

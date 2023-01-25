@@ -813,39 +813,6 @@ function DriftHelpers:FixAHWC()
 	end
 end
 
-function DriftHelpers:Wait(delay, func, ...)
-	if type(delay) ~= "number" or type(func) ~= "function" then
-		return false
-	end
-
-	if DriftHelpers.waitFrame == nil then
-		DriftHelpers.waitFrame = CreateFrame("Frame", "WaitFrame", UIParent)
-		DriftHelpers.waitFrame:SetScript(
-			"OnUpdate",
-			function(self, elapse)
-				local count = #DriftHelpers.waitTable
-				local i = 1
-				while (i <= count) do
-					local waitRecord = tremove(DriftHelpers.waitTable, i)
-					local d = tremove(waitRecord, 1)
-					local f = tremove(waitRecord, 1)
-					local p = tremove(waitRecord, 1)
-					if (d > elapse) then
-						tinsert(DriftHelpers.waitTable, i, {d - elapse, f, p})
-						i = i + 1
-					else
-						count = count - 1
-						f(unpack(p))
-					end
-				end
-			end
-		)
-	end
-
-	tinsert(DriftHelpers.waitTable, {delay, func, {...}})
-	return true
-end
-
 function DriftHelpers:IsAnyBagShown()
 	local anyBagShown = false
 	for i=1,TOTAL_BAGS do

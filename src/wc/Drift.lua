@@ -366,7 +366,7 @@ local function eventHandler(self, event, ...)
 		DriftHelpers:ModifyFrames(frames)
 
 		-- Modify frames after an addon loads
-		DriftHelpers:Wait(1, Drift.RegisterEvent, Drift, "ADDON_LOADED")
+		Drift:RegisterEvent("ADDON_LOADED")
 
 		-- Modify frames after combat ends
 		Drift:RegisterEvent("PLAYER_REGEN_ENABLED")
