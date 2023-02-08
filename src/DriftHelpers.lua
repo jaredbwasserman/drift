@@ -58,6 +58,7 @@ local hasFixedWatchWC = false
 local hasFixedAHWC = false
 local hasFixedTimeManager = false
 local hasFixedMicroMenu = false
+local hasFixedEncounterJournal = false
 
 
 --------------------------------------------------------------------------------
@@ -557,6 +558,12 @@ function DriftHelpers:ModifyFrames(frames)
 		DriftHelpers:FixMicroMenu()
 	end
 
+	-- Fix EncounterJournal
+	-- https://github.com/jaredbwasserman/drift/issues/51
+	if (not DriftOptions.windowsDisabled) then
+		DriftHelpers:FixEncounterJournal()
+	end
+
 	-- Reset for good measure
 	for frameName, _ in pairs(frames) do
 		local frame = getFrame(frameName)
@@ -835,6 +842,27 @@ function DriftHelpers:FixMicroMenu()
 		)
 
 		hasFixedMicroMenu = true
+	end
+end
+
+function DriftHelpers:FixEncounterJournal()
+	if hasFixedEncounterJournal then
+		return
+	end
+
+	if (not isRetail) then
+		return
+	end
+
+	if EncounterJournal then
+		EncounterJournal:HookScript(
+			"OnShow",
+			function()
+				EncounterJournalTooltip:ClearAllPoints()
+			end
+		)
+
+		hasFixedEncounterJournal = true
 	end
 end
 
