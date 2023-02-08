@@ -57,6 +57,7 @@ local hasFixedQuestWatchClassic = false
 local hasFixedWatchWC = false
 local hasFixedAHWC = false
 local hasFixedTimeManager = false
+local hasFixedMicroMenu = false
 
 
 --------------------------------------------------------------------------------
@@ -550,6 +551,12 @@ function DriftHelpers:ModifyFrames(frames)
 		DriftHelpers:FixAHWC()
 	end
 
+	-- Fix tooltip issue
+	-- https://github.com/jaredbwasserman/drift/issues/50
+	if (not DriftOptions.buttonsDisabled) then
+		DriftHelpers:FixMicroMenu()
+	end
+
 	-- Reset for good measure
 	for frameName, _ in pairs(frames) do
 		local frame = getFrame(frameName)
@@ -810,6 +817,24 @@ function DriftHelpers:FixAHWC()
 		end
 
 		hasFixedAHWC = true
+	end
+end
+
+function DriftHelpers:FixMicroMenu()
+	if hasFixedMicroMenu then
+		return
+	end
+
+	if MicroMenu and HelpOpenWebTicketButton then
+		hooksecurefunc(
+			MicroMenu,
+			"GetEdgeButton",
+			function()
+				HelpOpenWebTicketButton:ClearAllPoints()
+			end
+		)
+
+		hasFixedMicroMenu = true
 	end
 end
 
