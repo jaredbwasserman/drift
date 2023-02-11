@@ -5,15 +5,13 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 * [Drift (Wago)](https://addons.wago.io/addons/drift)
 
 ## Update Checklist
-1. Bump addon version for retail, classic, wc.
-1. Update Wago script interface versions.
-1. Test retail, classic, wc.
-1. Update CurseForge and Wago descriptions if needed.
+1. Bump addon version in toc files.
+1. Update interface versions in curseforge script and wago script.
+1. Update curseforge and wago descriptions if needed.
+1. Generate artifacts.
 1. Create a new GitHub release.
    1. Upload artifacts in the new release.
-1. Use file naming convention `vX.Y.Z-<GAME>` (e.g. `v1.0.25-retail`).
 1. Release on CurseForge and Wago.
-   1. Set env vars for wago script.
 
 ## TODO
 1. Add scaling support for WorldMapFrame
