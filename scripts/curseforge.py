@@ -5,10 +5,11 @@ import sys
 
 
 # Current interface versions
+# GET https://wow.curseforge.com/api/game/versions
 interface_version = {
-	'classic': 9094,
-	'retail': 9711,
-	'wc': 9641,
+	'classic': 9094, # 1.14.3
+	'retail': 9712, # 10.0.7
+	'wc': 9641, # 3.4.1
 }
 
 # Get source directory
