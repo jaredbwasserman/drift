@@ -8,7 +8,7 @@ import sys
 # GET https://wow.curseforge.com/api/game/versions
 interface_version = {
 	'classic': 9094, # 1.14.3
-	'retail': 9712, # 10.0.7
+	'retail': 9772, # 10.1.0
 	'wc': 9641, # 3.4.1
 }
 
