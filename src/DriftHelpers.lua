@@ -59,6 +59,7 @@ local hasFixedAHWC = false
 local hasFixedTimeManager = false
 local hasFixedMicroMenu = false
 local hasFixedEncounterJournal = false
+local hasFixedTradeSkillMaster = false
 
 
 --------------------------------------------------------------------------------
@@ -564,6 +565,12 @@ function DriftHelpers:ModifyFrames(frames)
 		DriftHelpers:FixEncounterJournal()
 	end
 
+	-- Fix TradeSkillMaster
+	-- https://github.com/jaredbwasserman/drift/issues/54
+	if (not DriftOptions.windowsDisabled) then
+		DriftHelpers:FixTradeSkillMaster()
+	end
+
 	-- Reset for good measure
 	for frameName, _ in pairs(frames) do
 		local frame = getFrame(frameName)
@@ -863,6 +870,22 @@ function DriftHelpers:FixEncounterJournal()
 		)
 
 		hasFixedEncounterJournal = true
+	end
+end
+
+function DriftHelpers:FixTradeSkillMaster()
+	if hasFixedTradeSkillMaster then
+		return
+	end
+
+	if not IsAddOnLoaded("TradeSkillMaster") then
+		return
+	end
+
+	if MerchantFrame then
+		DriftPoints[MerchantFrame:GetName()] = nil
+		MerchantFrame:SetClampedToScreen(false)
+		hasFixedTradeSkillMaster = true
 	end
 end
 
