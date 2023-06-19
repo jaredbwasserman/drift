@@ -46,6 +46,9 @@ source_helpers = os.path.join(source_dir, 'DriftHelpers.lua')
 # Option file location
 source_options = os.path.join(source_dir, 'DriftOptions.lua')
 
+# Logo file location
+source_logo = os.path.join(drift_repo_dir, 'drift-logo.blp')
+
 # Get version numbers and interface numbers
 source_toc_retail = os.path.join(source_dir_retail, 'Drift.toc')
 source_toc_classic = os.path.join(source_dir_classic, 'Drift.toc')
@@ -70,6 +73,7 @@ dest_helpers_wc = os.path.join(dest_dir_wc, 'DriftHelpers.lua')
 dest_options_retail = os.path.join(dest_dir_retail, 'DriftOptions.lua')
 dest_options_classic = os.path.join(dest_dir_classic, 'DriftOptions.lua')
 dest_options_wc = os.path.join(dest_dir_wc, 'DriftOptions.lua')
+dest_logo_retail = os.path.join(dest_dir_retail, 'drift-logo.blp')
 
 # Copy retail
 if os.path.exists(dest_dir_retail):
@@ -80,6 +84,8 @@ print('Copying\n  {0} to\n  {1}\n'.format(source_helpers, dest_helpers_retail))
 shutil.copy2(source_helpers, dest_helpers_retail)
 print('Copying\n  {0} to\n  {1}\n'.format(source_options, dest_options_retail))
 shutil.copy2(source_options, dest_options_retail)
+print('Copying\n  {0} to\n  {1}\n'.format(source_logo, dest_logo_retail))
+shutil.copy2(source_logo, dest_logo_retail)
 
 # Zip retail and clean up
 zip(dest_dir_retail)
