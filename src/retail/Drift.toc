@@ -4,6 +4,7 @@
 ## Version: 2.2.6
 ## Author: Jared Wasserman
 ## SavedVariables: DriftPoints, DriftScales, DriftOptions
+## IconTexture: Interface\Addons\Drift\drift-logo
 
 DriftHelpers.lua
 DriftOptions.lua

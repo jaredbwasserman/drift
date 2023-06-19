@@ -15,7 +15,6 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 1. Release on curseforge and wago.
 
 ## TODO
-1. Add mini icon so it is not a red question mark in the addon list
 1. Add scaling support for WorldMapFrame
 1. Configurable variables
    1. Opacity while moving and scaling
