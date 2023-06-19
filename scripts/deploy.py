@@ -34,7 +34,7 @@ dest_options_wc = os.path.join(dest_dir_wc, 'DriftOptions.lua')
 
 # Logo locations
 source_logo = os.path.join(drift_repo_dir, 'drift-logo.blp')
-dest_logo = os.path.join(dest_dir_retail, 'drift-logo.blp')
+dest_logo_retail = os.path.join(dest_dir_retail, 'drift-logo.blp')
 
 # Copy retail
 if os.path.exists(dest_dir_retail):
@@ -45,8 +45,8 @@ print('Copying\n  {0} to\n  {1}'.format(source_helpers, dest_helpers_retail))
 shutil.copy2(source_helpers, dest_helpers_retail)
 print('Copying\n  {0} to\n  {1}'.format(source_options, dest_options_retail))
 shutil.copy2(source_options, dest_options_retail)
-print('Copying\n  {0} to\n  {1}'.format(source_logo, dest_logo))
-shutil.copy2(source_logo, dest_logo)
+print('Copying\n  {0} to\n  {1}'.format(source_logo, dest_logo_retail))
+shutil.copy2(source_logo, dest_logo_retail)
 
 # Copy classic
 if os.path.exists(dest_dir_classic):
