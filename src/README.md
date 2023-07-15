@@ -161,7 +161,7 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Group Loot 4 (classic, wc)
 - Quick Join Toast 1 (retail)
 - Quick Join Toast 2 (retail)
-- Vehicle Seat Indicator (retail, wc)
+- Vehicle Seat Indicator (wc)
 
 # Slash Commands
 `/drift` - Print allowed commands.  
