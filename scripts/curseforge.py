@@ -9,7 +9,7 @@ import sys
 interface_version = {
 	'classic': 9094, # 1.14.3
 	'retail': 9919, # 10.1.5
-	'wc': 9641, # 3.4.1
+	'wc': 9894, # 3.4.2
 }
 
 # Get source directory
