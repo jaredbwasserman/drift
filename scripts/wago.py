@@ -13,7 +13,7 @@ patch_key = {
 
 # Current interface versions
 interface_version = {
-	'classic': '1.14.3',
+	'classic': '1.14.4',
 	'retail': '10.1.5',
 	'wc': '3.4.2',
 }

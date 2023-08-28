@@ -288,6 +288,9 @@ local frames = {
 	["DurabilityFrame"] = {
 		DriftDisabledBy = "miscellaneousDisabled",
 	},
+	["SettingsPanel"] = {
+		DriftDisabledBy = "windowsDisabled",
+	},
 }
 
 -- Frame for handling events
