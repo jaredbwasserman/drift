@@ -15,7 +15,7 @@ patch_key = {
 interface_version = {
 	'classic': '1.14.4',
 	'retail': '10.1.7',
-	'wc': '3.4.2',
+	'wc': '3.4.3',
 }
 
 # Get source directory
