@@ -60,6 +60,7 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Generic Trait (retail)
 - Gossip (retail, classic, wc)
 - Group Finder (retail)
+- Guide (retail)
 - Guild & Communities (retail)
 - Guild Bank (retail)
 - Guild Information (classic, wc)

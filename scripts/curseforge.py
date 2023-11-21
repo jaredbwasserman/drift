@@ -5,10 +5,11 @@ import sys
 
 
 # Current interface versions
+# Go to https://legacy.curseforge.com/account/api-tokens
 # GET https://wow.curseforge.com/api/game/versions
 interface_version = {
-	'classic': 9895, # 1.14.4
-	'retail': 10163, # 10.1.7
+	'classic': 10341, # 1.15.0
+	'retail': 10215, # 10.2.0
 	'wc': 10272, # 3.4.3
 }
 
