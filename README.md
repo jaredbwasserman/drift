@@ -1,10 +1,12 @@
 # Drift
+
 Addon for World of Warcraft that modifies default UI frames so you can click and drag to move and scale.
 
-* [Drift (CurseForge)](https://www.curseforge.com/wow/addons/drift)
-* [Drift (Wago)](https://addons.wago.io/addons/drift)
+- [Drift (CurseForge)](https://www.curseforge.com/wow/addons/drift)
+- [Drift (Wago)](https://addons.wago.io/addons/drift)
 
 ## Update Checklist
+
 1. Update addon version in toc files.
 1. Update interface version in toc files.
 1. Update interface version in scripts.
@@ -15,6 +17,13 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 1. Release on curseforge and wago.
 
 ## TODO
+
+1. Release new versions for all games
+   1. Need to create a cata release (instead of wrath)
+1. Move relevant TODO items to issues
+1. Move Bugs to issues
+1. Fix code so there is the same set of files for all releases
+   1. Detect the game version when setting things up
 1. Add scaling support for WorldMapFrame
 1. Configurable variables
    1. Opacity while moving and scaling
@@ -27,6 +36,7 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 1. Figure out how to get MinimapZoneTextButton to work for dragging Minimap (wc)
 
 ## Bugs
+
 1. Scaling Bugs
    1. Map does not work correctly after scaling WorldMapFrame
    1. Character model has incorrect size after scaling CharacterFrame
