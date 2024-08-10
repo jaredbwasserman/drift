@@ -517,6 +517,12 @@ local frames = {
 	["GuideFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
 	},
+	["ProfessionsBookFrame"] = {
+		DriftDisabledBy = "windowsDisabled",
+	},
+	["PlayerSpellsFrame"] = {
+		DriftDisabledBy = "windowsDisabled",
+	}
 }
 
 -- Frame for handling events
