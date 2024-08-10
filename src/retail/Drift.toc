@@ -1,7 +1,7 @@
-## Interface: 100200
+## Interface: 110000
 ## Title: Drift
 ## Notes: Modifies default UI frames so you can click and drag to move and scale.
-## Version: 2.2.14
+## Version: 2.3.0
 ## Author: Jared Wasserman
 ## SavedVariables: DriftPoints, DriftScales, DriftOptions
 ## IconTexture: Interface\Addons\Drift\drift-logo

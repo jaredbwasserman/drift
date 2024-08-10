@@ -5,11 +5,12 @@ import sys
 
 
 # Current interface versions
-# Go to https://legacy.curseforge.com/account/api-tokens
-# GET https://wow.curseforge.com/api/game/versions
+# Go to https://console.curseforge.com/?#/api-keys
+# curl -X GET https://api.curseforge.com/v1/games -H 'Accept: application/json' -H 'x-api-key: API_KEY'
+# curl -X GET https://api.curseforge.com/v2/games/wow/versions -H 'Accept: application/json' -H 'x-api-key: API_KEY'
 interface_version = {
-	'classic': 10341, # 1.15.0
-	'retail': 10215, # 10.2.0
+	'classic': 11459, # 1.15.3
+	'retail': 11274, # 11.0.0
 	'wc': 10272, # 3.4.3
 }
 
