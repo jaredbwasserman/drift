@@ -18,13 +18,10 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 
 ## TODO
 
-1. Release new versions for all games
-   1. Need to create a cata release (instead of wrath)
 1. Move relevant TODO items to issues
 1. Move Bugs to issues
 1. Fix code so there is the same set of files for all releases
    1. Detect the game version when setting things up
-1. Add scaling support for WorldMapFrame
 1. Configurable variables
    1. Opacity while moving and scaling
    1. Max and min scale
