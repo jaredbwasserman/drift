@@ -22,6 +22,7 @@ Addon for World of Warcraft that modifies default UI frames so you can click and
 1. Move Bugs to issues
 1. Fix code so there is the same set of files for all releases
    1. Detect the game version when setting things up
+   1. One `Drift.lua` file that has union of all (alphabetized)
 1. Configurable variables
    1. Opacity while moving and scaling
    1. Max and min scale
