@@ -522,7 +522,10 @@ local frames = {
 	},
 	["PlayerSpellsFrame"] = {
 		DriftDisabledBy = "windowsDisabled",
-	}
+	},
+	["CurrencyTransferMenu"] = {
+		DriftDisabledBy = "windowsDisabled",
+	},
 }
 
 -- Frame for handling events

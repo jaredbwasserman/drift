@@ -43,6 +43,7 @@ Only Windows are enabled by default. You can enable or disable frames by going t
 - Covenant Sanctum (retail)
 - Crafting Orders (retail)
 - Currency Options (retail)
+- Currency Transfer (retail)
 - Customer Support (retail, classic, wc)
 - Dressing Room (retail, classic, wc)
 - Expansion Landing Page (retail)
