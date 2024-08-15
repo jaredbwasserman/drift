@@ -395,7 +395,7 @@ function DriftHelpers:PrintHelp()
 end
 
 function DriftHelpers:PrintVersion()
-	print("|cffFFC125Drift:|r Version " .. GetAddOnMetadata("Drift", "Version"))
+	print("|cffFFC125Drift:|r Version " .. C_AddOns.GetAddOnMetadata("Drift", "Version"))
 end
 
 function DriftHelpers:HandleSlashCommands(msg, editBox)
@@ -722,7 +722,7 @@ function DriftHelpers:FixFramesForElvUIRetail()
 		return
 	end
 
-	if not IsAddOnLoaded("ElvUI") then
+	if not C_AddOns.IsAddOnLoaded("ElvUI") then
 		return
 	end
 
@@ -851,7 +851,7 @@ function DriftHelpers:FixTradeSkillMaster()
 		return
 	end
 
-	if not IsAddOnLoaded("TradeSkillMaster") then
+	if not C_AddOns.IsAddOnLoaded("TradeSkillMaster") then
 		return
 	end
 

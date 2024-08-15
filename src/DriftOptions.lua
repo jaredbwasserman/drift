@@ -364,7 +364,7 @@ function DriftHelpers:SetupConfig()
 
 	local driftOptionsVersionContent = DriftOptionsPanel.optionspanel:CreateFontString(nil, "BACKGROUND")
 	driftOptionsVersionContent:SetFontObject("GameFontHighlight")
-	driftOptionsVersionContent:SetText(GetAddOnMetadata("Drift", "Version"))
+	driftOptionsVersionContent:SetText(C_AddOns.GetAddOnMetadata("Drift", "Version"))
 	driftOptionsVersionContent:SetJustifyH("LEFT")
 	driftOptionsVersionContent:SetPoint("BOTTOMLEFT", DriftOptionsPanel.optionspanel, "BOTTOMLEFT", 70, 30)
 
